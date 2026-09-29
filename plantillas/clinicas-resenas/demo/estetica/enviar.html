@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedir reseña · Clínica Lumière</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>:root{--c:#3d2b27;--on-c:#f7efe9;--acc:#c9a27e;--on-acc:#1f1512;--ink:#2a1f1c;--mut:#6f625d;--bg:#fbf8f5;--soft:#f3ebe4;--card:#ffffff;--line:#e8ddd4;--hero-bg:linear-gradient(160deg,#f3ebe4,#fbf8f5 60%);--font:"Jost",system-ui,sans-serif;--font-h:"Cormorant Garamond",Georgia,serif;--h-weight:600;--h-track:0;--r:4px;--img-r:6px;--btn-r:2px}</style>
+</head>
+<body>
+<!-- Panel interno para recepción: no enlazar desde la web pública.
+     Crea el mensaje de WhatsApp con el enlace a opina.html en 5 segundos. -->
+<main class="mini">
+  <div class="box" style="text-align:left">
+    <span class="eyebrow">Recepción · Clínica Lumière</span>
+    <h1>Pedir reseña a un paciente</h1>
+    <p>Envíalo cuando el paciente salga de la consulta (o 2 horas después).</p>
+    <form id="f" onsubmit="return false">
+      <div><label for="nom">Nombre del paciente</label><input id="nom" autocomplete="off" placeholder="Ej. Laura"></div>
+      <div style="display:grid;grid-template-columns:90px 1fr;gap:8px">
+        <div><label for="pre">Prefijo</label><input id="pre" value="34" inputmode="numeric"></div>
+        <div><label for="tel">Móvil</label><input id="tel" type="tel" inputmode="tel" placeholder="600 000 000" autocomplete="off"></div>
+      </div>
+      <div><label for="tipo">Mensaje</label><select id="tipo"></select></div>
+      <div class="msg" id="prev" aria-live="polite"></div>
+      <button class="btn wa big" id="wa" type="button">Enviar por WhatsApp</button>
+      <button class="btn alt" id="copiar" type="button">Copiar texto (para SMS)</button>
+    </form>
+    <div class="log"><b>Peticiones enviadas desde este dispositivo este mes: <span id="cuenta">0</span></b></div>
+    <p class="small" style="margin-top:16px">Envía solo a pacientes que hayan aceptado recibir comunicaciones. No menciones el tratamiento en el mensaje.</p>
+  </div>
+</main>
+
+<script>
+  var MENSAJES = [{"nombre":"Después de la cita","texto":"Hola {paciente}, ha sido un placer verte hoy en Clínica Lumière ✨ ¿Nos cuentas cómo te has sentido? Solo 10 segundos: {enlace}"},{"nombre":"Recordatorio (3 días después)","texto":"Hola {paciente}, esperamos que todo vaya genial. Tu opinión nos ayuda muchísimo: {enlace} ¡Gracias!"},{"nombre":"Tras la revisión","texto":"Hola {paciente}, gracias por confiar en nosotros en todo el proceso. Si te apetece contarlo, aquí puedes hacerlo: {enlace}"}];
+  var ENLACE = "https://clinicalumiere.es/opina.html";
+  var $ = function (id) { return document.getElementById(id); };
+
+  MENSAJES.forEach(function (m, i) {
+    var o = document.createElement('option'); o.value = i; o.textContent = m.nombre; $('tipo').appendChild(o);
+  });
+
+  function texto() {
+    var nombre = $('nom').value.trim().split(' ')[0] || '';
+    var url = ENLACE + (nombre ? '?n=' + encodeURIComponent(nombre) : '');
+    return MENSAJES[+$('tipo').value].texto
+      .replace(/\{paciente\}/g, nombre || '')
+      .replace(/\{enlace\}/g, url)
+      .replace(/ ,/g, ',').replace(/Hola ,/g, 'Hola,');
+  }
+  function numero() { return ($('pre').value + $('tel').value).replace(/\D/g, ''); }
+  function refrescar() { $('prev').textContent = texto(); }
+  ['nom', 'tipo'].forEach(function (id) { $(id).addEventListener('input', refrescar); });
+  refrescar();
+
+  // Contador mensual (solo en este navegador; no guarda datos de pacientes)
+  var clave = 'resenas-' + new Date().toISOString().slice(0, 7);
+  function leer() { try { return +localStorage.getItem(clave) || 0; } catch (e) { return 0; } }
+  function sumar() { try { localStorage.setItem(clave, leer() + 1); } catch (e) {} $('cuenta').textContent = leer(); }
+  $('cuenta').textContent = leer();
+
+  $('wa').addEventListener('click', function () {
+    var n = numero();
+    if (n.length < 9) { $('tel').focus(); $('tel').setCustomValidity('Escribe un móvil válido'); $('tel').reportValidity(); return; }
+    $('tel').setCustomValidity('');
+    window.open('https://wa.me/' + n + '?text=' + encodeURIComponent(texto()), '_blank');
+    sumar();
+    $('nom').value = ''; $('tel').value = ''; refrescar(); $('nom').focus();
+  });
+  $('copiar').addEventListener('click', function () {
+    var t = texto();
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject())
+      .then(function () { $('copiar').textContent = '¡Copiado!'; sumar(); })
+      .catch(function () { window.prompt('Copia el texto:', t); });
+    setTimeout(function () { $('copiar').textContent = 'Copiar texto (para SMS)'; }, 1800);
+  });
+</script>
+</body>
+</html>

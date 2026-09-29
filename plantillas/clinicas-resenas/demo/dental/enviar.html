@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedir reseña · Clínica Dental Alameda</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="estilos.css">
+<style>:root{--c:#0b6e74;--on-c:#ffffff;--acc:#ffc15e;--on-acc:#1a1a1a;--ink:#12242b;--mut:#566870;--bg:#ffffff;--soft:#eef7f7;--card:#ffffff;--line:#dfeced;--hero-bg:linear-gradient(135deg,#e3f3f3,#ffffff 65%);--font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-h:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--h-weight:800;--h-track:-.01em;--r:18px;--img-r:28px;--btn-r:999px}</style>
+</head>
+<body>
+<!-- Panel interno para recepción: no enlazar desde la web pública.
+     Crea el mensaje de WhatsApp con el enlace a opina.html en 5 segundos. -->
+<main class="mini">
+  <div class="box" style="text-align:left">
+    <span class="eyebrow">Recepción · Clínica Dental Alameda</span>
+    <h1>Pedir reseña a un paciente</h1>
+    <p>Envíalo cuando el paciente salga de la consulta (o 2 horas después).</p>
+    <form id="f" onsubmit="return false">
+      <div><label for="nom">Nombre del paciente</label><input id="nom" autocomplete="off" placeholder="Ej. Laura"></div>
+      <div style="display:grid;grid-template-columns:90px 1fr;gap:8px">
+        <div><label for="pre">Prefijo</label><input id="pre" value="34" inputmode="numeric"></div>
+        <div><label for="tel">Móvil</label><input id="tel" type="tel" inputmode="tel" placeholder="600 000 000" autocomplete="off"></div>
+      </div>
+      <div><label for="tipo">Mensaje</label><select id="tipo"></select></div>
+      <div class="msg" id="prev" aria-live="polite"></div>
+      <button class="btn wa big" id="wa" type="button">Enviar por WhatsApp</button>
+      <button class="btn alt" id="copiar" type="button">Copiar texto (para SMS)</button>
+    </form>
+    <div class="log"><b>Peticiones enviadas desde este dispositivo este mes: <span id="cuenta">0</span></b></div>
+    <p class="small" style="margin-top:16px">Envía solo a pacientes que hayan aceptado recibir comunicaciones. No menciones el tratamiento en el mensaje.</p>
+  </div>
+</main>
+
+<script>
+  var MENSAJES = [{"nombre":"Después de la cita","texto":"Hola {paciente}, gracias por venir hoy a Clínica Dental Alameda 😊 ¿Nos cuentas qué tal? Son 10 segundos y nos ayudas muchísimo: {enlace}"},{"nombre":"Recordatorio (3 días después)","texto":"Hola {paciente}, esperamos que estés genial. Si tienes un momento, nos encantaría saber tu opinión: {enlace} ¡Gracias!"},{"nombre":"Paciente de confianza","texto":"Hola {paciente}, llevas tiempo confiando en nosotros y eso vale mucho. ¿Nos ayudarías a que otras familias de Valencia nos conozcan? {enlace}"}];
+  var ENLACE = "https://clinicadentalalameda.es/opina.html";
+  var $ = function (id) { return document.getElementById(id); };
+
+  MENSAJES.forEach(function (m, i) {
+    var o = document.createElement('option'); o.value = i; o.textContent = m.nombre; $('tipo').appendChild(o);
+  });
+
+  function texto() {
+    var nombre = $('nom').value.trim().split(' ')[0] || '';
+    var url = ENLACE + (nombre ? '?n=' + encodeURIComponent(nombre) : '');
+    return MENSAJES[+$('tipo').value].texto
+      .replace(/\{paciente\}/g, nombre || '')
+      .replace(/\{enlace\}/g, url)
+      .replace(/ ,/g, ',').replace(/Hola ,/g, 'Hola,');
+  }
+  function numero() { return ($('pre').value + $('tel').value).replace(/\D/g, ''); }
+  function refrescar() { $('prev').textContent = texto(); }
+  ['nom', 'tipo'].forEach(function (id) { $(id).addEventListener('input', refrescar); });
+  refrescar();
+
+  // Contador mensual (solo en este navegador; no guarda datos de pacientes)
+  var clave = 'resenas-' + new Date().toISOString().slice(0, 7);
+  function leer() { try { return +localStorage.getItem(clave) || 0; } catch (e) { return 0; } }
+  function sumar() { try { localStorage.setItem(clave, leer() + 1); } catch (e) {} $('cuenta').textContent = leer(); }
+  $('cuenta').textContent = leer();
+
+  $('wa').addEventListener('click', function () {
+    var n = numero();
+    if (n.length < 9) { $('tel').focus(); $('tel').setCustomValidity('Escribe un móvil válido'); $('tel').reportValidity(); return; }
+    $('tel').setCustomValidity('');
+    window.open('https://wa.me/' + n + '?text=' + encodeURIComponent(texto()), '_blank');
+    sumar();
+    $('nom').value = ''; $('tel').value = ''; refrescar(); $('nom').focus();
+  });
+  $('copiar').addEventListener('click', function () {
+    var t = texto();
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject())
+      .then(function () { $('copiar').textContent = '¡Copiado!'; sumar(); })
+      .catch(function () { window.prompt('Copia el texto:', t); });
+    setTimeout(function () { $('copiar').textContent = 'Copiar texto (para SMS)'; }, 1800);
+  });
+</script>
+</body>
+</html>

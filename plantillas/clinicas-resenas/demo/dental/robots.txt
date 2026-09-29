@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /enviar.html
+Disallow: /opina.html
+Disallow: /gracias.html
+Sitemap: https://clinicadentalalameda.es/sitemap.xml

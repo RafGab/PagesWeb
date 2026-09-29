@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu opinión · {{nombre}}</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="{{color}}">
+{{{fuente_link}}}
+<link rel="stylesheet" href="estilos.css">
+<style>{{{css_vars}}}</style>
+</head>
+<body>
+<main class="mini">
+  <div class="box">
+    <!-- Paso 1: valoración -->
+    <div id="paso1">
+      <span class="eyebrow">{{nombre}}</span>
+      <h1 id="saludo">¿Qué tal tu experiencia con nosotros?</h1>
+      <p>Tardas 10 segundos y nos ayudas muchísimo.</p>
+      <div class="pick" role="group" aria-label="Valora de 1 a 5 estrellas">
+        <button type="button" data-v="1" aria-label="1 estrella">★</button>
+        <button type="button" data-v="2" aria-label="2 estrellas">★</button>
+        <button type="button" data-v="3" aria-label="3 estrellas">★</button>
+        <button type="button" data-v="4" aria-label="4 estrellas">★</button>
+        <button type="button" data-v="5" aria-label="5 estrellas">★</button>
+      </div>
+    </div>
+
+    <!-- Paso 2A: experiencia buena -->
+    <div id="bien" class="hide">
+      <h1>¡Gracias, de verdad! 💛</h1>
+      <p>¿Nos ayudas a que más personas nos encuentren? Solo tienes que copiar tu opinión en Google. Te lleva 30 segundos.</p>
+      <p><a class="btn big" id="irGoogle" href="{{google_resena_url}}" target="_blank" rel="noopener">Publicar mi opinión en Google</a></p>
+      <p class="small">Idea: cuenta qué te gustó del trato, la puntualidad o las instalaciones. <b>No hace falta que menciones tu tratamiento.</b></p>
+    </div>
+
+    <!-- Paso 2B: experiencia mejorable -->
+    <div id="mal" class="hide">
+      <h1>Sentimos que no haya sido perfecto</h1>
+      <p>Cuéntanos qué ha fallado. Lo leerá directamente la dirección de la clínica y te responderemos.</p>
+      <form id="fb" action="https://formspree.io/f/{{formspree_id}}" method="POST">
+        <input type="hidden" name="_subject" value="Opinión privada de paciente ({{nombre}})">
+        <input type="hidden" name="valoracion" id="valor">
+        <div><label for="q">¿Qué podemos mejorar?</label><textarea id="q" name="comentario" rows="4" required></textarea></div>
+        <div><label for="c">Tu nombre y teléfono (opcional, para responderte)</label><input id="c" name="contacto"></div>
+        <button class="btn big" type="submit" style="width:100%">Enviar a la dirección</button>
+      </form>
+      <p class="small" style="margin-top:18px">También puedes <a href="{{google_resena_url}}" target="_blank" rel="noopener" id="irGoogle2">publicar tu opinión en Google</a>.</p>
+    </div>
+
+    <!-- Paso 3: enviado -->
+    <div id="ok" class="hide">
+      <h1>Recibido. Gracias por decírnoslo.</h1>
+      <p>Nos pondremos en contacto contigo lo antes posible.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  var $ = function (id) { return document.getElementById(id); };
+  var botones = document.querySelectorAll('.pick button');
+
+  // Saludo personalizado si el enlace llega con ?n=Nombre
+  try {
+    var n = new URLSearchParams(location.search).get('n');
+    if (n) $('saludo').textContent = n.slice(0, 30) + ', ¿qué tal tu experiencia con nosotros?';
+  } catch (e) {}
+
+  botones.forEach(function (b) {
+    b.addEventListener('mouseenter', function () { pintar(+b.dataset.v); });
+    b.addEventListener('focus', function () { pintar(+b.dataset.v); });
+    b.addEventListener('click', function () { elegir(+b.dataset.v); });
+  });
+  document.querySelector('.pick').addEventListener('mouseleave', function () { pintar(0); });
+
+  function pintar(v) { botones.forEach(function (b) { b.classList.toggle('on', +b.dataset.v <= v); }); }
+
+  function elegir(v) {
+    dataLayer.push({ event: 'valoracion', valor: v });
+    $('valor').value = v;
+    $('paso1').classList.add('hide');
+    $(v >= 4 ? 'bien' : 'mal').classList.remove('hide');
+  }
+
+  ['irGoogle', 'irGoogle2'].forEach(function (id) {
+    $(id).addEventListener('click', function () { dataLayer.push({ event: 'ir_a_google' }); });
+  });
+
+  // Envío sin salir de la página (Formspree acepta JSON); si falla, envío normal.
+  $('fb').addEventListener('submit', function (e) {
+    if (!window.fetch) return;
+    e.preventDefault();
+    var f = e.target;
+    fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+      .then(function (r) { if (!r.ok) throw 0; $('mal').classList.add('hide'); $('ok').classList.remove('hide'); dataLayer.push({ event: 'opinion_privada' }); })
+      .catch(function () { f.submit(); });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "_nota": "EJEMPLO FICTICIO. Sustituye todos los datos por los de la clínica real.",
+  "nombre": "Clínica Dental Alameda",
+  "razon_social": "Clínica Dental Alameda S.L. [PENDIENTE]",
+  "registro_sanitario": "[PENDIENTE: nº de registro sanitario]",
+  "tipo_schema": "Dentist",
+  "tema": "clinico",
+  "colores": {
+    "principal": "#0b6e74", "sobre_principal": "#ffffff",
+    "acento": "#ffc15e", "sobre_acento": "#1a1a1a",
+    "texto": "#12242b", "texto_suave": "#566870",
+    "fondo": "#ffffff", "fondo_suave": "#eef7f7", "tarjeta": "#ffffff", "linea": "#dfeced",
+    "hero": "linear-gradient(135deg,#e3f3f3,#ffffff 65%)"
+  },
+  "dominio": "https://clinicadentalalameda.es",
+  "direccion": "Calle de Sueca 00",
+  "cp": "46006",
+  "ciudad": "Valencia",
+  "provincia": "Valencia",
+  "pais": "ES",
+  "prefijo_pais": "34",
+  "telefono": "+34 960 000 000",
+  "whatsapp": "34600000000",
+  "whatsapp_texto": "Hola, vengo de la web y quiero pedir cita",
+  "email": "hola@clinicadentalalameda.es",
+  "horario_texto": "L–V 9:00–20:00 · S 10:00–14:00",
+  "horario_schema": ["Mo-Fr 09:00-20:00", "Sa 10:00-14:00"],
+  "rango_precio": "€€",
+  "formspree_id": "TU_ID_FORMSPREE",
+  "google_nota": "4,9",
+  "google_resenas": 187,
+  "google_resena_url": "https://g.page/r/TU_CODIGO/review",
+  "google_perfil_url": "",
+  "redes": [],
+
+  "seo_titulo": "Dentista en Valencia (Ruzafa) | Clínica Dental Alameda · 4,9★",
+  "seo_descripcion": "Clínica dental en Ruzafa, Valencia. Implantes, ortodoncia invisible, limpiezas y urgencias el mismo día. 4,9★ con 187 reseñas en Google. Pide cita por WhatsApp.",
+  "hero_etiqueta": "Dentista en Ruzafa · Valencia",
+  "hero_titulo": "Tu dentista de confianza, sin miedo y sin sorpresas en el presupuesto",
+  "hero_subtitulo": "Primera visita y diagnóstico gratis, presupuesto cerrado antes de empezar y urgencias atendidas el mismo día.",
+  "hero_imagen": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1000&q=70",
+  "hero_imagen_alt": "Paciente sonriendo en la consulta dental",
+  "cta_principal": "Pedir cita por WhatsApp",
+  "cta_secundario": "Primera visita gratis",
+  "cta_formulario": "Quiero mi cita",
+
+  "txt_servicios": "Tratamientos",
+  "servicios_titulo": "Todo lo que tu sonrisa necesita, en un mismo sitio",
+  "servicios_subtitulo": "Precios claros desde el primer día y financiación hasta 24 meses sin intereses.",
+  "servicios": [
+    { "icono": "🦷", "nombre": "Limpieza y revisión", "texto": "Prevención completa en 40 minutos, sin molestias.", "precio": "Desde 45 €" },
+    { "icono": "😁", "nombre": "Ortodoncia invisible", "texto": "Alineadores transparentes que nadie nota.", "precio": "Estudio gratis" },
+    { "icono": "🔩", "nombre": "Implantes dentales", "texto": "Vuelve a morder con seguridad. Garantía por escrito.", "precio": "Plan a medida" },
+    { "icono": "✨", "nombre": "Blanqueamiento", "texto": "Hasta varios tonos más blanco en una sesión.", "precio": "Desde 190 €" },
+    { "icono": "🧒", "nombre": "Odontopediatría", "texto": "Revisiones para peques en un ambiente tranquilo.", "precio": "" },
+    { "icono": "🚑", "nombre": "Urgencias", "texto": "¿Dolor? Te vemos hoy mismo.", "precio": "Llama ahora" }
+  ],
+
+  "porque_titulo": "Por qué nos eligen en Ruzafa",
+  "diferenciales": [
+    { "cifra": "48 h", "texto": "máximo para tu primera cita" },
+    { "cifra": "0 €", "texto": "de sorpresas: presupuesto cerrado" },
+    { "cifra": "12 años", "texto": "cuidando sonrisas en Valencia" }
+  ],
+
+  "resenas": [
+    { "texto": "Tenía pánico al dentista y no sentí nada. Me explicaron todo antes de empezar.", "autor": "Laura G.", "cuando": "hace 2 semanas" },
+    { "texto": "Me atendieron el mismo día por un dolor de muela. Un trato de diez.", "autor": "Andrés M.", "cuando": "hace 1 mes" },
+    { "texto": "Presupuesto claro, sin letra pequeña y muy puntuales. Mis hijos también vienen aquí.", "autor": "Carmen R.", "cuando": "hace 1 mes" }
+  ],
+
+  "pasos": [
+    { "titulo": "Escríbenos", "texto": "Por WhatsApp o el formulario. Respondemos en minutos." },
+    { "titulo": "Primera visita gratis", "texto": "Revisión, diagnóstico y presupuesto cerrado." },
+    { "titulo": "Tu tratamiento", "texto": "Sin dolor, sin esperas y con seguimiento." }
+  ],
+
+  "faq": [
+    { "p": "¿La primera visita tiene coste?", "r": "No. La primera visita y el diagnóstico son gratuitos y sin compromiso." },
+    { "p": "¿Atendéis urgencias?", "r": "Sí. Llámanos y te atendemos el mismo día dentro del horario de la clínica." },
+    { "p": "¿Puedo financiar el tratamiento?", "r": "Sí, hasta 24 meses sin intereses, sujeto a aprobación de la entidad financiera." },
+    { "p": "¿Trabajáis con mutuas o seguros?", "r": "[PENDIENTE: confirmar con la clínica qué aseguradoras aceptan]." },
+    { "p": "¿Dónde estáis y dónde aparco?", "r": "En Ruzafa, Valencia. [PENDIENTE: parking cercano y transporte público]." }
+  ],
+
+  "contacto_titulo": "Pide tu primera visita gratis",
+  "contacto_texto": "Déjanos tus datos y te llamamos en menos de 1 hora (en horario de clínica).",
+
+  "mensajes_resena": [
+    { "nombre": "Después de la cita", "texto": "Hola {paciente}, gracias por venir hoy a Clínica Dental Alameda 😊 ¿Nos cuentas qué tal? Son 10 segundos y nos ayudas muchísimo: {enlace}" },
+    { "nombre": "Recordatorio (3 días después)", "texto": "Hola {paciente}, esperamos que estés genial. Si tienes un momento, nos encantaría saber tu opinión: {enlace} ¡Gracias!" },
+    { "nombre": "Paciente de confianza", "texto": "Hola {paciente}, llevas tiempo confiando en nosotros y eso vale mucho. ¿Nos ayudarías a que otras familias de Valencia nos conozcan? {enlace}" }
+  ]
+}

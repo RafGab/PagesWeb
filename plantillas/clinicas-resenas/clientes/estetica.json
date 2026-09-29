@@ -1,0 +1,103 @@
+{
+  "_nota": "EJEMPLO FICTICIO. Sustituye todos los datos por los de la clínica real. Revisa la normativa de publicidad sanitaria de tu comunidad.",
+  "nombre": "Clínica Lumière",
+  "razon_social": "Lumière Medicina Estética S.L. [PENDIENTE]",
+  "registro_sanitario": "[PENDIENTE: nº de registro sanitario]",
+  "tipo_schema": "MedicalClinic",
+  "tema": "elegante",
+  "colores": {
+    "principal": "#3d2b27", "sobre_principal": "#f7efe9",
+    "acento": "#c9a27e", "sobre_acento": "#1f1512",
+    "texto": "#2a1f1c", "texto_suave": "#6f625d",
+    "fondo": "#fbf8f5", "fondo_suave": "#f3ebe4", "tarjeta": "#ffffff", "linea": "#e8ddd4",
+    "hero": "linear-gradient(160deg,#f3ebe4,#fbf8f5 60%)"
+  },
+  "dominio": "https://clinicalumiere.es",
+  "direccion": "Calle de Velázquez 00",
+  "cp": "28001",
+  "ciudad": "Madrid",
+  "provincia": "Madrid",
+  "pais": "ES",
+  "prefijo_pais": "34",
+  "telefono": "+34 910 000 000",
+  "whatsapp": "34600000001",
+  "whatsapp_texto": "Hola, vengo de la web y me gustaría una valoración",
+  "email": "hola@clinicalumiere.es",
+  "horario_texto": "L–V 10:00–21:00 · S 10:00–15:00",
+  "horario_schema": ["Mo-Fr 10:00-21:00", "Sa 10:00-15:00"],
+  "rango_precio": "€€€",
+  "formspree_id": "TU_ID_FORMSPREE",
+  "google_nota": "4,9",
+  "google_resenas": 243,
+  "google_resena_url": "https://g.page/r/TU_CODIGO/review",
+  "google_perfil_url": "",
+  "redes": ["https://www.instagram.com/[PENDIENTE]"],
+
+  "seo_titulo": "Medicina estética en Madrid (Salamanca) | Clínica Lumière · 4,9★",
+  "seo_descripcion": "Clínica de medicina estética en el barrio de Salamanca, Madrid. Tratamientos faciales, rejuvenecimiento y cuidado de la piel con médicos colegiados. Valoración gratuita.",
+  "hero_etiqueta": "Medicina estética · Barrio de Salamanca",
+  "hero_titulo": "Resultados naturales. Tú, en tu mejor versión",
+  "hero_subtitulo": "Tratamientos faciales y corporales realizados por médicos colegiados, con un plan personalizado y sin compromiso.",
+  "hero_imagen": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1000&q=70",
+  "hero_imagen_alt": "Paciente durante un tratamiento facial en la clínica",
+  "cta_principal": "Reservar valoración",
+  "cta_secundario": "Ver tratamientos",
+  "cta_formulario": "Quiero mi valoración gratuita",
+
+  "txt_servicios": "Tratamientos",
+  "servicios_titulo": "Tratamientos pensados para ti",
+  "servicios_subtitulo": "Cada plan empieza con una valoración médica gratuita. Nunca te propondremos algo que no necesitas.",
+  "servicios": [
+    { "icono": "✦", "nombre": "Arrugas de expresión", "texto": "Suaviza frente, entrecejo y patas de gallo con un resultado natural.", "precio": "Valoración gratuita" },
+    { "icono": "◌", "nombre": "Labios y perfilado", "texto": "Hidratación y definición respetando tus proporciones.", "precio": "Desde 250 €" },
+    { "icono": "❋", "nombre": "Calidad de la piel", "texto": "Mesoterapia, peelings y bioestimulación para una piel luminosa.", "precio": "Desde 120 €" },
+    { "icono": "◇", "nombre": "Rejuvenecimiento facial", "texto": "Plan global para recuperar firmeza y volumen.", "precio": "Plan a medida" },
+    { "icono": "◎", "nombre": "Láser y manchas", "texto": "Unifica el tono y trata manchas y rojeces.", "precio": "Desde 150 €" },
+    { "icono": "○", "nombre": "Corporal", "texto": "Tratamientos para flacidez, celulitis y grasa localizada.", "precio": "Valoración gratuita" }
+  ],
+
+  "porque_titulo": "La diferencia Lumière",
+  "diferenciales": [
+    { "cifra": "100%", "texto": "de tratamientos realizados por médicos colegiados" },
+    { "cifra": "1 plan", "texto": "personalizado para ti, sin paquetes cerrados" },
+    { "cifra": "+3.500", "texto": "pacientes atendidos en Madrid" }
+  ],
+
+  "galeria_titulo": "Resultados de nuestros pacientes",
+  "galeria_subtitulo": "Buscamos que se note que estás mejor, no que te has hecho algo.",
+  "galeria_aviso": "Imágenes publicadas con el consentimiento expreso de los pacientes. Los resultados varían en cada persona y dependen de la valoración médica.",
+  "galeria": [
+    { "antes": "", "despues": "", "texto": "[PENDIENTE: foto real con consentimiento] Calidad de la piel · 3 sesiones" },
+    { "antes": "", "despues": "", "texto": "[PENDIENTE: foto real con consentimiento] Labios · 1 sesión" },
+    { "antes": "", "despues": "", "texto": "[PENDIENTE: foto real con consentimiento] Rejuvenecimiento facial" }
+  ],
+
+  "resenas": [
+    { "texto": "Lo que más valoro es la honestidad: me dijeron lo que NO necesitaba. El resultado, súper natural.", "autor": "Marta S.", "cuando": "hace 1 semana" },
+    { "texto": "Un trato exquisito desde la recepción. La doctora te explica todo con calma.", "autor": "Elena P.", "cuando": "hace 3 semanas" },
+    { "texto": "Nadie nota que me he hecho algo, solo que me ven descansada. Justo lo que quería.", "autor": "Cristina L.", "cuando": "hace 1 mes" }
+  ],
+
+  "pasos": [
+    { "titulo": "Valoración gratuita", "texto": "Un médico estudia tu caso y escucha lo que quieres conseguir." },
+    { "titulo": "Tu plan personalizado", "texto": "Te proponemos opciones y precios cerrados, sin presión." },
+    { "titulo": "Tratamiento y seguimiento", "texto": "Revisamos contigo la evolución en cada fase." }
+  ],
+
+  "faq": [
+    { "p": "¿La valoración tiene coste?", "r": "No. La primera valoración médica es gratuita y sin compromiso." },
+    { "p": "¿Quién realiza los tratamientos?", "r": "Todos los tratamientos médicos los realizan médicos colegiados. [PENDIENTE: nombre y nº de colegiado]." },
+    { "p": "¿El resultado será natural?", "r": "Es nuestra prioridad. Trabajamos respetando tus rasgos y te explicamos qué puedes esperar antes de empezar." },
+    { "p": "¿Puedo hacer vida normal después?", "r": "En la mayoría de tratamientos, sí. En la valoración te explicamos los cuidados de cada caso." },
+    { "p": "¿Puedo financiar el tratamiento?", "r": "Sí, ofrecemos financiación sujeta a aprobación. [PENDIENTE: condiciones]." }
+  ],
+
+  "contacto_titulo": "Reserva tu valoración gratuita",
+  "contacto_texto": "Déjanos tus datos y te llamamos para buscar el mejor momento para ti.",
+
+  "mensajes_resena": [
+    { "nombre": "Después de la cita", "texto": "Hola {paciente}, ha sido un placer verte hoy en Clínica Lumière ✨ ¿Nos cuentas cómo te has sentido? Solo 10 segundos: {enlace}" },
+    { "nombre": "Recordatorio (3 días después)", "texto": "Hola {paciente}, esperamos que todo vaya genial. Tu opinión nos ayuda muchísimo: {enlace} ¡Gracias!" },
+    { "nombre": "Tras la revisión", "texto": "Hola {paciente}, gracias por confiar en nosotros en todo el proceso. Si te apetece contarlo, aquí puedes hacerlo: {enlace}" }
+  ]
+}

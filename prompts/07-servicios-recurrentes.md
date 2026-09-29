@@ -9,8 +9,10 @@ Monta un sistema de reseñas de Google para [NEGOCIO] ([SECTOR], [CIUDAD]).
 Enlace directo para dejar reseña: [URL g.page/r/.../review]
 
 1. Crea en la web la página /opina.html: si la valoración es de 4–5
-   estrellas, lleva al enlace de Google; si es de 1–3, muestra un
-   formulario privado (Formspree) para que la queja llegue a la clínica.
+   estrellas, destaca el botón a Google; si es de 1–3, muestra un
+   formulario privado (Formspree) para la dirección, PERO deja también
+   visible el enlace a Google (Google prohíbe el "review gating").
+   (Ya hecho en plantillas/clinicas-resenas/.)
 2. Escribe 3 mensajes de WhatsApp/SMS para enviar 2 h después de la cita
    (cercano, máx. 300 caracteres, con el enlace a /opina.html) y 1
    recordatorio a los 3 días.
