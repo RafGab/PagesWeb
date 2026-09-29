@@ -9,6 +9,7 @@ Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 | [`prompts/`](prompts/00-LEEME.md) | Prompts para auditar, diseñar (Stitch), construir (Claude Code), SEO, vender y automatizar |
 | [`plantillas/clinicas-resenas/`](plantillas/clinicas-resenas/README.md) | **Kit del pack de 97 €/mes para clínicas dentales y estéticas**: web + sistema de reseñas + panel de recepción, generado desde un JSON |
 | [`plantillas/taller-agenda/`](plantillas/taller-agenda/README.md) | **Kit del pack de 147 €/mes para talleres mecánicos**: web + agenda online + panel de WhatsApp y avisos de revisión/ITV |
+| [`ofertas/dtech/`](ofertas/dtech/README.md) | Oferta para DTech (importador/proveedor de dropshipping, Bogotá): análisis, propuesta en COP, mensajes y maqueta de captación de revendedores |
 | [`plantilla-cliente/`](plantilla-cliente/index.html) | Web de ejemplo para negocio local (clínica dental ficticia) |
 | [`landing-agencia/`](landing-agencia/index.html) | Landing de tu propia agencia para captar clientes |
 
