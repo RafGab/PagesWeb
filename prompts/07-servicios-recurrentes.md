@@ -32,6 +32,7 @@ Añade reservas online a la web de [TALLER] en [CIUDAD].
 Servicios y duración: [cambio de aceite 45 min, pre-ITV 60 min, diagnosis 30 min…]
 Horario: [HORARIO]
 
+(Ya hecho en plantillas/taller-agenda/: agenda propia + opción Cal.com.)
 1. Incrusta Cal.com (o el calendario de GoHighLevel) en /reservar.html,
    con un tipo de evento por servicio y los campos: matrícula, modelo,
    km, WhatsApp.

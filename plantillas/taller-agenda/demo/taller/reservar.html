@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reservar cita · Talleres Motorpro</title>
+<meta name="description" content="Reserva tu cita en Talleres Motorpro (Sevilla) en 1 minuto: elige servicio, día y hora.">
+<meta name="theme-color" content="#e2531d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<link rel="stylesheet" href="taller.css">
+<style>:root{--c:#e2531d;--on-c:#ffffff;--acc:#ffc933;--on-acc:#1a1a1a;--ink:#16181d;--mut:#5c626e;--bg:#ffffff;--soft:#f2f3f5;--card:#ffffff;--line:#e2e4e9;--hero-bg:linear-gradient(120deg,#16181d 0%,#262a33 100%);--font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-h:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;--h-weight:700;--h-track:.01em;--r:10px;--img-r:14px;--btn-r:8px}</style>
+</head>
+<body class="book">
+<header><div class="w nav">
+  <a class="logo" href="./">Talleres Motorpro</a>
+  <a class="btn alt" href="tel:+34954000000" aria-label="Llamar al +34 954 000 000">📞 Llamar</a>
+</div></header>
+
+<main id="main" class="w book-w">
+  <h1>Reserva tu cita</h1>
+  <p class="lead" style="margin-bottom:20px">En 1 minuto. Te confirmamos la cita por WhatsApp en menos de 2 horas (en horario de taller).</p>
+
+  <!-- Modo Cal.com (si el taller tiene cuenta): se rellena por JS -->
+  <div id="calcom" class="hide"></div>
+
+  <div id="asistente">
+  <ol class="stepper" aria-label="Pasos">
+    <li class="on" data-p="1"><span>1</span> Servicio</li>
+    <li data-p="2"><span>2</span> Día y hora</li>
+    <li data-p="3"><span>3</span> Tus datos</li>
+  </ol>
+
+  <div class="book-grid">
+    <div>
+      <!-- Paso 1 -->
+      <section id="p1" class="paso" aria-labelledby="t1">
+        <h2 id="t1">¿Qué necesita tu coche?</h2>
+        <p class="hint">Puedes elegir varios.</p>
+        <div id="lista-servicios" class="svc-list"></div>
+        <div class="nav-btns"><span></span><button class="btn big" id="a2" type="button" disabled>Elegir día y hora →</button></div>
+      </section>
+
+      <!-- Paso 2 -->
+      <section id="p2" class="paso hide" aria-labelledby="t2">
+        <h2 id="t2">¿Cuándo nos traes el coche?</h2>
+        <p class="hint">Elige el día y la hora a la que nos dejas el coche.</p>
+        <div class="days" id="dias" role="listbox" aria-label="Días disponibles"></div>
+        <div class="slots" id="horas" aria-live="polite"></div>
+        <div class="nav-btns"><button class="btn alt" type="button" data-volver="1">← Atrás</button><button class="btn big" id="a3" type="button" disabled>Continuar →</button></div>
+      </section>
+
+      <!-- Paso 3 -->
+      <section id="p3" class="paso hide" aria-labelledby="t3">
+        <h2 id="t3">Tus datos</h2>
+        <form id="f" class="form-grid" novalidate>
+          <div><label for="nom">Nombre</label><input id="nom" name="nombre" required autocomplete="name"></div>
+          <div><label for="tel">Móvil (WhatsApp)</label><input id="tel" name="telefono" type="tel" required autocomplete="tel" inputmode="tel"></div>
+          <div><label for="mat">Matrícula</label><input id="mat" name="matricula" required placeholder="1234ABC" autocapitalize="characters" maxlength="10"></div>
+          <div><label for="mod">Marca y modelo</label><input id="mod" name="modelo" required placeholder="Seat León 1.5 TSI"></div>
+          <div><label for="km">Kilómetros (aprox.)</label><input id="km" name="km" inputmode="numeric" placeholder="85.000"></div>
+          <div class="full" id="extras"></div>
+          <div class="full"><label for="com">¿Algo más que debamos saber?</label><textarea id="com" name="comentario" rows="3" placeholder="Ej. hace un ruido al frenar"></textarea></div>
+          <label class="chk full"><input type="checkbox" id="priv" required><span>Acepto la política de privacidad y que me contactéis por WhatsApp para gestionar la cita.</span></label>
+          <div class="nav-btns full"><button class="btn alt" type="button" data-volver="2">← Atrás</button><button class="btn big" type="submit" id="enviar">Confirmar reserva</button></div>
+          <p class="err full hide" id="err" role="alert"></p>
+        </form>
+      </section>
+
+      <!-- Paso 4 -->
+      <section id="p4" class="paso hide" aria-live="polite">
+        <div class="done">
+          <div class="ok-ic" aria-hidden="true">✓</div>
+          <h2>¡Solicitud de cita recibida!</h2>
+          <p id="done-txt">Te confirmamos la cita por WhatsApp en menos de 2 horas (en horario de taller).</p>
+          <p class="warn hide" id="aviso-wa"></p>
+          <div class="ctas" style="justify-content:center">
+            <a class="btn wa big" id="wa-conf" target="_blank" rel="noopener">Enviar también por WhatsApp</a>
+            <button class="btn alt big" id="ics" type="button">📅 Añadir a mi calendario</button>
+          </div>
+          <p class="small" style="margin-top:20px"><a href="./">Volver a la web</a></p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="resumen" aria-label="Resumen de tu cita">
+      <h3>Tu cita</h3>
+      <dl>
+        <dt>Servicio</dt><dd id="r-svc">—</dd>
+        <dt>Día</dt><dd id="r-dia">—</dd>
+        <dt>Hora</dt><dd id="r-hora">—</dd>
+      </dl>
+      <p class="small">📍 Calle de la Industria 00, Nave 4, 41007 Sevilla</p>
+    </aside>
+  </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var CFG = {"nombre":"Talleres Motorpro","direccion":"Calle de la Industria 00, Nave 4, 41007 Sevilla","whatsapp":"34600000002","formspree_id":"TU_ID_FORMSPREE","calcom_url":"","intervalo_min":30,"dias_visibles":21,"antelacion_min_horas":3,"franjas":{"1":["08:30-13:00","15:00-18:30"],"2":["08:30-13:00","15:00-18:30"],"3":["08:30-13:00","15:00-18:30"],"4":["08:30-13:00","15:00-18:30"],"5":["08:30-13:00","15:00-18:30"],"6":["09:00-12:30"]},"festivos":["2026-10-12","2026-11-01","2026-12-08","2026-12-25","2027-01-01","2027-01-06"],"extras":["Necesito vehículo de sustitución","Quiero recogida y entrega a domicilio"],"servicios":[{"id":"revision","nombre":"Revisión oficial","precio":"Desde 119 €","duracion_min":120},{"id":"aceite","nombre":"Cambio de aceite y filtros","precio":"Desde 69 €","duracion_min":45},{"id":"frenos","nombre":"Frenos","precio":"Desde 89 €","duracion_min":90},{"id":"neumaticos","nombre":"Neumáticos","precio":"Consultar","duracion_min":60},{"id":"preitv","nombre":"Pre-ITV","precio":"29 €","duracion_min":45},{"id":"diagnosis","nombre":"Diagnosis electrónica","precio":"Desde 39 €","duracion_min":30},{"id":"aire","nombre":"Aire acondicionado","precio":"Desde 59 €","duracion_min":60},{"id":"otro","nombre":"Otra avería","precio":"Diagnóstico gratis","duracion_min":60}]};
+  var $ = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  var iso = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  var aMin = function (hhmm) { var p = hhmm.split(':'); return +p[0] * 60 + +p[1]; };
+  var aHora = function (m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); };
+  window.dataLayer = window.dataLayer || [];
+
+  // ---- Modo Cal.com: si el taller tiene cuenta, se usa su calendario real ----
+  if (CFG.calcom_url) {
+    $('asistente').classList.add('hide');
+    var cal = $('calcom'); cal.classList.remove('hide');
+    var fr = document.createElement('iframe');
+    fr.src = CFG.calcom_url + (CFG.calcom_url.indexOf('?') < 0 ? '?' : '&') + 'embed=true';
+    fr.title = 'Calendario de reservas'; fr.className = 'calframe'; fr.loading = 'lazy';
+    cal.appendChild(fr);
+    return;
+  }
+
+  var estado = { servicios: [], fecha: null, hora: null };
+  var params = new URLSearchParams(location.search);
+
+  // ---- Paso 1: servicios ----
+  var preSel = (params.get('s') || '').split(',');
+  CFG.servicios.forEach(function (s) {
+    var l = document.createElement('label'); l.className = 'svc';
+    l.innerHTML = '<input type="checkbox" value="' + s.id + '"><span class="svc-n"></span><span class="svc-p"></span>';
+    l.querySelector('.svc-n').textContent = s.nombre;
+    l.querySelector('.svc-p').textContent = [s.precio, s.duracion_min >= 60 ? '≈ ' + (s.duracion_min / 60).toString().replace('.', ',') + ' h' : '≈ ' + s.duracion_min + ' min'].filter(Boolean).join(' · ');
+    var ch = l.querySelector('input');
+    if (preSel.indexOf(s.id) >= 0) ch.checked = true;
+    ch.addEventListener('change', leerServicios);
+    $('lista-servicios').appendChild(l);
+  });
+  function leerServicios() {
+    estado.servicios = CFG.servicios.filter(function (s) {
+      return document.querySelector('.svc input[value="' + s.id + '"]').checked;
+    });
+    document.querySelectorAll('.svc').forEach(function (l) { l.classList.toggle('on', l.querySelector('input').checked); });
+    $('a2').disabled = !estado.servicios.length;
+    resumen();
+  }
+  leerServicios();
+
+  // ---- Paso 2: días y horas ----
+  function franjasDe(d) { return CFG.franjas[String(d.getDay())] || []; }
+  function horasDe(d) {
+    var ahora = new Date(), res = [];
+    var minimo = new Date(ahora.getTime() + CFG.antelacion_min_horas * 3600e3);
+    franjasDe(d).forEach(function (f) {
+      var p = f.split('-'), ini = aMin(p[0]), fin = aMin(p[1]);
+      for (var m = ini; m < fin; m += CFG.intervalo_min) {
+        var t = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(m / 60), m % 60);
+        if (t >= minimo) res.push(aHora(m));
+      }
+    });
+    return res;
+  }
+  var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  var dias = [];
+  for (var i = 0; i < CFG.dias_visibles; i++) {
+    var d = new Date(hoy); d.setDate(hoy.getDate() + i);
+    var cerrado = CFG.festivos.indexOf(iso(d)) >= 0 || !franjasDe(d).length;
+    dias.push({ d: d, cerrado: cerrado, lleno: !cerrado && !horasDe(d).length });
+  }
+  dias.forEach(function (x) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'day'; b.disabled = x.cerrado || x.lleno; b.setAttribute('role', 'option');
+    b.innerHTML = '<small></small><b></b><small></small>';
+    var s = b.querySelectorAll('small');
+    s[0].textContent = x.d.toLocaleDateString('es-ES', { weekday: 'short' });
+    b.querySelector('b').textContent = x.d.getDate();
+    s[1].textContent = x.cerrado ? 'cerrado' : x.lleno ? 'sin horas' : x.d.toLocaleDateString('es-ES', { month: 'short' });
+    b.addEventListener('click', function () { elegirDia(x.d, b); });
+    $('dias').appendChild(b);
+  });
+  function elegirDia(d, boton) {
+    estado.fecha = d; estado.hora = null; $('a3').disabled = true;
+    document.querySelectorAll('.day').forEach(function (b) { b.classList.remove('on'); b.setAttribute('aria-selected', 'false'); });
+    boton.classList.add('on'); boton.setAttribute('aria-selected', 'true');
+    var cont = $('horas'); cont.innerHTML = '';
+    horasDe(d).forEach(function (h) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'slot'; b.textContent = h;
+      b.addEventListener('click', function () {
+        estado.hora = h; $('a3').disabled = false;
+        cont.querySelectorAll('.slot').forEach(function (x) { x.classList.toggle('on', x === b); });
+        resumen();
+      });
+      cont.appendChild(b);
+    });
+    resumen();
+  }
+
+  // ---- Navegación ----
+  function ir(n) {
+    [1, 2, 3, 4].forEach(function (k) { $('p' + k).classList.toggle('hide', k !== n); });
+    document.querySelectorAll('.stepper li').forEach(function (li) {
+      var p = +li.dataset.p; li.classList.toggle('on', p === n); li.classList.toggle('hecho', p < n);
+    });
+    var h = $('p' + n).querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus(); }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  $('a2').addEventListener('click', function () { ir(2); dataLayer.push({ event: 'reserva_paso2' }); });
+  $('a3').addEventListener('click', function () { ir(3); dataLayer.push({ event: 'reserva_paso3' }); });
+  document.querySelectorAll('[data-volver]').forEach(function (b) { b.addEventListener('click', function () { ir(+b.dataset.volver); }); });
+
+  // Extras (vehículo de sustitución, recogida…)
+  CFG.extras.forEach(function (e, i) {
+    var l = document.createElement('label'); l.className = 'chk';
+    l.innerHTML = '<input type="checkbox" name="extra' + i + '"><span></span>';
+    l.querySelector('span').textContent = e;
+    $('extras').appendChild(l);
+  });
+
+  // Datos que llegan en el enlace de los avisos (?n=Nombre&m=Matrícula)
+  if (params.get('n')) $('nom').value = params.get('n').slice(0, 40);
+  if (params.get('m')) $('mat').value = params.get('m').slice(0, 10).toUpperCase();
+  $('mat').addEventListener('input', function () { this.value = this.value.toUpperCase().replace(/[^A-Z0-9 -]/g, ''); });
+  ['nom', 'tel', 'mat', 'mod'].forEach(function (id) { $(id).addEventListener('input', function () { this.classList.remove('mal'); }); });
+
+  // ---- Resumen ----
+  function fechaLarga(d) { return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }); }
+  function resumen() {
+    $('r-svc').textContent = estado.servicios.map(function (s) { return s.nombre; }).join(', ') || '—';
+    $('r-dia').textContent = estado.fecha ? fechaLarga(estado.fecha) : '—';
+    $('r-hora').textContent = estado.hora || '—';
+  }
+
+  // ---- Envío ----
+  function textoCita() {
+    return 'Hola, acabo de reservar cita en la web:\n' +
+      '• Servicio: ' + $('r-svc').textContent + '\n' +
+      '• Día: ' + $('r-dia').textContent + ' a las ' + estado.hora + '\n' +
+      '• Coche: ' + $('mat').value + ' (' + $('mod').value + ')' + ($('km').value ? ', ' + $('km').value + ' km' : '') + '\n' +
+      '• Nombre: ' + $('nom').value + ' · ' + $('tel').value +
+      extrasElegidos().map(function (e) { return '\n• ' + e; }).join('') +
+      ($('com').value ? '\n• Nota: ' + $('com').value : '');
+  }
+  function extrasElegidos() {
+    return CFG.extras.filter(function (_, i) { return document.querySelector('[name="extra' + i + '"]').checked; });
+  }
+
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, err = $('err');
+    var faltan = ['nom', 'tel', 'mat', 'mod'].filter(function (id) { return !$(id).value.trim(); });
+    if ($('tel').value.replace(/\D/g, '').length < 9) faltan.push('tel');
+    if (faltan.length || !$('priv').checked) {
+      err.textContent = !$('priv').checked && !faltan.length ? 'Acepta la política de privacidad para continuar.' : 'Revisa los campos marcados.';
+      err.classList.remove('hide');
+      ['nom', 'tel', 'mat', 'mod'].forEach(function (id) { $(id).classList.toggle('mal', faltan.indexOf(id) >= 0); });
+      (faltan.length ? $(faltan[0]) : $('priv')).focus();
+      return;
+    }
+    err.classList.add('hide');
+    $('enviar').disabled = true; $('enviar').textContent = 'Enviando…';
+
+    var datos = new FormData(f);
+    datos.append('_subject', 'Nueva cita web: ' + estado.hora + ' ' + $('r-dia').textContent + ' · ' + $('mat').value);
+    datos.append('servicios', $('r-svc').textContent);
+    datos.append('dia', $('r-dia').textContent);
+    datos.append('fecha_iso', iso(estado.fecha));
+    datos.append('hora', estado.hora);
+    datos.append('extras', extrasElegidos().join(', '));
+
+    $('wa-conf').href = 'https://wa.me/' + CFG.whatsapp + '?text=' + encodeURIComponent(textoCita());
+
+    var demo = !CFG.formspree_id || /TU_ID|PENDIENTE/.test(CFG.formspree_id);
+    var envio = demo ? Promise.reject('demo') :
+      fetch('https://formspree.io/f/' + CFG.formspree_id, { method: 'POST', body: datos, headers: { Accept: 'application/json' } })
+        .then(function (r) { if (!r.ok) throw r.status; });
+    envio.then(function () {
+      dataLayer.push({ event: 'reserva_completada' });
+    }).catch(function (motivo) {
+      // Si no se pudo registrar, el WhatsApp pasa a ser el canal principal
+      $('aviso-wa').textContent = motivo === 'demo'
+        ? 'Modo demostración: configura Formspree para recibir las reservas por email. Mientras tanto, envíala por WhatsApp.'
+        : 'No hemos podido registrar la reserva automáticamente. Pulsa «Enviar también por WhatsApp» para completarla.';
+      $('aviso-wa').classList.remove('hide');
+      $('wa-conf').textContent = 'Enviar reserva por WhatsApp';
+      dataLayer.push({ event: 'reserva_fallo_envio' });
+    }).then(function () { ir(4); });
+  });
+
+  // ---- Archivo .ics para el calendario del cliente ----
+  $('ics').addEventListener('click', function () {
+    var ini = aMin(estado.hora);
+    var dur = Math.max.apply(null, estado.servicios.map(function (s) { return s.duracion_min; }).concat([30]));
+    var ymd = iso(estado.fecha).replace(/-/g, '');
+    var fin = Math.min(ini + dur, 23 * 60 + 59);
+    var t = function (m) { return ymd + 'T' + aHora(m).replace(':', '') + '00'; };
+    var e = function (s) { return String(s).replace(/([\\,;])/g, '\\$1').replace(/\n/g, '\\n'); };
+    var ahora = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//PagesWeb//Cita taller//ES', 'BEGIN:VEVENT',
+      'UID:' + Date.now() + '@' + location.hostname, 'DTSTAMP:' + ahora, 'DTSTART:' + t(ini), 'DTEND:' + t(fin),
+      'SUMMARY:' + e('Cita en ' + CFG.nombre + ' (' + $('mat').value + ')'),
+      'LOCATION:' + e(CFG.direccion), 'DESCRIPTION:' + e($('r-svc').textContent),
+      'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:' + e('Cita en ' + CFG.nombre), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    a.download = 'cita-' + CFG.nombre.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    dataLayer.push({ event: 'reserva_calendario' });
+  });
+
+  // Si llega con servicio preseleccionado, salta directo al paso 2
+  if (estado.servicios.length && params.get('s')) ir(2);
+})();
+</script>
+</body>
+</html>

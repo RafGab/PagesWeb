@@ -1,0 +1,121 @@
+{
+  "_nota": "EJEMPLO FICTICIO. Sustituye todos los datos por los del taller real.",
+  "nombre": "Talleres Motorpro",
+  "razon_social": "Motorpro Automoción S.L. [PENDIENTE]",
+  "registro_taller": "[PENDIENTE: nº de Registro Industrial del taller]",
+  "tipo_schema": "AutoRepair",
+  "tema": "taller",
+  "colores": {
+    "principal": "#e2531d", "sobre_principal": "#ffffff",
+    "acento": "#ffc933", "sobre_acento": "#1a1a1a",
+    "texto": "#16181d", "texto_suave": "#5c626e",
+    "fondo": "#ffffff", "fondo_suave": "#f2f3f5", "tarjeta": "#ffffff", "linea": "#e2e4e9",
+    "hero": "linear-gradient(120deg,#16181d 0%,#262a33 100%)"
+  },
+  "dominio": "https://talleresmotorpro.es",
+  "direccion": "Calle de la Industria 00, Nave 4",
+  "cp": "41007",
+  "ciudad": "Sevilla",
+  "provincia": "Sevilla",
+  "pais": "ES",
+  "prefijo_pais": "34",
+  "telefono": "+34 954 000 000",
+  "whatsapp": "34600000002",
+  "whatsapp_texto": "Hola, vengo de la web y quiero pedir cita para mi coche",
+  "email": "citas@talleresmotorpro.es",
+  "horario_texto": "L–V 8:30–13:30 y 15:00–19:00 · S 9:00–13:00",
+  "horario_schema": ["Mo-Fr 08:30-13:30", "Mo-Fr 15:00-19:00", "Sa 09:00-13:00"],
+  "rango_precio": "€€",
+  "formspree_id": "TU_ID_FORMSPREE",
+  "google_nota": "4,8",
+  "google_resenas": 312,
+  "google_resena_url": "https://g.page/r/TU_CODIGO/review",
+  "google_perfil_url": "",
+  "redes": [],
+
+  "seo_titulo": "Taller mecánico en Sevilla | Cita online en 1 minuto · Talleres Motorpro",
+  "seo_descripcion": "Taller mecánico multimarca en Sevilla. Revisión, cambio de aceite, frenos, neumáticos, pre-ITV y diagnosis. Presupuesto antes de reparar. Reserva tu cita online.",
+  "hero_etiqueta": "Taller multimarca · Sevilla Este",
+  "hero_titulo": "Tu coche listo el mismo día. Reserva tu cita online en 1 minuto",
+  "hero_subtitulo": "Presupuesto cerrado antes de tocar nada, piezas con garantía y te avisamos por WhatsApp cuando esté listo.",
+  "hero_imagen": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=1000&q=70",
+  "hero_imagen_alt": "Mecánico revisando el motor de un coche en el taller",
+  "cta_principal": "Reservar cita online",
+  "cta_secundario": "Pedir presupuesto por WhatsApp",
+  "cta_formulario": "Quiero mi presupuesto",
+
+  "servicios_titulo": "Servicios con precio claro",
+  "servicios_subtitulo": "Precios orientativos con IVA para turismos. Te damos el presupuesto exacto antes de empezar.",
+  "servicios": [
+    { "id": "revision", "icono": "🛠️", "nombre": "Revisión oficial", "texto": "Según el libro de mantenimiento, sin perder la garantía del fabricante.", "precio": "Desde 119 €", "duracion_min": 120 },
+    { "id": "aceite", "icono": "🛢️", "nombre": "Cambio de aceite y filtros", "texto": "Aceite homologado para tu motor y revisión de 20 puntos gratis.", "precio": "Desde 69 €", "duracion_min": 45 },
+    { "id": "frenos", "icono": "🛑", "nombre": "Frenos", "texto": "Pastillas, discos y líquido. Frenar bien no es negociable.", "precio": "Desde 89 €", "duracion_min": 90 },
+    { "id": "neumaticos", "icono": "🛞", "nombre": "Neumáticos", "texto": "Montaje, equilibrado y alineación. Todas las marcas.", "precio": "Consultar", "duracion_min": 60 },
+    { "id": "preitv", "icono": "✅", "nombre": "Pre-ITV", "texto": "Revisamos todo antes de la ITV para que la pases a la primera.", "precio": "29 €", "duracion_min": 45 },
+    { "id": "diagnosis", "icono": "💻", "nombre": "Diagnosis electrónica", "texto": "¿Luz de avería encendida? Te decimos qué es y cuánto cuesta.", "precio": "Desde 39 €", "duracion_min": 30 },
+    { "id": "aire", "icono": "❄️", "nombre": "Aire acondicionado", "texto": "Carga de gas y revisión para que no pases calor.", "precio": "Desde 59 €", "duracion_min": 60 },
+    { "id": "otro", "icono": "🔧", "nombre": "Otra avería", "texto": "Ruidos, vibraciones, embrague… cuéntanoslo y lo miramos.", "precio": "Diagnóstico gratis", "duracion_min": 60 }
+  ],
+
+  "marcas": ["Seat", "Volkswagen", "Renault", "Peugeot", "Citroën", "Toyota", "Ford", "Opel", "Kia", "Hyundai", "BMW", "Mercedes", "Audi", "Dacia", "Híbridos"],
+
+  "porque_titulo": "Por qué nos confían su coche en Sevilla",
+  "diferenciales": [
+    { "cifra": "24 h", "texto": "la mayoría de reparaciones" },
+    { "cifra": "0 €", "texto": "de sorpresas: presupuesto antes de reparar" },
+    { "cifra": "2 años", "texto": "de garantía en piezas y mano de obra" }
+  ],
+
+  "resenas": [
+    { "texto": "Reservé por la web a las 11 de la noche y a las 9 ya tenían el coche. Me avisaron por WhatsApp cuando estuvo listo.", "autor": "Javier R.", "cuando": "hace 1 semana" },
+    { "texto": "Me dieron presupuesto antes de tocar nada y costó exactamente eso. Así da gusto.", "autor": "María J.", "cuando": "hace 2 semanas" },
+    { "texto": "Me avisaron de que me tocaba la ITV, hicieron la pre-ITV y la pasé a la primera.", "autor": "Antonio G.", "cuando": "hace 1 mes" }
+  ],
+
+  "pasos": [
+    { "titulo": "Reserva online", "texto": "Elige servicio, día y hora en 1 minuto." },
+    { "titulo": "Presupuesto cerrado", "texto": "Revisamos el coche y te pasamos el precio por WhatsApp antes de reparar." },
+    { "titulo": "Te avisamos", "texto": "Cuando tu coche esté listo, te llega un WhatsApp." }
+  ],
+
+  "faq": [
+    { "p": "¿Pierdo la garantía del fabricante si hago la revisión aquí?", "r": "No. La normativa europea te permite hacer el mantenimiento en cualquier taller siempre que se sigan las especificaciones del fabricante, y sellamos tu libro de mantenimiento." },
+    { "p": "¿Cuánto tarda una revisión?", "r": "Entre 1 y 3 horas según el coche. Si nos dejas el coche a primera hora, normalmente lo tienes el mismo día." },
+    { "p": "¿Tenéis coche de sustitución?", "r": "[PENDIENTE: confirmar si hay coche de sustitución y condiciones]." },
+    { "p": "¿Me lleváis el coche a la ITV?", "r": "Sí. Hacemos la pre-ITV y, si quieres, llevamos nosotros el coche a la estación ITV. [PENDIENTE: precio del servicio]." },
+    { "p": "¿Cómo pago?", "r": "Tarjeta, efectivo o Bizum. Para reparaciones grandes ofrecemos financiación. [PENDIENTE: condiciones]." }
+  ],
+
+  "contacto_titulo": "¿Prefieres que te llamemos?",
+  "contacto_texto": "Déjanos tu teléfono y te llamamos para darte presupuesto o cita.",
+
+  "agenda": {
+    "calcom_url": "",
+    "intervalo_min": 30,
+    "dias_visibles": 21,
+    "antelacion_min_horas": 3,
+    "franjas": {
+      "1": ["08:30-13:00", "15:00-18:30"],
+      "2": ["08:30-13:00", "15:00-18:30"],
+      "3": ["08:30-13:00", "15:00-18:30"],
+      "4": ["08:30-13:00", "15:00-18:30"],
+      "5": ["08:30-13:00", "15:00-18:30"],
+      "6": ["09:00-12:30"]
+    },
+    "festivos": ["2026-10-12", "2026-11-01", "2026-12-08", "2026-12-25", "2027-01-01", "2027-01-06"],
+    "confirmacion_texto": "Te confirmamos la cita por WhatsApp en menos de 2 horas (en horario de taller).",
+    "extras": ["Necesito vehículo de sustitución", "Quiero recogida y entrega a domicilio"],
+    "meses_revision": 12,
+    "dias_aviso": 30
+  },
+
+  "mensajes_taller": [
+    { "id": "confirmar", "nombre": "Confirmar cita", "texto": "Hola {cliente} 👋 Te confirmamos la cita en {taller} el {fecha} a las {hora} para tu coche {matricula}. Si no puedes venir, avísanos por aquí. ¡Hasta pronto!" },
+    { "id": "recordatorio", "nombre": "Recordatorio (día anterior)", "texto": "Hola {cliente}, te recordamos que mañana {fecha} a las {hora} te esperamos con tu coche {matricula} en {taller}. ¿Todo bien? Responde OK para confirmar 🙏" },
+    { "id": "presupuesto", "nombre": "Presupuesto para aprobar", "texto": "Hola {cliente}, ya hemos revisado tu coche {matricula}. El presupuesto es de {importe} € (IVA incluido). ¿Te parece bien que empecemos? Responde SÍ y nos ponemos con ello." },
+    { "id": "listo", "nombre": "Coche listo para recoger", "texto": "Hola {cliente} ✅ ¡Tu coche {matricula} ya está listo! Puedes recogerlo en horario de {horario}. Importe: {importe} €." },
+    { "id": "resena", "nombre": "Pedir reseña (días después)", "texto": "Hola {cliente}, ¿qué tal va el coche? Si te hemos tratado bien, una reseña en Google nos ayuda muchísimo: {enlace_resena} ¡Gracias!" }
+  ],
+  "aviso_revision": "Hola {cliente} 👋 Soy de {taller}. Tu coche {matricula} cumple pronto un año desde su última revisión. Revisarlo a tiempo evita averías caras. Reserva aquí en 1 minuto: {enlace_reserva}",
+  "aviso_itv": "Hola {cliente} 👋 Soy de {taller}. La ITV de tu coche {matricula} vence el {fecha_itv}. ¿Te hacemos la pre-ITV para que la pases a la primera? Reserva aquí: {enlace_reserva}"
+}

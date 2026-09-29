@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /panel.html
+Disallow: /gracias.html
+Sitemap: https://talleresmotorpro.es/sitemap.xml

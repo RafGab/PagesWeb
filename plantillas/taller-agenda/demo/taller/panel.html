@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel del taller · Talleres Motorpro</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<link rel="stylesheet" href="taller.css">
+<style>:root{--c:#e2531d;--on-c:#ffffff;--acc:#ffc933;--on-acc:#1a1a1a;--ink:#16181d;--mut:#5c626e;--bg:#ffffff;--soft:#f2f3f5;--card:#ffffff;--line:#e2e4e9;--hero-bg:linear-gradient(120deg,#16181d 0%,#262a33 100%);--font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-h:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;--h-weight:700;--h-track:.01em;--r:10px;--img-r:14px;--btn-r:8px}</style>
+</head>
+<body class="book">
+<!-- Panel interno del taller: no enlazar desde la web pública. -->
+<header><div class="w nav">
+  <span class="logo">Talleres Motorpro · Panel</span>
+  <a class="btn alt" href="reservar.html" target="_blank">Ver agenda pública</a>
+</div></header>
+
+<main class="w book-w">
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" aria-controls="t-msg" id="b-msg" class="on">💬 Enviar mensaje</button>
+    <button role="tab" aria-selected="false" aria-controls="t-av" id="b-av">🔔 Avisos de revisión e ITV</button>
+  </div>
+
+  <!-- Pestaña 1: mensaje a un cliente -->
+  <section id="t-msg" role="tabpanel" aria-labelledby="b-msg" class="panel-card">
+    <h1>Mensaje a un cliente</h1>
+    <p class="hint">Confirma citas, manda presupuestos o avisa de que el coche está listo, en 10 segundos.</p>
+    <div class="form-grid">
+      <div class="full"><label for="tipo">Tipo de mensaje</label><select id="tipo"></select></div>
+      <div data-ph="cliente"><label for="cli">Nombre del cliente</label><input id="cli" autocomplete="off" placeholder="Ej. Javier"></div>
+      <div data-ph="siempre" class="tel-row"><div><label for="pre">Prefijo</label><input id="pre" value="34" inputmode="numeric"></div><div><label for="mov">Móvil</label><input id="mov" type="tel" inputmode="tel" autocomplete="off" placeholder="600 000 000"></div></div>
+      <div data-ph="matricula"><label for="mat">Matrícula</label><input id="mat" autocomplete="off" placeholder="1234ABC"></div>
+      <div data-ph="fecha"><label for="fec">Día de la cita</label><input id="fec" type="date"></div>
+      <div data-ph="hora"><label for="hor">Hora</label><input id="hor" type="time" step="900"></div>
+      <div data-ph="importe"><label for="imp">Importe (€, IVA incl.)</label><input id="imp" inputmode="decimal" placeholder="245,50"></div>
+    </div>
+    <div class="msg" id="prev" aria-live="polite"></div>
+    <div class="ctas" style="margin-top:14px">
+      <button class="btn wa big" id="wa" type="button">Enviar por WhatsApp</button>
+      <button class="btn alt" id="copiar" type="button">Copiar texto</button>
+    </div>
+  </section>
+
+  <!-- Pestaña 2: avisos -->
+  <section id="t-av" role="tabpanel" aria-labelledby="b-av" class="panel-card hide">
+    <h1>Avisos de revisión e ITV</h1>
+    <p class="hint">Carga tu lista de clientes (CSV exportado de tu programa de taller o de Excel) y te decimos a quién avisar este mes.
+      Se avisa si la revisión o la ITV vence en los próximos <b id="dias-aviso"></b> días o venció hace poco.</p>
+    <div class="ctas">
+      <label class="btn">📂 Cargar CSV<input type="file" id="archivo" accept=".csv,.txt" class="hide"></label>
+      <button class="btn alt" id="ejemplo" type="button">Probar con datos de ejemplo</button>
+      <button class="btn alt" id="plantilla" type="button">⬇ Descargar plantilla CSV</button>
+    </div>
+    <details style="margin-top:16px"><summary>…o pega los datos aquí</summary>
+      <textarea id="csv" rows="6" placeholder="nombre;telefono;matricula;modelo;ultima_revision;proxima_itv"></textarea>
+      <button class="btn" id="procesar" type="button" style="margin-top:10px">Buscar avisos</button>
+    </details>
+    <p id="resumen-av" class="av-sum" aria-live="polite"></p>
+    <ul id="lista-av" class="av-list"></ul>
+    <p class="small">Los datos se procesan solo en este navegador: no se guardan ni se envían a ningún servidor.
+      Avisa solo a clientes que hayan aceptado recibir comunicaciones.</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var CFG = {"nombre":"Talleres Motorpro","horario":"L–V 8:30–13:30 y 15:00–19:00 · S 9:00–13:00","prefijo":"34","enlace_reserva":"https://talleresmotorpro.es/reservar.html","enlace_resena":"https://g.page/r/TU_CODIGO/review","meses_revision":12,"dias_aviso":30,"mensajes":[{"id":"confirmar","nombre":"Confirmar cita","texto":"Hola {cliente} 👋 Te confirmamos la cita en {taller} el {fecha} a las {hora} para tu coche {matricula}. Si no puedes venir, avísanos por aquí. ¡Hasta pronto!"},{"id":"recordatorio","nombre":"Recordatorio (día anterior)","texto":"Hola {cliente}, te recordamos que mañana {fecha} a las {hora} te esperamos con tu coche {matricula} en {taller}. ¿Todo bien? Responde OK para confirmar 🙏"},{"id":"presupuesto","nombre":"Presupuesto para aprobar","texto":"Hola {cliente}, ya hemos revisado tu coche {matricula}. El presupuesto es de {importe} € (IVA incluido). ¿Te parece bien que empecemos? Responde SÍ y nos ponemos con ello."},{"id":"listo","nombre":"Coche listo para recoger","texto":"Hola {cliente} ✅ ¡Tu coche {matricula} ya está listo! Puedes recogerlo en horario de {horario}. Importe: {importe} €."},{"id":"resena","nombre":"Pedir reseña (días después)","texto":"Hola {cliente}, ¿qué tal va el coche? Si te hemos tratado bien, una reseña en Google nos ayuda muchísimo: {enlace_resena} ¡Gracias!"}],"aviso_revision":"Hola {cliente} 👋 Soy de {taller}. Tu coche {matricula} cumple pronto un año desde su última revisión. Revisarlo a tiempo evita averías caras. Reserva aquí en 1 minuto: {enlace_reserva}","aviso_itv":"Hola {cliente} 👋 Soy de {taller}. La ITV de tu coche {matricula} vence el {fecha_itv}. ¿Te hacemos la pre-ITV para que la pases a la primera? Reserva aquí: {enlace_reserva}"};
+  var $ = function (id) { return document.getElementById(id); };
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  var DIA = 864e5;
+
+  // ---------- Pestañas ----------
+  function pestana(cual) {
+    ['msg', 'av'].forEach(function (k) {
+      $('t-' + k).classList.toggle('hide', k !== cual);
+      $('b-' + k).classList.toggle('on', k === cual);
+      $('b-' + k).setAttribute('aria-selected', k === cual);
+    });
+  }
+  $('b-msg').addEventListener('click', function () { pestana('msg'); });
+  $('b-av').addEventListener('click', function () { pestana('av'); });
+
+  // ---------- Utilidades ----------
+  function fechaLarga(d) { return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }); }
+  function fechaCorta(d) { return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }); }
+  function rellenar(plantilla, v) {
+    return plantilla.replace(/\{(\w+)\}/g, function (_, k) { return v[k] != null && v[k] !== '' ? v[k] : ''; })
+      .replace(/Hola +,/g, 'Hola,').replace(/ {2,}/g, ' ').replace(/ \(\)/g, '');
+  }
+  function movil(prefijo, n) {
+    var d = String(n).replace(/\D/g, '');
+    return d.length === 9 ? prefijo + d : d;
+  }
+  function abrirWhatsApp(num, texto) { window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(texto), '_blank'); }
+
+  // ---------- Pestaña 1: mensajes ----------
+  CFG.mensajes.forEach(function (m, i) {
+    var o = document.createElement('option'); o.value = i; o.textContent = m.nombre; $('tipo').appendChild(o);
+  });
+  function valores() {
+    var f = $('fec').value ? new Date($('fec').value + 'T00:00') : null;
+    return {
+      cliente: $('cli').value.trim().split(' ')[0], matricula: $('mat').value.toUpperCase(),
+      fecha: f ? fechaLarga(f) : '', hora: $('hor').value, importe: $('imp').value,
+      taller: CFG.nombre, horario: CFG.horario, enlace_resena: CFG.enlace_resena, enlace_reserva: CFG.enlace_reserva,
+    };
+  }
+  function refrescar() {
+    var t = CFG.mensajes[+$('tipo').value].texto;
+    // Muestra solo los campos que usa este mensaje
+    document.querySelectorAll('[data-ph]').forEach(function (el) {
+      var ph = el.dataset.ph;
+      el.classList.toggle('hide', ph !== 'siempre' && t.indexOf('{' + ph + '}') < 0);
+    });
+    $('prev').textContent = rellenar(t, valores());
+  }
+  ['tipo', 'cli', 'mat', 'fec', 'hor', 'imp'].forEach(function (id) {
+    $(id).addEventListener('input', refrescar); $(id).addEventListener('change', refrescar);
+  });
+  refrescar();
+  $('wa').addEventListener('click', function () {
+    var n = movil($('pre').value.replace(/\D/g, ''), $('mov').value);
+    if (n.length < 9) { $('mov').setCustomValidity('Escribe un móvil válido'); $('mov').reportValidity(); return; }
+    $('mov').setCustomValidity('');
+    abrirWhatsApp(n, $('prev').textContent);
+  });
+  $('copiar').addEventListener('click', function () {
+    var t = $('prev').textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject())
+      .then(function () { $('copiar').textContent = '¡Copiado!'; setTimeout(function () { $('copiar').textContent = 'Copiar texto'; }, 1500); })
+      .catch(function () { window.prompt('Copia el texto:', t); });
+  });
+
+  // ---------- Pestaña 2: avisos ----------
+  $('dias-aviso').textContent = CFG.dias_aviso;
+  var CABECERA = ['nombre', 'telefono', 'matricula', 'modelo', 'ultima_revision', 'proxima_itv'];
+
+  function leerFecha(s) {
+    s = String(s || '').trim(); var m;
+    if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return new Date(+m[1], m[2] - 1, +m[3]);
+    if ((m = s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/))) return new Date(m[3].length === 2 ? 2000 + +m[3] : +m[3], m[2] - 1, +m[1]);
+    return null;
+  }
+  function sumarMeses(d, n) { var r = new Date(d); r.setMonth(r.getMonth() + n); return r; }
+
+  function parsearCSV(txt) {
+    var lineas = txt.replace(/\r/g, '').split('\n').filter(function (l) { return l.trim(); });
+    if (!lineas.length) return [];
+    var sep = (lineas[0].match(/;/g) || []).length >= (lineas[0].match(/,/g) || []).length ? ';' : ',';
+    var cols = CABECERA;
+    if (/nombre/i.test(lineas[0])) {
+      cols = lineas.shift().split(sep).map(function (c) {
+        return c.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z_]/g, '_');
+      });
+    }
+    return lineas.map(function (l) {
+      var v = l.split(sep), o = {};
+      cols.forEach(function (c, i) { o[c] = (v[i] || '').trim().replace(/^"|"$/g, ''); });
+      return o;
+    });
+  }
+
+  function calcularAvisos(filas) {
+    var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+    return filas.map(function (r) {
+      var motivos = [];
+      var ult = leerFecha(r.ultima_revision), itv = leerFecha(r.proxima_itv);
+      if (ult) {
+        var rev = sumarMeses(ult, CFG.meses_revision), dr = Math.round((rev - hoy) / DIA);
+        if (dr <= CFG.dias_aviso && dr >= -60) motivos.push({ tipo: 'revision', fecha: rev, dias: dr });
+      }
+      if (itv) {
+        var di = Math.round((itv - hoy) / DIA);
+        if (di <= CFG.dias_aviso && di >= -60) motivos.push({ tipo: 'itv', fecha: itv, dias: di });
+      }
+      return { r: r, motivos: motivos, urgencia: motivos.length ? Math.min.apply(null, motivos.map(function (m) { return m.dias; })) : 1e9 };
+    }).filter(function (x) { return x.motivos.length; })
+      .sort(function (a, b) { return a.urgencia - b.urgencia; });
+  }
+
+  function etiqueta(m) {
+    var nombre = m.tipo === 'itv' ? 'ITV' : 'Revisión';
+    var cuando = m.dias < 0 ? 'venció hace ' + (-m.dias) + ' días' : m.dias === 0 ? 'vence hoy' : 'vence en ' + m.dias + ' días';
+    return nombre + ' · ' + cuando + ' (' + fechaCorta(m.fecha) + ')';
+  }
+
+  function pintarAvisos(filas) {
+    var avisos = calcularAvisos(filas), ul = $('lista-av');
+    ul.innerHTML = '';
+    $('resumen-av').textContent = filas.length
+      ? avisos.length + ' de ' + filas.length + ' clientes necesitan aviso.'
+      : 'No se han encontrado filas. Revisa el formato (usa la plantilla CSV).';
+    avisos.forEach(function (a) {
+      var r = a.r, itv = a.motivos.filter(function (m) { return m.tipo === 'itv'; })[0];
+      var li = document.createElement('li'); li.className = 'av-item';
+      var enlace = CFG.enlace_reserva + '?s=' + (itv ? 'preitv' : 'revision') +
+        '&m=' + encodeURIComponent(r.matricula || '') + '&n=' + encodeURIComponent((r.nombre || '').split(' ')[0]);
+      var texto = rellenar(itv ? CFG.aviso_itv : CFG.aviso_revision, {
+        cliente: (r.nombre || '').split(' ')[0], matricula: r.matricula, taller: CFG.nombre,
+        fecha_itv: itv ? fechaCorta(itv.fecha) : '', enlace_reserva: enlace,
+      });
+      li.innerHTML = '<div class="av-info"><b></b><span class="av-car"></span><div class="av-tags"></div></div><button class="btn wa" type="button">Avisar</button>';
+      li.querySelector('b').textContent = r.nombre || '(sin nombre)';
+      li.querySelector('.av-car').textContent = [r.matricula, r.modelo].filter(Boolean).join(' · ');
+      a.motivos.forEach(function (m) {
+        var t = document.createElement('span');
+        t.className = 'tag tag-' + (m.dias < 0 ? 'late' : m.tipo); t.textContent = etiqueta(m);
+        li.querySelector('.av-tags').appendChild(t);
+      });
+      var boton = li.querySelector('button');
+      var num = movil(CFG.prefijo, r.telefono || '');
+      if (num.length < 9) { boton.disabled = true; boton.textContent = 'Sin móvil'; }
+      boton.addEventListener('click', function () {
+        abrirWhatsApp(num, texto);
+        li.classList.add('enviado'); boton.textContent = 'Enviado ✓';
+      });
+      ul.appendChild(li);
+    });
+  }
+
+  $('procesar').addEventListener('click', function () { pintarAvisos(parsearCSV($('csv').value)); });
+  $('archivo').addEventListener('change', function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var lector = new FileReader();
+    lector.onload = function () { $('csv').value = lector.result; pintarAvisos(parsearCSV(lector.result)); };
+    lector.readAsText(f);
+  });
+
+  // Datos de ejemplo calculados respecto a hoy, para que la demo siempre muestre avisos
+  $('ejemplo').addEventListener('click', function () {
+    var h = new Date();
+    var f = function (dias, meses) { var d = new Date(h); d.setMonth(d.getMonth() - (meses || 0)); d.setDate(d.getDate() + dias); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear(); };
+    var M = CFG.meses_revision;
+    var filas = [
+      'nombre;telefono;matricula;modelo;ultima_revision;proxima_itv',
+      'Javier Romero;600111222;4821KLM;Seat León;' + f(9, M) + ';' + f(200),
+      'María Jiménez;600333444;1177HJT;Renault Clio;' + f(-100) + ';' + f(18),
+      'Antonio García;600555666;8890GBD;Toyota Corolla;' + f(-12, M) + ';' + f(24),
+      'Lucía Navarro;600777888;2365LRS;Kia Sportage;' + f(-40) + ';' + f(300),
+      'Pedro Sánchez;;5512FZX;Ford Focus;' + f(3, M) + ';',
+      'Rocío Martín;600999000;7743JNP;Peugeot 208;' + f(-20) + ';' + f(90),
+    ].join('\n');
+    $('csv').value = filas; pintarAvisos(parsearCSV(filas));
+  });
+
+  $('plantilla').addEventListener('click', function () {
+    var csv = '﻿' + CABECERA.join(';') + '\nJavier Romero;600111222;4821KLM;Seat León;15/10/2025;20/03/2027\n';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'clientes-taller.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+})();
+</script>
+</body>
+</html>

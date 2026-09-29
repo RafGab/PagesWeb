@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solicitud recibida · {{nombre}}</title>
+<meta name="robots" content="noindex">
+{{{fuente_link}}}
+<link rel="stylesheet" href="estilos.css">
+<link rel="stylesheet" href="taller.css">
+<style>{{{css_vars}}}</style>
+</head>
+<body>
+<main class="mini">
+  <div class="box">
+    <h1>¡Solicitud recibida!</h1>
+    <p>Te llamaremos en horario de taller ({{horario_texto}}) para darte presupuesto o cita.</p>
+    <p>¿Tienes prisa? Escríbenos ahora:</p>
+    <p><a class="btn wa big" href="{{wa_link}}">Abrir WhatsApp</a></p>
+    <p><a class="btn alt" href="reservar.html">📅 Reservar cita online</a></p>
+    <p class="small"><a href="./">Volver a la web</a></p>
+  </div>
+</main>
+<script>window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'lead_formulario_ok' });</script>
+</body>
+</html>

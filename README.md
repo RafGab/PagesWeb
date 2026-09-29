@@ -8,8 +8,11 @@ Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 | [`docs/02-modelo-replicado.md`](docs/02-modelo-replicado.md) | **Modelo B (el del anuncio): packs por nicho de 97–197 €/mes**, oferta, precios, captación, entrega, números y plan de 30 días |
 | [`prompts/`](prompts/00-LEEME.md) | Prompts para auditar, diseñar (Stitch), construir (Claude Code), SEO, vender y automatizar |
 | [`plantillas/clinicas-resenas/`](plantillas/clinicas-resenas/README.md) | **Kit del pack de 97 €/mes para clínicas dentales y estéticas**: web + sistema de reseñas + panel de recepción, generado desde un JSON |
+| [`plantillas/taller-agenda/`](plantillas/taller-agenda/README.md) | **Kit del pack de 147 €/mes para talleres mecánicos**: web + agenda online + panel de WhatsApp y avisos de revisión/ITV |
 | [`plantilla-cliente/`](plantilla-cliente/index.html) | Web de ejemplo para negocio local (clínica dental ficticia) |
 | [`landing-agencia/`](landing-agencia/index.html) | Landing de tu propia agencia para captar clientes |
+
+Los kits comparten motor y estilos en `plantillas/comun/`.
 
 **Empieza por:** `prompts/03-claude-code-web.md` (prompt maestro para crear webs).
 

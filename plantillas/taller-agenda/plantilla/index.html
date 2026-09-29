@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{seo_titulo}}</title>
+<meta name="description" content="{{seo_descripcion}}">
+<link rel="canonical" href="{{dominio}}/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{seo_titulo}}">
+<meta property="og:description" content="{{seo_descripcion}}">
+<meta property="og:image" content="{{hero_imagen}}">
+<meta name="theme-color" content="{{color}}">
+{{{fuente_link}}}
+<link rel="stylesheet" href="estilos.css">
+<link rel="stylesheet" href="taller.css">
+<style>{{{css_vars}}}</style>
+<script type="application/ld+json">{{{schema_json}}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header><div class="w nav">
+  <a class="logo" href="#">{{nombre}}</a>
+  <nav aria-label="Principal"><ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#opiniones">Opiniones</a></li>
+    <li><a href="#faq">Preguntas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul></nav>
+  <a class="btn" href="reservar.html" data-ev="reservar">Reservar cita</a>
+</div></header>
+
+<main id="main">
+<section class="hero dark"><div class="w">
+  <div>
+    <span class="eyebrow">{{hero_etiqueta}}</span>
+    <h1>{{hero_titulo}}</h1>
+    <p class="lead">{{hero_subtitulo}}</p>
+    <div class="ctas">
+      <a class="btn big" href="reservar.html" data-ev="reservar">📅 {{cta_principal}}</a>
+      <a class="btn wa big" href="{{wa_link}}" data-ev="whatsapp">{{cta_secundario}}</a>
+    </div>
+    <a class="rating" href="#opiniones">
+      <span class="gl" aria-hidden="true"><i>G</i><i>o</i><i>o</i><i>g</i><i>l</i><i>e</i></span>
+      <span><b>{{google_nota}}</b> <span class="stars" aria-hidden="true">★★★★★</span><small>{{google_resenas}} reseñas de clientes</small></span>
+    </a>
+  </div>
+  <div class="hero-img" role="img" aria-label="{{hero_imagen_alt}}" style="background-image:url('{{hero_imagen}}')"></div>
+</div></section>
+
+<div class="strip"><div class="w">
+  <span>✔ Cita online 24/7</span><span>✔ Presupuesto antes de reparar</span><span>✔ Aviso por WhatsApp</span><span>✔ Garantía por escrito</span>
+</div></div>
+
+<section id="servicios"><div class="w">
+  <div class="center"><h2>{{servicios_titulo}}</h2><p>{{servicios_subtitulo}}</p></div>
+  <div class="grid">{{{servicios_html}}}</div>
+</div></section>
+
+<section class="alt-bg"><div class="w">
+  <div class="center"><h2>{{porque_titulo}}</h2></div>
+  <div class="stats">{{{stats_html}}}</div>
+  <div class="center" style="margin:48px auto 0"><p>Trabajamos con todas las marcas</p></div>
+  <ul class="chips">{{{marcas_html}}}</ul>
+</div></section>
+
+<section id="opiniones"><div class="w">
+  <div class="rev-head">
+    <div><h2>Lo que dicen nuestros clientes</h2><p style="color:var(--mut);margin:0">Opiniones reales publicadas en Google.</p></div>
+    <div class="rev-score"><b>{{google_nota}}</b><div><span class="stars" aria-label="{{google_nota}} de 5 estrellas">★★★★★</span><br><small style="color:var(--mut)">{{google_resenas}} reseñas en Google</small></div></div>
+  </div>
+  <div class="grid rev">{{{resenas_html}}}</div>
+  <p style="text-align:center;margin-top:28px"><a class="btn alt" href="{{google_perfil_url}}" target="_blank" rel="noopener">Ver todas en Google</a></p>
+</div></section>
+
+<section class="alt-bg"><div class="w">
+  <div class="center"><h2>Así de fácil</h2></div>
+  <div class="grid steps">{{{pasos_html}}}</div>
+</div></section>
+
+<section><div class="w">
+  <div class="itv">
+    <div><h2>¿Te toca la ITV?</h2><p>Hacemos la pre-ITV y revisamos todo para que la pases a la primera.</p></div>
+    <a class="btn big" href="reservar.html?s=preitv" data-ev="reservar_itv">Reservar pre-ITV</a>
+  </div>
+</div></section>
+
+<section id="faq" class="alt-bg"><div class="w" style="max-width:800px">
+  <div class="center"><h2>Preguntas frecuentes</h2></div>
+  {{{faq_html}}}
+</div></section>
+
+<section id="contacto"><div class="w contact">
+  <div class="final">
+    <h2>{{contacto_titulo}}</h2>
+    <p>{{contacto_texto}}</p>
+    <form action="https://formspree.io/f/{{formspree_id}}" method="POST" data-ev="formulario">
+      <input type="hidden" name="_subject" value="Nueva solicitud de presupuesto desde la web">
+      <input type="hidden" name="_next" value="{{dominio}}/gracias.html">
+      <div><label for="n">Nombre</label><input id="n" name="nombre" required autocomplete="name"></div>
+      <div><label for="t">Teléfono / WhatsApp</label><input id="t" name="telefono" type="tel" required autocomplete="tel"></div>
+      <div><label for="s">¿Qué necesitas?</label><select id="s" name="interes">{{{opciones_html}}}</select></div>
+      <label class="chk"><input type="checkbox" name="privacidad" required><span>Acepto la <a href="#privacidad">política de privacidad</a> y que me contactéis para darme presupuesto.</span></label>
+      <button class="btn big" type="submit">{{cta_formulario}}</button>
+    </form>
+  </div>
+  <div class="contact-side">
+    <iframe class="map" src="{{maps_embed}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa: cómo llegar a {{nombre}}"></iframe>
+    <p><b>{{direccion}}</b>, {{cp}} {{ciudad}}<br>{{horario_texto}}</p>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="w">
+  <div><b>{{nombre}}</b><br>{{direccion}}<br>{{cp}} {{ciudad}}</div>
+  <div><a href="tel:{{tel_href}}" data-ev="llamada">{{telefono}}</a><br>{{horario_texto}}<br><a href="mailto:{{email}}">{{email}}</a></div>
+  <div id="privacidad">{{registro_texto}}<br><small>Responsable del tratamiento de datos: {{razon_social}}. Usamos tus datos solo para gestionar tu cita o presupuesto.</small><br><small>© {{anio}} {{nombre}}</small></div>
+</div></footer>
+
+<a class="fab" href="{{wa_link}}" aria-label="Escribir por WhatsApp" data-ev="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7a11.6 11.6 0 0 1-4.5-4c-.3-.5-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.6.3.1.2.1.8-.1 1.4Z"/></svg></a>
+
+<!-- Barra fija en móvil: las dos acciones que más convierten -->
+<nav class="mbar" aria-label="Acciones rápidas">
+  <a href="tel:{{tel_href}}" data-ev="llamada">📞 Llamar</a>
+  <a href="reservar.html" class="go" data-ev="reservar">📅 Reservar cita</a>
+</nav>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  document.querySelectorAll('[data-ev]').forEach(function (el) {
+    el.addEventListener(el.tagName === 'FORM' ? 'submit' : 'click', function () { dataLayer.push({ event: 'lead_' + el.dataset.ev }); });
+  });
+</script>
+</body>
+</html>
