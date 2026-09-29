@@ -66,6 +66,32 @@ Resumido:
 
 ---
 
+## 2b. Evidencia directa: su anuncio en Instagram (septiembre 2026)
+
+Anuncio patrocinado de @oiertriana (captura aportada por el usuario):
+
+> **"El modelo que nadie copia — Construye una agencia que factura cada mes SIN EMPLEADOS.**
+> El trabajo lo hacen agentes de IA. Tú solo cobras la cuota, mes tras mes."
+>
+> | Nicho · servicio | Precio |
+> |---|---|
+> | Clínica dental · web y reseñas | 97 €/mes |
+> | Taller mecánico · web y agenda | 147 €/mes |
+> | Gimnasio · captación automática | 197 €/mes |
+>
+> *"Directo gratis este domingo a las 19:00: de cero a agencia de +3.000 €/mes"* → botón **Reservar plaza**.
+
+### Qué nos dice
+1. **Su modelo actual ya no es "web a $3.000"**: es una **suscripción mensual por nicho, sin pago inicial**, con un paquete cerrado (web + un sistema que da resultados: reseñas, agenda o captación de clientes).
+2. **Precios bajos a propósito (97–197 €/mes)**: el dueño del negocio decide rápido porque es fácil decir que sí. Se gana por volumen y porque los clientes siguen pagando mes a mes.
+3. **La promesa realista es +3.000 €/mes**, no 40.000 €. Eso son **~20–25 clientes a unos 130 € de media**, una cifra creíble para una persona con buena automatización.
+4. **El embudo de venta de *su* negocio**: anuncio pagado → directo gratis → venta de su programa o comunidad de pago (y afiliación a GoHighLevel). El directo es la puerta de entrada a su formación.
+5. "El modelo que nadie copia" es un gancho publicitario: en España ya hay decenas de agencias de "renting web" (weeeb, websaurio, webporsuscripcion…). Lo que añade es **empaquetar por nicho + automatizar con IA el servicio recurrente**.
+
+Conclusión: **el modelo concreto que hay que replicar es el del anuncio**. Está en `docs/02-modelo-replicado.md`, sección "Modelo B".
+
+---
+
 ## 3. Conclusión
 
 | Criterio | Nota (1–5) |

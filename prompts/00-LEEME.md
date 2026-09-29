@@ -10,5 +10,6 @@ Rellena lo que va entre `[CORCHETES]`. Orden de uso:
 | 04 | `04-seo-local.md` | Claude Code | SEO local, schema y Google Business Profile |
 | 05 | `05-prospeccion.md` | Claude | Mensajes de WhatsApp/email/DM y guion de llamada |
 | 06 | `06-agentes.md` | Claude Code | Automatizar todo con agentes |
+| 07 | `07-servicios-recurrentes.md` | Claude Code + n8n | Reseñas, agenda y captación automática (packs de cuota mensual) |
 
 **Atajo**: si solo vas a usar uno, usa el `03-claude-code-web.md`.

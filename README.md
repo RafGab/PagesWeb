@@ -5,7 +5,7 @@ Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 | Carpeta | Contenido |
 |---|---|
 | [`docs/01-analisis-oier-triana.md`](docs/01-analisis-oier-triana.md) | Quién es, sus agencias, verificación de su éxito (claims vs. evidencia) |
-| [`docs/02-modelo-replicado.md`](docs/02-modelo-replicado.md) | Oferta, precios, captación, entrega, números y plan de 30 días |
+| [`docs/02-modelo-replicado.md`](docs/02-modelo-replicado.md) | **Modelo B (el del anuncio): packs por nicho de 97–197 €/mes**, oferta, precios, captación, entrega, números y plan de 30 días |
 | [`prompts/`](prompts/00-LEEME.md) | Prompts para auditar, diseñar (Stitch), construir (Claude Code), SEO, vender y automatizar |
 | [`plantilla-cliente/`](plantilla-cliente/index.html) | Web de ejemplo para negocio local (clínica dental ficticia) |
 | [`landing-agencia/`](landing-agencia/index.html) | Landing de tu propia agencia para captar clientes |

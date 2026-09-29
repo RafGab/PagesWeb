@@ -17,6 +17,40 @@ Componentes:
 4. Formulario/WhatsApp conectado + medición (Analytics / eventos de clic).
 5. Plan mensual: hosting, cambios, copias de seguridad, informe de leads.
 
+## ⭐ Modelo B (recomendado): suscripción por nicho, sin pago inicial — el del anuncio de Oier
+
+Es lo que Oier anuncia hoy. En lugar de vender "una web", vendes **un paquete cerrado por nicho con cuota mensual**. La web va incluida; lo que el cliente paga es el **resultado recurrente**.
+
+| Pack | Precio | Qué incluye | Qué hacen los agentes de IA cada mes |
+|---|---|---|---|
+| **Clínica dental · web + reseñas** | 97 €/mes | Web del nicho, ficha de Google optimizada, sistema para pedir reseñas por WhatsApp/SMS tras cada cita | Enviar las peticiones de reseña, redactar respuestas a reseñas, 4 publicaciones al mes en Google, informe |
+| **Taller mecánico · web + agenda** | 147 €/mes | Web, reservas online (Cal.com / Google Calendar / GoHighLevel), recordatorios de cita y de ITV/revisión | Recordatorios, reactivar clientes que no vuelven ("te toca el cambio de aceite"), informe |
+| **Gimnasio · captación automática** | 197 €/mes | Web y landing de "clase de prueba gratis", formulario conectado, asistente de WhatsApp que responde y agenda | Responder leads en menos de 1 minuto, seguimientos, agendar pruebas, reactivar socios dados de baja |
+
+Condiciones típicas: 0 € de alta, 6–12 meses de permanencia (o 1 mes gratis si pagan un año), y la web se entrega en 48–72 h porque **se usa la misma plantilla para todo el nicho**.
+
+### Por qué funciona
+- **Un "sí" fácil**: 97 € al mes no requiere que el dueño lo piense mucho.
+- **Producción casi nula**: se hace una plantilla por nicho (`plantilla-cliente/`) y se personaliza en 1 hora con `prompts/03`.
+- **El valor es medible**: reseñas conseguidas, citas agendadas, leads respondidos. Por eso el cliente no se da de baja.
+
+### Cuentas para llegar a 3.000 €/mes (lo que promete el directo)
+| Mezcla | Clientes | Ingreso mensual (MRR) |
+|---|---|---|
+| 31 clínicas × 97 € | 31 | 3.007 € |
+| 10 clínicas + 10 talleres + 3 gimnasios | 23 | 3.001 € |
+| 16 gimnasios × 197 € | 16 | 3.152 € |
+
+Con 30 webs de muestra a la semana (ver captación) y 1–2 clientes nuevos por semana, se llega en **4–6 meses**, si se mantienen las bajas por debajo del 5% mensual.
+
+Costes por cliente: hosting estático 0 €, envío de WhatsApp/SMS 2–8 €/mes, CRM (GoHighLevel 97 $/mes en total, o alternativas gratis como Cal.com + n8n + Brevo). Margen de 80–90%.
+
+Stack mínimo sin GoHighLevel: web estática (Netlify o Cloudflare) + Formspree + Cal.com + WhatsApp Business API (vía Twilio/360dialog) + n8n + Claude para los textos. Los prompts están en `prompts/07-servicios-recurrentes.md`.
+
+---
+
+## Modelo A: proyecto + cuota (webs a medida)
+
 ## 2. Precios (3 niveles)
 
 | Plan | España / USA | LATAM (ref. Colombia/México) | Incluye |
