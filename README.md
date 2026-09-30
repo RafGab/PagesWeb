@@ -2,6 +2,8 @@
 
 Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 
+**Primero lee [`CONTEXTO.md`](CONTEXTO.md)** (y [`parches/`](parches/README.md) para el agente): producto real, precios oficiales y qué no anunciar.
+
 | Carpeta | Contenido |
 |---|---|
 | [`docs/01-analisis-oier-triana.md`](docs/01-analisis-oier-triana.md) | Quién es, sus agencias, verificación de su éxito (claims vs. evidencia) |

@@ -1,3 +1,7 @@
+> ⚠️ **Pendiente de alinear con el producto real (ver `../../CONTEXTO.md`).** Esta oferta propone un agente en **WhatsApp**,
+> que hoy figura como "próximamente" en AI Lead Machine, y usa precios del análisis inicial, no la lista oficial.
+> Antes de enviarla a DTech hay que rehacerla con lo que existe hoy (agente en web, cualificación, agenda, panel de leads) y los planes oficiales.
+
 # Oferta para DTech (@tecnologia.dtech) — Bogotá, Colombia
 
 > Preparada el 29/09/2026 con información pública. **No pude abrir Instagram, Facebook, Rappi ni sus

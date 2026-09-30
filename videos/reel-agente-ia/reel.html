@@ -32,7 +32,7 @@
   /* S1 */
   .clock{font-family:var(--h);font-weight:800;font-size:52px;color:var(--aqua);letter-spacing:.02em}
   .notif{left:90px;width:820px;background:var(--white);color:var(--ink);border-radius:28px;padding:26px 30px;display:flex;gap:22px;align-items:center;box-shadow:0 20px 50px #0007}
-  .notif .ic{width:74px;height:74px;border-radius:20px;background:var(--wa);flex:0 0 auto;display:grid;place-items:center}
+  .notif .ic{width:74px;height:74px;border-radius:20px;background:var(--cobalt);flex:0 0 auto;display:grid;place-items:center}
   .notif b{font:700 30px var(--b);display:block}.notif span{font:500 36px var(--b)}
   .notif small{margin-left:auto;align-self:flex-start;font:500 24px var(--b);color:var(--grey)}
   .stamp{white-space:nowrap;font-family:var(--h);font-weight:900;font-size:78px;color:var(--ink);background:var(--amber);padding:18px 34px;border-radius:24px;transform-origin:center}
@@ -99,10 +99,10 @@
     <div class="deco a" data-spin="12" style="left:620px;top:-180px;width:640px;height:640px;border:60px solid #19D6E622"></div>
     <div class="a clock" style="left:90px;top:250px" data-in="0.1,0.4,up">11:47 p. m.</div>
     <div class="a h mid" style="left:90px;top:320px;width:880px" data-in="0.3,0.5,up">Tu cliente te escribe…</div>
-    <div class="a notif" style="top:600px" data-in="0.9,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Qué precio tiene?</span></div><small>ahora</small></div>
-    <div class="a notif" style="top:770px" data-in="1.5,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Tienen cita mañana?</span></div><small>ahora</small></div>
-    <div class="a notif" style="top:940px" data-in="2.1,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Hacen envíos?</span></div><small>ahora</small></div>
-    <div class="a notif" style="top:1110px" data-in="2.7,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿¿Hola??</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:600px" data-in="0.9,0.45,pop"><div class="ic">{CHAT}</div><div><b>Cliente nuevo</b><span>¿Qué precio tiene?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:770px" data-in="1.5,0.45,pop"><div class="ic">{CHAT}</div><div><b>Cliente nuevo</b><span>¿Tienen cita mañana?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:940px" data-in="2.1,0.45,pop"><div class="ic">{CHAT}</div><div><b>Cliente nuevo</b><span>¿Hacen envíos?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:1110px" data-in="2.7,0.45,pop"><div class="ic">{CHAT}</div><div><b>Cliente nuevo</b><span>¿¿Hola??</span></div><small>ahora</small></div>
     <div class="a stamp" style="left:90px;top:1320px" data-in="3.4,0.4,stamp">…y nadie responde</div>
   </section>
 
@@ -125,7 +125,7 @@
     <div class="a pill" style="top:430px;background:var(--ink);color:var(--white)" data-in="10.1,0.5,left"><div class="ic" style="background:var(--aqua)">{WEB}</div>Página web profesional</div>
     <div class="a h" style="left:80px;right:140px;top:700px;text-align:center;font-size:140px" data-in="10.7,0.35,pop">+</div>
     <div class="a pill" style="top:880px;background:var(--cobalt);color:var(--white)" data-in="11.1,0.5,right"><div class="ic" style="background:var(--aqua)">{BOT}</div>Agente IA 24/7</div>
-    <div class="a" style="left:80px;top:1190px;width:840px;font:700 46px/1.25 var(--b)" data-in="11.9,0.5,up">Atiende, informa, agenda y vende por ti. Incluso mientras duermes.</div>
+    <div class="a" style="left:80px;top:1190px;width:840px;font:700 46px/1.25 var(--b)" data-in="11.9,0.5,up">Atiende, cualifica y agenda por ti. Incluso mientras duermes.</div>
   </section>
 
   <!-- ESCENA 4 · La web (13.3–20.5 s) -->
@@ -137,15 +137,15 @@
         <div class="a web-hero" data-in="14.9,0.35,fade"></div>
         <div class="a web-title" data-in="15.3,0.35,up">Reserva tu cita en 1 minuto</div>
         <div class="a web-btn" id="btnAgenda" style="top:560px;background:var(--cobalt);color:var(--white)" data-in="15.7,0.35,pop">Agendar cita</div>
-        <div class="a web-btn" style="top:656px;background:var(--wa);color:var(--white)" data-in="16.0,0.35,pop">Escribir por WhatsApp</div>
+        <div class="a web-btn" style="top:656px;background:var(--ink);color:var(--white)" data-in="16.0,0.35,pop">Hablar con el asistente</div>
         <div class="a web-stars" data-in="16.3,0.35,up"><i>★★★★★</i> 4,9 · 212 reseñas</div>
         <div class="a web-cards" data-in="16.6,0.35,up"><div></div><div></div><div></div></div>
         <div class="a tap" id="tap" style="left:190px;top:555px"></div>
       </div>
     </div>
-    <div class="a check" style="top:560px" data-in="16.9,0.4,right"><div class="ic">{OK}</div>Lista en 7 días</div>
-    <div class="a check" style="top:760px" data-in="17.5,0.4,right"><div class="ic">{OK}</div>Aparece en Google</div>
-    <div class="a check" style="top:960px" data-in="18.1,0.4,right"><div class="ic">{OK}</div>Agenda y WhatsApp en un clic</div>
+    <div class="a check" style="top:560px" data-in="16.9,0.4,right"><div class="ic">{OK}</div>Lista en días, no en meses</div>
+    <div class="a check" style="top:760px" data-in="17.5,0.4,right"><div class="ic">{OK}</div>Web corporativa a tu medida</div>
+    <div class="a check" style="top:960px" data-in="18.1,0.4,right"><div class="ic">{OK}</div>Asistente IA integrado</div>
   </section>
 
   <!-- ESCENA 5 · Agente que agenda (20.3–31.3 s) -->
@@ -159,7 +159,7 @@
       <div class="a bub out" style="top:236px" data-in="22.9,0.35,right">¡Hola! El sábado tengo 10:00 o 11:30. ¿Cuál le queda mejor?</div>
       <div class="a bub in" style="top:400px" data-in="24.0,0.35,left">10:00, porfa</div>
       <div class="a typing" style="top:500px" data-in="24.4,0.2,fade" data-out="25.1,0.15,fade"><i></i><i></i><i></i></div>
-      <div class="a bub out" style="top:500px" data-in="25.2,0.35,right">Listo ✓ Agendado el sábado a las 10:00. Le recuerdo un día antes.</div>
+      <div class="a bub out" style="top:500px" data-in="25.2,0.35,right">Listo ✓ Agendado el sábado a las 10:00. </div>
     </div>
     <div class="a cal" data-in="26.0,0.5,up">
       <div class="cal-h">Tu calendario <span>semana del 28 sep</span></div>
@@ -170,7 +170,7 @@
         <div class="tm">11:00</div><div class="busy">Cita</div><div></div><div></div><div class="busy">Cita</div><div class="busy">Cita</div><div></div>
       </div>
     </div>
-    <div class="a toast" data-in="28.6,0.4,pop">{BELL}<span>Recordatorio programado: viernes 9:00 a. m.</span></div>
+    <div class="a toast" data-in="28.6,0.4,pop">{BELL}<span>Cita añadida a tu Google Calendar</span></div>
   </section>
 
   <!-- ESCENA 6 · Funciones (31.1–39.5 s) -->
@@ -178,11 +178,11 @@
     <div class="deco a" data-spin="10" style="left:-300px;top:-300px;width:760px;height:760px;border:80px solid #ffffff14"></div>
     <div class="a h" style="left:80px;top:230px;width:900px;font-size:84px" data-in="31.5,0.45,up">Lo que hace tu agente IA</div>
     <div class="a feat" style="left:80px;top:420px" data-in="32.0,0.4,pop"><div class="ic" style="background:var(--amber)">{BOLT}</div><p>Responde en segundos, 24/7</p></div>
-    <div class="a feat" style="left:550px;top:420px" data-in="33.1,0.4,pop"><div class="ic" style="background:var(--aqua)">{CAL}</div><p>Agenda citas en tu calendario</p></div>
-    <div class="a feat" style="left:80px;top:750px" data-in="34.2,0.4,pop"><div class="ic" style="background:var(--sky)">{BELLI}</div><p>Envía recordatorios solo</p></div>
-    <div class="a feat" style="left:550px;top:750px" data-in="35.3,0.4,pop"><div class="ic" style="background:var(--amber)">{TARGET}</div><p>Guarda cada contacto en tu lista</p></div>
-    <div class="a feat" style="left:80px;top:1080px" data-in="36.4,0.4,pop"><div class="ic" style="background:var(--aqua)">{HAND}</div><p>Te pasa los casos importantes</p></div>
-    <div class="a feat" style="left:550px;top:1080px" data-in="37.5,0.4,pop"><div class="ic" style="background:var(--sky)">{LOOP}</div><p>Hace seguimiento a cada cliente</p></div>
+    <div class="a feat" style="left:550px;top:420px" data-in="33.1,0.4,pop"><div class="ic" style="background:var(--aqua)">{CAL}</div><p>Agenda en tu Google Calendar</p></div>
+    <div class="a feat" style="left:80px;top:750px" data-in="34.2,0.4,pop"><div class="ic" style="background:var(--sky)">{BELLI}</div><p>Te avisa por correo de cada lead</p></div>
+    <div class="a feat" style="left:550px;top:750px" data-in="35.3,0.4,pop"><div class="ic" style="background:var(--amber)">{TARGET}</div><p>Cualifica y filtra a cada cliente</p></div>
+    <div class="a feat" style="left:80px;top:1080px" data-in="36.4,0.4,pop"><div class="ic" style="background:var(--aqua)">{HAND}</div><p>Te pasa a una persona si hace falta</p></div>
+    <div class="a feat" style="left:550px;top:1080px" data-in="37.5,0.4,pop"><div class="ic" style="background:var(--sky)">{LIST}</div><p>Panel de leads con estados y notas</p></div>
   </section>
 
   <!-- ESCENA 7 · Resultado (39.3–42.3 s) -->
@@ -215,6 +215,8 @@ const CONFIG = {
 const S = (d, c = '#071226', w = 7) => `<svg width="62" height="62" viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const ICONS = {
   WA: `<svg width="44" height="44" viewBox="0 0 24 24"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7a11.6 11.6 0 0 1-4.5-4c-.3-.5-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.6.3.1.2.1.8-.1 1.4Z"/></svg>`,
+  CHAT: `<svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14h44v30H30l-12 10V44H10z"/><path d="M22 28h0M32 28h0M42 28h0"/></svg>`,
+  LIST: S('<rect x="10" y="8" width="44" height="48" rx="6"/><path d="M20 22h24M20 32h24M20 42h14"/>'),
   WEB: S('<rect x="8" y="12" width="48" height="40" rx="6"/><path d="M8 24h48M16 18h2M24 18h2"/>'),
   BOT: S('<rect x="12" y="20" width="40" height="30" rx="10"/><path d="M32 20v-8M26 34h0M38 34h0M26 42h12"/>'),
   BOTW: S('<rect x="12" y="20" width="40" height="30" rx="10"/><path d="M32 20v-8M26 34h0M38 34h0M26 42h12"/>', '#19D6E6', 6),
@@ -222,7 +224,7 @@ const ICONS = {
   BOLT: S('<path d="M36 6L14 36h16l-4 22 22-30H32z"/>'),
   CAL: S('<rect x="8" y="12" width="48" height="44" rx="6"/><path d="M8 26h48M20 6v12M44 6v12M22 40l6 6 12-12"/>'),
   BELLI: S('<path d="M16 44V30a16 16 0 0 1 32 0v14l4 6H12z"/><path d="M26 56a6 6 0 0 0 12 0"/>'),
-  BELL: `<span style="width:64px;height:64px;border-radius:18px;background:#19D6E6;display:grid;place-items:center;flex:0 0 auto">${S('<path d="M16 44V30a16 16 0 0 1 32 0v14l4 6H12z"/><path d="M26 56a6 6 0 0 0 12 0"/>', '#071226', 6).replace(/62/g, '40')}</span>`,
+  BELL: `<span style="width:64px;height:64px;border-radius:18px;background:#19D6E6;display:grid;place-items:center;flex:0 0 auto">${S('<rect x="8" y="12" width="48" height="44" rx="6"/><path d="M8 26h48M20 6v12M44 6v12M22 40l6 6 12-12"/>', '#071226', 6).replace(/62/g, '40')}</span>`,
   TARGET: S('<circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="11"/><path d="M32 32l18-18"/>'),
   HAND: S('<circle cx="32" cy="20" r="10"/><path d="M12 56c2-12 10-18 20-18s18 6 20 18"/>'),
   LOOP: S('<path d="M50 24A20 20 0 0 0 14 22M14 40a20 20 0 0 0 36 2"/><path d="M50 10v14H36M14 54V40h14"/>'),
