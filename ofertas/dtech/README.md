@@ -1,119 +1,95 @@
-> ⚠️ **Pendiente de alinear con el producto real (ver `../../CONTEXTO.md`).** Esta oferta propone un agente en **WhatsApp**,
-> que hoy figura como "próximamente" en AI Lead Machine, y usa precios del análisis inicial, no la lista oficial.
-> Antes de enviarla a DTech hay que rehacerla con lo que existe hoy (agente en web, cualificación, agenda, panel de leads) y los planes oficiales.
+# Oferta para DTech (@tecnologia.dtech) · versión 2, con el producto real
 
-# Oferta para DTech (@tecnologia.dtech) — Bogotá, Colombia
+> Reescrita el 01/10/2026 a partir de `../../CONTEXTO.md` (producto verificado en el código y precios oficiales).
+> La versión anterior (agente de WhatsApp, precios propios, kits de venta y calculadora) está en `archivo/` y **no debe enviarse**.
 
-> Preparada el 29/09/2026 con información pública. **No pude abrir Instagram, Facebook, Rappi ni sus
-> webs desde este entorno**, así que el diagnóstico son hipótesis que hay que confirmar en los primeros
-> 10 minutos de la llamada (ver "Validar antes de proponer").
+## Lo que DTech ya te dijo (Denis Bermúdez, 30/09/2026)
+1. *"Nosotros manejamos bot"*.
+2. *"Pero al WhatsApp manejo humanizado ya que es venta al mayoreo"*.
 
-## 1. Qué es el negocio
+Consecuencias para la oferta: no compitas con su bot ni con su atención humana en WhatsApp. Se vende **un filtro previo**
+que entrega los casos calificados y con resumen a su equipo humano.
 
-| Dato | Fuente |
-|---|---|
-| "Tecnología, belleza y hogar en Bogotá". Bio: *"IMPORTADORES 🇨🇳 · Proveedor Drop PREMIUM · entregas de 12 a 24 h · mayoristas y distribuidores"*. ~2.165 seguidores, ~207 publicaciones | Instagram (resultado de búsqueda) |
-| Bodega mayorista en el **C.C. Puerto Rico, Calle 13 #19-28/40** (zona mayorista de Los Mártires) | Las2orillas, Rappi |
-| Compra **desde 3 unidades**, más descuento a más volumen, envíos a toda Colombia | Las2orillas |
-| Dicen tener **+10 años**, **+400.000 órdenes**; portafolio 2025: **+5.000 emprendedores activos, +45.000 pedidos en 2025, +300 productos** | Las2orillas, portafoliodtech.com |
-| Canales: catálogo web WooCommerce (catalogodtech.com, ~29 páginas), portafolio empresarial (portafoliodtech.com), Rappi, Falabella (vendedor "Tecnología Dtech"), TikTok, WhatsApp | Buscadores |
-| Categorías: smartwatches, parlantes, audífonos, gaming, accesorios de celular, hogar, belleza, bebés, mascotas, juguetes | catalogodtech.com |
-| Empresa relacionada: **Diamond Technology Distributions S.A.S.** (Tecnología DTech) | Registro empresarial, Facebook |
-| WhatsApp públicos: 322 321 4138 (catálogo D-TECH) y 322 912 4924 (Facebook Tecnología DTech) | Buscadores |
+## Qué se ofrece (todo verificado contra el código de tu agente)
+- **Fase 1, disponible hoy:** agente en la web de DTech que atiende 24/7, **califica** al revendedor (modalidad, ciudad, categoría, volumen, experiencia),
+  **prioriza con reglas** (por ejemplo volumen alto = urgente), **agenda una llamada con un asesor** en Google Calendar,
+  **avisa por correo**, panel de leads con estados, notas y CSV, y botón "hablar con una persona".
+- **Fase 2, en desarrollo:** el mismo agente en **WhatsApp**, como primer filtro antes del equipo humano.
+  En tu web de precios figura como "próximamente" en el plan Crecimiento. **No lo vendas como disponible.**
 
-⚠️ Hay dos marcas muy parecidas (**"Tecnología DTech / Diamond Technology"** y **"D-TECH"** del catálogo).
-Todo indica que son la misma empresa o empresas hermanas, pero **confírmalo antes de mencionar datos de una a la otra**.
+### Decisión tuya antes de enviar
+La propuesta incluye la fase 2 con una fecha estimada: `[FECHA ESTIMADA DE WHATSAPP]` en `propuesta.html`.
+- Si vas a construirlo, pon una fecha realista que puedas cumplir.
+- Si no quieres comprometerte, **borra el bloque "Fase 2"** de la propuesta. El resto se sostiene solo.
 
-## 2. Diagnóstico (hipótesis)
-
-Para un proveedor de dropshipping, el negocio es: **más revendedores activos × más pedidos por revendedor**.
-Lo que suele fallar en proveedores de este tamaño, y lo más probable en DTech:
-
-1. **Captar revendedores depende de Instagram/TikTok y del WhatsApp.** 2.165 seguidores en Instagram es poco
-   para una empresa con 5.000 emprendedores: la captación no está escalada.
-2. **El catálogo muestra productos, pero no "vende el negocio"**: no responde a lo que pregunta un dropshipper
-   (¿cuánto gano?, ¿cómo empiezo?, ¿trabajan con Dropi?, ¿tienen fotos y videos para mis anuncios?).
-3. **Los revendedores no tienen material para vender** (fotos limpias, videos, textos, precio sugerido). El que
-   no tiene material no lanza productos, y el que no lanza no hace pedidos.
-4. **El WhatsApp se satura** con preguntas repetidas (precios por volumen, stock, cómo funciona el drop)
-   y los leads se enfrían.
-5. **No hay seguimiento** de revendedores registrados que no hacen su primer pedido ni de los que dejan de pedir.
-
-## 3. La oferta: "Máquina de revendedores DTech"
-
-Un sistema que **consigue más revendedores activos y los pone a vender más rápido**, hecho con IA y operado por nosotros.
-
-### Qué incluye
-| Pieza | Qué es | Para qué |
+## Precios (oficiales, de `demo-site/implementar.html`, COP sin IVA)
+| Plan | 12 meses | 6 meses |
 |---|---|---|
-| **A. Página "Vende DTech sin inventario"** | Landing de captación: cómo funciona el drop y el mayoreo, calculadora de ganancia por producto, productos ganadores, preguntas frecuentes, registro | Convertir visitas de Instagram/TikTok/anuncios en revendedores registrados |
-| **B. Kit de venta por producto** | Por cada producto: fotos limpias, video vertical corto, 3 textos de anuncio, precio sugerido y margen, descargable en 1 clic | Que el revendedor lance el producto hoy, no la semana que viene |
-| **C. Asistente de WhatsApp con IA** | Responde en menos de 1 minuto: precios por volumen, stock, cómo trabajar dropshipping, envíos. Pasa a un asesor cuando hay pedido grande o queja | No perder leads por demora y liberar al equipo |
-| **D. Seguimiento automático** | Registrado sin primer pedido → mensajes día 1, 3 y 7; revendedor que no pide en 30 días → aviso con los productos ganadores del mes | Activar y reactivar revendedores |
-| **E. Informe mensual** | Registros, revendedores activos, pedidos atribuidos, productos más vendidos | Medir y decidir |
+| **Esencial** (hasta ~500 conversaciones/mes, un canal) | 5.800.000 + 750.000/mes | 6.500.000 + 850.000/mes |
+| **Crecimiento** ⭐ (recomendado: alto volumen, reglas avanzadas, estadísticas, varios canales) | 14.000.000 + 2.300.000/mes (total 41.600.000) | 16.000.000 + 2.600.000/mes (total 31.600.000) |
 
-### Planes (COP, IVA no incluido)
-| | **Arranque** | **Crecimiento** ⭐ | **Escala** |
-|---|---|---|---|
-| Implementación | $2.400.000 | $3.900.000 | $3.900.000 |
-| Mensualidad | $690.000 | $1.490.000 | $2.900.000 |
-| A. Página de captación + calculadora | ✅ | ✅ | ✅ |
-| B. Kits de venta | 20 productos | 40 + 8 nuevos/mes | 60 + 15 nuevos/mes |
-| C. Asistente WhatsApp IA | — | ✅ | ✅ |
-| D. Seguimiento automático | — | ✅ | ✅ |
-| Campañas Meta/TikTok para captar revendedores | — | — | ✅ (inversión en pauta aparte, mín. $1.500.000/mes) |
-| E. Informe mensual | ✅ | ✅ | ✅ |
+Por qué Crecimiento: DTech dice tener miles de revendedores y vende por varios canales, así que superaría las 500 conversaciones al mes y necesitará
+las reglas avanzadas y las estadísticas. Esencial sirve como arranque más barato para probar solo en la web; se puede cambiar de plan.
+Ya no hay "piloto de $990.000": no existe en tu lista de precios. Tu gancho es la **demo con sus datos, sin costo**.
 
-Permanencia mínima: 3 meses. Pago de la implementación 50 % al iniciar y 50 % al entregar.
-(Las tarifas de Meta por mensaje las paga DTech directamente. Con el cobro que empieza el 1/10/2026, el diseño propuesto
-sale por ≈ $325.000 COP/mes; ver `whatsapp-octubre-2026.md`.)
+## ¿Un bot que ya tienen es lo mismo que tu agente?
+**No necesariamente, pero no lo sabes hasta ver su bot.** "Bot" es una palabra que cubre cosas muy distintas:
 
-### Entrada fácil: piloto de 30 días por $990.000
-Página de captación + 10 kits de venta + medición. **Si siguen con cualquier plan, el piloto se descuenta de la implementación.**
-Es la mejor forma de cerrar: riesgo bajo para ellos y resultados medibles en un mes.
+| | Bot típico (menús, palabras clave, FAQ) | Tu agente (según tu código) |
+|---|---|---|
+| Entiende texto libre | Poco o nada: se apoya en botones y palabras exactas | Sí, con IA, y combina botones con texto libre |
+| Recoge datos del cliente | Formularios fijos | Extrae los datos de la conversación según los campos de cada negocio |
+| Decide quién es prioritario | No | Sí, con reglas del negocio |
+| Agenda con disponibilidad real | Rara vez | Sí, Google Calendar y alternativas si está ocupado |
+| Pasa a una persona con resumen | A veces, sin contexto | Sí |
+| Panel de leads con estados y notas | Raro | Sí, con CSV y estadísticas |
 
-## 4. Por qué les sale a cuenta (con sus propios números)
+Pero **tu agente es de la misma familia: automatiza la primera atención.** Si el bot de DTech ya califica, prioriza y entrega los casos resumidos
+a su equipo, tu propuesta de "agente" aporta poco y **no deberías insistir**. Por eso el primer paso es averiguarlo, no vender.
 
-Sus datos públicos: ~45.000 pedidos en 2025 ≈ **3.750 pedidos/mes** entre ~5.000 emprendedores.
+### Cómo averiguar qué hace su bot (haz esto antes de la llamada)
+1. **Pruébalo tú:** escríbele como un revendedor nuevo (canal que use: web, Instagram, WhatsApp). Apunta si:
+   - entiende una frase libre o solo botones;
+   - te pregunta ciudad, volumen, modalidad o categoría;
+   - te pasa a una persona y si esa persona recibe el resumen;
+   - te agenda una llamada o te da un enlace;
+   - responde a las 11 de la noche.
+2. **Pregúntale a Denis (5 preguntas):**
+   - ¿En qué canal está el bot y qué hace exactamente?
+   - ¿Qué pregunta a quien llega y qué hace con las respuestas? ¿Llegan a una hoja, CRM o correo?
+   - ¿Cómo sabe su equipo qué lead es prioritario?
+   - ¿Qué porcentaje de quienes preguntan termina haciendo un pedido?
+   - ¿Qué es lo que más le molesta de su bot actual?
 
-| Supuesto (a validar en la llamada) | Valor |
+### Qué ofrecer según lo que encuentres
+| Si su bot… | Entonces tu oferta es… |
 |---|---|
-| Nuevos revendedores activos al mes gracias al sistema | 40 |
-| Pedidos al mes por revendedor activo | 10 |
-| Margen bruto de DTech por pedido | $8.000 |
-| **Margen extra al mes** | **40 × 10 × $8.000 = $3.200.000** |
+| Es de menús o palabras clave y no califica | **El agente** como mejora: entiende texto libre, califica y entrega al humano con resumen |
+| Califica, pero los datos se pierden (no hay panel ni correo) | **El panel de leads + avisos**, y el agente si quieren mejorar la conversación |
+| Hace todo lo anterior y bien | **No vendas el agente.** Quizá su cuello de botella es la captación (la web) o el seguimiento, y eso aún no lo cubre tu producto |
+| Solo funciona en un canal (por ejemplo Instagram) | El agente en la **web**, que es otro canal, y la fase 2 en WhatsApp |
 
-Con estos supuestos, el plan Crecimiento se paga desde el primer mes. Y cada mes se acumulan más revendedores.
-**En la llamada, pide su margen real por pedido y su tasa de activación**, y rehaz la cuenta con ellos.
+## Antes de enviar la propuesta
+- [ ] Decidir la fase 2 y sustituir `[FECHA ESTIMADA DE WHATSAPP]` (nombre y WhatsApp ya están puestos; el correo no se incluye).
+- [ ] Para hablar de "demo con sus datos" tienes que **construir el rubro de DTech** en tu agente (mayorista y dropshipping). Hoy no existe: los rubros
+  listos son inmobiliaria, dental, despacho, hotel, gimnasio y extranjería. Es un archivo nuevo en `backend/demo/verticals/` (preguntas, campos, reglas, color).
+- [ ] Confirmar con Denis qué hace su bot (sección anterior).
+- [ ] Revisar el cobro de WhatsApp (`whatsapp-octubre-2026.md`): el aviso de ese documento sobre el "agente en WhatsApp" aplica a la fase 2, no a hoy.
 
-## 5. Validar antes de proponer (primeros 10 minutos de la llamada)
-1. ¿Cuántos revendedores nuevos entran al mes y por dónde llegan?
-2. ¿Qué % de los que preguntan termina haciendo el primer pedido?
-3. ¿Trabajan con Dropi u otra plataforma, o los pedidos entran por WhatsApp?
-4. ¿Cuántas personas atienden el WhatsApp y cuánto tardan en responder?
-5. ¿Dan a los revendedores fotos, videos y textos? ¿Dónde?
-6. ¿Margen medio por pedido de dropshipping?
+## Archivos
+- `propuesta.html`: propuesta de una página para enviar o guardar en PDF.
+- `mensajes.md`: mensajes para Denis, respuesta al "ya tenemos bot" y guion de llamada.
+- `whatsapp-octubre-2026.md`: análisis del cobro de WhatsApp y coste para la fase 2.
+- `archivo/`: versión anterior, **no enviar**.
 
-Si los pedidos entran por Dropi, el kit de venta se enlaza a su ficha en Dropi y el seguimiento se hace con
-el reporte de Dropi. Si entran por WhatsApp, el asistente es aún más valioso.
-
-## 6. Cómo contactarlos
-Archivos listos en esta carpeta:
-- `whatsapp-octubre-2026.md` — **el cobro de WhatsApp desde el 1/10/2026: qué cambia, el problema para DTech y la solución con el agente virtual** (incluye costes y las instrucciones del agente).
-- `mensajes.md` — WhatsApp y DM iniciales, seguimientos, respuestas a objeciones y guion de la llamada.
-- `propuesta.html` — propuesta de 1 página para enviar o imprimir en PDF (Ctrl+P).
-- `muestra-captacion.html` — **maqueta** de la página "Vende DTech sin inventario" para enseñar en la llamada
-  (con productos y precios de ejemplo; se sustituyen por los reales). Es tu mejor argumento: *"ya se la hice"*.
-
-⚠️ La maqueta usa su nombre porque es una propuesta *para ellos*: enséñasela en privado, no la publiques
-ni la compartas con terceros hasta que la aprueben.
+## Análisis de DTech (sin cambios)
+Importador y mayorista de tecnología, hogar y belleza en el C.C. Puerto Rico (Calle 13, Bogotá). Vende desde 3 unidades y abastece a dropshippers con despacho en 12–24 h.
+Dice tener +10 años, +5.000 emprendedores activos y unos 45.000 pedidos en 2025 (datos de su propio material, sin verificar). WhatsApp públicos: 322 321 4138 y 322 912 4924.
+Hay dos marcas parecidas ("Tecnología DTech / Diamond Technology" y "D-TECH"): confirma que son la misma empresa antes de mezclar datos.
 
 ## Fuentes
 - [Instagram @tecnologia.dtech](https://www.instagram.com/tecnologia.dtech/)
-- [Las2orillas – Las bodegas ocultas de tecnología en Bogotá](https://www.las2orillas.co/las-bodegas-ocultas-de-tecnologia-en-bogota-con-muchos-productos-desde-3-500/)
-- [Las2orillas – La gigantesca bodega mayorista en Bogotá](https://www.las2orillas.co/la-gigantesca-bodega-mayorista-en-bogota-donde-hay-productos-por-menos-de-5-mil/)
+- [Las2orillas – bodegas de tecnología en Bogotá](https://www.las2orillas.co/las-bodegas-ocultas-de-tecnologia-en-bogota-con-muchos-productos-desde-3-500/)
 - [catalogodtech.com](https://catalogodtech.com/) · [portafoliodtech.com](https://portafoliodtech.com/)
-- [Rappi – Tecnología DTech Los Mártires](https://www.rappi.com.co/tiendas/900250967-diamondtechnology-mt-enc)
-- [Falabella – vendedor Tecnología Dtech](https://www.falabella.com.co/falabella-co/seller/Tecnolog%C3%ADa%20Dtech)
-- [Facebook – Tecnología DTech](https://www.facebook.com/diamondtecnologiaDTECH/)
-- [La República – Diamond Technology Distributions S.A.S.](https://empresas.larepublica.co/colombia/bogota/bogota-d-c/diamond-technology-distributions-sas-900707815)
+- [Rappi – Tecnología DTech](https://www.rappi.com.co/tiendas/900250967-diamondtechnology-mt-enc)
+- Planes y funciones: `demo-site/implementar.html` del repositorio `RafGab/ai-lead-machine-demo`

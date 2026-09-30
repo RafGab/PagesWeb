@@ -1,51 +1,55 @@
-# Mensajes y guion para DTech
+# Mensajes y guion para DTech (versión 2, con el producto real)
 
-Trato de **usted** (lo normal en B2B en Colombia). Escribe al WhatsApp comercial y, en paralelo, un DM en Instagram.
-Antes de enviar, sube `muestra-captacion.html` a un enlace privado (Netlify Drop, sin indexar) para compartirla.
+Trato de **usted**. Estado: Denis Bermúdez ya respondió (30/09): *"Nosotros manejamos bot… pero al WhatsApp manejo humanizado ya que es venta al mayoreo."*
 
-## 0. Mensaje de oportunidad: cobro de WhatsApp (válido estas semanas)
-> Buenas tardes, equipo DTech 👋 Con lo de que "WhatsApp empieza a cobrar" desde el 1 de octubre hay mucha confusión, así que les resumo lo que aplica a ustedes:
-> • Si atienden con la app de WhatsApp Business del celular, **no les cobran nada**.
-> • Si usan un bot o un CRM, en Colombia cada respuesta cuesta unos **$3 pesos** a partir de la 1.001 del mes. Lo caro son las **difusiones de marketing (≈ $50 pesos cada mensaje)**.
-> Les preparé un análisis de cuánto les costaría automatizar la atención a sus revendedores sin pagar de más (con un agente que responde 24/7). ¿Se lo muestro en 15 minutos?
+## 1. Respuesta a Denis (enviar ya)
+> Tiene toda la razón, Denis: en mayoreo el cierre tiene que ser con una persona, y no le propondría quitar eso 🙌
+> Mi idea es otra: que a su equipo le lleguen los revendedores **ya calificados** (modalidad, ciudad, volumen, categoría) y con un resumen de la conversación, para dedicarse solo a cerrar.
+> Para no proponerle nada que ya tenga, ¿me cuenta en qué canal está su bot y qué le pregunta a quien llega? Con eso le digo con sinceridad si tiene sentido o no.
 
-## 1. Primer mensaje (WhatsApp)
-> Buenas tardes, ¿hablo con el área comercial de DTech? 👋
-> Vi que son proveedor de dropshipping con entrega en 12–24 h. Les armé una página para **captar más revendedores**: les explica cómo ganar con sus productos, calcula la ganancia y los registra directo a su WhatsApp.
-> Se la dejo aquí para que la vean: [ENLACE]
-> ¿Le puedo mostrar en 15 minutos cómo la usaríamos para activar más emprendedores? ¿Le queda bien mañana o el jueves?
+*Por qué este mensaje:* no discute, reconoce su decisión de trato humano y pide la información que necesitas para saber si hay oferta.
 
-## 2. DM de Instagram (más corto)
-> ¡Hola, equipo DTech! Les hice una página para conseguir más revendedores para su catálogo (con calculadora de ganancia y registro por WhatsApp). ¿A quién se la puedo enviar? 🙌
+## 2. Si responde describiendo su bot
+Apunta lo que dice y usa la tabla "Qué ofrecer según lo que encuentres" de `README.md`. Respuestas tipo:
 
-## 3. Seguimientos
-**Día 2**
-> Hola de nuevo 🙂 Un dato: la mayoría de emprendedores que preguntan a un proveedor no hacen el primer pedido porque no tienen fotos ni textos para vender. En la página que les hice cada producto trae su "kit de venta" listo. ¿Lo miramos 15 minutos?
+**Si es un bot de menús o palabras clave**
+> Entiendo, eso resuelve lo básico. La diferencia con lo que hago yo es que el agente entiende texto libre, califica al revendedor con las reglas de ustedes (por ejemplo, volumen alto pasa como urgente) y le pasa a su asesor el caso con un resumen. ¿Le muestro en 15 minutos cómo quedaría con datos de DTech?
 
-**Día 5**
-> Última vez que le escribo por esto 🙏 Le propongo un **piloto de 30 días por $990.000**: la página funcionando + 10 kits de venta + medición. Si no le trae revendedores nuevos, no sigue. ¿Le interesa?
+**Si dice que su bot ya califica y pasa a una persona**
+> Perfecto, entonces lo tienen cubierto y no quiero venderle algo que ya tiene. Si en algún momento quiere ver más datos (horarios de más demanda, motivos de consulta) o mejorar la captación desde la web, me escribe y lo vemos. ¡Mucho éxito!
 
-## 4. Respuestas a objeciones
+(Sí: a veces la respuesta honesta es no vender. Te protege la reputación y te deja la puerta abierta.)
+
+## 3. Mensaje de oportunidad: cobro de WhatsApp (solo si sigue en conversación)
+> Con lo del cobro de WhatsApp desde el 1 de octubre hay mucha confusión. Si atienden con la app de WhatsApp Business del celular, no les cobran nada. Si usan un bot o un CRM conectado a la API, en Colombia las respuestas cuestan unos $3 pesos a partir de la 1.001 del mes y los mensajes de marketing unos $50 cada uno. Por eso conviene diseñar bien cualquier automatización. ¿Quiere que le revise cuánto le costaría con su volumen?
+
+(Coste de referencia en `whatsapp-octubre-2026.md`.)
+
+## 4. Objeciones
 | Objeción | Respuesta |
 |---|---|
-| "Ya tenemos página / catálogo" | "Y está muy bien para quien ya le compra. Esto es otra cosa: es para convencer a quien **todavía no** le compra. El catálogo muestra productos; esta página vende el negocio de revender DTech." |
-| "Los clientes nos llegan solos por TikTok" | "Perfecto, entonces tienen tráfico. La pregunta es cuántos de esos se pierden en el WhatsApp. El asistente les responde en menos de 1 minuto a cualquier hora." |
-| "Está caro" | "Hagamos la cuenta con sus números: ¿cuánto margen le deja un pedido? … Con 40 revendedores nuevos haciendo 10 pedidos al mes, el plan se paga el primer mes. Y si prefiere, empezamos por el piloto de $990.000." |
-| "Ya tenemos a alguien que maneja redes" | "Esto no reemplaza a su community manager, le da una página a dónde mandar a la gente y material para los revendedores. Trabajamos con él/ella." |
-| "Déjeme pensarlo" | "Claro. ¿Qué necesitaría ver para decidir? Si le sirve, le mando la propuesta en una página con los números." (enviar `propuesta.html` en PDF) |
-| "¿Y si no funciona?" | "Por eso existe el piloto: 30 días, medimos registros y primeros pedidos. Si no sirve, no sigue y se queda con la página." |
+| "Ya tenemos bot" | "Entonces lo importante es saber qué hace. ¿Me cuenta qué pregunta y qué pasa con los datos? Si ya califica y entrega los casos resumidos a su equipo, no le propongo nada." |
+| "Nuestro WhatsApp es humano, es mayoreo" | "De acuerdo, y no lo cambiaría. El agente trabaja antes: recoge lo que su asesor preguntaría y se lo entrega resumido. Quien decide y cierra sigue siendo su equipo." |
+| "¿Funciona en WhatsApp?" | "Hoy funciona en su web. WhatsApp es la siguiente fase y la estoy desarrollando; se lo acuerdo por escrito con fecha antes de empezarla, y no sustituye a su equipo humano." |
+| "Está caro" | "Con su volumen le recomiendo Crecimiento, pero se puede empezar por Esencial para probar solo en la web y cambiar de plan después. ¿Cuántos revendedores nuevos le llegan al mes?" |
+| "¿Y si no funciona?" | "Por eso la demo con sus datos sin costo antes de contratar: lo ve atendiendo un caso típico de DTech y decide con eso." |
+| "Déjeme pensarlo" | "Claro. ¿Qué necesitaría ver para decidir? Le envío la propuesta de una página y lo hablamos el [día] a las [hora]." |
 
-## 5. Guion de la llamada (15–20 min)
-1. **Contexto (1 min):** "Trabajo con negocios que venden por WhatsApp y redes; me especializo en sistemas que consiguen y activan clientes con IA."
-2. **Diagnóstico (6 min)** — las 6 preguntas de "Validar antes de proponer" del README. Anota los números.
-3. **Mostrar la maqueta (4 min):** calculadora de ganancia → kit de venta → registro que llega al WhatsApp.
-4. **Cuenta con sus números (3 min):** rehacer la tabla de ROI con su margen real.
-5. **Propuesta (3 min):** "Le recomiendo el plan Crecimiento, porque su cuello de botella es el WhatsApp. Si prefiere probar antes, empezamos con el piloto."
-6. **Cierre (2 min):** "¿Arrancamos el lunes? Le envío la propuesta y el enlace de pago del 50 %."
+## 5. Guion de llamada (15–20 minutos)
+1. **Contexto (1 min):** "Monto agentes de IA que atienden, califican y agendan. Quiero entender cómo atienden ustedes hoy antes de proponerle nada."
+2. **Diagnóstico (8 min):**
+   - ¿Dónde está su bot y qué hace? ¿Qué pregunta a quien llega y adónde van esos datos?
+   - ¿Cómo distingue su equipo un lead prioritario?
+   - ¿Cuántos revendedores nuevos entran al mes y cuántos terminan haciendo su primer pedido?
+   - ¿Quién atiende el WhatsApp de mayoreo y cuánto tarda en responder de noche o en fin de semana?
+   - ¿Qué es lo que más le molesta del proceso actual?
+3. **Decisión honesta (2 min):** si ya tienen lo que propones, dilo: "Entonces no tiene sentido que le venda esto."
+4. **Propuesta (5 min):** agente en la web (fase 1) con sus reglas, agenda con asesor, avisos y panel. WhatsApp como fase 2, con fecha por escrito. Planes: Esencial o Crecimiento.
+5. **Siguiente paso (2 min):** demo con sus datos sin costo. "¿Me manda las modalidades, el pedido mínimo y las preguntas que hace su equipo? La tiene en [2–5 días]."
 
 ## 6. Qué pedirles si dicen que sí
-- Logo, colores y 3–5 fotos de la bodega/equipo (generan confianza).
-- Lista de los 20–40 productos más vendidos con: precio mayorista, precio drop, precio sugerido, stock y fotos.
-- Condiciones reales: pedido mínimo, descuentos por volumen, tiempos y costos de envío, garantía, si trabajan con Dropi.
-- Número de WhatsApp comercial y quién atiende.
-- Acceso al Business Manager de Meta (para la API de WhatsApp y el píxel).
+- Modalidades, pedido mínimo, descuentos por volumen, tiempos y costos de envío, garantía, si trabajan con Dropi.
+- Qué hace que un lead sea prioritario y a quién se le asigna.
+- Un Google Calendar compartido con la cuenta de servicio y el correo para los avisos.
+- Acceso a su web para pegar el widget.
+- Logo y colores (el widget se adapta a su marca).

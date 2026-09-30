@@ -1,5 +1,9 @@
 # DTech y el cobro de WhatsApp desde el 1 de octubre de 2026: problema y solución
 
+> ⚠️ **Aviso (01/10/2026):** el agente en WhatsApp que se describe abajo es la **fase 2**, todavía **no disponible** en AI Lead Machine.
+> Lo que sí existe hoy es el agente en la web. Las funciones de consultar stock o estado de pedido del prompt de ejemplo no existen en el producto:
+> serían integraciones a medida. Usa este documento para hablar del **coste de Meta** y de la fase 2, no como descripción del producto actual.
+
 > Investigado el 30/09/2026. Las tarifas son las publicadas por Meta y recogidas por proveedores oficiales (ver fuentes).
 > No pude abrir la documentación de Meta directamente desde este entorno; las cifras coinciden en varias fuentes independientes.
 

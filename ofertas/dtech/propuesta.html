@@ -3,43 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Propuesta DTech · Máquina de revendedores</title>
+<title>Propuesta DTech · Agente de calificación de revendedores</title>
 <meta name="robots" content="noindex, nofollow">
-<!-- Rellena [TU NOMBRE], [TU WHATSAPP] y [TU EMAIL]. Para PDF: Ctrl/Cmd + P → Guardar como PDF. -->
+<!--
+  Versión 2 (01/10/2026), alineada con el producto real (ver CONTEXTO.md en la raíz del repositorio).
+  ANTES DE ENVIAR: sustituye [FECHA ESTIMADA DE WHATSAPP] por una fecha que puedas cumplir
+  (o borra el bloque de la fase 2 si no vas a comprometerte). Para PDF: Ctrl/Cmd + P → Guardar como PDF.
+-->
 <style>
-  :root{--c:#1f6bff;--c2:#00b8ad;--ink:#0d1321;--mut:#5b6478;--soft:#f3f6fb;--line:#e3e8f1}
+  :root{--ink:#071226;--cobalt:#2650F0;--aqua:#19D6E6;--amber:#FFB81C;--paper:#EEF3FF;--mut:#51607C;--line:#DCE4F5}
   *{box-sizing:border-box}
-  body{margin:0;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#e9edf4}
+  body{margin:0;font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:#E3EAF8}
   .page{max-width:880px;margin:24px auto;background:#fff;padding:44px 48px;border-radius:14px;box-shadow:0 20px 50px -30px #0005}
-  h1{font-size:2rem;line-height:1.1;margin:6px 0 8px;letter-spacing:-.02em}
-  h2{font-size:1.15rem;margin:28px 0 10px;text-transform:uppercase;letter-spacing:.04em;color:var(--c)}
+  h1{font-size:1.9rem;line-height:1.1;margin:6px 0 8px;letter-spacing:-.02em}
+  h2{font-size:1.05rem;margin:28px 0 10px;text-transform:uppercase;letter-spacing:.05em;color:var(--cobalt)}
   p{margin:0 0 10px}.mut{color:var(--mut)}
-  .top{display:flex;min-width:0;justify-content:space-between;gap:20px;border-bottom:3px solid var(--ink);padding-bottom:18px;flex-wrap:wrap}
+  .top{display:flex;justify-content:space-between;gap:20px;border-bottom:4px solid var(--ink);padding-bottom:18px;flex-wrap:wrap}
   .eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
   .meta{text-align:right;font-size:.9rem;color:var(--mut)}
-  .box{background:var(--soft);border-radius:12px;padding:16px 18px}
-  .pieces{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-  .piece{border:1px solid var(--line);border-radius:12px;padding:12px}
-  .piece b{display:block;margin-bottom:2px}.piece span{font-size:.88rem;color:var(--mut)}
-  .tw{overflow-x:auto}
-  table{width:100%;min-width:520px;border-collapse:collapse;font-size:.92rem}
+  .box{background:var(--paper);border-radius:12px;padding:16px 18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .item{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .item b{display:block;margin-bottom:2px}.item span{font-size:.9rem;color:var(--mut)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem}
   th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-  th{background:var(--soft);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
-  td.c,th.c{text-align:center}
-  .rec{background:#1f6bff10}
-  .rec-h{background:var(--c);color:#fff}
-  .price{font-weight:800;font-size:1.05rem}
-  .pilot{border:2px dashed var(--c2);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
-  .pilot .price{font-size:1.5rem;color:var(--c2)}
-  .roi{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
-  .roi div{background:var(--soft);border-radius:10px;padding:10px}.roi b{display:block;font-size:1.25rem}
-  .roi .res{background:var(--ink);color:#fff}
-  ol{padding-left:20px;margin:0}li{margin:4px 0}
+  th{background:var(--paper);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+  .rec{background:#2650F012}.rec-h{background:var(--cobalt);color:#fff}
+  td.c,th.c{text-align:center}.price{font-weight:800;font-size:1.02rem}
+  .phase{border-radius:12px;padding:16px 18px;margin-bottom:10px}
+  .now{background:#19D6E622;border-left:6px solid var(--cobalt)}
+  .soon{background:#FFB81C24;border-left:6px solid var(--amber)}
+  .tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 10px;border-radius:99px;margin-bottom:6px}
+  .tag.n{background:var(--cobalt);color:#fff}.tag.s{background:var(--amber);color:var(--ink)}
+  ul{margin:6px 0 0;padding-left:20px}li{margin:3px 0}
   .foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem}
   .toolbar{max-width:880px;margin:16px auto 0;text-align:right}
   .toolbar button{font:700 .95rem system-ui;padding:10px 18px;border-radius:10px;border:0;background:var(--ink);color:#fff;cursor:pointer}
-  @media(max-width:700px){.pieces{grid-template-columns:1fr 1fr}.page{padding:26px 18px;margin:0;border-radius:0}.meta{text-align:left}.roi{grid-template-columns:1fr 1fr}table{font-size:.82rem}th,td{padding:7px 5px}}
-  @media print{body{background:#fff}.pieces{grid-template-columns:repeat(5,1fr)}.page{box-shadow:none;margin:0;max-width:none;padding:0}.toolbar{display:none}h2{break-after:avoid}table,.pilot,.roi{break-inside:avoid}@page{margin:14mm}}
+  @media(max-width:700px){.page{padding:26px 18px;margin:0;border-radius:0}.meta{text-align:left}.grid{grid-template-columns:1fr}table{font-size:.82rem}th,td{padding:7px 5px}.tw{overflow-x:auto}table{min-width:520px}}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}.toolbar{display:none}h2{break-after:avoid}table,.phase,.grid{break-inside:avoid}@page{margin:14mm}}
 </style>
 </head>
 <body>
@@ -47,67 +48,82 @@
 <article class="page">
   <div class="top">
     <div>
-      <span class="eyebrow">Propuesta comercial</span>
-      <h1>Máquina de revendedores DTech</h1>
-      <p class="mut">Más emprendedores activos vendiendo sus productos, y cada uno vendiendo más.</p>
+      <span class="eyebrow">Propuesta comercial · AI Lead Machine</span>
+      <h1>Agente de IA para calificar y atender a sus revendedores</h1>
+      <p class="mut">Que su equipo humano reciba a cada emprendedor ya calificado y con el resumen de la conversación.</p>
     </div>
-    <div class="meta">Para: <b>DTech</b> · Bogotá<br>Preparada por: <b>[TU NOMBRE]</b><br>Fecha: 29 de septiembre de 2026<br>Válida 15 días</div>
+    <div class="meta">Para: <b>DTech</b> · Bogotá<br>Preparada por: <b>Viviana Acero</b><br>Fecha: 1 de octubre de 2026<br>Válida 15 días</div>
   </div>
 
-  <h2>El reto</h2>
-  <p>DTech ya tiene lo más difícil: producto importado, bodega, precio de importador y despacho en 12–24 h. El crecimiento ahora depende de <b>cuántos revendedores nuevos llegan, cuántos hacen su primer pedido y cuántos siguen pidiendo</b>. Hoy eso pasa, sobre todo, por redes y por un WhatsApp que atiende a mano las mismas preguntas una y otra vez.</p>
+  <h2>El punto de partida</h2>
+  <p>DTech atiende a sus clientes de mayoreo por WhatsApp con trato humano, y ya cuenta con un bot. <b>No proponemos reemplazar ninguna de las dos cosas.</b>
+    Proponemos un agente que trabaje <b>antes</b> de que intervenga su equipo: recibe a quien llega, hace las preguntas que su equipo haría, prioriza y le entrega el caso listo.</p>
 
-  <h2>La solución</h2>
-  <div class="pieces">
-    <div class="piece"><b>A. Página de captación</b><span>"Vende DTech sin inventario", con calculadora de ganancia y registro</span></div>
-    <div class="piece"><b>B. Kits de venta</b><span>Fotos, video vertical, textos y precio sugerido por producto</span></div>
-    <div class="piece"><b>C. Asistente WhatsApp IA</b><span>Responde en menos de 1 minuto, 24/7, y pasa a un asesor cuando hace falta</span></div>
-    <div class="piece"><b>D. Seguimiento</b><span>Activa a los registrados y reactiva a los que dejan de pedir</span></div>
-    <div class="piece"><b>E. Informe mensual</b><span>Registros, activos, pedidos y productos top</span></div>
+  <h2>Qué hace el agente (funciona hoy)</h2>
+  <div class="grid">
+    <div class="item"><b>Atiende 24/7 en su web</b><span>Conversación con botones para lo cerrado y texto libre para lo demás, en cualquier horario.</span></div>
+    <div class="item"><b>Califica al revendedor</b><span>Modalidad (dropshipping, mayoreo o distribuidor), ciudad, categoría, volumen mensual y experiencia.</span></div>
+    <div class="item"><b>Prioriza con sus reglas</b><span>Por ejemplo: volumen alto o distribuidor pasa como urgente a un asesor. Las reglas se definen con ustedes.</span></div>
+    <div class="item"><b>Agenda con un asesor</b><span>Consulta su Google Calendar, ofrece horarios libres y alternativas si el horario está ocupado.</span></div>
+    <div class="item"><b>Avisa por correo</b><span>Cada lead nuevo llega a su equipo con los datos recogidos.</span></div>
+    <div class="item"><b>Panel de leads</b><span>Estados, notas y exportación a CSV; estadísticas de volumen, horarios de más demanda y motivos de consulta.</span></div>
+    <div class="item"><b>Pasa a una persona</b><span>Botón «hablar con una persona» en cualquier momento, con resumen para el asesor.</span></div>
+    <div class="item"><b>Se instala con una línea</b><span>Un widget que se pega en su web actual, sin rehacer lo que ya tienen.</span></div>
   </div>
 
-  <h2>Planes</h2>
+  <h2>Fases</h2>
+  <div class="phase now">
+    <span class="tag n">Fase 1 · disponible hoy</span>
+    <b>Agente en la web de DTech.</b> Configuración del flujo para su caso (proveedor mayorista y de dropshipping), reglas de prioridad, calendario, avisos y panel.
+    Puesta en marcha en días, con una demo con los datos de DTech antes de publicar.
+  </div>
+  <div class="phase soon">
+    <span class="tag s">Fase 2 · en desarrollo</span>
+    <b>El mismo agente en WhatsApp, como primer filtro antes de su equipo humano.</b>
+    Hoy no está disponible: es una función en desarrollo de AI Lead Machine, prevista para el plan Crecimiento.
+    Fecha estimada: <b>[FECHA ESTIMADA DE WHATSAPP]</b>. No sustituye a su atención humana de mayoreo: recoge los datos, filtra y pasa el caso a su equipo.
+    <ul>
+      <li>Requiere la API oficial de WhatsApp Business (número verificado). Meta cobra por mensaje desde el 1 de octubre de 2026; en Colombia,
+        las respuestas dentro de la ventana de 24 h cuestan unos US$ 0,0008 desde el mensaje 1.001 de cada mes y los mensajes de marketing unos US$ 0,0125.
+        Ese coste lo paga DTech directamente a Meta.</li>
+      <li>El alcance y el precio de esta fase se acuerdan por escrito antes de empezarla.</li>
+    </ul>
+  </div>
+
+  <h2>Planes (COP, sin IVA)</h2>
   <div class="tw"><table>
-    <thead><tr><th></th><th class="c">Arranque</th><th class="c rec-h">Crecimiento ⭐</th><th class="c">Escala</th></tr></thead>
+    <thead><tr><th></th><th class="c">Esencial</th><th class="c rec-h">Crecimiento ⭐</th></tr></thead>
     <tbody>
-      <tr><td>Implementación</td><td class="c price">$2.400.000</td><td class="c price rec">$3.900.000</td><td class="c price">$3.900.000</td></tr>
-      <tr><td>Mensualidad</td><td class="c price">$690.000</td><td class="c price rec">$1.490.000</td><td class="c price">$2.900.000</td></tr>
-      <tr><td>A. Página de captación + calculadora</td><td class="c">✓</td><td class="c rec">✓</td><td class="c">✓</td></tr>
-      <tr><td>B. Kits de venta</td><td class="c">20</td><td class="c rec">40 + 8/mes</td><td class="c">60 + 15/mes</td></tr>
-      <tr><td>C. Asistente de WhatsApp con IA</td><td class="c">—</td><td class="c rec">✓</td><td class="c">✓</td></tr>
-      <tr><td>D. Seguimiento automático</td><td class="c">—</td><td class="c rec">✓</td><td class="c">✓</td></tr>
-      <tr><td>Campañas Meta/TikTok de captación*</td><td class="c">—</td><td class="c rec">—</td><td class="c">✓</td></tr>
-      <tr><td>E. Informe mensual</td><td class="c">✓</td><td class="c rec">✓</td><td class="c">✓</td></tr>
+      <tr><td>Para quién</td><td class="c">Hasta ~500 conversaciones al mes, un solo canal</td><td class="c rec">Alto volumen, reglas avanzadas, varios canales y estadísticas</td></tr>
+      <tr><td>Contrato de 12 meses · instalación única</td><td class="c price">$5.800.000</td><td class="c price rec">$14.000.000</td></tr>
+      <tr><td>Contrato de 12 meses · cuota mensual</td><td class="c price">$750.000</td><td class="c price rec">$2.300.000</td></tr>
+      <tr><td>Contrato de 6 meses · instalación única</td><td class="c">$6.500.000</td><td class="c rec">$16.000.000</td></tr>
+      <tr><td>Contrato de 6 meses · cuota mensual</td><td class="c">$850.000</td><td class="c rec">$2.600.000</td></tr>
+      <tr><td>Incluye</td><td class="c">Web corporativa de 5 a 8 páginas, agente en su web 24/7, agenda en Google Calendar, aviso por correo, panel de leads, botón «hablar con una persona»</td><td class="c rec">Todo lo de Esencial, web de 10 a 15 páginas, cualificación avanzada con sus reglas y panel de estadísticas. WhatsApp cuando esté disponible (fase 2)</td></tr>
     </tbody>
   </table></div>
-  <p class="mut" style="font-size:.85rem;margin-top:8px">Valores en COP antes de IVA. Implementación: 50 % al iniciar, 50 % al entregar. Permanencia mínima 3 meses.
-    *Inversión en pauta aparte (mín. $1.500.000/mes). Tarifas de Meta por mensajes de WhatsApp (desde el 1/10/2026: 1.000 respuestas gratis al mes; luego ≈ US$0,0008 por respuesta y US$0,0125 por mensaje de marketing en Colombia; estimado ≈ $325.000/mes con el diseño propuesto) se pagan directamente a Meta.</p>
+  <p class="mut" style="font-size:.85rem;margin-top:8px">La aplicación del IVA (19 %) se valida según el régimen tributario de cada parte. Se puede cambiar de plan cuando el volumen crezca.
+    Con contrato de 12 meses, el plan Crecimiento supone $41.600.000 en total (instalación + 12 cuotas); con 6 meses, $31.600.000. Si DTech ya cuenta con la web que necesita, podemos cotizar una versión centrada solo en el agente.</p>
 
-  <h2>Empecemos con un piloto</h2>
-  <div class="pilot">
-    <div><b>Piloto de 30 días</b><br><span class="mut">Página de captación + 10 kits de venta + medición de registros y primeros pedidos.<br>Si continúan con cualquier plan, <b>se descuenta de la implementación</b>.</span></div>
-    <div class="price">$990.000</div>
-  </div>
-
-  <h2>Por qué se paga solo (ejemplo)</h2>
-  <div class="roi">
-    <div><b>40</b>revendedores nuevos activos / mes</div>
-    <div><b>× 10</b>pedidos / mes cada uno</div>
-    <div><b>× $8.000</b>margen por pedido</div>
-    <div class="res"><b>$3.200.000</b>margen extra / mes</div>
-  </div>
-  <p class="mut" style="font-size:.85rem;margin-top:8px">Supuestos ilustrativos: los ajustamos juntos con sus datos reales de margen y activación antes de empezar.</p>
-
-  <h2>Próximos pasos</h2>
+  <h2>Cómo empezamos</h2>
   <ol>
-    <li>Llamada de 20 minutos para validar números y elegir plan o piloto.</li>
-    <li>Nos envían logo, top de productos (precios drop/mayoreo/sugerido) y condiciones comerciales.</li>
-    <li>En <b>7 días hábiles</b>: página de captación y primeros kits publicados. En 14 días: asistente de WhatsApp activo (plan Crecimiento).</li>
+    <li><b>Conversación de 20 minutos</b> para conocer cómo atienden hoy y qué hace su bot actual, y decidir el plan.</li>
+    <li><b>Demo con sus datos, sin costo:</b> usted ve el agente atendiendo un caso típico de DTech antes de contratar.</li>
+    <li><b>Configuración en días</b> del flujo, las reglas, el calendario y los avisos; revisión conjunta antes de publicar.</li>
+    <li><b>Publicación</b> en su web y formación de 30 minutos para su equipo sobre el panel.</li>
   </ol>
 
+  <h2>Qué necesitamos de DTech</h2>
+  <ul>
+    <li>Qué preguntas hace su equipo hoy a un revendedor nuevo y qué hace que un lead sea prioritario.</li>
+    <li>Modalidades, pedido mínimo, descuentos por volumen y cómo se atiende cada una.</li>
+    <li>Un Google Calendar compartido con la cuenta de servicio, y el correo que recibirá los avisos.</li>
+    <li>Acceso a su web para pegar el widget.</li>
+  </ul>
+
   <div class="foot">
-    <span><b>[TU NOMBRE]</b> · Sistemas de captación con IA</span>
-    <span>WhatsApp [TU WHATSAPP] · [TU EMAIL]</span>
+    <span><b>Viviana Acero</b> · AI Lead Machine</span>
+    <span>WhatsApp +34 672 953 197</span>
   </div>
 </article>
 </body>

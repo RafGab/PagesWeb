@@ -53,5 +53,5 @@ Reel 45 s y descripción (`videos/`), tarjetas (`tarjetas/`), oferta a DTech (`o
 kits de clínicas y talleres (`plantillas/`).
 
 ## Pendiente de alinear con el producto real
-- `ofertas/dtech/`: vende un agente de WhatsApp y usa precios propios del análisis inicial, no los oficiales de arriba.
+- `ofertas/dtech/`: **reescrita el 01/10/2026** con el producto real y los precios oficiales (WhatsApp como fase 2). Falta decidir la fecha de la fase 2 y construir el rubro de DTech en el agente.
 - `plantillas/*`, `demos/*` y `landing-agencia/`: usan precios y funciones (recordatorios, WhatsApp) que no coinciden con el producto oficial.
