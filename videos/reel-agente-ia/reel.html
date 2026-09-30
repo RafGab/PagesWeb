@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel · Web + Agente IA</title>
+<!--
+  Animación del Reel (1080×1920, 45 s). No se reproduce sola: render.mjs llama a window.seek(t)
+  para cada fotograma y lo graba. Para previsualizar en el navegador, abre reel.html?play
+  Textos editables en la sección CONFIG del script.
+-->
+<style>
+  @font-face{font-family:"Montserrat";font-weight:700;src:url(fonts/montserrat-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Montserrat";font-weight:800;src:url(fonts/montserrat-latin-800-normal.woff2) format("woff2")}
+  @font-face{font-family:"Montserrat";font-weight:900;src:url(fonts/montserrat-latin-900-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:400;src:url(fonts/dm-sans-latin-400-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:500;src:url(fonts/dm-sans-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:700;src:url(fonts/dm-sans-latin-700-normal.woff2) format("woff2")}
+  :root{
+    --navy:#0B1026; --pink:#FF2E63; --yellow:#FFD60A; --cyan:#19C3FF; --lime:#B8FF3C; --violet:#7B2CFF;
+    --wa:#25D366; --white:#FFFFFF; --ink:#0B1026; --soft:#F1F4FA; --grey:#8A93A8;
+    --h:"Montserrat","DejaVu Sans",sans-serif; --b:"DM Sans","DejaVu Sans",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--navy)}
+  body{font-family:var(--b);color:var(--white)}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+  .scene{position:absolute;inset:0;overflow:hidden}
+  .a{position:absolute;will-change:transform,opacity}
+  .h{font-family:var(--h);font-weight:900;line-height:1.02;letter-spacing:-.02em}
+  .deco{position:absolute;border-radius:50%;pointer-events:none}
+
+  /* S1 */
+  .clock{font-family:var(--h);font-weight:800;font-size:52px;color:var(--cyan);letter-spacing:.02em}
+  .notif{left:90px;width:820px;background:var(--white);color:var(--ink);border-radius:28px;padding:26px 30px;display:flex;gap:22px;align-items:center;box-shadow:0 20px 50px #0007}
+  .notif .ic{width:74px;height:74px;border-radius:20px;background:var(--wa);flex:0 0 auto;display:grid;place-items:center}
+  .notif b{font:700 30px var(--b);display:block}.notif span{font:500 36px var(--b)}
+  .notif small{margin-left:auto;align-self:flex-start;font:500 24px var(--b);color:var(--grey)}
+  .stamp{white-space:nowrap;font-family:var(--h);font-weight:900;font-size:78px;color:var(--white);background:var(--pink);padding:18px 34px;border-radius:24px;transform-origin:center}
+
+  /* Texto grande */
+  .big{font-size:128px}.mid{font-size:92px}.sm{font-size:64px}
+  .word{display:inline-block}
+
+  /* S3 */
+  .pill{left:80px;right:140px;border-radius:40px;padding:40px 44px;display:flex;align-items:center;gap:30px;font-family:var(--h);font-weight:900;font-size:74px;line-height:1.05}
+  .pill .ic{width:120px;height:120px;border-radius:30px;display:grid;place-items:center;flex:0 0 auto}
+
+  /* S4: teléfono con web */
+  .phone{left:80px;top:430px;width:470px;height:930px;background:#111;border-radius:64px;padding:18px;box-shadow:0 40px 80px #0006}
+  .screen{position:relative;width:100%;height:100%;background:var(--white);border-radius:48px;overflow:hidden;color:var(--ink)}
+  .web-bar{left:0;right:0;top:0;height:92px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:26px 30px 0;color:var(--white);font:800 26px var(--h)}
+  .web-hero{left:0;right:0;top:92px;height:300px;background:linear-gradient(135deg,var(--cyan),var(--violet));}
+  .web-hero::after{content:"";position:absolute;right:-40px;bottom:-60px;width:240px;height:240px;border-radius:50%;background:#ffffff33}
+  .web-title{left:28px;right:28px;top:420px;font:900 44px/1.08 var(--h)}
+  .web-btn{left:28px;right:28px;height:78px;border-radius:20px;display:flex;align-items:center;justify-content:center;font:800 28px var(--h)}
+  .web-stars{left:28px;top:760px;font:700 26px var(--b);color:var(--ink)}
+  .web-stars i{font-style:normal;color:#F5A623;letter-spacing:2px}
+  .web-cards{left:28px;right:28px;top:810px;display:flex;gap:14px}
+  .web-cards div{flex:1;height:70px;border-radius:16px;background:var(--soft)}
+  .tap{width:90px;height:90px;border-radius:50%;border:6px solid var(--white);background:#ffffff55}
+  .check{left:590px;width:420px;display:flex;gap:22px;align-items:flex-start;font:800 46px/1.1 var(--h);color:var(--ink)}
+  .check .ic{width:74px;height:74px;border-radius:50%;background:var(--navy);display:grid;place-items:center;flex:0 0 auto}
+
+  /* S5: chat + calendario */
+  .chat{left:70px;right:70px;top:430px;height:670px;background:#0F1733;border-radius:40px;overflow:hidden;border:2px solid #ffffff1a}
+  .chat-top{position:absolute;left:0;right:0;top:0;height:112px;background:var(--wa);display:flex;align-items:center;gap:20px;padding:0 30px;color:var(--ink)}
+  .chat-top .av{width:66px;height:66px;border-radius:50%;background:var(--navy);display:grid;place-items:center}
+  .chat-top b{font:800 32px var(--h);display:block}.chat-top small{font:500 24px var(--b)}
+  .bub{max-width:680px;padding:20px 26px;border-radius:30px;font:500 32px/1.28 var(--b)}
+  .bub.in{left:30px;background:var(--white);color:var(--ink);border-bottom-left-radius:8px}
+  .bub.out{right:30px;background:var(--lime);color:var(--ink);border-bottom-right-radius:8px}
+  .typing{right:30px;background:#ffffff1f;border-radius:30px;padding:24px 30px;display:flex;gap:12px}
+  .typing i{width:16px;height:16px;border-radius:50%;background:var(--white);display:block}
+  .cal{left:70px;right:70px;top:1125px;height:375px;background:var(--white);border-radius:40px;color:var(--ink);padding:30px 34px}
+  .cal-h{display:flex;justify-content:space-between;align-items:center;font:900 36px var(--h)}
+  .cal-h span{font:700 24px var(--b);color:var(--grey)}
+  .cal-grid{position:absolute;left:34px;right:34px;top:96px;display:grid;grid-template-columns:110px repeat(6,1fr);gap:10px}
+  .cal-grid div{height:66px;border-radius:14px;background:var(--soft);font:700 22px var(--b);display:flex;align-items:center;justify-content:center;color:var(--grey);text-align:center;line-height:1.1}
+  .cal-grid .hd{height:40px;background:none;font:800 24px var(--h);color:var(--ink)}
+  .cal-grid .tm{background:none;justify-content:flex-start;font:700 24px var(--b);color:var(--ink)}
+  .cal-grid .busy{background:#DCE3F0;color:#7D879C}
+  .toast{left:110px;right:110px;top:560px;box-shadow:0 24px 60px #000a;background:var(--navy);color:var(--white);border:3px solid var(--lime);border-radius:26px;padding:20px 26px;display:flex;gap:18px;align-items:center;font:700 30px var(--b)}
+
+  /* S6: funciones */
+  .feat{width:430px;height:300px;border-radius:34px;padding:34px;background:var(--white);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between}
+  .feat .ic{width:96px;height:96px;border-radius:26px;display:grid;place-items:center}
+  .feat p{font:900 40px/1.08 var(--h)}
+
+  /* S8: llamada a la acción */
+  .cta{left:90px;right:150px;height:190px;border-radius:40px;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;font:900 64px var(--h);box-shadow:0 18px 0 #B89600}
+  .brand{font:800 34px var(--h);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ESCENA 1 · Gancho (0–5 s) -->
+  <section class="scene" data-in="0,0,none" data-end="5.4" style="background:var(--navy)">
+    <div class="deco a" data-spin="12" style="left:620px;top:-180px;width:640px;height:640px;border:60px solid #19C3FF22"></div>
+    <div class="a clock" style="left:90px;top:250px" data-in="0.1,0.4,up">11:47 p. m.</div>
+    <div class="a h mid" style="left:90px;top:320px;width:880px" data-in="0.3,0.5,up">Tu cliente te escribe…</div>
+    <div class="a notif" style="top:600px" data-in="0.9,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Qué precio tiene?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:770px" data-in="1.5,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Tienen cita mañana?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:940px" data-in="2.1,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿Hacen envíos?</span></div><small>ahora</small></div>
+    <div class="a notif" style="top:1110px" data-in="2.7,0.45,pop"><div class="ic">{WA}</div><div><b>Cliente nuevo</b><span>¿¿Hola??</span></div><small>ahora</small></div>
+    <div class="a stamp" style="left:90px;top:1320px" data-in="3.4,0.4,stamp">…y nadie responde</div>
+  </section>
+
+  <!-- ESCENA 2 · Dolor (4.8–9.5 s) -->
+  <section class="scene" data-in="4.8,0.5,wipe" data-end="9.9" style="background:var(--pink)">
+    <div class="deco a" data-spin="-10" style="left:-260px;top:1250px;width:700px;height:700px;border:70px solid #ffffff22"></div>
+    <div class="a h big" style="left:80px;top:360px;width:900px">
+      <span class="word a-w" data-in="5.3,0.35,pop">Y&nbsp;compra</span><br>
+      <span class="word a-w" data-in="5.8,0.35,pop">al&nbsp;que</span><br>
+      <span class="word a-w" data-in="6.3,0.35,pop" style="color:var(--yellow)">responde</span><br>
+      <span class="word a-w" data-in="6.8,0.35,pop" style="color:var(--yellow)">primero.</span>
+    </div>
+    <div class="a" style="left:80px;top:1080px;width:860px;font:700 50px/1.2 var(--b)" data-in="7.6,0.5,up">Responder tarde = <b style="font-family:var(--h);font-weight:900">venta perdida.</b></div>
+  </section>
+
+  <!-- ESCENA 3 · Solución (9.3–13.5 s) -->
+  <section class="scene" data-in="9.3,0.5,wipe" data-end="13.9" style="background:var(--yellow);color:var(--ink)">
+    <div class="deco a" data-spin="14" style="left:640px;top:1180px;width:620px;height:620px;border:60px solid #0B102614"></div>
+    <div class="a h sm" style="left:80px;top:300px" data-in="9.7,0.4,up">La solución:</div>
+    <div class="a pill" style="top:430px;background:var(--navy);color:var(--white)" data-in="10.1,0.5,left"><div class="ic" style="background:var(--cyan)">{WEB}</div>Página web que vende</div>
+    <div class="a h" style="left:80px;right:140px;top:700px;text-align:center;font-size:140px" data-in="10.7,0.35,pop">+</div>
+    <div class="a pill" style="top:880px;background:var(--pink);color:var(--white)" data-in="11.1,0.5,right"><div class="ic" style="background:var(--lime)">{BOT}</div>Agente IA 24/7</div>
+    <div class="a" style="left:80px;top:1190px;width:840px;font:700 46px/1.25 var(--b)" data-in="11.9,0.5,up">Atiende, vende y agenda por ti. Incluso mientras duermes.</div>
+  </section>
+
+  <!-- ESCENA 4 · La web (13.3–20.5 s) -->
+  <section class="scene" data-in="13.3,0.5,wipe" data-end="20.9" style="background:var(--cyan);color:var(--ink)">
+    <div class="a h" style="left:80px;top:240px;width:900px;font-size:84px" data-in="13.7,0.45,up">Tu web, lista para vender</div>
+    <div class="a phone" data-in="14.0,0.55,up">
+      <div class="screen">
+        <div class="a web-bar" data-in="14.6,0.3,fade"><span>Tu Negocio</span><span>☰</span></div>
+        <div class="a web-hero" data-in="14.9,0.35,fade"></div>
+        <div class="a web-title" data-in="15.3,0.35,up">Reserva tu cita en 1 minuto</div>
+        <div class="a web-btn" id="btnAgenda" style="top:560px;background:var(--lime);color:var(--ink)" data-in="15.7,0.35,pop">Agendar cita</div>
+        <div class="a web-btn" style="top:656px;background:var(--wa);color:var(--white)" data-in="16.0,0.35,pop">Escribir por WhatsApp</div>
+        <div class="a web-stars" data-in="16.3,0.35,up"><i>★★★★★</i> 4,9 · 212 reseñas</div>
+        <div class="a web-cards" data-in="16.6,0.35,up"><div></div><div></div><div></div></div>
+        <div class="a tap" id="tap" style="left:190px;top:555px"></div>
+      </div>
+    </div>
+    <div class="a check" style="top:560px" data-in="16.9,0.4,right"><div class="ic">{OK}</div>Lista en 7 días</div>
+    <div class="a check" style="top:760px" data-in="17.5,0.4,right"><div class="ic">{OK}</div>Aparece en Google</div>
+    <div class="a check" style="top:960px" data-in="18.1,0.4,right"><div class="ic">{OK}</div>Agenda y WhatsApp en un clic</div>
+  </section>
+
+  <!-- ESCENA 5 · Agente que agenda (20.3–31.3 s) -->
+  <section class="scene" data-in="20.3,0.5,wipe" data-end="31.7" style="background:var(--navy)">
+    <div class="deco a" data-spin="-8" style="left:560px;top:-220px;width:720px;height:720px;border:70px solid #B8FF3C18"></div>
+    <div class="a h" style="left:70px;top:230px;width:940px;font-size:76px;line-height:1.04" data-in="20.7,0.45,up">Tu agente IA <span style="color:var(--lime)">agenda por ti</span></div>
+    <div class="a chat" data-in="21.0,0.45,up">
+      <div class="chat-top"><div class="av">{BOTW}</div><div><b>Asistente IA</b><small>en línea · responde al instante</small></div></div>
+      <div class="a bub in" style="top:136px" data-in="21.5,0.35,left">Hola, ¿tienen cita para el sábado?</div>
+      <div class="a typing" style="top:236px" data-in="22.0,0.2,fade" data-out="22.8,0.15,fade"><i></i><i></i><i></i></div>
+      <div class="a bub out" style="top:236px" data-in="22.9,0.35,right">¡Hola! El sábado tengo 10:00 o 11:30. ¿Cuál le queda mejor?</div>
+      <div class="a bub in" style="top:400px" data-in="24.0,0.35,left">10:00, porfa</div>
+      <div class="a typing" style="top:500px" data-in="24.4,0.2,fade" data-out="25.1,0.15,fade"><i></i><i></i><i></i></div>
+      <div class="a bub out" style="top:500px" data-in="25.2,0.35,right">Listo ✓ Agendado el sábado a las 10:00. Le recuerdo un día antes.</div>
+    </div>
+    <div class="a cal" data-in="26.0,0.5,up">
+      <div class="cal-h">Tu calendario <span>semana del 28 sep</span></div>
+      <div class="cal-grid">
+        <div class="hd"></div><div class="hd">Lun</div><div class="hd">Mar</div><div class="hd">Mié</div><div class="hd">Jue</div><div class="hd">Vie</div><div class="hd">Sáb</div>
+        <div class="tm">9:00</div><div class="busy">Cita</div><div></div><div class="busy">Cita</div><div></div><div class="busy">Cita</div><div></div>
+        <div class="tm">10:00</div><div></div><div class="busy">Cita</div><div></div><div class="busy">Cita</div><div></div><div id="slot">+</div>
+        <div class="tm">11:00</div><div class="busy">Cita</div><div></div><div></div><div class="busy">Cita</div><div class="busy">Cita</div><div></div>
+      </div>
+    </div>
+    <div class="a toast" data-in="28.6,0.4,pop">{BELL}<span>Recordatorio programado: viernes 9:00 a. m.</span></div>
+  </section>
+
+  <!-- ESCENA 6 · Funciones (31.1–39.5 s) -->
+  <section class="scene" data-in="31.1,0.5,wipe" data-end="39.9" style="background:var(--violet)">
+    <div class="deco a" data-spin="10" style="left:-300px;top:-300px;width:760px;height:760px;border:80px solid #ffffff14"></div>
+    <div class="a h" style="left:80px;top:230px;width:900px;font-size:84px" data-in="31.5,0.45,up">Lo que hace tu agente IA</div>
+    <div class="a feat" style="left:80px;top:420px" data-in="32.0,0.4,pop"><div class="ic" style="background:var(--yellow)">{BOLT}</div><p>Responde en segundos, 24/7</p></div>
+    <div class="a feat" style="left:550px;top:420px" data-in="33.1,0.4,pop"><div class="ic" style="background:var(--lime)">{CAL}</div><p>Agenda citas en tu calendario</p></div>
+    <div class="a feat" style="left:80px;top:750px" data-in="34.2,0.4,pop"><div class="ic" style="background:var(--cyan)">{BELLI}</div><p>Envía recordatorios solo</p></div>
+    <div class="a feat" style="left:550px;top:750px" data-in="35.3,0.4,pop"><div class="ic" style="background:var(--pink)">{TARGET}</div><p>Guarda cada cliente potencial</p></div>
+    <div class="a feat" style="left:80px;top:1080px" data-in="36.4,0.4,pop"><div class="ic" style="background:var(--yellow)">{HAND}</div><p>Te pasa los casos importantes</p></div>
+    <div class="a feat" style="left:550px;top:1080px" data-in="37.5,0.4,pop"><div class="ic" style="background:var(--lime)">{LOOP}</div><p>Hace seguimiento a quien no compró</p></div>
+  </section>
+
+  <!-- ESCENA 7 · Resultado (39.3–42.3 s) -->
+  <section class="scene" data-in="39.3,0.5,wipe" data-end="42.7" style="background:var(--lime);color:var(--ink)">
+    <div class="a h big" style="left:80px;top:420px;width:920px" data-in="39.7,0.4,left">Más citas.</div>
+    <div class="a h big" style="left:80px;top:720px;width:920px" data-in="40.3,0.4,left">Cero chats sin responder.</div>
+    <div class="a h mid" style="left:80px;top:1160px;width:900px;color:var(--violet)" data-in="40.9,0.4,left">Tú, a atender clientes.</div>
+  </section>
+
+  <!-- ESCENA 8 · Llamada a la acción (42.1–45 s) -->
+  <section class="scene" data-in="42.1,0.5,wipe" data-end="45.1" style="background:var(--navy)">
+    <div class="deco a" data-spin="12" style="left:520px;top:1150px;width:760px;height:760px;border:80px solid #FF2E6322"></div>
+    <div class="a brand" style="left:90px;top:300px" data-in="42.4,0.3,fade" id="brand"></div>
+    <div class="a h" style="left:90px;top:370px;width:880px;font-size:96px" data-in="42.5,0.4,up">¿Lo quieres en tu negocio?</div>
+    <div class="a cta" id="cta" style="top:800px" data-in="43.0,0.4,pop"></div>
+    <div class="a" style="left:90px;top:1060px;width:840px;font:700 46px/1.3 var(--b)" data-in="43.4,0.4,up">Demo gratis en 15 minutos.<br><span style="color:var(--lime)">Link en la bio.</span></div>
+  </section>
+</div>
+
+<script>
+// ===================== CONFIG (textos editables) =====================
+const CONFIG = {
+  marca: 'AI Lead Machine',            // aparece en el cierre
+  palabraClave: 'AGENTE',              // "Escríbeme AGENTE"
+  duracion: 45,
+};
+// ====================================================================
+
+// Iconos SVG (trazos gruesos, legibles en móvil)
+const S = (d, c = '#0B1026', w = 7) => `<svg width="62" height="62" viewBox="0 0 64 64" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICONS = {
+  WA: `<svg width="44" height="44" viewBox="0 0 24 24"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7a11.6 11.6 0 0 1-4.5-4c-.3-.5-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.6.3.1.2.1.8-.1 1.4Z"/></svg>`,
+  WEB: S('<rect x="8" y="12" width="48" height="40" rx="6"/><path d="M8 24h48M16 18h2M24 18h2"/>'),
+  BOT: S('<rect x="12" y="20" width="40" height="30" rx="10"/><path d="M32 20v-8M26 34h0M38 34h0M26 42h12"/>'),
+  BOTW: S('<rect x="12" y="20" width="40" height="30" rx="10"/><path d="M32 20v-8M26 34h0M38 34h0M26 42h12"/>', '#B8FF3C', 6),
+  OK: S('<path d="M16 33l10 10 22-22"/>', '#B8FF3C', 8),
+  BOLT: S('<path d="M36 6L14 36h16l-4 22 22-30H32z"/>'),
+  CAL: S('<rect x="8" y="12" width="48" height="44" rx="6"/><path d="M8 26h48M20 6v12M44 6v12M22 40l6 6 12-12"/>'),
+  BELLI: S('<path d="M16 44V30a16 16 0 0 1 32 0v14l4 6H12z"/><path d="M26 56a6 6 0 0 0 12 0"/>'),
+  BELL: `<span style="width:64px;height:64px;border-radius:18px;background:#B8FF3C;display:grid;place-items:center;flex:0 0 auto">${S('<path d="M16 44V30a16 16 0 0 1 32 0v14l4 6H12z"/><path d="M26 56a6 6 0 0 0 12 0"/>', '#0B1026', 6).replace(/62/g, '40')}</span>`,
+  TARGET: S('<circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="11"/><path d="M32 32l18-18"/>'),
+  HAND: S('<circle cx="32" cy="20" r="10"/><path d="M12 56c2-12 10-18 20-18s18 6 20 18"/>'),
+  LOOP: S('<path d="M50 24A20 20 0 0 0 14 22M14 40a20 20 0 0 0 36 2"/><path d="M50 10v14H36M14 54V40h14"/>'),
+};
+document.querySelectorAll('.ic, .av, .toast').forEach(el => {
+  el.innerHTML = el.innerHTML.replace(/\{(\w+)\}/g, (_, k) => ICONS[k] || '');
+});
+document.getElementById('brand').textContent = CONFIG.marca;
+document.getElementById('cta').textContent = 'Escríbeme ' + CONFIG.palabraClave;
+
+// ---------- Motor de animación determinista ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, s, d) => d <= 0 ? (t >= s ? 1 : 0) : clamp((t - s) / d);
+const outCubic = p => 1 - Math.pow(1 - p, 3);
+const outBack = p => { const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const inCubic = p => p * p * p;
+const parse = v => { if (!v) return null; const [s, d, ty] = v.split(','); return { s: +s, d: +d, ty }; };
+
+const items = [...document.querySelectorAll('[data-in]')].map(el => ({ el, i: parse(el.dataset.in), o: parse(el.dataset.out), spin: +el.dataset.spin || 0, end: el.dataset.end ? +el.dataset.end : null }));
+const spins = [...document.querySelectorAll('[data-spin]')].filter(el => !el.dataset.in).map(el => ({ el, spin: +el.dataset.spin }));
+
+function apply(it, t) {
+  const { el, i, o } = it;
+  if (it.end !== null && t > it.end) { el.style.visibility = 'hidden'; return; }
+  if (t < i.s) { el.style.visibility = 'hidden'; return; }
+  el.style.visibility = 'visible';
+  const p = prog(t, i.s, i.d);
+  let op = 1, tx = 0, ty = 0, sc = 1, rot = 0, clip = '';
+  switch (i.ty) {
+    case 'pop': sc = 0.4 + 0.6 * outBack(p); op = clamp(p * 2.5); break;
+    case 'up': ty = (1 - outCubic(p)) * 140; op = outCubic(p); break;
+    case 'left': tx = -(1 - outCubic(p)) * 260; op = outCubic(p); break;
+    case 'right': tx = (1 - outCubic(p)) * 260; op = outCubic(p); break;
+    case 'fade': op = p; break;
+    case 'stamp': sc = 2.2 - 1.2 * outCubic(p); rot = -6; op = clamp(p * 2); break;
+    case 'wipe': clip = `circle(${outCubic(p) * 125}% at 50% 55%)`; break;
+    default: break;
+  }
+  if (o && t >= o.s) { const q = inCubic(prog(t, o.s, o.d)); op *= 1 - q; if (o.ty === 'up') ty -= q * 100; }
+  el.style.opacity = op;
+  el.style.clipPath = clip;
+  el.style.transform = `translate(${tx}px,${ty}px) scale(${sc}) rotate(${rot}deg)`;
+}
+
+function seek(t) {
+  for (const it of items) apply(it, t);
+  // Decoración: anillos que giran despacio
+  for (const d of document.querySelectorAll('[data-spin]')) {
+    const base = d.style.transform && !d.dataset.in ? '' : d.style.transform;
+    d.style.transform = (d.dataset.in ? d.style.transform : '') + ` rotate(${t * (+d.dataset.spin)}deg)`;
+  }
+  // Puntos de "escribiendo…"
+  document.querySelectorAll('.typing i').forEach((dot, k) => {
+    dot.style.transform = `translateY(${-10 * Math.max(0, Math.sin(t * 9 - k * 0.9))}px)`;
+    dot.style.opacity = 0.5 + 0.5 * Math.max(0, Math.sin(t * 9 - k * 0.9));
+  });
+  // Toque en "Agendar cita" (escena 4)
+  const tap = document.getElementById('tap');
+  const tp = prog(t, 18.8, 0.7);
+  tap.style.visibility = t >= 18.6 && t < 20.6 ? 'visible' : 'hidden';
+  tap.style.opacity = t < 18.8 ? prog(t, 18.6, 0.2) : 1 - tp;
+  tap.style.transform = `scale(${0.6 + tp * 1.2})`;
+  document.getElementById('btnAgenda').style.filter = t > 18.8 && t < 19.4 ? 'brightness(.88)' : '';
+  // Hueco del calendario que se llena (escena 5)
+  const slot = document.getElementById('slot'), sp = prog(t, 26.9, 0.45);
+  if (t >= 26.9) {
+    slot.textContent = 'Laura ✓';
+    slot.style.background = '#B8FF3C'; slot.style.color = '#0B1026';
+    slot.style.transform = `scale(${1 + 0.25 * Math.sin(Math.PI * sp)})`;
+    slot.style.boxShadow = `0 0 0 ${6 * (1 - sp) + 3}px #7B2CFF`;
+  } else {
+    slot.textContent = '+'; slot.style.background = ''; slot.style.color = ''; slot.style.transform = ''; slot.style.boxShadow = '';
+  }
+  // Botón final que late
+  const cta = document.getElementById('cta');
+  if (t >= 43.4) cta.style.transform = `scale(${1 + 0.035 * Math.sin((t - 43.4) * Math.PI * 2 * 1.4)})`;
+}
+window.seek = seek;
+window.DURACION = CONFIG.duracion;
+window.listo = document.fonts.ready.then(() => true);
+
+// Vista previa en el navegador: reel.html?play
+if (location.search.includes('play')) {
+  const t0 = performance.now();
+  (function loop() { seek(((performance.now() - t0) / 1000) % CONFIG.duracion); requestAnimationFrame(loop); })();
+} else { seek(0); }
+</script>
+</body>
+</html>
