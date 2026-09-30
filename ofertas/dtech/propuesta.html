@@ -39,6 +39,15 @@
   .foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem}
   .toolbar{max-width:880px;margin:16px auto 0;text-align:right}
   .toolbar button{font:700 .95rem system-ui;padding:10px 18px;border-radius:10px;border:0;background:var(--ink);color:#fff;cursor:pointer}
+  .calc{border:1px solid var(--line)}
+  .cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:10px 0}
+  .cgrid label{font-size:.75rem;font-weight:700;color:var(--mut);display:block}
+  .cgrid input{width:100%;margin-top:3px;padding:8px;border:1px solid var(--line);border-radius:8px;font:600 .95rem system-ui;color:var(--ink)}
+  .cres{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .cres div{background:#fff;border-radius:10px;padding:8px 10px}
+  .cres span{display:block;font-size:.72rem;color:var(--mut)}.cres b{font-size:1.05rem}
+  .cres .big{background:var(--ink);color:#fff}.cres .big span{color:var(--cielo,#8FB2FF)}.cres .big b{color:var(--amber)}
+  @media(max-width:700px){.cgrid{grid-template-columns:1fr 1fr}.cres{grid-template-columns:1fr 1fr}}
   @media(max-width:700px){.page{padding:26px 18px;margin:0;border-radius:0}.meta{text-align:left}.grid{grid-template-columns:1fr}table{font-size:.82rem}th,td{padding:7px 5px}.tw{overflow-x:auto}table{min-width:520px}}
   @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}.toolbar{display:none}h2{break-after:avoid}table,.phase,.grid{break-inside:avoid}@page{margin:14mm}}
 </style>
@@ -90,6 +99,32 @@
     </ul>
   </div>
 
+  <h2>Extra para atraer revendedores: calculadora de ganancia y kits de venta</h2>
+  <p>Además del agente, proponemos una <b>página de captación para revendedores</b> en la web de DTech con dos herramientas pensadas para su modelo de negocio.
+    Son un desarrollo a medida para DTech, no una función estándar del agente.</p>
+  <div class="grid">
+    <div class="item"><b>Calculadora de ganancia</b><span>El emprendedor elige un producto, ajusta su precio de venta, flete, ventas al mes y devoluciones, y ve cuánto ganaría. Quien ve su número real, se anima a empezar.</span></div>
+    <div class="item"><b>Kits de venta por producto</b><span>Por cada producto estrella: fotos, video vertical, textos de anuncio y precio sugerido, listos para descargar. El revendedor empieza a vender el mismo día.</span></div>
+  </div>
+  <div class="box calc" style="margin-top:12px" id="calculadora">
+    <b>Pruébela (con cifras de ejemplo, no son precios reales de DTech)</b>
+    <div class="cgrid">
+      <label>Precio DTech<input id="c-costo" inputmode="numeric" value="48.000"></label>
+      <label>Su precio de venta<input id="c-venta" inputmode="numeric" value="119.900"></label>
+      <label>Flete + comisión<input id="c-flete" inputmode="numeric" value="15.000"></label>
+      <label>Ventas al mes<input id="c-ventas" inputmode="numeric" value="60"></label>
+      <label>Devoluciones (%)<input id="c-dev" inputmode="numeric" value="15"></label>
+    </div>
+    <div class="cres">
+      <div><span>Ganancia por venta</span><b id="r-venta"></b></div>
+      <div><span>Pedidos entregados</span><b id="r-ent"></b></div>
+      <div><span>Costo de devoluciones</span><b id="r-dev"></b></div>
+      <div class="big"><span>Ganancia estimada al mes</span><b id="r-mes"></b></div>
+    </div>
+    <p class="mut" style="font-size:.8rem;margin:8px 0 0">Estimación orientativa. En la versión final se cargan los productos y precios reales de DTech y el registro del revendedor llega al agente y al panel de leads.</p>
+  </div>
+  <p class="mut" style="font-size:.85rem;margin-top:8px">Se incluyen en la instalación del plan elegido como valor añadido de bienvenida <!-- DECISIÓN DE VIVIANA: si prefieres cobrarlo aparte, cámbialo por "a cotizar" --> (la cantidad de productos y kits se acuerda al inicio).</p>
+
   <h2>Planes (COP, sin IVA)</h2>
   <div class="tw"><table>
     <thead><tr><th></th><th class="c">Esencial</th><th class="c rec-h">Crecimiento ⭐</th></tr></thead>
@@ -126,5 +161,21 @@
     <span>WhatsApp +34 672 953 197</span>
   </div>
 </article>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var cop=function(n){return '$'+Math.round(n).toLocaleString('es-CO')};
+  var num=function(i){return +String($(i).value).replace(/\D/g,'')||0};
+  function calc(){
+    var costo=num('c-costo'),venta=num('c-venta'),flete=num('c-flete'),ventas=num('c-ventas');
+    var dev=Math.min(num('c-dev'),100)/100;
+    var por=venta-costo-flete, ent=Math.round(ventas*(1-dev)), cdev=Math.round(ventas*dev)*flete;
+    $('r-venta').textContent=cop(por);$('r-ent').textContent=ent;$('r-dev').textContent='−'+cop(cdev);
+    $('r-mes').textContent=cop(Math.max(ent*por-cdev,0));
+  }
+  ['c-costo','c-venta','c-flete','c-ventas','c-dev'].forEach(function(i){$(i).addEventListener('input',calc)});
+  calc();
+})();
+</script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 # Oferta para DTech (@tecnologia.dtech) · versión 2, con el producto real
 
 > Reescrita el 01/10/2026 a partir de `../../CONTEXTO.md` (producto verificado en el código y precios oficiales).
-> La versión anterior (agente de WhatsApp, precios propios, kits de venta y calculadora) está en `archivo/` y **no debe enviarse**.
+> La versión anterior (agente de WhatsApp, precios propios, piloto de $990.000) está en `archivo/` y **no debe enviarse**.
+> La calculadora y los kits de venta **se conservaron** en la propuesta v2 como extra a medida (ver abajo).
 
 ## Lo que DTech ya te dijo (Denis Bermúdez, 30/09/2026)
 1. *"Nosotros manejamos bot"*.
@@ -16,6 +17,12 @@ que entrega los casos calificados y con resumen a su equipo humano.
   **avisa por correo**, panel de leads con estados, notas y CSV, y botón "hablar con una persona".
 - **Fase 2, en desarrollo:** el mismo agente en **WhatsApp**, como primer filtro antes del equipo humano.
   En tu web de precios figura como "próximamente" en el plan Crecimiento. **No lo vendas como disponible.**
+
+- **Extra gancho (idea tuya, a medida):** página de captación de revendedores con **calculadora de ganancia** y **kits de venta** por producto.
+  Está en `propuesta.html` con una calculadora que funciona (cifras de ejemplo). **No es parte de tu producto estándar ni de tu lista de precios**:
+  es un desarrollo aparte. En la propuesta figura como "incluido en la instalación como valor añadido". Si prefieres cobrarlo, cambia esa frase por "a cotizar".
+  Antes de prometerlo, calcula cuánto tiempo te lleva y limita la cantidad de productos y kits (yo dejé "se acuerda al inicio").
+  La maqueta completa con tarjetas de producto y formulario está en `archivo/muestra-captacion-maqueta-antigua.html` (colores antiguos).
 
 ### Decisión tuya antes de enviar
 La propuesta incluye la fase 2 con una fecha estimada: `[FECHA ESTIMADA DE WHATSAPP]` en `propuesta.html`.

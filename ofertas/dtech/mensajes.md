@@ -20,6 +20,11 @@ Apunta lo que dice y usa la tabla "Qué ofrecer según lo que encuentres" de `RE
 
 (Sí: a veces la respuesta honesta es no vender. Te protege la reputación y te deja la puerta abierta.)
 
+## 2b. Gancho: calculadora de ganancia y kits de venta
+> Además del agente, le preparo una página para captar revendedores con una calculadora: el emprendedor pone el producto, su precio de venta y sus ventas al mes y ve cuánto ganaría. Y un kit de venta por producto (fotos, video vertical, textos de anuncio). Se la dejo en la propuesta para que la pruebe.
+
+(Es un extra a medida, no una función del agente. Preséntalo así.)
+
 ## 3. Mensaje de oportunidad: cobro de WhatsApp (solo si sigue en conversación)
 > Con lo del cobro de WhatsApp desde el 1 de octubre hay mucha confusión. Si atienden con la app de WhatsApp Business del celular, no les cobran nada. Si usan un bot o un CRM conectado a la API, en Colombia las respuestas cuestan unos $3 pesos a partir de la 1.001 del mes y los mensajes de marketing unos $50 cada uno. Por eso conviene diseñar bien cualquier automatización. ¿Quiere que le revise cuánto le costaría con su volumen?
 
