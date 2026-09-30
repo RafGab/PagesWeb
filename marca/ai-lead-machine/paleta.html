@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Paleta AI Lead Machine</title>
+<style>
+  @font-face{font-family:"Montserrat";font-weight:800;src:url(../../tarjetas/ai-lead-machine/fonts/montserrat-latin-800-normal.woff2) format("woff2")}
+  @font-face{font-family:"Montserrat";font-weight:900;src:url(../../tarjetas/ai-lead-machine/fonts/montserrat-latin-900-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:400;src:url(../../tarjetas/ai-lead-machine/fonts/dm-sans-latin-400-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:500;src:url(../../tarjetas/ai-lead-machine/fonts/dm-sans-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:700;src:url(../../tarjetas/ai-lead-machine/fonts/dm-sans-latin-700-normal.woff2) format("woff2")}
+  :root{--ink:#071226;--cobalt:#2650F0;--aqua:#19D6E6;--amber:#FFB81C;--sky:#8FB2FF;--paper:#EEF3FF;--muted:#51607C;--h:"Montserrat","DejaVu Sans",sans-serif;--b:"DM Sans","DejaVu Sans",sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{width:1600px;background:var(--paper);color:var(--ink);font:400 22px/1.45 var(--b);padding:72px 80px 80px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+  .eyebrow{font:800 20px var(--h);letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt)}
+  h1{font:900 76px/1 var(--h);letter-spacing:-.02em;margin-top:10px}
+  header p{max-width:520px;color:var(--muted);font-size:22px}
+  .grad{height:96px;border-radius:28px;background:linear-gradient(100deg,var(--cobalt),var(--aqua));display:flex;align-items:center;padding:0 36px;color:#fff;font:800 26px var(--h);margin-bottom:28px;justify-content:space-between}
+  .grad span:last-child{font:500 20px var(--b);opacity:.95;color:var(--ink)}
+  .sw{display:grid;grid-template-columns:1.25fr 1.25fr 1fr 1fr 1fr;gap:20px;margin-bottom:28px}
+  .c{border-radius:28px;padding:30px 28px;min-height:330px;display:flex;flex-direction:column;justify-content:space-between}
+  .c h3{font:900 34px/1 var(--h)}
+  .c .hex{font:800 26px var(--h);letter-spacing:.02em}
+  .c small{display:block;font:500 18px/1.35 var(--b);opacity:.92;margin-top:6px}
+  .c .rol{font:700 19px/1.3 var(--b)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+  .card{background:#fff;border-radius:28px;padding:34px 36px}
+  .card h2{font:900 28px var(--h);margin-bottom:16px}
+  .bar{display:flex;height:64px;border-radius:18px;overflow:hidden;margin-bottom:16px}
+  .bar div{display:flex;align-items:center;justify-content:center;font:800 20px var(--h)}
+  ul{list-style:none}li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid #E3EAF8}
+  li:last-child{border:0}li::before{content:"";position:absolute;left:0;top:16px;width:16px;height:16px;border-radius:50%;background:var(--cobalt)}
+  li.no::before{background:var(--amber)}
+  table{width:100%;border-collapse:collapse;font-size:20px}td{padding:9px 0;border-bottom:1px solid #E3EAF8}td:last-child{text-align:right;font-weight:700}tr:last-child td{border:0}
+  .pill{display:inline-block;padding:4px 14px;border-radius:99px;font:800 17px var(--h)}
+  .demo{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:6px}
+  .btn{background:var(--amber);color:var(--ink);font:800 22px var(--h);padding:16px 30px;border-radius:16px}
+  .btn2{background:var(--cobalt);color:#fff;font:800 22px var(--h);padding:16px 30px;border-radius:16px}
+  .bub{background:var(--ink);color:#fff;border-radius:22px 22px 22px 6px;padding:14px 20px;font-size:20px}
+  .bub b{color:var(--aqua)}
+  .dark{background:var(--ink);color:#fff;border-radius:28px;padding:34px 36px}
+  .dark h2{color:#fff}.dark p{color:#C9D8F5}
+  footer{margin-top:10px;color:var(--muted);font-size:18px}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="eyebrow">AI Lead Machine · Identidad de color</div><h1>Confianza eléctrica</h1></div>
+  <p>Azul cobalto para transmitir seriedad, aqua para la inteligencia artificial y ámbar para las llamadas a la acción. Fondos oscuros y limpios, como las apps financieras y de salud que la gente ya asocia con confianza.</p>
+</header>
+
+<div class="grad"><span>Degradado de marca · Cobalto → Aqua</span><span>135° · para el logo, portadas y botones principales</span></div>
+
+<div class="sw">
+  <div class="c" style="background:var(--ink);color:#fff"><div><h3>Noche</h3><small>Fondo principal</small></div><div><div class="hex">#071226</div><small>RGB 7 · 18 · 38</small><div class="rol" style="margin-top:12px">Fondos oscuros y texto principal sobre claro</div></div></div>
+  <div class="c" style="background:var(--cobalt);color:#fff"><div><h3>Cobalto</h3><small>Color de marca</small></div><div><div class="hex">#2650F0</div><small>RGB 38 · 80 · 240</small><div class="rol" style="margin-top:12px">Titulares destacados, botones secundarios, enlaces</div></div></div>
+  <div class="c" style="background:var(--aqua);color:var(--ink)"><div><h3>Aqua</h3><small>La IA</small></div><div><div class="hex">#19D6E6</div><small>RGB 25 · 214 · 230</small><div class="rol" style="margin-top:12px">Detalles tecnológicos sobre fondos oscuros</div></div></div>
+  <div class="c" style="background:var(--amber);color:var(--ink)"><div><h3>Ámbar</h3><small>Acción</small></div><div><div class="hex">#FFB81C</div><small>RGB 255 · 184 · 28</small><div class="rol" style="margin-top:12px">Un solo botón por pieza: “Escríbeme”, “Agenda”</div></div></div>
+  <div class="c" style="background:linear-gradient(#8FB2FF 0 50%,#EEF3FF 50% 100%);color:var(--ink);border:2px solid #D3DFF8"><div><h3>Cielo</h3><small>Apoyo y fondos claros</small></div><div><div class="hex">#8FB2FF</div><div class="hex" style="margin-top:8px">#EEF3FF</div><small style="margin-top:10px">Iconos suaves y fondos claros</small></div></div>
+</div>
+
+<div class="row">
+  <div class="card">
+    <h2>Proporción de uso</h2>
+    <div class="bar"><div style="flex:60;background:var(--ink);color:#fff">60% Noche / Bruma</div><div style="flex:30;background:var(--cobalt);color:#fff">30% Cobalto</div><div style="flex:10;background:var(--amber);color:var(--ink)">10%</div></div>
+    <ul>
+      <li>Mucho espacio oscuro o claro, y el color solo donde hay que mirar.</li>
+      <li>Un único botón en ámbar por pantalla o pieza.</li>
+      <li class="no">Evita el morado y magenta neón: es el look más repetido en marcas de IA y se confunde con ellas.</li>
+      <li class="no">No combines ámbar con aqua en la misma zona: compiten por la atención.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Contrastes que se leen bien</h2>
+    <table>
+      <tr><td>Blanco sobre Noche</td><td>18,7 : 1</td></tr>
+      <tr><td>Blanco sobre Cobalto</td><td>6,0 : 1</td></tr>
+      <tr><td>Noche sobre Ámbar</td><td>10,8 : 1</td></tr>
+      <tr><td>Noche sobre Aqua</td><td>10,5 : 1</td></tr>
+      <tr><td>Cobalto sobre Bruma</td><td>5,4 : 1</td></tr>
+      <tr><td>Ámbar sobre Cobalto (titulares grandes)</td><td>3,5 : 1</td></tr>
+      <tr><td>Aqua sobre Cobalto (titulares grandes)</td><td>3,4 : 1</td></tr>
+    </table>
+    <p style="color:var(--muted);font-size:17px;margin-top:10px">Para texto pequeño se recomienda 4,5 : 1 o más. Los pares de 3,4–3,5 solo para titulares grandes.</p>
+  </div>
+</div>
+
+<div class="dark">
+  <h2>Así se ve junto</h2>
+  <p style="margin-bottom:22px">Ejemplo de una pieza de redes: fondo Noche, titular blanco con acento cobalto, un detalle aqua y un único botón ámbar.</p>
+  <div class="demo">
+    <div class="bub">¿Tienen cita el sábado? <b>— Agendado a las 10:00 ✓</b></div>
+    <span class="pill" style="background:var(--aqua);color:var(--ink)">Agente IA 24/7</span>
+    <span class="btn2">Web que vende</span>
+    <span class="btn">Escríbeme AGENTE</span>
+  </div>
+</div>
+<footer>Tipografías: Montserrat (titulares, peso 800–900) y DM Sans (texto). Verde #25D366 solo para elementos propios de WhatsApp.</footer>
+</body>
+</html>

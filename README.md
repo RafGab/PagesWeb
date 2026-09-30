@@ -12,6 +12,7 @@ Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 | [`ofertas/dtech/`](ofertas/dtech/README.md) | Oferta para DTech (importador/proveedor de dropshipping, Bogotá): análisis, propuesta en COP, mensajes y maqueta de captación de revendedores |
 | [`videos/reel-agente-ia/`](videos/reel-agente-ia/descripcion.md) | Reel de 45 s (9:16) "Web + Agente IA" con agendamiento en calendario, descripción y fuente editable |
 | [`tarjetas/ai-lead-machine/`](tarjetas/ai-lead-machine/LEEME.md) | Tarjeta para compartir (PNG 4:5) y tarjeta de presentación para imprimir (PDF con sangrado) |
+| [`marca/ai-lead-machine/`](marca/ai-lead-machine/LEEME.md) | Paleta de marca "Confianza eléctrica" (cobalto, aqua, ámbar) con contrastes y usos |
 | [`demos/`](demos/) | Demos publicables con marca ficticia (Bodega Nova): agente virtual de WhatsApp con IA y página de captación de revendedores |
 | [`plantilla-cliente/`](plantilla-cliente/index.html) | Web de ejemplo para negocio local (clínica dental ficticia) |
 | [`landing-agencia/`](landing-agencia/index.html) | Landing de tu propia agencia para captar clientes |

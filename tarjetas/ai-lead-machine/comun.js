@@ -10,8 +10,8 @@ window.CFG = Object.assign({
 }, window.__CFG || {});
 
 const C = window.CFG;
-const col = { navy: '#0B1026', pink: '#FF2E63', yellow: '#FFD60A', cyan: '#19C3FF', lime: '#B8FF3C', violet: '#7B2CFF' };
-const svg = (d, stroke = col.navy, w = 6) => `<svg viewBox="0 0 64 64" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const col = { ink: '#071226', cobalt: '#2650F0', aqua: '#19D6E6', amber: '#FFB81C', sky: '#8FB2FF' };
+const svg = (d, stroke = col.ink, w = 6) => `<svg viewBox="0 0 64 64" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 window.ICONS = {
   web: svg('<rect x="8" y="12" width="48" height="40" rx="6"/><path d="M8 24h48M16 18h2M24 18h2"/>'),
   bot: svg('<rect x="12" y="20" width="40" height="30" rx="10"/><path d="M32 20v-8M26 34h0M38 34h0M26 42h12"/>'),
