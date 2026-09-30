@@ -1,0 +1,275 @@
+<title>Captación Bodega Nova</title>
+<style>
+  :root{color-scheme:light;--c:#1f6bff;--c2:#00d4c8;--ink:#0d1321;--mut:#5b6478;--bg:#fff;--soft:#f3f6fb;--line:#e3e8f1;--dark:#0b1020;--r:16px}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:inherit}.w{max-width:1120px;margin:auto;padding:0 20px}
+  h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0 0 12px}
+  h1{font-size:clamp(2.1rem,5.2vw,3.6rem)}h2{font-size:clamp(1.7rem,3.4vw,2.5rem)}h3{font-size:1.15rem}
+  .demo{background:#fff4d6;color:#5c4a00;text-align:center;font-size:.9rem;padding:8px 16px;border-bottom:1px solid #f0d27a}
+  header{position:sticky;top:0;z-index:10;background:#0b1020ee;backdrop-filter:blur(8px);color:#fff}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .logo{font-weight:900;font-size:1.3rem;letter-spacing:-.03em;text-decoration:none}.logo span{color:var(--c2)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:12px;background:var(--c);color:#fff;font:700 1rem/1.2 system-ui,sans-serif;text-decoration:none;border:0;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)}.btn.ghost{background:transparent;box-shadow:inset 0 0 0 2px #ffffff55;color:#fff}
+  .btn.wa{background:#1fa855}.btn.sm{padding:10px 16px;font-size:.92rem}
+  .btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+
+  .hero{background:radial-gradient(70% 60% at 80% 0,#1f6bff55,transparent),var(--dark);color:#fff;padding:72px 0 64px}
+  .hero .w{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .hero p.lead{color:#b9c2d6;font-size:1.2rem;margin:0 0 26px}
+  .hero em{font-style:normal;color:var(--c2)}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .kpi{background:#ffffff0f;border:1px solid #ffffff1f;border-radius:var(--r);padding:20px}
+  .kpi b{display:block;font-size:2rem;color:var(--c2);line-height:1.1}.kpi span{color:#b9c2d6;font-size:.95rem}
+
+  section{padding:80px 0}.soft{background:var(--soft)}
+  .center{text-align:center;max-width:700px;margin:0 auto 40px}.center p{color:var(--mut)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px}
+  .card p{color:var(--mut);margin:0}.card .tag{display:inline-block;font-size:.8rem;font-weight:800;color:var(--c);background:#1f6bff14;padding:4px 10px;border-radius:99px;margin-bottom:12px}
+  .card ul{padding-left:18px;color:var(--mut);margin:12px 0 0}
+  .card.hot{border:2px solid var(--c);box-shadow:0 24px 50px -30px var(--c)}
+
+  /* Calculadora */
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+  .calc form{display:grid;gap:14px}
+  label{font-weight:700;font-size:.92rem;display:block;margin-bottom:4px}
+  input,select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff;color:var(--ink)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .res{background:var(--dark);color:#fff;border-radius:var(--r);padding:28px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .res small{color:#b9c2d6}.res .big{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;color:var(--c2);line-height:1}
+  .res dl{display:grid;grid-template-columns:1fr auto;gap:6px 16px;margin:10px 0 0;color:#dfe5f1}.res dd{margin:0;font-weight:700;text-align:right}
+  .note{font-size:.85rem;color:var(--mut);margin-top:12px}
+
+  /* Productos */
+  .prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .prod .img{aspect-ratio:4/3;display:grid;place-items:center;font-size:3.4rem;background:linear-gradient(135deg,#eaf1ff,#e6fbf9)}
+  .prod .b{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .prod .p{display:flex;justify-content:space-between;font-size:.92rem;color:var(--mut)}.prod .p b{color:var(--ink)}
+  .prod .gan{font-weight:800;color:#128a44}
+  .prod .acts{display:flex;gap:8px;margin-top:auto;padding-top:10px}
+  .prod .acts .btn{flex:1;padding:10px 8px;font-size:.88rem}
+  .pill{font-size:.75rem;font-weight:800;color:#b45309;background:#fff1e0;border-radius:99px;padding:3px 10px;align-self:flex-start}
+  .kit{background:#fff;border:1px dashed var(--c);border-radius:var(--r);padding:18px;margin-top:22px}
+  .kit ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;list-style:none;padding:0;margin:10px 0 0}
+  .kit li::before{content:"✓ ";color:var(--c);font-weight:900}
+
+  .steps{counter-reset:s}.steps .card::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;margin-bottom:12px}
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}summary{font-weight:700;cursor:pointer}details p{color:var(--mut);margin:10px 0 0}
+
+  .reg{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:start}
+  .reg form{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:14px}
+  .chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.88rem}.chk input{width:auto;margin-top:4px}
+  .preview{background:#e7ffdb;border:1px solid #b8e6a0;border-radius:14px;padding:16px;white-space:pre-wrap;font-size:.95rem;overflow-wrap:anywhere}
+  .hide{display:none!important}
+  footer{background:var(--dark);color:#b9c2d6;padding:36px 0;font-size:.92rem}
+  .fab{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#1fa855;display:grid;place-items:center;box-shadow:0 10px 30px #0005;z-index:20;color:#fff;font-size:1.6rem;text-decoration:none}
+
+  @media(max-width:900px){
+    .hero .w,.calc,.reg{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}
+    section{padding:56px 0}.hero{padding:48px 0}.nav .btn{display:none}
+  }
+</style>
+<div class="demo" role="note">Demo con una marca y datos ficticios · así se vería con la marca de su empresa</div>
+<header><div class="w nav">
+  <a class="logo" href="#">Bodega<span>Nova</span></a>
+  <a class="btn sm" href="#registro">Quiero vender</a>
+</div></header>
+
+<main>
+<section class="hero"><div class="w">
+  <div>
+    <h1>Vende tecnología, hogar y belleza <em>sin tener inventario</em></h1>
+    <p class="lead">Tú vendes, nosotros despachamos a toda Colombia en 12–24 h desde nuestra bodega en Bogotá. Precio de importador, fotos y videos listos para tus anuncios.</p>
+    <div class="ctas">
+      <a class="btn" href="#registro">Empezar a vender gratis</a>
+      <a class="btn ghost" href="#calculadora">Calcular mi ganancia</a>
+    </div>
+  </div>
+  <div class="kpis" aria-label="Bodega Nova en cifras">
+    <div class="kpi"><b>+8</b><span>años importando</span></div>
+    <div class="kpi"><b>+2.000</b><span>emprendedores activos</span></div>
+    <div class="kpi"><b>12–24 h</b><span>despacho de pedidos</span></div>
+    <div class="kpi"><b>+300</b><span>productos en catálogo</span></div>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="center"><h2>Elige cómo quieres trabajar con nosotros</h2><p>Empieza sin inversión y crece a tu ritmo.</p></div>
+  <div class="grid3">
+    <div class="card"><span class="tag">Sin inversión</span><h3>Dropshipping</h3><p>Publicas nuestros productos, vendes y nosotros enviamos a tu cliente con contraentrega.</p>
+      <ul><li>Sin comprar inventario</li><li>Tú pones el precio</li><li>Kit de venta por producto</li></ul></div>
+    <div class="card hot"><span class="tag">Más margen</span><h3>Mayoreo desde 3 unidades</h3><p>Compra a precio de importador. Más unidades, más descuento.</p>
+      <ul><li>Descuentos por volumen</li><li>Envíos a toda Colombia</li><li>Recogida en bodega</li></ul></div>
+    <div class="card"><span class="tag">Para negocios</span><h3>Distribuidor</h3><p>Para tiendas y vendedores con volumen. Precios y asesor dedicados.</p>
+      <ul><li>Lista de precios especial</li><li>Productos nuevos primero</li><li>Asesor comercial</li></ul></div>
+  </div>
+</div></section>
+
+<section id="calculadora" class="soft"><div class="w">
+  <div class="center"><h2>¿Cuánto puedes ganar?</h2><p>Elige un producto y ajusta los números a tu caso.</p></div>
+  <div class="calc">
+    <form id="calc" onsubmit="return false">
+      <div><label for="c-prod">Producto</label><select id="c-prod"></select></div>
+      <div class="row2">
+        <div><label for="c-costo">Precio bodega (drop)</label><input id="c-costo" inputmode="numeric"></div>
+        <div><label for="c-venta">Tu precio de venta</label><input id="c-venta" inputmode="numeric"></div>
+      </div>
+      <div class="row2">
+        <div><label for="c-flete">Flete + comisión aprox.</label><input id="c-flete" inputmode="numeric" value="15000"></div>
+        <div><label for="c-ventas">Ventas al mes</label><input id="c-ventas" inputmode="numeric" value="60"></div>
+      </div>
+      <div><label for="c-dev">Devoluciones estimadas (%)</label><input id="c-dev" inputmode="numeric" value="15"></div>
+    </form>
+    <div class="res" aria-live="polite">
+      <small>Ganancia estimada al mes</small>
+      <div class="big" id="r-mes">$0</div>
+      <dl>
+        <dt>Ganancia por venta</dt><dd id="r-venta">$0</dd>
+        <dt>Pedidos entregados</dt><dd id="r-ent">0</dd>
+        <dt>Coste de devoluciones</dt><dd id="r-dev">$0</dd>
+      </dl>
+      <small>Cálculo orientativo. Sin contar tu inversión en publicidad.</small>
+    </div>
+  </div>
+</div></section>
+
+<section id="productos"><div class="w">
+  <div class="center"><h2>Productos ganadores de este mes</h2><p>Los que más venden nuestros emprendedores. Cada uno con su kit de venta listo.</p></div>
+  <div class="prods" id="prods"></div>
+  <p id="kit-msg" class="note" role="status" hidden></p>
+  <div class="kit">
+    <b>📦 Cada producto trae su kit de venta:</b>
+    <ul><li>Fotos en fondo blanco</li><li>Video vertical para TikTok/Reels</li><li>3 textos de anuncio</li><li>Precio sugerido y margen</li><li>Preguntas frecuentes del cliente</li><li>Ficha técnica</li></ul>
+  </div>
+</div></section>
+
+<section class="soft"><div class="w">
+  <div class="center"><h2>Empieza hoy en 3 pasos</h2></div>
+  <div class="grid3 steps">
+    <div class="card"><h3>Regístrate</h3><p>Déjanos tus datos y un asesor te escribe por WhatsApp con la lista de precios.</p></div>
+    <div class="card"><h3>Descarga tu kit</h3><p>Elige productos ganadores y publica con nuestras fotos, videos y textos.</p></div>
+    <div class="card"><h3>Vende, nosotros enviamos</h3><p>Nos pasas el pedido y lo despachamos en 12–24 h a tu cliente.</p></div>
+  </div>
+</div></section>
+
+<section><div class="w" style="max-width:820px">
+  <div class="center"><h2>Preguntas frecuentes</h2></div>
+  <details><summary>¿Necesito dinero para empezar?</summary><p>No en dropshipping: solo vendes y te pagamos la diferencia. Para mayoreo, el pedido mínimo es de 3 unidades por referencia.</p></details>
+  <details><summary>¿Cómo me pagan mis ganancias en dropshipping?</summary><p>Le transferimos su ganancia cada semana, cuando la transportadora confirma el recaudo del contraentrega.</p></details>
+  <details><summary>¿Trabajan con Dropi?</summary><p>Sí: puede importar nuestros productos a su tienda y los pedidos nos llegan directo.</p></details>
+  <details><summary>¿A qué ciudades envían y cuánto cuesta?</summary><p>A toda Colombia: 12–24 h en ciudades principales y 2–4 días en el resto del país.</p></details>
+  <details><summary>¿Qué pasa si un producto llega defectuoso?</summary><p>Lo cambiamos sin costo en los primeros 30 días: envíe una foto y su número de pedido por WhatsApp.</p></details>
+</div></section>
+
+<section id="registro" class="soft"><div class="w reg">
+  <div>
+    <h2>Regístrate y recibe la lista de precios hoy</h2>
+    <p style="color:var(--mut)">Un asesor te escribe por WhatsApp con los precios para tu modalidad y los productos ganadores del mes.</p>
+    <div id="prev-box" class="hide">
+      <p style="font-weight:700;margin-bottom:8px">Así le llegaría este registro a la bodega por WhatsApp:</p>
+      <div class="preview" id="prev"></div>
+      <p class="note">En la versión final, el registro también se guarda en una hoja de cálculo/CRM y el asistente con IA responde al instante.</p>
+    </div>
+  </div>
+  <form id="reg" novalidate>
+    <div><label for="f-nom">Nombre</label><input id="f-nom" required autocomplete="name"></div>
+    <div class="row2">
+      <div><label for="f-wa">WhatsApp</label><input id="f-wa" type="tel" required autocomplete="tel" placeholder="300 000 0000"></div>
+      <div><label for="f-ciu">Ciudad</label><input id="f-ciu" required></div>
+    </div>
+    <div><label for="f-mod">¿Cómo quieres trabajar?</label>
+      <select id="f-mod"><option>Dropshipping</option><option>Mayoreo desde 3 unidades</option><option>Distribuidor</option></select></div>
+    <div><label for="f-exp">¿Ya vendes por internet?</label>
+      <select id="f-exp"><option>Estoy empezando</option><option>Sí, por Instagram/WhatsApp</option><option>Sí, con tienda online o Dropi</option><option>Tengo tienda física</option></select></div>
+    <div><label for="f-cat">Lo que más te interesa</label>
+      <select id="f-cat"><option>Tecnología</option><option>Hogar</option><option>Belleza</option><option>Gaming</option><option>De todo un poco</option></select></div>
+    <label class="chk"><input type="checkbox" id="f-ok" required><span>Acepto el tratamiento de mis datos (Ley 1581 de 2012) y que me contacten por WhatsApp.</span></label>
+    <button class="btn wa" type="submit">Quiero la lista de precios</button>
+    <p id="f-err" class="hide" style="color:#b3261e;font-weight:700;margin:0" role="alert">Completa tus datos y acepta el tratamiento de datos.</p>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="w">Bodega Nova · bodega mayorista de ejemplo en Bogotá · demo con datos ficticios.</div></footer>
+<a class="fab" href="#registro" aria-label="Ir al registro">💬</a>
+
+<script>
+(function () {
+  // Número de WhatsApp comercial. Vacío = modo maqueta (muestra el mensaje en vez de abrir WhatsApp).
+  var WHATSAPP = '';
+  // PRODUCTOS DE EJEMPLO: sustituir por el top real de la bodega (precio drop y precio sugerido).
+  var PRODUCTOS = [
+    { e: '⌚', n: 'Reloj inteligente AMOLED', c: 'Tecnología', drop: 48000, sug: 119900, top: true },
+    { e: '🎧', n: 'Audífonos inalámbricos con estuche de carga', c: 'Tecnología', drop: 29000, sug: 74900, top: true },
+    { e: '🔊', n: 'Parlante portátil con luces RGB', c: 'Tecnología', drop: 39000, sug: 94900 },
+    { e: '💇‍♀️', n: 'Cepillo alisador eléctrico', c: 'Belleza', drop: 42000, sug: 109900, top: true },
+    { e: '💡', n: 'Lámpara LED con sensor de movimiento (x3)', c: 'Hogar', drop: 18000, sug: 49900 },
+    { e: '🎮', n: 'Control gamer inalámbrico para celular', c: 'Gaming', drop: 35000, sug: 89900 },
+    { e: '📽️', n: 'Mini proyector portátil HD', c: 'Tecnología', drop: 115000, sug: 249900 },
+    { e: '🐶', n: 'Cepillo autolimpiable para mascotas', c: 'Mascotas', drop: 14000, sug: 39900 },
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var cop = function (n) { return '$' + Math.round(n).toLocaleString('es-CO'); };
+  var num = function (id) { return +String($(id).value).replace(/\D/g, '') || 0; };
+
+  // Productos ganadores
+  PRODUCTOS.forEach(function (p, i) {
+    var d = document.createElement('article'); d.className = 'prod';
+    d.innerHTML = '<div class="img" aria-hidden="true"></div><div class="b">' + (p.top ? '<span class="pill">🔥 Más vendido</span>' : '') +
+      '<h3></h3><div class="p"><span>Precio drop</span><b class="pd"></b></div><div class="p"><span>Precio sugerido</span><b class="ps"></b></div>' +
+      '<div class="gan"></div><div class="acts"><a class="btn sm" href="#calculadora">Calcular</a><button class="btn sm wa" type="button">Kit de venta</button></div></div>';
+    d.querySelector('.img').textContent = p.e;
+    d.querySelector('h3').textContent = p.n;
+    d.querySelector('.pd').textContent = cop(p.drop);
+    d.querySelector('.ps').textContent = cop(p.sug);
+    d.querySelector('.gan').textContent = 'Ganas hasta ' + cop(p.sug - p.drop) + ' por venta';
+    d.querySelector('a').addEventListener('click', function () { $('c-prod').value = i; cargar(); });
+    d.querySelector('button').addEventListener('click', function () {
+      var m = $('kit-msg'); m.textContent = 'En la versión final, este botón descarga el kit de venta de «' + p.n + '»: fotos, video vertical, textos de anuncio y precio sugerido.'; m.hidden = false; m.scrollIntoView({ block: 'nearest' });
+    });
+    $('prods').appendChild(d);
+    var o = document.createElement('option'); o.value = i; o.textContent = p.n; $('c-prod').appendChild(o);
+  });
+
+  // Calculadora
+  function cargar() {
+    var p = PRODUCTOS[+$('c-prod').value];
+    $('c-costo').value = p.drop.toLocaleString('es-CO'); $('c-venta').value = p.sug.toLocaleString('es-CO');
+    calcular();
+  }
+  function calcular() {
+    var costo = num('c-costo'), venta = num('c-venta'), flete = num('c-flete'), ventas = num('c-ventas');
+    var dev = Math.min(num('c-dev'), 100) / 100;
+    var porVenta = venta - costo - flete;
+    var entregados = Math.round(ventas * (1 - dev));
+    var costeDev = Math.round(ventas * dev) * flete;   // en una devolución se pierde el flete
+    $('r-venta').textContent = cop(porVenta);
+    $('r-ent').textContent = entregados;
+    $('r-dev').textContent = '−' + cop(costeDev);
+    $('r-mes').textContent = cop(Math.max(entregados * porVenta - costeDev, 0));
+  }
+  ['c-costo', 'c-venta', 'c-flete', 'c-ventas', 'c-dev'].forEach(function (id) { $(id).addEventListener('input', calcular); });
+  $('c-prod').addEventListener('change', cargar);
+  cargar();
+
+  // Registro → WhatsApp del asesor
+  $('reg').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ok = ['f-nom', 'f-wa', 'f-ciu'].every(function (id) { return $(id).value.trim(); }) && $('f-ok').checked;
+    $('f-err').classList.toggle('hide', ok);
+    if (!ok) return;
+    var msg = 'Hola Bodega Nova, me registré en la web para vender sus productos.\n' +
+      '• Nombre: ' + $('f-nom').value.trim() + '\n• Ciudad: ' + $('f-ciu').value.trim() + '\n• WhatsApp: ' + $('f-wa').value.trim() +
+      '\n• Modalidad: ' + $('f-mod').value + '\n• Experiencia: ' + $('f-exp').value + '\n• Me interesa: ' + $('f-cat').value +
+      '\n¿Me envían la lista de precios?';
+    if (WHATSAPP) { window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank'); return; }
+    $('prev').textContent = msg; $('prev-box').classList.remove('hide');
+    $('prev-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+})();
+</script>

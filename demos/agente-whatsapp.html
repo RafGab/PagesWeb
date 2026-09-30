@@ -1,0 +1,347 @@
+<title>Agente Bodega Nova</title>
+<style>
+  /* Layout: teléfono con el chat a la izquierda, panel "lo que pasa por detrás" a la derecha; en móvil, uno debajo del otro. */
+  :root{
+    --bg:#eef1ee; --surface:#ffffff; --ink:#15201b; --mut:#5c6b64; --line:#d9e0dc;
+    --brand:#0f6b4f; --brand-ink:#ffffff; --chat:#e7e2d8; --in:#ffffff; --out:#d6f5c9; --chip:#f4f7f5;
+    --accent:#e0701b; --good:#1c8a4d; --warn:#b3261e; --note:#fff5d6; --note-ink:#5a4600;
+    --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+    --bg:#0f1512; --surface:#18201c; --ink:#e6ede9; --mut:#9aaba3; --line:#2b3631;
+    --brand:#1f8f6a; --brand-ink:#ffffff; --chat:#111a16; --in:#1f2a25; --out:#1d4b37; --chip:#1f2a25;
+    --accent:#f0914a; --good:#4cc98a; --warn:#ff8a80; --note:#3a3212; --note-ink:#f3e3a6; color-scheme:dark}}
+  :root[data-theme="dark"]{
+    --bg:#0f1512; --surface:#18201c; --ink:#e6ede9; --mut:#9aaba3; --line:#2b3631;
+    --brand:#1f8f6a; --brand-ink:#ffffff; --chat:#111a16; --in:#1f2a25; --out:#1d4b37; --chip:#1f2a25;
+    --accent:#f0914a; --good:#4cc98a; --warn:#ff8a80; --note:#3a3212; --note-ink:#f3e3a6; color-scheme:dark}
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);padding:24px 16px 40px}
+  .wrap{max-width:1080px;margin:0 auto;display:grid;gap:20px}
+  header.top h1{font-size:1.6rem;line-height:1.2;margin:0 0 4px;text-wrap:balance}
+  header.top p{margin:0;color:var(--mut);max-width:70ch}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:20px;align-items:start}
+  @media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+  /* Teléfono */
+  .phone{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;height:640px;max-height:80vh;min-height:480px}
+  .bar{background:var(--brand);color:var(--brand-ink);padding:12px 16px;display:flex;align-items:center;gap:12px}
+  .av{width:38px;height:38px;border-radius:50%;background:#ffffff33;display:grid;place-items:center;font-weight:700}
+  .bar b{display:block}.bar small{opacity:.85}
+  .chat{flex:1;overflow-y:auto;background:var(--chat);padding:14px 12px;display:flex;flex-direction:column;gap:8px}
+  .msg{max-width:84%;padding:8px 10px 18px;border-radius:10px;position:relative;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 1px 0 #0000000f}
+  .msg.in{align-self:flex-start;background:var(--in)}
+  .msg.out{align-self:flex-end;background:var(--out)}
+  .msg time{position:absolute;right:8px;bottom:3px;font-size:.68rem;color:var(--mut);font-family:var(--f-mono)}
+  .msg.sys{align-self:center;background:var(--note);color:var(--note-ink);font-size:.8rem;padding:6px 10px;box-shadow:none;max-width:92%;text-align:center}
+  .typing{align-self:flex-end;font-size:.8rem;color:var(--mut);padding:4px 8px}
+  .chips{display:flex;gap:6px;overflow-x:auto;padding:8px 10px;background:var(--surface);border-top:1px solid var(--line)}
+  .chips button{flex:0 0 auto;border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:99px;padding:6px 12px;font:500 .82rem var(--f-body);cursor:pointer}
+  .chips button:hover{border-color:var(--brand)}
+  form.send{display:flex;gap:8px;padding:10px;background:var(--surface);border-top:1px solid var(--line)}
+  form.send input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:10px 14px;font:inherit}
+  form.send button{border:0;background:var(--brand);color:var(--brand-ink);border-radius:99px;padding:0 16px;font:600 .9rem var(--f-body);cursor:pointer}
+  button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .hint{font-size:.78rem;color:var(--mut);padding:0 12px 10px;background:var(--surface)}
+
+  /* Panel */
+  .panel{display:grid;gap:16px;min-width:0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+  .card h2{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+  .meters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .meter b{display:block;font:600 1.6rem/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+  .meter span{font-size:.8rem;color:var(--mut)}
+  .meter.cost b{color:var(--good)}
+  .cmp{margin-top:12px;font-size:.85rem;color:var(--mut)}
+  .cmp b{color:var(--ink)}
+  .lead dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0}
+  .lead dt{color:var(--mut);font-size:.85rem}.lead dd{margin:0;font-weight:600}
+  .empty{color:var(--mut);font-size:.9rem;margin:0}
+  .handoff{border-left:4px solid var(--accent)}
+  .handoff p{margin:0}
+  .log{font:12px/1.5 var(--f-mono);color:var(--mut);max-height:160px;overflow-y:auto;margin:0;padding:0;list-style:none}
+  .log li{padding:2px 0;border-bottom:1px dashed var(--line)}
+  .rules{margin:0;padding-left:18px;color:var(--mut);font-size:.88rem}
+  .rules li{margin:3px 0}
+  .mode{font-size:.78rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--chip);border:1px solid var(--line)}
+  .reset{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;font:500 .82rem var(--f-body);cursor:pointer;justify-self:start}
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<div class="wrap">
+  <header class="top">
+    <span class="tag">Demo · agente virtual de WhatsApp</span>
+    <h1>Así atiende el agente a un revendedor, a cualquier hora</h1>
+    <p>Bodega Nova es una bodega mayorista de ejemplo (datos ficticios). Pruebe los atajos o escriba como si fuera un emprendedor que quiere vender sus productos. A la derecha ve lo que el agente registra y cuánto cuesta cada mensaje con las tarifas de WhatsApp desde el 1 de octubre de 2026.</p>
+  </header>
+
+  <div class="grid">
+    <section class="phone" aria-label="Chat de WhatsApp de ejemplo">
+      <div class="bar"><div class="av" aria-hidden="true">BN</div><div><b>Bodega Nova</b><small>Asistente comercial · responde 24/7</small></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="chips" id="chips" aria-label="Preguntas típicas"></div>
+      <form class="send" id="send">
+        <label for="txt" class="sr" style="position:absolute;left:-9999px">Escriba un mensaje</label>
+        <input id="txt" autocomplete="off" placeholder="Escriba como revendedor…" maxlength="400">
+        <button type="submit">Enviar</button>
+      </form>
+      <div class="hint" id="hint">Los atajos usan respuestas preparadas. Lo que escriba lo responde la IA en vivo si su cuenta lo permite.</div>
+    </section>
+
+    <div class="panel">
+      <div class="card">
+        <h2>Coste en WhatsApp de esta conversación</h2>
+        <div class="meters">
+          <div class="meter"><b id="m-msgs">0</b><span>mensajes enviados por el agente</span></div>
+          <div class="meter cost"><b id="m-cop">$0</b><span>coste en Colombia (≈ $3 por respuesta desde la 1.001 del mes)</span></div>
+          <div class="meter"><b id="m-bot">0</b><span>mensajes que habría enviado un bot que parte cada respuesta en 3</span></div>
+        </div>
+        <p class="cmp">Cada respuesta del agente va en <b>un solo mensaje</b>. Desde el 1/10/2026 Meta cobra por mensaje entregado: menos mensajes, misma venta.</p>
+      </div>
+
+      <div class="card lead">
+        <h2>Lead registrado</h2>
+        <div id="lead"><p class="empty">Aún sin datos. El agente los pide todos juntos en una sola pregunta.</p></div>
+      </div>
+
+      <div class="card handoff" id="handoff-card" hidden>
+        <h2>Pasado a un asesor humano</h2>
+        <p id="handoff"></p>
+      </div>
+
+      <div class="card">
+        <h2>Registro de acciones <span class="mode" id="mode">respuestas de demo</span></h2>
+        <ul class="log" id="log"></ul>
+      </div>
+
+      <div class="card">
+        <h2>Reglas del agente</h2>
+        <ul class="rules">
+          <li>Una respuesta completa por mensaje, máximo 5 líneas.</li>
+          <li>Solo usa precios, stock y pedidos de la base de datos: nunca inventa.</li>
+          <li>Pide modalidad, ciudad e interés en una sola pregunta.</li>
+          <li>Pasa a un asesor pedidos grandes, distribuidores, quejas y garantías.</li>
+          <li>Nunca pide datos de tarjetas ni contraseñas.</li>
+        </ul>
+      </div>
+      <button class="reset" id="reset" type="button">Reiniciar conversación</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---------- Datos de ejemplo (ficticios) ----------
+  var CATALOGO = [
+    { id: 'reloj', n: 'Reloj inteligente AMOLED', drop: 48000, m3: 42000, m12: 38500, sug: 119900, stock: 340, k: ['reloj', 'smartwatch', 'watch'] },
+    { id: 'audifonos', n: 'Audífonos inalámbricos con estuche', drop: 29000, m3: 25500, m12: 23000, sug: 74900, stock: 0, llega: 'el viernes', k: ['audifono', 'audífono', 'airpod', 'auricular'] },
+    { id: 'parlante', n: 'Parlante portátil RGB', drop: 39000, m3: 34000, m12: 31000, sug: 94900, stock: 120, k: ['parlante', 'bafle', 'speaker'] },
+    { id: 'alisador', n: 'Cepillo alisador eléctrico', drop: 42000, m3: 37000, m12: 34000, sug: 109900, stock: 85, k: ['alisador', 'cepillo', 'plancha'] },
+    { id: 'lampara', n: 'Lámpara LED con sensor (x3)', drop: 18000, m3: 15500, m12: 14000, sug: 49900, stock: 600, k: ['lampara', 'lámpara', 'led', 'luz'] },
+  ];
+  var PEDIDOS = { '10482': { estado: 'Despachado hoy', guia: 'Interrapidísimo 700123456789', llega: 'mañana antes de las 6 p. m.' } };
+  var CIUDADES = ['bogotá', 'bogota', 'medellín', 'medellin', 'cali', 'barranquilla', 'bucaramanga', 'cartagena', 'pereira', 'manizales', 'cúcuta', 'cucuta', 'ibagué', 'ibague', 'villavicencio', 'pasto', 'neiva', 'santa marta', 'armenia', 'tunja'];
+  var ATAJOS = [
+    'Hola, quiero vender sus productos, ¿cómo funciona?',
+    '¿Cuánto vale el reloj inteligente si compro 12?',
+    '¿Tienen audífonos en stock?',
+    'Soy Laura, de Medellín, quiero hacer dropshipping de belleza',
+    '¿Dónde está mi pedido 10482?',
+    'Quiero ser distribuidor, compro 300 unidades al mes',
+    'Me llegó un parlante dañado',
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var cop = function (n) { return '$' + Math.round(n).toLocaleString('es-CO'); };
+  var hora = function () { var d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+  var sinTilde = function (s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); };
+
+  var estado, turnos, sample = null;
+
+  function reiniciar() {
+    estado = { enviados: 0, lead: {}, handoff: null };
+    turnos = [];
+    $('chat').innerHTML = ''; $('log').innerHTML = '';
+    $('handoff-card').hidden = true;
+    pintarLead(); pintarContadores();
+    sistema('Hoy, 23:12 · fuera del horario del equipo');
+  }
+
+  // ---------- Pintar ----------
+  function burbuja(texto, lado) {
+    var d = document.createElement('div'); d.className = 'msg ' + lado;
+    d.textContent = texto;
+    var t = document.createElement('time'); t.textContent = hora(); d.appendChild(t);
+    $('chat').appendChild(d); $('chat').scrollTop = $('chat').scrollHeight;
+  }
+  function sistema(texto) {
+    var d = document.createElement('div'); d.className = 'msg sys'; d.textContent = texto;
+    $('chat').appendChild(d); $('chat').scrollTop = $('chat').scrollHeight;
+  }
+  function log(texto) {
+    var li = document.createElement('li'); li.textContent = hora() + '  ' + texto; $('log').prepend(li);
+  }
+  function pintarContadores() {
+    $('m-msgs').textContent = estado.enviados;
+    $('m-cop').textContent = cop(estado.enviados * 3.2);
+    $('m-bot').textContent = estado.enviados * 3;
+  }
+  function pintarLead() {
+    var L = estado.lead, campos = [['Nombre', L.nombre], ['Ciudad', L.ciudad], ['Modalidad', L.modalidad], ['Interés', L.interes]].filter(function (x) { return x[1]; });
+    var box = $('lead'); box.innerHTML = '';
+    if (!campos.length) { var p = document.createElement('p'); p.className = 'empty'; p.textContent = 'Aún sin datos. El agente los pide todos juntos en una sola pregunta.'; box.appendChild(p); return; }
+    var dl = document.createElement('dl');
+    campos.forEach(function (c) { var dt = document.createElement('dt'); dt.textContent = c[0]; var dd = document.createElement('dd'); dd.textContent = c[1]; dl.append(dt, dd); });
+    box.appendChild(dl);
+  }
+  function responder(texto, extra) {
+    burbuja(texto, 'out');
+    estado.enviados += 1; pintarContadores();
+    turnos.push({ role: 'assistant', content: texto });
+    if (extra && extra.lead) {
+      var cambio = false;
+      ['nombre', 'ciudad', 'modalidad', 'interes'].forEach(function (k) { if (extra.lead[k] && extra.lead[k] !== estado.lead[k]) { estado.lead[k] = String(extra.lead[k]); cambio = true; } });
+      if (cambio) { pintarLead(); log('Lead actualizado en la hoja de registros'); }
+    }
+    if (extra && extra.handoff) {
+      estado.handoff = extra.handoff;
+      $('handoff').textContent = extra.handoff; $('handoff-card').hidden = false;
+      log('Conversación asignada a un asesor con resumen');
+    }
+  }
+
+  // ---------- Respuestas preparadas (sin IA) ----------
+  function producto(t) {
+    return CATALOGO.find(function (p) { return p.k.some(function (k) { return t.indexOf(sinTilde(k)) >= 0; }); });
+  }
+  function extraerLead(original, t) {
+    var lead = {};
+    var mn = original.match(/(?:soy|me llamo|mi nombre es)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)/i);
+    if (mn) lead.nombre = mn[1].charAt(0).toUpperCase() + mn[1].slice(1);
+    var c = CIUDADES.find(function (x) { return t.indexOf(sinTilde(x)) >= 0; });
+    if (c) lead.ciudad = c.split(' ').map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ').replace('Bogota', 'Bogotá').replace('Medellin', 'Medellín');
+    if (/drop/.test(t)) lead.modalidad = 'Dropshipping';
+    else if (/mayor|por mayor|al por mayor/.test(t)) lead.modalidad = 'Mayoreo';
+    else if (/distribuid/.test(t)) lead.modalidad = 'Distribuidor';
+    var cat = ['tecnologia', 'belleza', 'hogar', 'gaming', 'mascotas'].find(function (x) { return t.indexOf(x) >= 0; });
+    if (cat) lead.interes = cat.charAt(0).toUpperCase() + cat.slice(1).replace('Tecnologia', 'Tecnología');
+    return lead;
+  }
+  function preparada(original) {
+    var t = sinTilde(original);
+    var lead = extraerLead(original, t);
+    var num = (t.match(/(?:pedido|guia|orden)\D{0,12}(\d{3,})/) || [])[1];
+    var mq = t.match(/(?:por|compro|comprar|x|de|son|llevo)\s+(\d{1,5})\b|\b(\d{1,5})\s*(?:unidades|unds?|uds|u\b)/);
+    var cant = mq ? +(mq[1] || mq[2]) : 0;
+    var p = producto(t);
+
+    if (/danad|roto|garantia|devol|queja|no sirve|malo/.test(t)) {
+      return { texto: 'Lamento mucho lo del producto. Ya le paso con un asesor de garantías que le escribe en este mismo chat en horario de atención (desde las 8:00). Para agilizar, envíe por aquí una foto del producto y su número de pedido.', lead: lead,
+        handoff: 'Garantía: cliente reporta producto dañado (' + (p ? p.n : 'producto sin identificar') + '). Pidió foto y número de pedido. Prioridad alta, primera hora.' };
+    }
+    if (/distribuid/.test(t) || cant >= 100) {
+      return { texto: 'Excelente, para ese volumen tenemos condiciones de distribuidor con precios especiales y asesor dedicado. Le asigno ahora un asesor comercial que le escribe mañana a primera hora con la lista de distribuidor.\n¿En qué ciudad está y qué categorías le interesan?', lead: Object.assign({ modalidad: 'Distribuidor' }, lead),
+        handoff: 'Posible distribuidor: ' + (cant ? cant + ' unidades al mes. ' : '') + 'Pide lista de precios de distribuidor. Contactar mañana a primera hora.' };
+    }
+    if (/pedido|guia|envio|llega/.test(t) && num) {
+      var ped = PEDIDOS[num];
+      if (ped) return { texto: 'Su pedido ' + num + ': ' + ped.estado + '.\n• Guía: ' + ped.guia + '\n• Llega: ' + ped.llega + '\nPuede seguirlo en la web de la transportadora con ese número.', lead: lead };
+      return { texto: 'No encuentro el pedido ' + num + '. ¿Me confirma el número? Está en el mensaje de confirmación que le enviamos al comprar.', lead: lead };
+    }
+    if (p && /stock|hay|tienen|disponib|queda/.test(t)) {
+      if (p.stock > 0) return { texto: 'Sí, ' + p.n + ': ' + p.stock + ' unidades disponibles para despacho hoy.\n• Precio drop: ' + cop(p.drop) + '\n• Desde 3 u.: ' + cop(p.m3) + ' c/u\n¿Lo quiere para dropshipping o por mayor?', lead: lead };
+      return { texto: p.n + ': agotado por ahora, llega ' + p.llega + '. Le puedo avisar por aquí cuando entre.\nMientras tanto, el parlante RGB (' + cop(39000) + ' drop) es de lo más vendido en tecnología.', lead: lead };
+    }
+    if (p || /precio|cuanto|vale|cuesta|valor/.test(t)) {
+      var q = p || CATALOGO[0];
+      var unit = cant >= 12 ? q.m12 : cant >= 3 ? q.m3 : q.drop;
+      var tramo = cant >= 12 ? 'desde 12 u.' : cant >= 3 ? 'desde 3 u.' : 'dropshipping (1 u.)';
+      return { texto: q.n + ' · precio ' + tramo + ': ' + cop(unit) + ' c/u' + (cant >= 3 ? ' → ' + cant + ' u. = ' + cop(unit * cant) : '') + '.\n• Drop: ' + cop(q.drop) + ' · 3+ u.: ' + cop(q.m3) + ' · 12+ u.: ' + cop(q.m12) + '\n• Precio sugerido de venta: ' + cop(q.sug) + '\n' + (q.stock > 0 ? 'Hay ' + q.stock + ' u. para despacho hoy.' : 'Agotado, llega ' + q.llega + '.'), lead: lead };
+    }
+    if (Object.keys(lead).length && (lead.ciudad || lead.modalidad)) {
+      var falta = ['ciudad', 'modalidad', 'interes'].filter(function (k) { return !lead[k] && !estado.lead[k]; });
+      return { texto: 'Perfecto' + (lead.nombre ? ', ' + lead.nombre : '') + '. Le envío la lista de precios de ' + (lead.modalidad || estado.lead.modalidad || 'dropshipping') + ' y los 5 productos más vendidos' + (lead.interes ? ' de ' + lead.interes.toLowerCase() : '') + ', con fotos y textos listos para publicar: [enlace a la lista]' + (falta.length ? '\n¿Me confirma ' + falta.map(function (k) { return { ciudad: 'su ciudad', modalidad: 'si trabajará dropshipping o por mayor', interes: 'qué categoría le interesa' }[k]; }).join(' y ') + '?' : ''), lead: lead };
+    }
+    if (/drop|vender|como funciona|empezar|revend|hola|buenas/.test(t)) {
+      return { texto: '¡Hola! Así funciona:\n• Dropshipping: usted vende y nosotros despachamos a su cliente en 12–24 h, sin inventario.\n• Por mayor: desde 3 unidades por referencia, a más unidades menor precio.\nPara enviarle la lista correcta, dígame en un solo mensaje: nombre, ciudad, modalidad y categoría (tecnología, hogar o belleza).', lead: lead };
+    }
+    return { texto: 'Le ayudo con precios, stock, cómo trabajar dropshipping o el estado de un pedido. ¿Qué producto o pedido le interesa? Si prefiere, le paso con un asesor.', lead: lead };
+  }
+
+  // ---------- IA en vivo (capacidad "sample") ----------
+  var REGLAS = [
+    'Eres el asistente comercial por WhatsApp de Bodega Nova, bodega mayorista de ejemplo en Bogotá (tecnología, hogar y belleza).',
+    'Atiendes a emprendedores que quieren vender los productos: dropshipping (despacho en 12-24 h a toda Colombia, sin inventario), mayoreo desde 3 unidades, o distribuidor.',
+    'REGLAS: responde en UN solo mensaje, máximo 5 líneas, trata de usted, sin saludos ni despedidas sueltas, 1 emoji como mucho.',
+    'Usa SOLO estos datos; nunca inventes precios, stock ni plazos. Si algo no está, dilo y ofrece un asesor.',
+    'Si faltan datos del cliente, pídelos juntos en una sola pregunta: nombre, ciudad, modalidad e interés.',
+    'Pasa a un asesor humano (pasar_a_asesor=true, con resumen de 2 líneas) si: pedido de 100 o más unidades o quiere ser distribuidor; queja, garantía, devolución o pago; lo pide o está molesto.',
+    'Nunca pidas datos de tarjetas ni contraseñas. Precios en pesos colombianos con punto de miles.',
+    'CATÁLOGO (precio drop, 3+ u., 12+ u., sugerido, stock): ' + JSON.stringify(CATALOGO.map(function (p) { return { producto: p.n, drop: p.drop, desde3: p.m3, desde12: p.m12, sugerido: p.sug, stock: p.stock, llega: p.llega || null }; })),
+    'PEDIDOS: ' + JSON.stringify(PEDIDOS),
+    'Responde SOLO con JSON: {"mensaje": string, "lead": {"nombre": string|null, "ciudad": string|null, "modalidad": "Dropshipping"|"Mayoreo"|"Distribuidor"|null, "interes": string|null}, "pasar_a_asesor": boolean, "resumen_asesor": string|null}',
+  ].join('\n');
+
+  async function conIA() {
+    var historial = turnos.slice(-10);
+    if (historial.length && historial[0].role === 'assistant') historial = historial.slice(1);
+    var r = await sample.json([{ role: 'user', content: REGLAS }].concat(historial), { modelTier: 'quick', cache: false });
+    if (!r || typeof r.mensaje !== 'string' || !r.mensaje.trim()) throw { code: 'invalid_json' };
+    return { texto: r.mensaje.trim(), lead: r.lead || {}, handoff: r.pasar_a_asesor ? (r.resumen_asesor || 'El cliente necesita un asesor.') : null };
+  }
+
+  var ocupado = false;
+  async function recibir(texto, desdeAtajo) {
+    if (ocupado || !texto.trim()) return;
+    ocupado = true;
+    burbuja(texto, 'in');
+    turnos.push({ role: 'user', content: texto });
+    var esc = document.createElement('div'); esc.className = 'typing'; esc.textContent = 'escribiendo…'; $('chat').appendChild(esc);
+    var res;
+    try {
+      if (!desdeAtajo && sample) {
+        res = await conIA();
+        $('mode').textContent = 'IA en vivo';
+        log('Respondido con IA en vivo');
+      } else {
+        await new Promise(function (ok) { setTimeout(ok, 700); });
+        res = preparada(texto);
+        log('Respondido con respuesta preparada');
+      }
+    } catch (e) {
+      if (e && (e.code === 'not_granted' || e.code === 'sampling_disabled' || e.code === 'capability_disabled' || e.code === 'not_declared')) {
+        sample = null; $('hint').textContent = 'La IA en vivo no está disponible en esta vista: se usan respuestas preparadas.';
+      }
+      res = preparada(texto);
+      log('IA no disponible: respuesta preparada');
+    }
+    esc.remove();
+    responder(res.texto, res);
+    ocupado = false;
+  }
+
+  // ---------- Arranque ----------
+  ATAJOS.forEach(function (a) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = a;
+    b.addEventListener('click', function () { recibir(a, true); });
+    $('chips').appendChild(b);
+  });
+  $('send').addEventListener('submit', function (e) {
+    e.preventDefault(); var v = $('txt').value; $('txt').value = ''; recibir(v, false);
+  });
+  $('reset').addEventListener('click', reiniciar);
+  reiniciar();
+
+  if (window.claude && window.claude.use) {
+    window.claude.use('sample').then(function (s) {
+      sample = s;
+      if (!s) $('hint').textContent = 'Los atajos y lo que escriba se responden con respuestas preparadas (IA en vivo no disponible en esta vista).';
+    }).catch(function () { sample = null; });
+  } else {
+    $('hint').textContent = 'Los atajos y lo que escriba se responden con respuestas preparadas.';
+  }
+})();
+</script>
