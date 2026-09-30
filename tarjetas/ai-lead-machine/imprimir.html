@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tarjeta de presentación · AI Lead Machine</title>
+<!--
+  Tarjeta 90 × 50 mm con 3 mm de sangrado por lado (hoja de 96 × 56 mm), 2 páginas: frente y dorso.
+  Los textos importantes quedan a 6 mm o más del borde de corte. render.mjs la guarda como PDF.
+-->
+<style>
+  @font-face{font-family:"Montserrat";font-weight:800;src:url(fonts/montserrat-latin-800-normal.woff2) format("woff2")}
+  @font-face{font-family:"Montserrat";font-weight:900;src:url(fonts/montserrat-latin-900-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:500;src:url(fonts/dm-sans-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"DM Sans";font-weight:700;src:url(fonts/dm-sans-latin-700-normal.woff2) format("woff2")}
+  @page{size:96mm 56mm;margin:0}
+  :root{--navy:#0B1026;--pink:#FF2E63;--yellow:#FFD60A;--cyan:#19C3FF;--lime:#B8FF3C;--violet:#7B2CFF;--h:"Montserrat","DejaVu Sans",sans-serif;--b:"DM Sans","DejaVu Sans",sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#888}
+  .page{position:relative;width:96mm;height:56mm;overflow:hidden;break-after:page;margin:0 auto 6mm}
+  @media print{html,body{background:none}.page{margin:0}}
+  .front{background:var(--navy);color:#fff}
+  .back{background:var(--yellow);color:var(--navy)}
+  .ring{position:absolute;border-radius:50%}
+
+  /* FRENTE: zona segura = 6 mm desde el borde de la hoja (3 mm sangrado + 3 mm de margen) */
+  .front .brand{position:absolute;left:8mm;top:7.5mm;font:800 6.4pt var(--h);letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
+  .front h1{position:absolute;left:8mm;top:13mm;width:62mm;font:900 15.5pt/1.06 var(--h);letter-spacing:-.01em}
+  .front h1 mark{background:var(--pink);color:#fff;padding:0 1.4mm;border-radius:1.4mm;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .front .sub{position:absolute;left:8mm;top:32mm;width:62mm;font:500 7pt/1.3 var(--b);color:#D9DEF0}
+  .front .chips{position:absolute;left:8mm;bottom:7.5mm;display:flex;gap:1.6mm}
+  .chip{display:flex;align-items:center;gap:1.2mm;border-radius:99px;padding:.9mm 2.2mm .9mm .9mm;font:700 6pt var(--b);color:var(--navy)}
+  .chip i{width:4.2mm;height:4.2mm;border-radius:50%;background:var(--navy);display:grid;place-items:center}
+  .chip i svg{width:2.6mm;height:2.6mm;stroke:#fff}
+
+  /* DORSO */
+  .back .t1{position:absolute;left:8mm;top:8mm;font:800 6.2pt var(--h);letter-spacing:.08em;text-transform:uppercase}
+  .back .t2{position:absolute;left:8mm;top:12.5mm;width:48mm;font:900 13pt/1.04 var(--h)}
+  .back .t2 span{color:var(--violet)}
+  .back .list{position:absolute;left:8mm;top:26mm;width:50mm;font:700 7pt/1.5 var(--b)}
+  .back .list div::before{content:"✓";display:inline-block;width:3.6mm;height:3.6mm;border-radius:50%;background:var(--navy);color:var(--yellow);font:900 5.4pt/3.6mm var(--b);text-align:center;margin-right:1.6mm;vertical-align:.1mm}
+  .back .who{position:absolute;left:8mm;bottom:7.5mm;width:50mm;font:700 7.4pt/1.35 var(--b)}
+  .back .who b{font:900 9pt var(--h);display:block}
+  .back .qr{position:absolute;right:8mm;top:8mm;width:27mm;height:27mm;background:#fff;border-radius:2.4mm;padding:1.8mm}
+  .back .qr svg{width:100%;height:100%;display:block}
+  .back .qrcap{position:absolute;right:8mm;top:36mm;width:27mm;text-align:center;font:700 5.6pt/1.2 var(--b)}
+  .back .web{position:absolute;right:8mm;bottom:7.5mm;width:27mm;text-align:center;font:700 5.4pt var(--b);color:var(--navy);opacity:.75}
+</style>
+</head>
+<body>
+<section class="page front">
+  <div class="ring" style="right:-18mm;top:-18mm;width:52mm;height:52mm;border:5.5mm solid #19C3FF26"></div>
+  <div class="ring" style="right:6mm;bottom:-24mm;width:40mm;height:40mm;border:5mm solid #FF2E6326"></div>
+  <div class="brand" data-f="marca"></div>
+  <h1>Tu web + un agente IA que <mark>nunca deja de responder</mark></h1>
+  <p class="sub">Atiende por WhatsApp, agenda citas en tu calendario y hace seguimiento. 24/7.</p>
+  <div class="chips">
+    <div class="chip" style="background:var(--cyan)"><i data-icon="web"></i>Web</div>
+    <div class="chip" style="background:var(--lime)"><i data-icon="bot"></i>Agente IA</div>
+    <div class="chip" style="background:var(--yellow)"><i data-icon="cal"></i>Agenda</div>
+  </div>
+</section>
+
+<section class="page back">
+  <div class="ring" style="left:-16mm;bottom:-22mm;width:46mm;height:46mm;border:5mm solid #0B102612"></div>
+  <div class="t1">Demo gratis en 15 min</div>
+  <div class="t2">Escríbeme <span data-f="palabra"></span></div>
+  <div class="list"><div>Página web que vende</div><div>Agente IA en WhatsApp 24/7</div><div>Agenda en tu calendario</div></div>
+  <div class="who"><b data-f="nombre"></b><span data-f="whatsapp"></span></div>
+  <div class="qr" data-qr></div>
+  <div class="qrcap">Escanea y mira la demo</div>
+</section>
+<script src="comun.js"></script>
+</body>
+</html>
