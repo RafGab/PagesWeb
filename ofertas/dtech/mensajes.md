@@ -3,6 +3,12 @@
 Trato de **usted** (lo normal en B2B en Colombia). Escribe al WhatsApp comercial y, en paralelo, un DM en Instagram.
 Antes de enviar, sube `muestra-captacion.html` a un enlace privado (Netlify Drop, sin indexar) para compartirla.
 
+## 0. Mensaje de oportunidad: cobro de WhatsApp (válido estas semanas)
+> Buenas tardes, equipo DTech 👋 Con lo de que "WhatsApp empieza a cobrar" desde el 1 de octubre hay mucha confusión, así que les resumo lo que aplica a ustedes:
+> • Si atienden con la app de WhatsApp Business del celular, **no les cobran nada**.
+> • Si usan un bot o un CRM, en Colombia cada respuesta cuesta unos **$3 pesos** a partir de la 1.001 del mes. Lo caro son las **difusiones de marketing (≈ $50 pesos cada mensaje)**.
+> Les preparé un análisis de cuánto les costaría automatizar la atención a sus revendedores sin pagar de más (con un agente que responde 24/7). ¿Se lo muestro en 15 minutos?
+
 ## 1. Primer mensaje (WhatsApp)
 > Buenas tardes, ¿hablo con el área comercial de DTech? 👋
 > Vi que son proveedor de dropshipping con entrega en 12–24 h. Les armé una página para **captar más revendedores**: les explica cómo ganar con sus productos, calcula la ganancia y los registra directo a su WhatsApp.

@@ -61,7 +61,8 @@ Un sistema que **consigue más revendedores activos y los pone a vender más rá
 | E. Informe mensual | ✅ | ✅ | ✅ |
 
 Permanencia mínima: 3 meses. Pago de la implementación 50 % al iniciar y 50 % al entregar.
-(El coste de la API de WhatsApp —unos $150.000–$400.000/mes según volumen— lo paga DTech directamente a Meta/proveedor.)
+(Las tarifas de Meta por mensaje las paga DTech directamente. Con el cobro que empieza el 1/10/2026, el diseño propuesto
+sale por ≈ $325.000 COP/mes; ver `whatsapp-octubre-2026.md`.)
 
 ### Entrada fácil: piloto de 30 días por $990.000
 Página de captación + 10 kits de venta + medición. **Si siguen con cualquier plan, el piloto se descuenta de la implementación.**
@@ -94,6 +95,7 @@ el reporte de Dropi. Si entran por WhatsApp, el asistente es aún más valioso.
 
 ## 6. Cómo contactarlos
 Archivos listos en esta carpeta:
+- `whatsapp-octubre-2026.md` — **el cobro de WhatsApp desde el 1/10/2026: qué cambia, el problema para DTech y la solución con el agente virtual** (incluye costes y las instrucciones del agente).
 - `mensajes.md` — WhatsApp y DM iniciales, seguimientos, respuestas a objeciones y guion de la llamada.
 - `propuesta.html` — propuesta de 1 página para enviar o imprimir en PDF (Ctrl+P).
 - `muestra-captacion.html` — **maqueta** de la página "Vende DTech sin inventario" para enseñar en la llamada
