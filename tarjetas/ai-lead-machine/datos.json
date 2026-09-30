@@ -1,8 +1,9 @@
 {
   "marca": "AI Lead Machine",
   "nombre": "Viviana Acero",
-  "whatsapp": "672 953 197",
+  "whatsapp": "+34 672 953 197",
   "url": "ai-lead-machine-demo.onrender.com/implementar.html",
   "palabra": "AGENTE",
-  "qr": "demo"
+  "qr": "whatsapp",
+  "qrtexto": "Escanea y escríbeme por WhatsApp"
 }

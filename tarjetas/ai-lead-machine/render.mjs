@@ -14,9 +14,9 @@ const QRCode = req('qrcode');
 const cfg = JSON.parse(readFileSync(join(aqui, 'datos.json'), 'utf8'));
 const digitos = String(cfg.whatsapp).replace(/\D/g, '');
 const destinoQr = cfg.qr === 'whatsapp' && digitos.length >= 9
-  ? `https://wa.me/${digitos}?text=${encodeURIComponent('Hola, vi tu tarjeta y quiero la demo del agente IA')}`
+  ? `https://wa.me/${digitos}`   // sin texto prellenado: el QR queda más simple y se lee mejor impreso
   : 'https://' + String(cfg.url).replace(/^https?:\/\//, '');
-const qrSvg = await QRCode.toString(destinoQr, { type: 'svg', margin: 0, errorCorrectionLevel: 'M', color: { dark: '#0B1026', light: '#FFFFFF' } });
+const qrSvg = (await QRCode.toString(destinoQr, { type: 'svg', margin: 0, errorCorrectionLevel: 'M', color: { dark: '#000000', light: '#FFFFFF' } })).replace('<svg ', '<svg shape-rendering="crispEdges" ');
 console.log('El QR lleva a:', destinoQr);
 
 const b = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});

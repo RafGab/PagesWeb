@@ -7,7 +7,7 @@
 | `previsualizacion-imprimir.png` | Vista previa de las dos caras |
 
 ## Completar tus datos
-Edita `datos.json` (nombre, WhatsApp, y `"qr": "whatsapp"` si quieres que el QR abra tu chat en vez de la demo) y ejecuta:
+Edita `datos.json` (nombre, WhatsApp con prefijo del país y `"qr"`: `"whatsapp"` abre tu chat, `"demo"` abre la demo) y ejecuta:
 
     MODULES=<carpeta con node_modules de playwright y qrcode> node render.mjs
 

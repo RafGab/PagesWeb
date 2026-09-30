@@ -6,6 +6,7 @@ window.CFG = Object.assign({
   whatsapp: '[Tu WhatsApp]',
   url: 'ai-lead-machine-demo.onrender.com/implementar.html',
   palabra: 'AGENTE',
+  qrtexto: 'Escanea y mira la demo',
 }, window.__CFG || {});
 
 const C = window.CFG;
