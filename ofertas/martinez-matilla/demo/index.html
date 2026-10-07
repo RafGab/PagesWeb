@@ -3,164 +3,213 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Martínez Matilla · Propuesta de web con asistente (demo)</title>
+<title>Martínez-Matilla Abogados · Propuesta de web con asistente (demo)</title>
 <meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <!--
-  DEMO / MAQUETA. Estructura construida con las tres indicaciones del banner:
-  1) Plano: identidad, estructura, narrativa de scroll, orden de construcción.
-  2) Hero: promesa + evidencia + una acción en menos de 10 s, botón primario y secundario.
-  3) Movimiento: animar solo donde suma; nada donde estorba; respeta prefers-reduced-motion.
-  TODO (marcado con [CONFIRMAR]): textos, áreas, equipo y datos son PROVISIONALES.
-  No pude abrir martinezmatilla.com desde mi entorno: sustituir con el contenido real antes de enseñarlo como "su web".
+  DEMO preparada por Viviana Acero · AI Lead Machine. Contenido, logo, imágenes, colores y tipografía salen de la web real
+  martinezmatilla.com (copia guardada el 07/10/2026). Los textos son los suyos; solo se reordenan y se acortan.
+  Dos versiones en el mismo archivo (interruptor arriba a la derecha):
+    · "Su estilo": mismos colores (negro + magenta #BC1580), misma tipografía (Montserrat), mejor orden y claridad.
+    · "Mejora de marca": mantiene logo y magenta, afina tipografía de titulares, espacios y contraste.
+  Movimiento: solo entrada suave al hacer scroll; respeta prefers-reduced-motion.
 -->
 <style>
-  :root{--ink:#14110F;--ink2:#1E1A17;--paper:#F6F1E9;--bronze:#B98A4E;--bronze2:#D9B57C;--mut:#8D857B;--line:#ffffff1f}
+  :root{--mag:#BC1580;--mag-d:#9A0F68;--mag-l:#E35BB5;--ink:#111111;--mut:#5b5b66;--bg:#fff;--alt:#F5F5F7;--line:#E4E4EA;--dark:#111;--hf:"Montserrat",system-ui,sans-serif;--r:0;--hw:800;--hts:uppercase;--hl:0}
+  [data-theme=marca]{--ink:#190B1D;--mut:#5E5566;--alt:#FAF5F9;--line:#EBDDE8;--dark:#190B1D;--hf:"Fraunces",Georgia,serif;--r:6px;--hw:600;--hts:none;--hl:-.01em}
   *{box-sizing:border-box}html{scroll-behavior:smooth}
-  body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.65 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
-  h1,h2,h3{font-family:"Cormorant Garamond","Playfair Display",Georgia,serif;font-weight:600;line-height:1.08;margin:0}
-  a{color:inherit}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-  header{position:sticky;top:0;z-index:20;background:#14110Fe6;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;justify-content:space-between;align-items:center;height:68px}
-  .logo{font-family:Georgia,serif;font-size:1.25rem;letter-spacing:.04em}.logo b{color:var(--bronze2);font-weight:600}
-  nav a{margin-left:26px;text-decoration:none;font-size:.9rem;color:#d8d1c6}nav a:hover{color:var(--bronze2)}
-  .btn{display:inline-block;padding:14px 26px;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;letter-spacing:.02em;transition:transform .25s,background .25s,color .25s;border:1px solid var(--bronze)}
-  .btn.p{background:var(--bronze);color:#1a1209}.btn.p:hover{background:var(--bronze2);transform:translateY(-2px)}
-  .btn.s{color:var(--paper)}.btn.s:hover{background:#ffffff10}
-  /* HERO */
-  .hero{padding:110px 0 90px;background:radial-gradient(900px 400px at 85% 0,#B98A4E26,transparent 60%)}
-  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze2);margin-bottom:22px;display:block}
-  .hero h1{font-size:clamp(2.6rem,6.2vw,5rem);max-width:15ch}
-  .hero h1 em{color:var(--bronze2);font-style:italic}
-  .hero p.lead{max-width:56ch;color:#cfc8bd;font-size:1.15rem;margin:26px 0 34px}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif}
+  h1,h2,h3{font-family:var(--hf);font-weight:var(--hw);text-transform:var(--hts);letter-spacing:var(--hl);line-height:1.12;margin:0}
+  a{color:inherit}img{max-width:100%;display:block}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .theme{position:fixed;right:14px;bottom:92px;z-index:50;background:#111;color:#fff;border-radius:999px;padding:5px;display:flex;gap:2px;box-shadow:0 8px 24px #0004;font-size:.74rem}
+  .theme button{border:0;background:none;color:#fff;font:600 .74rem Montserrat,sans-serif;padding:8px 12px;border-radius:999px;cursor:pointer}
+  .theme button[aria-pressed=true]{background:var(--mag)}
+  .top{background:#111;color:#fff;font-size:.8rem}.top .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}.top a{text-decoration:none;font-weight:600}
+  header{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;height:76px}
+  .nav img{height:56px;width:auto}
+  nav a{margin-left:22px;text-decoration:none;font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}nav a:hover{color:var(--mag)}
+  .btn{display:inline-block;padding:14px 26px;border-radius:var(--r);text-decoration:none;font-weight:700;font-size:.86rem;letter-spacing:.04em;text-transform:uppercase;transition:transform .25s,background .25s;border:2px solid var(--mag)}
+  .btn.p{background:var(--mag);color:#fff}.btn.p:hover{background:var(--mag-d);transform:translateY(-2px)}
+  .btn.s{color:#fff;border-color:#fff}.btn.s:hover{background:#ffffff1c}
+  .btn.o{color:var(--mag)}.btn.o:hover{background:var(--mag);color:#fff}
+  /* hero */
+  .hero{position:relative;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.58)),url(assets/hero.jpg) center/cover;padding:96px 0 84px}
+  [data-theme=marca] .hero{background:linear-gradient(100deg,#190B1Df2 0%,#190B1Dcc 55%,#190B1D88 100%),url(assets/hero.jpg) center/cover}
+  .tag{display:inline-block;background:var(--mag);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;border-radius:var(--r);margin-bottom:22px}
+  .hero h1{font-size:clamp(2rem,4.8vw,3.5rem);max-width:19ch}
+  .hero h1 em{font-style:normal;color:var(--mag-l)}
+  .hero p.lead{max-width:60ch;font-size:1.08rem;margin:22px 0 32px;color:#ececf1}
   .cta{display:flex;gap:14px;flex-wrap:wrap}
-  .proof{display:flex;gap:34px;flex-wrap:wrap;margin-top:56px;padding-top:26px;border-top:1px solid var(--line)}
-  .proof div b{display:block;font-family:Georgia,serif;font-size:1.7rem;color:var(--bronze2)}.proof span{font-size:.82rem;color:var(--mut)}
-  section{padding:84px 0;border-top:1px solid var(--line)}
-  h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:14px}.sub{color:#b9b1a5;max-width:60ch;margin:0 0 40px}
-  .areas{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-  .area{background:var(--ink);padding:30px 26px;transition:background .3s}.area:hover{background:var(--ink2)}
-  .area h3{font-size:1.5rem;margin-bottom:8px}.area p{margin:0;color:#b9b1a5;font-size:.95rem}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
-  .step{counter-increment:s;border-top:2px solid var(--bronze);padding-top:16px}
-  .step::before{content:"0" counter(s);font-family:Georgia,serif;color:var(--bronze2);font-size:1.3rem}
-  .step h3{font-size:1.35rem;margin:6px 0}.step p{margin:0;color:#b9b1a5;font-size:.93rem}
-  .assist{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-  .assist ul{padding:0;list-style:none;margin:20px 0 28px}.assist li{padding:9px 0 9px 28px;position:relative;border-bottom:1px solid var(--line)}
-  .assist li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:1px;background:var(--bronze2)}
-  .chat{background:#F6F1E9;color:#14110F;border-radius:6px;padding:18px;box-shadow:0 40px 80px -40px #000}
-  .chat .h{font-weight:700;border-bottom:1px solid #0001;padding-bottom:10px;margin-bottom:12px}.chat .h small{display:block;font-weight:400;color:#2d8a4e}
-  .m{max-width:84%;padding:10px 13px;border-radius:12px;margin:8px 0;font-size:.92rem;line-height:1.45}
-  .m.b{background:#fff;border:1px solid #0001}.m.u{background:#14110F;color:#fff;margin-left:auto}
-  .ok{background:#E3F2E8;color:#1B5E33;padding:9px 12px;border-radius:8px;font-size:.85rem;margin-top:10px}
-  .note{font-size:.82rem;color:var(--mut);margin-top:14px}
-  .contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-  .contact p{color:#b9b1a5}.dato{padding:12px 0;border-bottom:1px solid var(--line)}.dato b{display:block;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze2)}
-  footer{padding:32px 0;border-top:1px solid var(--line);font-size:.82rem;color:var(--mut)}
-  /* MOVIMIENTO: solo entrada suave al hacer scroll (transform + opacity); sin movimiento en texto legal, formularios ni el chat */
-  .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
-  .rv.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.btn{transition:none}}
-  @media(max-width:860px){nav{display:none}.areas{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.assist,.contact{grid-template-columns:1fr}.hero{padding:70px 0 60px}section{padding:60px 0}}
+  .trust{display:flex;gap:30px;flex-wrap:wrap;margin-top:46px;padding-top:24px;border-top:1px solid #ffffff3a;font-size:.9rem}
+  .trust b{display:block;font-size:1.05rem}.trust span{color:#d9d9e0;font-size:.8rem}
+  section{padding:80px 0}.alt{background:var(--alt)}
+  .head{text-align:center;max-width:720px;margin:0 auto 44px}
+  h2{font-size:clamp(1.6rem,3.2vw,2.3rem)}.sub{color:var(--mut);margin:12px 0 0}
+  .head h2::after{content:"";display:block;width:56px;height:4px;background:var(--mag);margin:16px auto 0;border-radius:var(--r)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;display:flex;flex-direction:column;gap:10px;transition:transform .3s,box-shadow .3s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px #0006}
+  .card h3{font-size:1.02rem;color:var(--ink)}[data-theme=marca] .card h3{font-size:1.35rem}
+  .card p{margin:0;color:var(--mut);font-size:.94rem;flex:1}.card a.m{color:var(--mag);font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+  .card.bank{grid-column:span 2;background:linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),url(assets/bancos.jpg) center/cover}
+  .sublinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.sublinks a{font-size:.76rem;font-weight:600;border:1px solid var(--line);padding:5px 11px;border-radius:99px;text-decoration:none;background:#fff}.sublinks a:hover{border-color:var(--mag);color:var(--mag)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;counter-reset:s}
+  .step{counter-increment:s;text-align:center;padding:0 10px}
+  .step::before{content:counter(s);display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--mag);color:#fff;font:800 1.2rem var(--hf);margin:0 auto 14px}
+  .step h3{font-size:1.02rem;margin-bottom:6px;text-transform:none}.step p{margin:0;color:var(--mut);font-size:.94rem}
+  .assist{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  .assist ul{padding:0;list-style:none;margin:20px 0 26px}.assist li{padding:9px 0 9px 30px;position:relative;border-bottom:1px solid var(--line);font-size:.95rem}
+  .assist li::before{content:"✓";position:absolute;left:0;color:var(--mag);font-weight:800}
+  .note{font-size:.8rem;color:var(--mut);margin-top:14px}
+  .chat{background:#fff;border:1px solid var(--line);border-radius:calc(var(--r) + 10px);padding:18px;box-shadow:0 30px 60px -36px #0007}
+  .chat .h{display:flex;align-items:center;gap:10px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:10px}
+  .chat .h i{width:34px;height:34px;border-radius:50%;background:var(--mag);color:#fff;display:grid;place-items:center;font-style:normal;font-size:.8rem}.chat .h small{display:block;font-weight:500;color:#1c8a4a;font-size:.74rem}
+  .m{max-width:86%;padding:10px 13px;border-radius:14px;margin:8px 0;font-size:.88rem;line-height:1.45}
+  .m.b{background:var(--alt);border:1px solid var(--line)}.m.u{background:var(--mag);color:#fff;margin-left:auto}
+  .ok{background:#E5F4EB;color:#14653A;padding:9px 12px;border-radius:10px;font-size:.82rem;margin-top:10px}
+  .rev{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .rev blockquote{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .rev p{margin:0 0 12px;font-size:.92rem}.rev cite{font-style:normal;font-weight:700;font-size:.85rem}.rev small{display:block;color:var(--mut)}
+  .score{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:28px;font-weight:700}.score b{color:var(--mag);letter-spacing:.1em}
+  .blog{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .blog a{text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;display:block}.blog a:hover{border-color:var(--mag)}
+  .blog h3{font-size:1rem;text-transform:none;margin-bottom:8px}.blog span{color:var(--mag);font-size:.78rem;font-weight:700;text-transform:uppercase}
+  .final{background:var(--dark);color:#fff;text-align:center}.final h2{color:#fff}.final p{color:#d8d0da;margin:12px auto 28px;max-width:56ch}
+  .cont{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px;text-align:left}
+  .cont div{border-top:3px solid var(--mag);padding-top:12px;font-size:.92rem}.cont b{display:block;text-transform:uppercase;font-size:.74rem;letter-spacing:.1em;color:var(--mag-l);margin-bottom:4px}.cont a{text-decoration:none}
+  footer{background:#0b0b0b;color:#aaa;font-size:.8rem;padding:24px 0}footer a{color:#ccc}
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.btn,.card{transition:none}}
+  @media(max-width:880px){nav{display:none}.cards,.rev,.blog,.cont{grid-template-columns:1fr}.card.bank{grid-column:auto}.steps{grid-template-columns:1fr}.assist{grid-template-columns:1fr}.hero{padding:64px 0 56px}section{padding:56px 0}.theme{bottom:84px}.nav .btn{padding:10px 14px;font-size:.74rem}}
 </style>
 </head>
-<body>
+<body data-theme="estilo">
+<div class="theme" role="group" aria-label="Versión de la demo"><button type="button" data-t="estilo" aria-pressed="true">Su estilo</button><button type="button" data-t="marca" aria-pressed="false">Mejora de marca</button></div>
+
+<div class="top"><div class="wrap"><span>Despacho 100 % online · Primera consulta gratuita</span><span><a href="tel:+34633546370">633 54 63 70</a> · <a href="mailto:info@martinezmatilla.com">info@martinezmatilla.com</a></span></div></div>
 <header><div class="wrap nav">
-  <div class="logo"><b>Martínez</b> Matilla <!-- [CONFIRMAR] nombre y logo reales --></div>
-  <nav><a href="#areas">Áreas</a><a href="#metodo">Cómo trabajamos</a><a href="#asistente">Asistente</a><a href="#contacto">Contacto</a></nav>
-  <a class="btn p" href="#contacto">Pedir consulta</a>
+  <a href="#"><img src="assets/logo-martinez-matilla.png" alt="Martínez-Matilla Abogados"></a>
+  <nav><a href="#servicios">Servicios</a><a href="#como">Cómo trabajamos</a><a href="#asistente">Asistente</a><a href="#resenas">Reseñas</a><a href="#contacto">Contacto</a></nav>
+  <a class="btn p" href="#contacto">Reclamación gratuita</a>
 </div></header>
 
 <main>
-<section class="hero" style="border-top:0"><div class="wrap">
-  <span class="eyebrow rv">Despacho de abogados · [CONFIRMAR ciudad]</span>
-  <h1 class="rv">Su caso, en manos de <em>quien lo defiende</em> desde la primera llamada.</h1>
-  <p class="lead rv">Explíquenos su situación a cualquier hora. Le respondemos, ordenamos su caso y le reservamos una primera consulta con un abogado. <!-- [CONFIRMAR] promesa real --></p>
-  <div class="cta rv"><a class="btn p" href="#contacto">Reservar primera consulta</a><a class="btn s" href="#asistente">Hablar con el asistente ahora</a></div>
-  <div class="proof rv">
-    <div><b>[XX] años</b><span>de ejercicio [CONFIRMAR]</span></div>
-    <div><b>[Áreas]</b><span>de práctica [CONFIRMAR]</span></div>
-    <div><b>24 h</b><span>para recibir su consulta, también de noche</span></div>
+<section class="hero" style="padding-bottom:84px"><div class="wrap">
+  <span class="tag rv">Reclamaciones bancarias y laborales</span>
+  <h1 class="rv">Recupera lo que es tuyo: <em>anulamos los intereses</em> de tus tarjetas y préstamos</h1>
+  <p class="lead rv">En Martínez-Matilla Abogados reclamamos por ti. Servicios legales online, especializados en reclamaciones bancarias y en derecho laboral, civil y mercantil. Gestionamos tu caso 100 % digital, estés donde estés.</p>
+  <div class="cta rv"><a class="btn p" href="#contacto">Reclamación gratuita</a><a class="btn s" href="#asistente">Cuéntanos tu caso ahora</a></div>
+  <div class="trust rv">
+    <div><b>Excelente · 20 reseñas</b><span>publicadas en Google</span></div>
+    <div><b>Sin adelantar dinero</b><span>según indica su web</span></div>
+    <div><b>100 % online</b><span>formulario, WhatsApp o videollamada</span></div>
   </div>
 </div></section>
 
-<section id="areas"><div class="wrap">
-  <h2 class="rv">Áreas de práctica</h2>
-  <p class="sub rv">[CONFIRMAR] Sustituir por las áreas reales del despacho. Ejemplo orientativo.</p>
-  <div class="areas rv">
-    <div class="area"><h3>Civil y familia</h3><p>[CONFIRMAR] Texto real del área.</p></div>
-    <div class="area"><h3>Mercantil</h3><p>[CONFIRMAR] Texto real del área.</p></div>
-    <div class="area"><h3>Laboral</h3><p>[CONFIRMAR] Texto real del área.</p></div>
-    <div class="area"><h3>Penal</h3><p>[CONFIRMAR] Texto real del área.</p></div>
-    <div class="area"><h3>Extranjería</h3><p>[CONFIRMAR] Texto real del área.</p></div>
-    <div class="area"><h3>Otras</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+<section id="servicios"><div class="wrap">
+  <div class="head rv"><h2>¿En qué podemos ayudarte?</h2><p class="sub">Elige tu caso y te explicamos las opciones.</p></div>
+  <div class="cards rv">
+    <article class="card bank"><h3>Reclamaciones bancarias</h3><p>Asesoramiento legal para particulares, empresas y autónomos frente a abusos de bancos y financieras.</p>
+      <div class="sublinks"><a href="https://martinezmatilla.com/tarjetas-revolving/">Tarjetas revolving</a><a href="https://martinezmatilla.com/hipotecas/">Hipotecas</a><a href="https://martinezmatilla.com/microprestamos/">Micropréstamos</a><a href="https://martinezmatilla.com/prestamos-coche/">Préstamos coche</a></div>
+      <a class="m" href="https://martinezmatilla.com/reclamaciones-bancarias/">Saber más →</a></article>
+    <article class="card"><h3>Derecho laboral</h3><p>Defendemos tus derechos frente a despidos y reclamaciones laborales.</p><a class="m" href="https://martinezmatilla.com/derecho-laboral/">Saber más →</a></article>
+    <article class="card"><h3>Derecho administrativo</h3><p>Recurrimos sanciones y resoluciones de la Administración.</p><a class="m" href="https://martinezmatilla.com/derecho-administrativo/">Saber más →</a></article>
+    <article class="card"><h3>Derecho civil</h3><p>Solucionamos conflictos civiles y reclamaciones legales.</p><a class="m" href="https://martinezmatilla.com/derecho-civil/">Saber más →</a></article>
+    <article class="card"><h3>Derecho mercantil</h3><p>Asesoramiento legal para empresas y autónomos.</p><a class="m" href="https://martinezmatilla.com/derecho-mercantil/">Saber más →</a></article>
   </div>
 </div></section>
 
-<section id="metodo"><div class="wrap">
-  <h2 class="rv">Cómo trabajamos</h2>
-  <p class="sub rv">Un proceso claro, sin sorpresas.</p>
+<section id="como" class="alt"><div class="wrap">
+  <div class="head rv"><h2>¿Cómo trabajamos?</h2><p class="sub">Fácil, sin letra pequeña y sin necesidad de desplazarte.</p></div>
   <div class="steps rv">
-    <div class="step"><h3>Nos cuenta</h3><p>Por el asistente, el teléfono o el formulario.</p></div>
-    <div class="step"><h3>Lo ordenamos</h3><p>Recogemos datos y plazos para que el abogado llegue preparado.</p></div>
-    <div class="step"><h3>Primera consulta</h3><p>Cita reservada en la agenda del despacho.</p></div>
-    <div class="step"><h3>Estrategia</h3><p>El abogado le explica opciones y honorarios.</p></div>
+    <div class="step"><h3>Nos cuentas tu caso</h3><p>Vía formulario, WhatsApp o videollamada.</p></div>
+    <div class="step"><h3>Analizamos gratis tu situación</h3><p>Revisamos tu documentación sin compromiso.</p></div>
+    <div class="step"><h3>Te explicamos las opciones</h3><p>Y empezamos la reclamación.</p></div>
   </div>
+  <p class="sub rv" style="text-align:center;margin-top:30px">Todo el proceso es confidencial, transparente y 100 % online. Siempre estarás informado por email, móvil o WhatsApp.</p>
 </div></section>
 
 <section id="asistente"><div class="wrap assist">
   <div class="rv">
-    <span class="eyebrow">Asistente del despacho</span>
-    <h2>Atendemos su consulta aunque el despacho esté cerrado</h2>
+    <span class="tag">Novedad · Asistente 24 h</span>
+    <h2>Cuéntanos tu caso a cualquier hora, también fuera del horario del despacho</h2>
     <ul>
-      <li>Responde y pregunta lo que preguntaría el despacho.</li>
-      <li>Identifica los casos con plazo urgente.</li>
-      <li>Reserva la cita en el Google Calendar del despacho, con disponibilidad real.</li>
-      <li>Envía un resumen por correo al abogado.</li>
-      <li>Pasa a una persona cuando usted lo pide.</li>
+      <li>Atiende en la web las 24 horas y pregunta lo que preguntaría el despacho.</li>
+      <li>Recoge tipo de caso, entidad, documentación disponible y datos de contacto.</li>
+      <li>Marca los casos con plazo urgente para que el abogado los vea primero.</li>
+      <li>Reserva la llamada o videollamada en el calendario del despacho, con disponibilidad real.</li>
+      <li>Envía un resumen por correo y guarda el caso en un panel con estados y notas.</li>
+      <li>Pasa a una persona cuando el cliente lo pide.</li>
     </ul>
     <a class="btn p" href="https://ai-lead-machine-demo.onrender.com/?rubro=despacho" target="_blank" rel="noopener">Probar el asistente (demo en vivo)</a>
-    <p class="note">El asistente no ofrece asesoría legal: solo recoge los datos para que el abogado lo atienda.</p>
+    <p class="note">Convive con su botón de WhatsApp actual. El asistente no valora el caso ni promete resultados: solo recoge los datos y deja la cita al abogado.</p>
   </div>
   <div class="chat rv" aria-label="Ejemplo de conversación">
-    <div class="h">Asistente del despacho<small>● en línea</small></div>
-    <div class="m u">Hola, me han despedido y me dan 3 días para firmar el finiquito.</div>
-    <div class="m b">Lamento la situación. ¿Cuál es su nombre y un teléfono de contacto?</div>
-    <div class="m u">Ana Ruiz, 600 000 000.</div>
-    <div class="m b">Gracias, Ana. Es un caso con plazo corto y lo marco como prioritario. Mañana a las 10:00 hay hueco con una abogada. ¿Se lo reservo?</div>
-    <div class="m u">Sí, por favor.</div>
+    <div class="h"><i>MM</i><div>Asistente de Martínez-Matilla<small>● en línea</small></div></div>
+    <div class="m b">Hola, soy el asistente del despacho. Cuéntame brevemente tu caso y te ayudo a reservar tu primera consulta gratuita.</div>
+    <div class="m u">Tengo una tarjeta revolving y los intereses son muy altos.</div>
+    <div class="m b">Gracias. ¿Cuál es tu nombre y un teléfono de contacto?</div>
+    <div class="m u">Laura, 600 000 000.</div>
+    <div class="m b">¿Qué entidad emitió la tarjeta y tienes a mano los contratos o extractos?</div>
+    <div class="m u">Sí, los tengo en PDF.</div>
+    <div class="m b">Perfecto. El jueves a las 10:00 hay hueco con un abogado por videollamada. ¿Te lo reservo?</div>
     <div class="ok">✓ Cita creada · resumen enviado al despacho</div>
   </div>
 </div></section>
 
-<section id="contacto"><div class="wrap contact">
-  <div class="rv"><h2>Primera consulta</h2><p>Cuéntenos su caso. Le respondemos en horario laboral y el asistente le atiende el resto del tiempo.</p>
-    <a class="btn p" href="#">[CONFIRMAR] Formulario o botón de reserva</a></div>
-  <div class="rv">
-    <div class="dato"><b>Teléfono</b>[CONFIRMAR]</div>
-    <div class="dato"><b>Correo</b>[CONFIRMAR]</div>
-    <div class="dato"><b>Dirección</b>[CONFIRMAR]</div>
-    <div class="dato"><b>Horario</b>[CONFIRMAR]</div>
+<section id="resenas" class="alt"><div class="wrap">
+  <div class="head rv"><h2>Reseñas de nuestros clientes</h2></div>
+  <div class="score rv"><b>EXCELENTE</b><span>a base de 20 reseñas · publicado en Google</span></div>
+  <div class="rev rv">
+    <blockquote><p>“Todo muy sencillo y con buenos resultados. Me hicieron todas las gestiones y recuperé el dinero de más pagado en la hipoteca. Muy recomendable.”</p><cite>Patxi Martinez</cite><small>Reseña en Google</small></blockquote>
+    <blockquote><p>“Les enviamos la documentación que nos pidieron sin movernos de casa ni perder tiempo, y en apenas unos meses ya estaba todo solucionado.”</p><cite>Alejandro Saurina</cite><small>Reseña en Google</small></blockquote>
+    <blockquote><p>“Me reclamaron los gastos de dos hipotecas sin tener que salir de casa y me fueron informando en todo momento. Muy recomendables.”</p><cite>Gloria Melcón</cite><small>Reseña en Google</small></blockquote>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head rv"><h2>Artículos de interés jurídico</h2></div>
+  <div class="blog rv">
+    <a href="https://martinezmatilla.com/2026/08/24/reclamar-comision-apertura-abusiva/"><h3>Comisión de apertura abusiva: cuándo puedes reclamar al banco</h3><span>Leer más</span></a>
+    <a href="https://martinezmatilla.com/2026/07/22/nulidad-seguro-vida-prima-unica-hipoteca-tribunal-supremo/"><h3>El Tribunal Supremo declara la nulidad del seguro de vida de prima única vinculado a hipotecas</h3><span>Leer más</span></a>
+    <a href="https://martinezmatilla.com/2026/07/08/reclamar-prestamos-personales-microcreditos-intereses-abusivos/"><h3>Reclamaciones de préstamos personales y microcréditos: recupera los intereses abusivos</h3><span>Leer más</span></a>
+  </div>
+</div></section>
+
+<section id="contacto" class="final"><div class="wrap">
+  <h2 class="rv">Reclamar tus derechos es más fácil de lo que crees</h2>
+  <p class="rv">Cuéntanos tu caso y empieza hoy. Tu primera consulta es gratuita.</p>
+  <div class="cta rv" style="justify-content:center"><a class="btn p" href="https://martinezmatilla.com/contacto/">Contactar</a><a class="btn s" href="https://wa.me/34633546370">WhatsApp</a></div>
+  <div class="cont rv">
+    <div><b>Teléfono</b><a href="tel:+34633546370">633 54 63 70</a></div>
+    <div><b>Email</b><a href="mailto:info@martinezmatilla.com">info@martinezmatilla.com</a></div>
+    <div><b>Horarios</b>Lunes – Jueves: 9:00–14:00 y 15:00–18:00<br>Viernes: 9:00–14:00<br>El asistente atiende fuera de este horario.</div>
   </div>
 </div></section>
 </main>
-<footer><div class="wrap">© Martínez Matilla · [CONFIRMAR aviso legal, política de privacidad y cookies]. Demo preparada por Viviana Acero · AI Lead Machine.</div></footer>
+<footer><div class="wrap">© 2026 Martínez Matilla Abogados · <a href="https://martinezmatilla.com/aviso-legal/">Aviso legal</a> · <a href="https://martinezmatilla.com/politica-de-privacidad/">Política de privacidad</a> · <a href="https://martinezmatilla.com/politica-de-cookies-ue/">Política de cookies</a><br>Demo de propuesta preparada por Viviana Acero · AI Lead Machine. No es la web publicada del despacho.</div></footer>
 
 <script>
-  // Entrada suave solo si el usuario no pidió menos movimiento
   (function(){
+    var b=document.body;
+    function set(t){b.setAttribute('data-theme',t);[].forEach.call(document.querySelectorAll('.theme button'),function(x){x.setAttribute('aria-pressed',x.dataset.t===t)});try{localStorage.setItem('mm-theme',t)}catch(e){}}
+    [].forEach.call(document.querySelectorAll('.theme button'),function(x){x.addEventListener('click',function(){set(x.dataset.t)})});
+    try{var s=localStorage.getItem('mm-theme');if(s)set(s)}catch(e){}
     var els=[].slice.call(document.querySelectorAll('.rv'));
     if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
-    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
     els.forEach(function(e){io.observe(e)});
   })();
 </script>
-<!-- Asistente real de AI Lead Machine (se activa al publicar en un servidor; en archivo local puede no cargar) -->
 <script src="https://ai-lead-machine-backend.onrender.com/widget.js"
         data-api-url="https://ai-lead-machine-backend.onrender.com"
-        data-color="#B98A4E" data-agent-name="Asistente del despacho"
-        data-subtitle="Le ayudo a reservar su primera consulta"
-        data-welcome="Hola, soy el asistente del despacho. Cuénteme brevemente su caso y le ayudo a reservar una primera consulta."
+        data-color="#BC1580" data-agent-name="Asistente de Martínez-Matilla"
+        data-subtitle="Cuéntame tu caso y reservo tu consulta gratuita"
+        data-welcome="Hola, soy el asistente de Martínez-Matilla Abogados. Cuéntame brevemente tu caso y te ayudo a reservar tu primera consulta gratuita."
         data-position="right" defer></script>
 </body>
 </html>

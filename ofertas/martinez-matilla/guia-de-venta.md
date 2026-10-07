@@ -1,8 +1,9 @@
 # Martínez Matilla · guía para cerrar la reunión del viernes (9/10/2026)
 
 > **Objetivo:** captar al cliente. El primer pago es secundario; lo importante es que el despacho use el agente y se convierta en tu caso de éxito.
-> **Lo que NO pude hacer:** abrir `martinezmatilla.com` (mi entorno lo bloquea) ni acceder al proyecto "Plan de acción para establecer y fusionar lineamientos".
-> Por eso la demo (`demo/index.html`) tiene los textos del despacho marcados como `[CONFIRMAR]` y no afirma nada sobre su web actual. Mira la sección 9 para lo que necesito de ti.
+> **Actualización 07/10/2026:** ya tengo la copia de su web (archivo `.webarchive`). Es **Martínez-Matilla Abogados**, de León, despacho **100 % online**, especializado en reclamaciones bancarias y también laboral, administrativo, civil y mercantil.
+> La demo (`demo/index.html`) usa **su logo, sus textos, sus colores y su tipografía reales**, con dos versiones: **"Su estilo"** y **"Mejora de marca"** (interruptor en la esquina).
+> Sigue pendiente el proyecto "Plan de acción para establecer y fusionar lineamientos": no tengo acceso a él desde esta sesión (ver sección 9).
 > Todas las funciones y precios salen de `CONTEXTO.md` (producto verificado en el código y lista oficial). Precios en euros, **sin IVA**.
 
 ---
@@ -36,6 +37,28 @@
 
 **Veredicto:** el banner es **buen anuncio, pero no es la mejor oferta para esta reunión**. Funciona como gancho de captación general, pero para un cliente concreto con web propia te conviene empezar con un piloto y cobrar el rediseño aparte (opciones B y C).
 
+## 2b. Su web hoy (lo que vi en la copia guardada)
+**Datos del despacho:** tel. 633 54 63 70 · info@martinezmatilla.com · horario lunes a jueves 9:00–14:00 y 15:00–18:00, viernes 9:00–14:00 (cerrado tardes de viernes y fines de semana). Tienen botón de WhatsApp (plugin "Click to Chat", enlaza a un chat humano), **20 reseñas en Google** con valoración "Excelente", un blog activo (3 artículos entre julio y agosto de 2026) y la promesa "Sin adelantar dinero" y "Primera consulta gratuita".
+**Cómo está hecha:** WordPress con el tema Divi, cookies con Complianz, reseñas con Trustindex y dos etiquetas de Google (anuncios y analítica). Hay presencia de Google Ads (etiqueta `AW-…`), así que **ya pagan por captar clientes**: cada consulta perdida les cuesta dinero. Úsalo en la reunión.
+
+**Fortalezas (dilas primero):**
+- Propuesta clara y valiente: "Recupera lo que es tuyo: anulamos los intereses de tus tarjetas y préstamos".
+- Modelo 100 % online y proceso en 3 pasos fácil de entender.
+- Reseñas reales con casos concretos (hipotecas, revolving, préstamos de coche).
+- Marca reconocible: logo MM en negro y magenta.
+
+**Oportunidades (con respeto, como sugerencias):**
+| Observación | Por qué importa | Cómo lo resolvemos |
+|---|---|---|
+| El botón principal "Reclamación gratuita" **llama por teléfono** | Quien llega de noche, en fin de semana o desde el trabajo no puede llamar | Doble acción: reservar por el asistente, WhatsApp o formulario |
+| Cerrado viernes tarde, sábado y domingo | Mucha gente busca ayuda legal cuando no está en el trabajo | El asistente atiende 24 h y deja la cita en su calendario |
+| En la tarjeta de "Reclamaciones bancarias" el texto es el de mercantil ("Asesoramiento legal para empresas y autónomos") | Es su servicio estrella y la descripción no lo refleja | Texto propio centrado en tarjetas revolving, hipotecas, micropréstamos y préstamos de coche |
+| Las reseñas hablan mucho de **complemento de maternidad en pensiones** y no aparece como servicio en el menú | Hay demanda real y no se ve | Valorar una página de servicio (decisión del despacho) |
+| Dos formas de "Cómo trabajamos" duplicadas en el código y mucho código de plantilla (Divi) | Puede ralentizar la carga en móvil | Medir la velocidad con PageSpeed antes de afirmar nada (no la he medido) |
+| Trabajan "sin adelantar dinero" (cobro a éxito, según su web) | Cada caso no viable les cuesta tiempo | El asistente recoge entidad, contrato, documentos y fechas **para que el abogado priorice**. No evalúa el caso |
+
+> No he medido velocidad ni posicionamiento. Si lo mencionas, hazlo después de pasar su web por PageSpeed Insights.
+
 ---
 
 ## 3. Tres opciones realistas para Martínez Matilla
@@ -49,7 +72,7 @@
 - **Riesgo:** que "se queden con el piloto" y no paguen. Mitiga con fecha de decisión pactada en la reunión y revisión a los 15 días.
 
 ### Opción B · Despacho fundador, web mejorada + agente (**recomendada**)
-- **Qué incluye:** web mejorada (nueva estructura, hero, textos, animaciones sobrias, móvil) + agente integrado con agenda, avisos y panel + formación de 30 minutos + revisión de las primeras conversaciones.
+- **Qué incluye:** mejoras sobre su web actual en WordPress/Divi (hero, textos, orden de secciones, doble acción de contacto, móvil; en la demo hay una versión que **conserva su estilo** y otra de **mejora de marca**, y el despacho elige) + agente integrado con agenda, avisos y panel + formación de 30 minutos + revisión de las primeras conversaciones.
 - **Precio:** **alta 790 € + 149 €/mes + IVA, contrato de 12 meses.** Total del primer año: **2.578 €** (frente a 4.480 € de lista).
 - **Por qué ese precio:** ahorran 1.710 € el primer año, tú cubres el rediseño con el alta y el mensual queda por debajo de tu oficial.
 - **Contrapartida (condición del precio fundador):** permiso para citarlos como caso de éxito, con testimonio y, si quieren, enlace discreto en el pie de la web.
@@ -79,8 +102,8 @@
 ## 4. Antes del viernes (miércoles y jueves)
 - [ ] **Prueba de respuesta:** escribe al despacho una consulta normal fuera de horario (noche o sábado) y apunta cuánto tardan. Es tu mejor argumento.
 - [ ] Revisa su web con los ojos de un cliente: ¿se entiende en 3 segundos lo que hacen? ¿hay un botón claro de contacto? ¿se ve bien en móvil? ¿hay formulario o solo teléfono? Apunta 3 cosas concretas y positivas.
-- [ ] Mándame el **texto de su web** (copiar y pegar) o capturas, o permite el dominio `martinezmatilla.com` en la red del entorno, para sustituir los `[CONFIRMAR]` de la demo.
-- [ ] Prepara el rubro **despacho** del agente con su nombre, color y áreas (el rubro ya existe: `?rubro=despacho`).
+- [x] Texto y logo de su web: ya están en la demo.
+- [ ] **Crea un rubro propio para ellos.** El rubro `despacho` actual cubre laboral, civil, familia, mercantil, penal y extranjería, y **no incluye reclamaciones bancarias**. Hace falta uno nuevo con: tipo de caso (tarjeta revolving, hipoteca, micropréstamo, préstamo de coche, laboral, administrativo, civil, mercantil), entidad, si tiene el contrato o los extractos, plazos y teléfono. Lo puedo preparar como parche (ver sección 9).
 - [ ] Abre la demo el jueves y haz una conversación completa: cita en tu calendario, correo recibido, lead en el panel.
 - [ ] Decide **tu suelo** de precio (el mínimo que aceptas) antes de entrar.
 
@@ -91,14 +114,15 @@
 > "Gracias por recibirme. Monto webs con un asistente que atiende a los clientes del despacho y les reserva la primera consulta. Primero quiero entender cómo trabajan hoy, y después les enseño qué haría yo."
 
 **2. Preguntas de diagnóstico (10 min)**: toma notas literales.
-1. ¿Cómo les llegan hoy los clientes nuevos? ¿Teléfono, web, recomendación?
+1. ¿Cómo les llegan hoy los clientes nuevos? ¿Google Ads, buscadores, recomendación? ¿Qué canal convierte mejor?
 2. ¿Qué pasa con una consulta que llega por la noche o el fin de semana?
 3. ¿Quién la atiende y cuánto tarda en responder?
-4. ¿Cuántas consultas nuevas reciben a la semana y cuántas acaban en cliente?
-5. ¿Qué áreas quieren potenciar?
+4. ¿Cuántas consultas nuevas reciben a la semana, cuántas son viables y cuántas acaban en cliente? ¿Cuánto invierten en Google Ads al mes?
+5. ¿Qué áreas quieren potenciar? ¿Reclamaciones bancarias, complemento de maternidad, laboral?
 6. ¿Qué es lo que más les molesta de su web?
 7. ¿Qué herramientas usan (calendario, correo, gestor)?
 8. ¿Qué les ha frenado antes para cambiar algo?
+9. ¿Quién atiende el WhatsApp y qué pasa con los mensajes de noche y fin de semana?
 
 **3. Tu dato (2 min)**
 > "Les escribí el [día] a las [hora] y la respuesta llegó [cuándo]. Un cliente que busca abogado pregunta a varios y se queda con quien responde primero."
@@ -119,7 +143,7 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 |---|---|
 | "No sé si un bot encaja con un despacho" | "Lo entiendo, por eso no da consejo legal ni opina del caso: solo recoge datos y reserva la cita. El abogado sigue siendo quien atiende" |
 | "¿Y la confidencialidad?" | "Recoge solo los datos necesarios para la primera consulta y se firma el contrato de encargado de tratamiento. Les paso el aviso de privacidad para el chat" (**tenerlos preparados**) |
-| "Ya tenemos web" | "Perfecto, el piloto se instala en la web actual con una línea. El rediseño es opcional" |
+| "Ya tenemos web y WhatsApp" | "Perfecto, no se toca nada de lo que funciona. El asistente se instala en su web actual con una línea y convive con su botón de WhatsApp: atiende cuando el despacho está cerrado" |
 | "Está caro" | Muestra el piloto gratis y la mensualidad: *"¿Cuánto vale para ustedes un cliente nuevo al mes?"* |
 | "Déjenos pensarlo" | "Claro. ¿Qué necesitaría ver para decidir? Dejamos fijado el día [X] para hablar" |
 | "¿Y si no funciona?" | "Por eso el piloto: lo ven con casos reales antes de pagar" |
@@ -144,15 +168,16 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 ---
 
 ## 9. Lo que necesito de ti
-1. **Texto o capturas de martinezmatilla.com**, o que permitas el dominio en la red del entorno, para adaptar la demo y no inventar nada.
+1. ~~Texto y logo de su web~~ (recibido).
 2. **El proyecto "Plan de acción para establecer y fusionar lineamientos":** no tengo acceso desde esta sesión. Pega aquí su contenido o los lineamientos clave y reviso las opciones contra ellos.
 3. **Tu suelo de precio** y si aceptas la contrapartida de caso de éxito.
 4. **Confirmación de la ficha de Google** (¿puedes cumplirla?).
+5. **Decir "sí" para que prepare el rubro de reclamaciones bancarias** del agente (parche como el de recordatorios) y la demo con ese flujo.
 
 ## 10. Después de la reunión (mensaje de seguimiento)
 > Gracias por la reunión de hoy. Como acordamos: instalo el asistente en su web el [día], con acceso al panel. Necesito: acceso a la web, calendario compartido y correo para los avisos. Revisamos los primeros datos el [día +15] y decidimos el [día +30]. ¡Un placer!
 
 ## 11. Cómo se mejoró la web (método de las tres indicaciones del banner)
-1. **El plano:** identidad (oscuro cálido + bronce, serif sobria), estructura (hero, áreas, método, asistente, contacto), narrativa de scroll y orden de construcción (primero hero y contacto, luego áreas, luego asistente).
+1. **El plano:** identidad = **la suya** (logo MM, negro y magenta `#BC1580`, Montserrat). La versión "mejora de marca" mantiene logo y magenta y cambia solo titulares (serif), espacios y contraste. Estructura: hero, servicios, cómo trabajamos, asistente, reseñas, artículos, contacto.
 2. **Lo primero que ven:** una promesa clara, evidencia (años, áreas, 24 h), botón primario (reservar consulta) y secundario (hablar con el asistente); a completar con datos reales para pruebas A/B de titulares.
 3. **Cómo se mueve:** solo entrada suave al hacer scroll (opacidad y desplazamiento), nunca en texto legal, formularios ni chat; respeta `prefers-reduced-motion`.
