@@ -100,7 +100,7 @@
 ---
 
 ## 4. Antes del viernes (miércoles y jueves)
-- [ ] **Prueba de respuesta:** escribe al despacho una consulta normal fuera de horario (noche o sábado) y apunta cuánto tardan. Es tu mejor argumento.
+- [x] **Prueba de respuesta:** hecha. Les escribiste el domingo 4/10 y contestaron el miércoles 7/10 (≈ 3 días). Dato recibido de tu proyecto "Plan de acción"; confírmalo tú.
 - [ ] Revisa su web con los ojos de un cliente: ¿se entiende en 3 segundos lo que hacen? ¿hay un botón claro de contacto? ¿se ve bien en móvil? ¿hay formulario o solo teléfono? Apunta 3 cosas concretas y positivas.
 - [x] Texto y logo de su web: ya están en la demo.
 - [ ] **Crea un rubro propio para ellos.** El rubro `despacho` actual cubre laboral, civil, familia, mercantil, penal y extranjería, y **no incluye reclamaciones bancarias**. Hace falta uno nuevo con: tipo de caso (tarjeta revolving, hipoteca, micropréstamo, préstamo de coche, laboral, administrativo, civil, mercantil), entidad, si tiene el contrato o los extractos, plazos y teléfono. Lo puedo preparar como parche (ver sección 9).
@@ -125,7 +125,8 @@
 9. ¿Quién atiende el WhatsApp y qué pasa con los mensajes de noche y fin de semana?
 
 **3. Tu dato (2 min)**
-> "Les escribí el [día] a las [hora] y la respuesta llegó [cuándo]. Un cliente que busca abogado pregunta a varios y se queda con quien responde primero."
+> "Les escribí el domingo 4 de octubre y la respuesta llegó el miércoles 7, unos tres días después. Un cliente que busca abogado pregunta a varios y se queda con quien responde primero."
+> *(Dilo con cariño: de ese contacto salió esta cita. Es un dato, no un reproche. Si no recuerdas la hora exacta, no la menciones.)*
 
 **4. Demo (8 min):** web mejorada, y abre el asistente en vivo. Haz una conversación completa con un caso urgente y enseña: cita en el calendario, correo, panel. Remata con: *"No da asesoría legal, solo recoge los datos y le deja la cita al abogado."*
 
