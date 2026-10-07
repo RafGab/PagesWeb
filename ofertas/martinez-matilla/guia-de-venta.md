@@ -2,7 +2,7 @@
 
 > **Objetivo:** captar al cliente. El primer pago es secundario; lo importante es que el despacho use el agente y se convierta en tu caso de éxito.
 > **Actualización 07/10/2026:** ya tengo la copia de su web (archivo `.webarchive`). Es **Martínez-Matilla Abogados**, de León, despacho **100 % online**, especializado en reclamaciones bancarias y también laboral, administrativo, civil y mercantil.
-> La demo (`demo/index.html`) usa **su logo, sus textos, sus colores y su tipografía reales**, con dos versiones: **"Su estilo"** y **"Mejora de marca"** (interruptor en la esquina).
+> La demo (`demo/index.html`) usa **su logo, sus textos, sus colores y su tipografía reales**, con dos versiones: **"Su estilo"** (réplica fiel de su diseño actual: barra magenta, hero claro, cinco tarjetas claro/oscuro, bloque negro y franja magenta) y **"Versión mejorada"** (mismos colores y logo, más aire y mejor jerarquía). Interruptor abajo a la izquierda.
 > Sigue pendiente el proyecto "Plan de acción para establecer y fusionar lineamientos": no tengo acceso a él desde esta sesión (ver sección 9).
 > Todas las funciones y precios salen de `CONTEXTO.md` (producto verificado en el código y lista oficial). Precios en euros, **sin IVA**.
 
@@ -72,7 +72,7 @@
 - **Riesgo:** que "se queden con el piloto" y no paguen. Mitiga con fecha de decisión pactada en la reunión y revisión a los 15 días.
 
 ### Opción B · Despacho fundador, web mejorada + agente (**recomendada**)
-- **Qué incluye:** mejoras sobre su web actual en WordPress/Divi (hero, textos, orden de secciones, doble acción de contacto, móvil; en la demo hay una versión que **conserva su estilo** y otra de **mejora de marca**, y el despacho elige) + agente integrado con agenda, avisos y panel + formación de 30 minutos + revisión de las primeras conversaciones.
+- **Qué incluye:** mejoras sobre su web actual en WordPress/Divi (hero, textos, orden de secciones, doble acción de contacto, móvil; en la demo hay una versión que **conserva su estilo** y otra **mejorada** con los mismos colores, y el despacho elige) + agente integrado con agenda, avisos y panel + formación de 30 minutos + revisión de las primeras conversaciones.
 - **Precio:** **alta 790 € + 149 €/mes + IVA, contrato de 12 meses.** Total del primer año: **2.578 €** (frente a 4.480 € de lista).
 - **Por qué ese precio:** ahorran 1.710 € el primer año, tú cubres el rediseño con el alta y el mensual queda por debajo de tu oficial.
 - **Contrapartida (condición del precio fundador):** permiso para citarlos como caso de éxito, con testimonio y, si quieren, enlace discreto en el pie de la web.
@@ -178,6 +178,6 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 > Gracias por la reunión de hoy. Como acordamos: instalo el asistente en su web el [día], con acceso al panel. Necesito: acceso a la web, calendario compartido y correo para los avisos. Revisamos los primeros datos el [día +15] y decidimos el [día +30]. ¡Un placer!
 
 ## 11. Cómo se mejoró la web (método de las tres indicaciones del banner)
-1. **El plano:** identidad = **la suya** (logo MM, negro y magenta `#BC1580`, Montserrat). La versión "mejora de marca" mantiene logo y magenta y cambia solo titulares (serif), espacios y contraste. Estructura: hero, servicios, cómo trabajamos, asistente, reseñas, artículos, contacto.
+1. **El plano:** identidad = **la suya** (logo MM, negro y magenta `#BC1580`, Montserrat). La versión mejorada mantiene logo, magenta y Montserrat; sube el peso de los titulares, usa minúsculas legibles, redondea esquinas y da más aire. Estructura: hero, servicios, cómo trabajamos, asistente, reseñas, artículos, contacto.
 2. **Lo primero que ven:** una promesa clara, evidencia (años, áreas, 24 h), botón primario (reservar consulta) y secundario (hablar con el asistente); a completar con datos reales para pruebas A/B de titulares.
 3. **Cómo se mueve:** solo entrada suave al hacer scroll (opacidad y desplazamiento), nunca en texto legal, formularios ni chat; respeta `prefers-reduced-motion`.
