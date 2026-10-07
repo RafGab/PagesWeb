@@ -3,7 +3,7 @@
 > **Objetivo:** captar al cliente. El primer pago es secundario; lo importante es que el despacho use el agente y se convierta en tu caso de éxito.
 > **Actualización 07/10/2026:** ya tengo la copia de su web (archivo `.webarchive`). Es **Martínez-Matilla Abogados**, de León, despacho **100 % online**, especializado en reclamaciones bancarias y también laboral, administrativo, civil y mercantil.
 > La demo (`demo/index.html`) usa **su logo, sus textos, sus colores y su tipografía reales**, con dos versiones: **"Su estilo"** (réplica fiel de su diseño actual: barra magenta, hero claro, cinco tarjetas claro/oscuro, bloque negro y franja magenta) y **"Versión mejorada"** (mismos colores y logo, más aire y mejor jerarquía). Interruptor abajo a la izquierda.
-> Precios y mínimo: ver `precio-minimo-y-ficha-google.md`. Los precios de la sección 3 de esta guía son anteriores; **para B usa los de ese documento** (abre en 1.290 €, objetivo 990 €, suelo 790 € + 149 €/mes).
+> Precios y mínimo: ver `precio-minimo-y-ficha-google.md`. Los precios de la sección 3 de esta guía son anteriores; **para B usa los de ese documento** (abre en 1.290 €, objetivo 990 €; tu suelo de 500 € + 149 €/mes solo con testimonio o pago al firmar).
 > Todas las funciones y precios salen de `CONTEXTO.md` (producto verificado en el código y lista oficial). Precios en euros, **sin IVA**.
 
 ---
@@ -171,7 +171,7 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 ## 9. Lo que necesito de ti
 1. ~~Texto y logo de su web~~ (recibido).
 2. **El proyecto "Plan de acción para establecer y fusionar lineamientos":** no tengo acceso desde esta sesión. Pega aquí su contenido o los lineamientos clave y reviso las opciones contra ellos.
-3. ~~Tu suelo de precio~~: propuesta en `precio-minimo-y-ficha-google.md` (abre en 1.290 €, objetivo 990 €, suelo 790 € de alta + 149 €/mes, 12 meses). **Tú decides.**
+3. ~~Tu suelo de precio~~: según tu proyecto "Plan de acción" (dato recibido de otra sesión, confírmalo), **suelo = 500 € de alta + 149 €/mes + IVA, 12 meses**, y solo a cambio de testimonio o de pago del alta al firmar. Abre en 790–1.290 €; ver `precio-minimo-y-ficha-google.md`.
 4. **Confirmación de la ficha de Google** (¿puedes cumplirla?).
 5. ~~Rubro de reclamaciones bancarias~~: subido a la rama `claude/rubro-reclamaciones` (ver `precio-minimo-y-ficha-google.md`, sección 5). Falta fusionarlo y desplegarlo.
 

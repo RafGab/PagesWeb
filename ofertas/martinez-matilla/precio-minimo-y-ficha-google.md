@@ -2,6 +2,9 @@
 
 > Preparado el 07/10/2026. Precios en euros, **sin IVA** (21 % aparte). Las cifras de la competencia salen de blogs y páginas de proveedores españoles encontrados por búsqueda web; varias páginas estaban bloqueadas en mi entorno y no pude abrirlas, así que son **orientativas**. Contrástalas con 2 o 3 presupuestos reales de agencias de León antes del viernes.
 
+> **Actualización 07/10/2026 (dato recibido de tu proyecto "Plan de acción"; confírmalo tú):** tu suelo para Martínez-Matilla es **500 € de alta + 149 €/mes + IVA, 12 meses**. Se te aconsejó abrir en 790 € y bajar a 500 € **solo** a cambio de caso de éxito con testimonio o de pago del alta al firmar. Esa decisión **prevalece sobre mi suelo de 790 €** en las tablas siguientes.
+> Con 500 € de alta y 25–35 horas de trabajo, el alta sola paga unos **14–20 €/hora**; el margen real viene de los 129 €/mes. Por eso la condición de 500 € debe ser siempre **testimonio o pago al firmar**, y el alcance debe quedar limitado (ver abajo).
+
 ## 1. Qué cobra la competencia (orientativo)
 | Qué | Rango encontrado | Fuente y matiz |
 |---|---|---|
@@ -24,7 +27,8 @@
 |---|---|---|---|---|---|
 | **Abre en** | **1.290 €** | 149 € | 12 meses | **3.078 €** | Te deja margen para ceder sin bajar de tu objetivo |
 | **Objetivo de cierre** | **990 €** | 149 € | 12 meses | **2.778 €** | Donde quieres cerrar |
-| **Tu suelo (no bajes de aquí)** | **790 €** | 149 € | 12 meses | **2.578 €** | Cubre tu tiempo (≈ 26 €/hora solo con el alta) y deja 129 €/mes de margen |
+| **Mi suelo original** | 790 € | 149 € | 12 meses | 2.578 € | Cubre tu tiempo (≈ 26 €/hora solo con el alta) y deja 129 €/mes de margen |
+| **Tu suelo (decisión tuya)** | **500 €** | 149 € | 12 meses | **2.288 €** | Solo a cambio de testimonio o de pago del alta al firmar. Primer día: 500 + 149 = 649 € |
 | **Techo (no subas de aquí)** | 2.500 € | 165 € | 12 meses | 4.480 € | Es tu lista oficial (Esencial); por encima no se justifica para un despacho pequeño |
 
 **Por qué este rango no es ni bajo ni alto:** el objetivo (2.778 €) queda **por debajo** de lo que costaría comprar web, mantenimiento y agente por separado (≈ 6.500–8.000 €), y **por encima** de una plantilla de 199–499 €/año, que no hace lo mismo. La mensualidad de 149 € está dentro del rango de mantenimiento de web (50–150 €) y **incluye además** el asistente, el calendario y el panel. Tu anuncio de **alta 0 €** para los 3 primeros queda como oferta distinta (sin rediseño), no para este cliente.
@@ -36,8 +40,8 @@
 
 ### Escalera de concesiones (cede en este orden, nunca en la mensualidad)
 1. **Fraccionar el alta** en 2 o 3 pagos.
-2. **Caso de éxito:** el precio fundador (990 → 790 €) a cambio de testimonio y permiso para citarlos.
-3. **Reducir el alcance, no el precio:** si no llegan a 790 € de alta, ofrece **solo el asistente** (alta 290 € + 99 €/mes, mínimo 3 meses; es tu alta del cuarto cliente) y deja el rediseño para después.
+2. **Caso de éxito:** baja de 990 € a 790 € a cambio de testimonio y permiso para citarlos. **Tu suelo de 500 €** se concede solo con testimonio **o** con el alta pagada entera al firmar.
+3. **Reducir el alcance, no el precio:** si no llegan a tu suelo, ofrece **solo el asistente** (alta 290 € + 99 €/mes, mínimo 3 meses; es tu alta del cuarto cliente) y deja el rediseño para después.
 4. **Nunca** bajar la mensualidad de 149 € ni aceptar alta 0 € con rediseño: trabajarías 30 horas gratis.
 
 ### Qué decir si preguntan "¿por qué ese precio?"
@@ -47,7 +51,8 @@
 | Escenario | Primer año | Costes (≈ 20 €/mes) | Neto |
 |---|---|---|---|
 | Objetivo (990 + 149 × 12) | 2.778 € | 240 € | **2.538 €** |
-| Suelo (790 + 149 × 12) | 2.578 € | 240 € | **2.338 €** |
+| Suelo original (790 + 149 × 12) | 2.578 € | 240 € | **2.338 €** |
+| **Tu suelo (500 + 149 × 12)** | 2.288 € | 240 € | **2.048 €** |
 | Solo asistente (290 + 99 × 3 meses) | 587 € | 60 € | **527 €** |
 
 **Condición de tu Plan de acción:** este cliente cuenta como uno de los 2 cupos de webs y agente hasta el 16/10/2026.
@@ -74,6 +79,8 @@ Martínez-Matilla ya tiene ficha (se ven 20 reseñas en Google), así que el tra
 **Complementa la ficha en la web:** que nombre, dirección y teléfono sean idénticos y añade datos estructurados de negocio local si usan un plugin de SEO.
 
 ## 5. Qué se subió al repositorio del agente
+> El rubro de reclamaciones y la ficha de Google (sección 4) **ya están hechos en esta sesión**; la nota de tu proyecto los daba por pendientes.
+
 - Rama **`claude/rubro-reclamaciones`** en `RafGab/ai-lead-machine-demo` (no está fusionada en `main`; no abrí pull request).
 - Contiene el rubro nuevo `reclamaciones` (tipo de caso: revolving, hipoteca, préstamo personal, préstamo de coche, laboral, administrativo, civil, mercantil, otro; entidad y documentos solo en casos bancarios; prioridad alta si hay fecha límite) y 3 tests nuevos. El agente no valora el caso, no promete cantidades y no habla de honorarios.
 - También contiene el commit de **recordatorios y seguimiento** (apagado por defecto: `REMINDERS_ENABLED=0`) y la corrección de un test que dependía del reloj real. **No lo actives con este cliente sin el aviso de privacidad.**
