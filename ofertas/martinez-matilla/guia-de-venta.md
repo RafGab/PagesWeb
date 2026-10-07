@@ -174,6 +174,16 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 4. **Confirmación de la ficha de Google** (¿puedes cumplirla?).
 5. **Decir "sí" para que prepare el rubro de reclamaciones bancarias** del agente (parche como el de recordatorios) y la demo con ese flujo.
 
+## 9b. Compatibilidad con tu "Plan de acción" (recibido de otra sesión tuya, sin verificar por ti)
+Otra sesión de tu proyecto "Plan de acción" me envió estos lineamientos. Los uso como contraste; **las decisiones son tuyas**:
+| Lineamiento | Cómo encaja con esta guía |
+|---|---|
+| Ingresos primero; foco en Acero Pulido; webs y agente con tope de **2 clientes hasta el 16/10/2026**, sin publicidad pagada | Martínez-Matilla sería uno de esos 2 cupos. **El piloto C también ocupa un cupo**: decide si cabe antes de ofrecerlo |
+| Comprobar que el agente funciona con varios clientes antes del 3.º | El rubro de reclamaciones bancarias y un despliegue propio para este cliente cuentan como prueba |
+| Oferta pública: alta 0 € a los 3 primeros (mín. 3 meses), 149 €/mes, "la web es tuya"; desde el 4.º, alta 290 € | Es mi opción A. La opción B (790 € + 149 €/mes, 12 meses) es compatible como oferta **con rediseño** |
+| No anunciar WhatsApp, recordatorios ni reseñas automáticas; quitar la "ficha de Google optimizada" salvo que la hagas a mano | Coincide con la sección 7. Ya no la menciones en la reunión |
+| Presentación: abogada en Colombia (Universidad Militar Nueva Granada); en España, asesora de extranjería **no colegiada** | Delante de un despacho, preséntate **como proveedora de tecnología** y no como colega abogada. No des a entender que ejerces en España |
+
 ## 10. Después de la reunión (mensaje de seguimiento)
 > Gracias por la reunión de hoy. Como acordamos: instalo el asistente en su web el [día], con acceso al panel. Necesito: acceso a la web, calendario compartido y correo para los avisos. Revisamos los primeros datos el [día +15] y decidimos el [día +30]. ¡Un placer!
 
