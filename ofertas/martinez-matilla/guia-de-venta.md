@@ -3,7 +3,7 @@
 > **Objetivo:** captar al cliente. El primer pago es secundario; lo importante es que el despacho use el agente y se convierta en tu caso de éxito.
 > **Actualización 07/10/2026:** ya tengo la copia de su web (archivo `.webarchive`). Es **Martínez-Matilla Abogados**, de León, despacho **100 % online**, especializado en reclamaciones bancarias y también laboral, administrativo, civil y mercantil.
 > La demo (`demo/index.html`) usa **su logo, sus textos, sus colores y su tipografía reales**, con dos versiones: **"Su estilo"** (réplica fiel de su diseño actual: barra magenta, hero claro, cinco tarjetas claro/oscuro, bloque negro y franja magenta) y **"Versión mejorada"** (mismos colores y logo, más aire y mejor jerarquía). Interruptor abajo a la izquierda.
-> Sigue pendiente el proyecto "Plan de acción para establecer y fusionar lineamientos": no tengo acceso a él desde esta sesión (ver sección 9).
+> Precios y mínimo: ver `precio-minimo-y-ficha-google.md`. Los precios de la sección 3 de esta guía son anteriores; **para B usa los de ese documento** (abre en 1.290 €, objetivo 990 €, suelo 790 € + 149 €/mes).
 > Todas las funciones y precios salen de `CONTEXTO.md` (producto verificado en el código y lista oficial). Precios en euros, **sin IVA**.
 
 ---
@@ -170,9 +170,9 @@ Si dudan: *"¿Qué necesitarían ver el día 30 para decidir?"* y anótalo como 
 ## 9. Lo que necesito de ti
 1. ~~Texto y logo de su web~~ (recibido).
 2. **El proyecto "Plan de acción para establecer y fusionar lineamientos":** no tengo acceso desde esta sesión. Pega aquí su contenido o los lineamientos clave y reviso las opciones contra ellos.
-3. **Tu suelo de precio** y si aceptas la contrapartida de caso de éxito.
+3. ~~Tu suelo de precio~~: propuesta en `precio-minimo-y-ficha-google.md` (abre en 1.290 €, objetivo 990 €, suelo 790 € de alta + 149 €/mes, 12 meses). **Tú decides.**
 4. **Confirmación de la ficha de Google** (¿puedes cumplirla?).
-5. **Decir "sí" para que prepare el rubro de reclamaciones bancarias** del agente (parche como el de recordatorios) y la demo con ese flujo.
+5. ~~Rubro de reclamaciones bancarias~~: subido a la rama `claude/rubro-reclamaciones` (ver `precio-minimo-y-ficha-google.md`, sección 5). Falta fusionarlo y desplegarlo.
 
 ## 9b. Compatibilidad con tu "Plan de acción" (recibido de otra sesión tuya, sin verificar por ti)
 Otra sesión de tu proyecto "Plan de acción" me envió estos lineamientos. Los uso como contraste; **las decisiones son tuyas**:
