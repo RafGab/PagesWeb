@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Martínez Matilla · Propuesta de web con asistente (demo)</title>
+<meta name="robots" content="noindex, nofollow">
+<!--
+  DEMO / MAQUETA. Estructura construida con las tres indicaciones del banner:
+  1) Plano: identidad, estructura, narrativa de scroll, orden de construcción.
+  2) Hero: promesa + evidencia + una acción en menos de 10 s, botón primario y secundario.
+  3) Movimiento: animar solo donde suma; nada donde estorba; respeta prefers-reduced-motion.
+  TODO (marcado con [CONFIRMAR]): textos, áreas, equipo y datos son PROVISIONALES.
+  No pude abrir martinezmatilla.com desde mi entorno: sustituir con el contenido real antes de enseñarlo como "su web".
+-->
+<style>
+  :root{--ink:#14110F;--ink2:#1E1A17;--paper:#F6F1E9;--bronze:#B98A4E;--bronze2:#D9B57C;--mut:#8D857B;--line:#ffffff1f}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink);color:var(--paper);font:16px/1.65 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
+  h1,h2,h3{font-family:"Cormorant Garamond","Playfair Display",Georgia,serif;font-weight:600;line-height:1.08;margin:0}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;z-index:20;background:#14110Fe6;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:68px}
+  .logo{font-family:Georgia,serif;font-size:1.25rem;letter-spacing:.04em}.logo b{color:var(--bronze2);font-weight:600}
+  nav a{margin-left:26px;text-decoration:none;font-size:.9rem;color:#d8d1c6}nav a:hover{color:var(--bronze2)}
+  .btn{display:inline-block;padding:14px 26px;border-radius:2px;text-decoration:none;font-weight:600;font-size:.95rem;letter-spacing:.02em;transition:transform .25s,background .25s,color .25s;border:1px solid var(--bronze)}
+  .btn.p{background:var(--bronze);color:#1a1209}.btn.p:hover{background:var(--bronze2);transform:translateY(-2px)}
+  .btn.s{color:var(--paper)}.btn.s:hover{background:#ffffff10}
+  /* HERO */
+  .hero{padding:110px 0 90px;background:radial-gradient(900px 400px at 85% 0,#B98A4E26,transparent 60%)}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze2);margin-bottom:22px;display:block}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,5rem);max-width:15ch}
+  .hero h1 em{color:var(--bronze2);font-style:italic}
+  .hero p.lead{max-width:56ch;color:#cfc8bd;font-size:1.15rem;margin:26px 0 34px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .proof{display:flex;gap:34px;flex-wrap:wrap;margin-top:56px;padding-top:26px;border-top:1px solid var(--line)}
+  .proof div b{display:block;font-family:Georgia,serif;font-size:1.7rem;color:var(--bronze2)}.proof span{font-size:.82rem;color:var(--mut)}
+  section{padding:84px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:14px}.sub{color:#b9b1a5;max-width:60ch;margin:0 0 40px}
+  .areas{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .area{background:var(--ink);padding:30px 26px;transition:background .3s}.area:hover{background:var(--ink2)}
+  .area h3{font-size:1.5rem;margin-bottom:8px}.area p{margin:0;color:#b9b1a5;font-size:.95rem}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:s}
+  .step{counter-increment:s;border-top:2px solid var(--bronze);padding-top:16px}
+  .step::before{content:"0" counter(s);font-family:Georgia,serif;color:var(--bronze2);font-size:1.3rem}
+  .step h3{font-size:1.35rem;margin:6px 0}.step p{margin:0;color:#b9b1a5;font-size:.93rem}
+  .assist{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .assist ul{padding:0;list-style:none;margin:20px 0 28px}.assist li{padding:9px 0 9px 28px;position:relative;border-bottom:1px solid var(--line)}
+  .assist li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:1px;background:var(--bronze2)}
+  .chat{background:#F6F1E9;color:#14110F;border-radius:6px;padding:18px;box-shadow:0 40px 80px -40px #000}
+  .chat .h{font-weight:700;border-bottom:1px solid #0001;padding-bottom:10px;margin-bottom:12px}.chat .h small{display:block;font-weight:400;color:#2d8a4e}
+  .m{max-width:84%;padding:10px 13px;border-radius:12px;margin:8px 0;font-size:.92rem;line-height:1.45}
+  .m.b{background:#fff;border:1px solid #0001}.m.u{background:#14110F;color:#fff;margin-left:auto}
+  .ok{background:#E3F2E8;color:#1B5E33;padding:9px 12px;border-radius:8px;font-size:.85rem;margin-top:10px}
+  .note{font-size:.82rem;color:var(--mut);margin-top:14px}
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  .contact p{color:#b9b1a5}.dato{padding:12px 0;border-bottom:1px solid var(--line)}.dato b{display:block;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze2)}
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:.82rem;color:var(--mut)}
+  /* MOVIMIENTO: solo entrada suave al hacer scroll (transform + opacity); sin movimiento en texto legal, formularios ni el chat */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.btn{transition:none}}
+  @media(max-width:860px){nav{display:none}.areas{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.assist,.contact{grid-template-columns:1fr}.hero{padding:70px 0 60px}section{padding:60px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><b>Martínez</b> Matilla <!-- [CONFIRMAR] nombre y logo reales --></div>
+  <nav><a href="#areas">Áreas</a><a href="#metodo">Cómo trabajamos</a><a href="#asistente">Asistente</a><a href="#contacto">Contacto</a></nav>
+  <a class="btn p" href="#contacto">Pedir consulta</a>
+</div></header>
+
+<main>
+<section class="hero" style="border-top:0"><div class="wrap">
+  <span class="eyebrow rv">Despacho de abogados · [CONFIRMAR ciudad]</span>
+  <h1 class="rv">Su caso, en manos de <em>quien lo defiende</em> desde la primera llamada.</h1>
+  <p class="lead rv">Explíquenos su situación a cualquier hora. Le respondemos, ordenamos su caso y le reservamos una primera consulta con un abogado. <!-- [CONFIRMAR] promesa real --></p>
+  <div class="cta rv"><a class="btn p" href="#contacto">Reservar primera consulta</a><a class="btn s" href="#asistente">Hablar con el asistente ahora</a></div>
+  <div class="proof rv">
+    <div><b>[XX] años</b><span>de ejercicio [CONFIRMAR]</span></div>
+    <div><b>[Áreas]</b><span>de práctica [CONFIRMAR]</span></div>
+    <div><b>24 h</b><span>para recibir su consulta, también de noche</span></div>
+  </div>
+</div></section>
+
+<section id="areas"><div class="wrap">
+  <h2 class="rv">Áreas de práctica</h2>
+  <p class="sub rv">[CONFIRMAR] Sustituir por las áreas reales del despacho. Ejemplo orientativo.</p>
+  <div class="areas rv">
+    <div class="area"><h3>Civil y familia</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+    <div class="area"><h3>Mercantil</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+    <div class="area"><h3>Laboral</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+    <div class="area"><h3>Penal</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+    <div class="area"><h3>Extranjería</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+    <div class="area"><h3>Otras</h3><p>[CONFIRMAR] Texto real del área.</p></div>
+  </div>
+</div></section>
+
+<section id="metodo"><div class="wrap">
+  <h2 class="rv">Cómo trabajamos</h2>
+  <p class="sub rv">Un proceso claro, sin sorpresas.</p>
+  <div class="steps rv">
+    <div class="step"><h3>Nos cuenta</h3><p>Por el asistente, el teléfono o el formulario.</p></div>
+    <div class="step"><h3>Lo ordenamos</h3><p>Recogemos datos y plazos para que el abogado llegue preparado.</p></div>
+    <div class="step"><h3>Primera consulta</h3><p>Cita reservada en la agenda del despacho.</p></div>
+    <div class="step"><h3>Estrategia</h3><p>El abogado le explica opciones y honorarios.</p></div>
+  </div>
+</div></section>
+
+<section id="asistente"><div class="wrap assist">
+  <div class="rv">
+    <span class="eyebrow">Asistente del despacho</span>
+    <h2>Atendemos su consulta aunque el despacho esté cerrado</h2>
+    <ul>
+      <li>Responde y pregunta lo que preguntaría el despacho.</li>
+      <li>Identifica los casos con plazo urgente.</li>
+      <li>Reserva la cita en el Google Calendar del despacho, con disponibilidad real.</li>
+      <li>Envía un resumen por correo al abogado.</li>
+      <li>Pasa a una persona cuando usted lo pide.</li>
+    </ul>
+    <a class="btn p" href="https://ai-lead-machine-demo.onrender.com/?rubro=despacho" target="_blank" rel="noopener">Probar el asistente (demo en vivo)</a>
+    <p class="note">El asistente no ofrece asesoría legal: solo recoge los datos para que el abogado lo atienda.</p>
+  </div>
+  <div class="chat rv" aria-label="Ejemplo de conversación">
+    <div class="h">Asistente del despacho<small>● en línea</small></div>
+    <div class="m u">Hola, me han despedido y me dan 3 días para firmar el finiquito.</div>
+    <div class="m b">Lamento la situación. ¿Cuál es su nombre y un teléfono de contacto?</div>
+    <div class="m u">Ana Ruiz, 600 000 000.</div>
+    <div class="m b">Gracias, Ana. Es un caso con plazo corto y lo marco como prioritario. Mañana a las 10:00 hay hueco con una abogada. ¿Se lo reservo?</div>
+    <div class="m u">Sí, por favor.</div>
+    <div class="ok">✓ Cita creada · resumen enviado al despacho</div>
+  </div>
+</div></section>
+
+<section id="contacto"><div class="wrap contact">
+  <div class="rv"><h2>Primera consulta</h2><p>Cuéntenos su caso. Le respondemos en horario laboral y el asistente le atiende el resto del tiempo.</p>
+    <a class="btn p" href="#">[CONFIRMAR] Formulario o botón de reserva</a></div>
+  <div class="rv">
+    <div class="dato"><b>Teléfono</b>[CONFIRMAR]</div>
+    <div class="dato"><b>Correo</b>[CONFIRMAR]</div>
+    <div class="dato"><b>Dirección</b>[CONFIRMAR]</div>
+    <div class="dato"><b>Horario</b>[CONFIRMAR]</div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">© Martínez Matilla · [CONFIRMAR aviso legal, política de privacidad y cookies]. Demo preparada por Viviana Acero · AI Lead Machine.</div></footer>
+
+<script>
+  // Entrada suave solo si el usuario no pidió menos movimiento
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('.rv'));
+    if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+<!-- Asistente real de AI Lead Machine (se activa al publicar en un servidor; en archivo local puede no cargar) -->
+<script src="https://ai-lead-machine-backend.onrender.com/widget.js"
+        data-api-url="https://ai-lead-machine-backend.onrender.com"
+        data-color="#B98A4E" data-agent-name="Asistente del despacho"
+        data-subtitle="Le ayudo a reservar su primera consulta"
+        data-welcome="Hola, soy el asistente del despacho. Cuénteme brevemente su caso y le ayudo a reservar una primera consulta."
+        data-position="right" defer></script>
+</body>
+</html>
