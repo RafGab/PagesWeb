@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Lead Machine · Hoja de marca</title>
+<style>
+/*FONTS*/
+:root{--noche:#0B1426;--atl:#14284B;--oro:#C9A66B;--oroviejo:#7A5C22;--cian:#38D5CF;--marfil:#F7F4ED;--niebla:#E8ECF3;--grafito:#4F596B;
+ --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marfil);color:var(--noche);font:400 16px/1.6 var(--sans)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 56px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:-.01em;line-height:1.08}
+.lab{font:500 .72rem var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--oroviejo)}
+.dark .lab{color:var(--oro)}
+/* hero */
+.hero{background:var(--noche);color:var(--marfil);position:relative;overflow:hidden;padding:84px 0 96px}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 80% 30%,#000,transparent 70%)}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#38D5CF22,transparent 65%)}
+.hero .wrap{position:relative;z-index:1}
+.lock{display:flex;align-items:center;gap:18px}
+.lock svg{width:60px;height:60px}
+.word{font:600 1.15rem var(--sans);letter-spacing:.34em;text-transform:uppercase}
+.word b{color:var(--oro);font-weight:700}
+.hero h1{font-size:clamp(3rem,6vw,5.2rem);max-width:15ch;margin:64px 0 24px}
+.hero h1 em{font-style:italic;color:var(--oro)}
+.hero p{max-width:58ch;font-size:1.18rem;color:#C9D1E0;margin:0}
+.rule{height:1px;background:linear-gradient(90deg,var(--oro),transparent);width:240px;margin:40px 0 28px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;border:1px solid #C9A66B66;color:var(--oro);padding:7px 14px;border-radius:99px}
+section{padding:88px 0;border-bottom:1px solid #0B142620}
+section.dark{background:var(--noche);color:var(--marfil);border-bottom:0}
+h2{font-size:2.5rem;margin:12px 0 14px}.lead{max-width:68ch;color:var(--grafito);font-size:1.08rem;margin:0 0 48px}.dark .lead{color:#B8C2D6}
+/* esencia */
+.five{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--noche)}
+.five>div{padding:26px 22px 8px 0}.five h3{font-size:1.4rem;margin-bottom:8px}.five p{margin:0;color:var(--grafito);font-size:.93rem}
+.five .n{font:500 .72rem var(--mono);color:var(--oroviejo);letter-spacing:.14em}
+/* logo */
+.logos{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+.tile{border-radius:4px;padding:56px 48px;display:flex;align-items:center;justify-content:center;min-height:240px;position:relative}
+.tile .cap{position:absolute;left:18px;bottom:12px;font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.t-noche{background:var(--noche);color:var(--marfil)}.t-marfil{background:#fff;border:1px solid #0B142622}.t-atl{background:var(--atl);color:var(--marfil)}.t-oro{background:var(--oro);color:var(--noche)}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+.stack{display:flex;flex-direction:column;align-items:center;gap:14px}.stack svg{width:84px;height:84px}
+.stack .word{font-size:1rem}
+.t-marfil .word{color:var(--noche)}.t-marfil .word b{color:var(--oroviejo)}
+.t-oro .word b{color:var(--noche)}
+/* paleta */
+.sw{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid #0B142622;border-radius:4px;overflow:hidden}
+.sw>div{min-height:300px;padding:22px 20px;display:flex;flex-direction:column;justify-content:flex-end}
+.sw h3{font-size:1.3rem}.sw .hx{font:500 .78rem var(--mono);letter-spacing:.06em;margin-top:6px}.sw p{font-size:.82rem;margin:8px 0 0;opacity:.85}
+.bar{display:flex;height:34px;border-radius:2px;overflow:hidden;margin-top:30px}
+.barcap{display:flex;font:500 .68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--grafito);margin-top:8px}
+.ct{width:100%;border-collapse:collapse;margin-top:40px;font-size:.9rem}
+.ct th,.ct td{padding:10px 12px;border-bottom:1px solid #0B142618;text-align:left}.ct th{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--grafito)}
+.sample{display:inline-block;padding:4px 12px;border-radius:2px;font-weight:600}
+/* tipografía */
+.type{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.tcard{border-top:1px solid var(--oro);padding-top:20px}
+.tcard .big{font-size:4.6rem;line-height:1;margin:14px 0}
+.tcard p{color:#B8C2D6;margin:6px 0;font-size:.95rem}
+.spec{border-top:1px solid #ffffff22;margin-top:48px;padding-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.spec h4{font:500 .7rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--oro);margin:0 0 14px}
+.spec .h1{font:600 2.7rem/1.1 var(--serif);margin:0 0 10px}.spec .h1 i{color:var(--oro)}
+.spec .b{color:#C9D1E0;max-width:52ch}
+/* componentes */
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.panel{background:#fff;border:1px solid #0B142620;border-radius:4px;padding:36px}
+.panel.d{background:var(--noche);border-color:var(--noche);color:var(--marfil)}
+.btn{display:inline-block;font:600 .8rem var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:15px 28px;border-radius:2px;border:1px solid var(--oro);margin:0 10px 10px 0}
+.btn.p{background:var(--oro);color:var(--noche)}.btn.s{color:var(--oro)}.btn.l{background:var(--noche);color:var(--marfil);border-color:var(--noche)}.btn.s2{color:var(--noche);border-color:var(--noche)}
+.cardx{border:1px solid #0B142622;border-top:3px solid var(--oro);padding:24px;background:#fff;border-radius:2px;margin-top:14px}
+.cardx h3{font-size:1.3rem;margin-bottom:6px}.cardx p{margin:0;color:var(--grafito);font-size:.93rem}
+.chat{background:var(--atl);border-radius:12px;padding:20px;color:var(--marfil)}
+.chat .hd{display:flex;align-items:center;gap:12px;border-bottom:1px solid #ffffff22;padding-bottom:14px;margin-bottom:12px;font-weight:600}
+.chat .hd svg{width:34px;height:34px;background:var(--noche);border-radius:8px;padding:5px}.chat small{display:block;color:var(--cian);font:500 .66rem var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.m{max-width:82%;padding:11px 15px;border-radius:12px;margin:8px 0;font-size:.9rem;line-height:1.45}
+.m.b{background:#ffffff14}.m.u{background:var(--oro);color:var(--noche);margin-left:auto;font-weight:500}
+.ok{background:#38D5CF1f;color:var(--cian);border:1px solid #38D5CF55;padding:9px 13px;border-radius:8px;font-size:.84rem;margin-top:10px}
+/* aplicaciones */
+.apps{display:grid;grid-template-columns:1fr 1.2fr;gap:28px}
+.card{background:var(--noche);color:var(--marfil);aspect-ratio:1.75;border-radius:6px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 60px -34px #0B1426}
+.card .t{font-family:var(--serif);font-size:1.5rem}.card .s{font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--oro)}
+.card .ct2{font-size:.8rem;color:#C9D1E0}
+.doc{background:#fff;border:1px solid #0B142622;border-radius:2px;padding:0;box-shadow:0 30px 60px -40px #0B1426;overflow:hidden}
+.doc .top{background:var(--noche);color:var(--marfil);padding:20px 34px;display:flex;justify-content:space-between;align-items:center}
+.doc .top svg{width:34px;height:34px}.doc .top .word{font-size:.8rem}
+.doc .gold{height:3px;background:var(--oro)}
+.doc .bd{padding:30px 34px 34px}
+.doc h3{font-size:1.6rem;margin-bottom:6px}.doc .sub{font:500 .66rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--oroviejo)}
+.doc p{font-size:.86rem;color:#2a3347;margin:12px 0 0}
+.doc .ln{border-bottom:1px dotted #0B142666;display:inline-block;width:160px}
+/* reglas */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.rules ul{margin:14px 0 0;padding-left:20px}.rules li{margin:8px 0;color:var(--grafito)}
+.rules h3{font-size:1.4rem}
+.yes{border-top:3px solid #1F8A66;padding-top:16px}.no{border-top:3px solid #A33B3B;padding-top:16px}
+footer{background:var(--noche);color:#9AA6BD;padding:36px 0;font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="s" viewBox="0 0 64 64"><g fill="none" stroke="#C9A66B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 16 13 54"/><path d="M32 16 51 54"/><path d="M21 38h22"/></g><circle cx="32" cy="11.5" r="4.6" fill="#38D5CF"/><circle cx="32" cy="38" r="2.7" fill="#38D5CF"/></symbol>
+<symbol id="sl" viewBox="0 0 64 64"><g fill="none" stroke="#0B1426" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 16 13 54"/><path d="M32 16 51 54"/><path d="M21 38h22"/></g><circle cx="32" cy="11.5" r="4.6" fill="#7A5C22"/><circle cx="32" cy="38" r="2.7" fill="#7A5C22"/></symbol>
+<symbol id="so" viewBox="0 0 64 64"><g fill="none" stroke="#0B1426" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 16 13 54"/><path d="M32 16 51 54"/><path d="M21 38h22"/></g><circle cx="32" cy="11.5" r="4.6" fill="#0B1426"/><circle cx="32" cy="38" r="2.7" fill="#0B1426"/></symbol>
+</defs></svg>
+
+<header class="hero"><div class="wrap">
+  <div class="lock"><svg><use href="#s"/></svg><span class="word"><b>AI</b> Lead Machine</span></div>
+  <h1>Atención que <em>nunca</em> se apaga.</h1>
+  <p>Sistema de marca v2 · Medianoche &amp; Oro. Una identidad sobria, precisa y de confianza para quien atiende, filtra y agenda a sus clientes con inteligencia artificial.</p>
+  <div class="rule"></div>
+  <div class="chips"><span class="chip">Elegancia</span><span class="chip">Tecnología</span><span class="chip">Confianza</span><span class="chip">Experiencia</span><span class="chip">Premium</span></div>
+</div></header>
+
+<section><div class="wrap">
+  <span class="lab">01 · Esencia</span>
+  <h2>Sobria por fuera, eficaz por dentro</h2>
+  <p class="lead">La marca habla como un despacho de confianza que trabaja con tecnología de primer nivel: pocos elementos, muy bien elegidos. El oro aporta experiencia y prestigio; el cian, una señal discreta de tecnología viva.</p>
+  <div class="five">
+    <div><span class="n">01</span><h3>Elegancia</h3><p>Titulares en serif, mucho aire y filetes finos en oro.</p></div>
+    <div><span class="n">02</span><h3>Tecnología</h3><p>Cuadrícula sutil, etiquetas en mono y un punto cian que indica "activo".</p></div>
+    <div><span class="n">03</span><h3>Confianza</h3><p>Fondos profundos, contrastes altos y mensajes claros, sin promesas vacías.</p></div>
+    <div><span class="n">04</span><h3>Experiencia</h3><p>Tono profesional, cifras concretas y casos reales en lugar de adjetivos.</p></div>
+    <div><span class="n">05</span><h3>Premium</h3><p>Oro champán solo en detalles que importan: acción, énfasis y firma.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="lab">02 · Logotipo</span>
+  <h2>Un símbolo, una firma</h2>
+  <p class="lead">El símbolo es una «A» abierta que traza el camino de un contacto: entra por el vértice (punto cian), atraviesa el filtro (la barra) y llega a la agenda. El nombre se compone en mayúsculas espaciadas; «AI» siempre en oro.</p>
+  <div class="logos">
+    <div class="tile t-noche"><div class="lock"><svg style="width:72px;height:72px"><use href="#s"/></svg><span class="word" style="font-size:1.45rem"><b>AI</b> Lead Machine</span></div><span class="cap">Principal · sobre Medianoche</span></div>
+    <div class="tile t-marfil"><div class="stack"><svg><use href="#sl"/></svg><span class="word"><b>AI</b> Lead Machine</span></div><span class="cap" style="color:#0B1426">Apilado · sobre marfil</span></div>
+  </div>
+  <div class="row3">
+    <div class="tile t-atl" style="min-height:170px"><svg style="width:64px;height:64px"><use href="#s"/></svg><span class="cap">Símbolo · sobre Atlántico</span></div>
+    <div class="tile t-oro" style="min-height:170px"><svg style="width:64px;height:64px"><use href="#so"/></svg><span class="cap">Una tinta · sobre oro</span></div>
+    <div class="tile t-marfil" style="min-height:170px"><div class="lock"><svg style="width:40px;height:40px"><use href="#sl"/></svg><span class="word" style="font-size:.78rem"><b>AI</b> Lead Machine</span></div><span class="cap" style="color:#0B1426">Mínimo · 32 px de alto</span></div>
+  </div>
+</div></section>
+
+<section class="dark"><div class="wrap">
+  <span class="lab">03 · Color</span>
+  <h2>Medianoche &amp; Oro</h2>
+  <p class="lead">Cinco colores con jerarquía clara. El oro no se usa como fondo grande ni como texto sobre claro (ahí se usa Oro viejo, con contraste legible).</p>
+  <div class="sw">
+    <div style="background:#0B1426;color:#F7F4ED;border-right:1px solid #ffffff22"><h3>Medianoche</h3><span class="hx">#0B1426 · RGB 11 20 38</span><p>Fondo principal, titulares y texto sobre claro.</p></div>
+    <div style="background:#14284B;color:#F7F4ED"><h3>Atlántico</h3><span class="hx">#14284B · RGB 20 40 75</span><p>Superficies, tarjetas y paneles sobre Medianoche.</p></div>
+    <div style="background:#C9A66B;color:#0B1426"><h3>Oro champán</h3><span class="hx">#C9A66B · RGB 201 166 107</span><p>Acción principal, filetes, símbolo y énfasis. Solo sobre oscuro.</p></div>
+    <div style="background:#38D5CF;color:#0B1426"><h3>Cian señal</h3><span class="hx">#38D5CF · RGB 56 213 207</span><p>Punto «activo», estados y datos. Siempre en pequeño.</p></div>
+    <div style="background:#F7F4ED;color:#0B1426"><h3>Marfil</h3><span class="hx">#F7F4ED · RGB 247 244 237</span><p>Fondo claro de documentos y web, y texto sobre oscuro.</p></div>
+  </div>
+  <div class="bar"><div style="flex:55;background:#0B1426;border:1px solid #ffffff33"></div><div style="flex:20;background:#14284B"></div><div style="flex:15;background:#F7F4ED"></div><div style="flex:7;background:#C9A66B"></div><div style="flex:3;background:#38D5CF"></div></div>
+  <div class="barcap"><span style="flex:55">55 % Medianoche</span><span style="flex:20">20 % Atlántico</span><span style="flex:15">15 % Marfil</span><span style="flex:7">7 % Oro</span><span style="flex:3">3 %</span></div>
+  <table class="ct">
+    <tr><th>Combinación</th><th>Contraste</th><th>Uso</th></tr>
+    <tr><td><span class="sample" style="background:#0B1426;color:#C9A66B">Oro sobre Medianoche</span></td><td>8,0 : 1</td><td>Títulos, botones, símbolo</td></tr>
+    <tr><td><span class="sample" style="background:#0B1426;color:#F7F4ED">Marfil sobre Medianoche</span></td><td>16,7 : 1</td><td>Texto principal sobre oscuro</td></tr>
+    <tr><td><span class="sample" style="background:#0B1426;color:#38D5CF">Cian sobre Medianoche</span></td><td>10,1 : 1</td><td>Estados y datos</td></tr>
+    <tr><td><span class="sample" style="background:#F7F4ED;color:#0B1426">Medianoche sobre Marfil</span></td><td>16,7 : 1</td><td>Texto principal sobre claro</td></tr>
+    <tr><td><span class="sample" style="background:#F7F4ED;color:#7A5C22">Oro viejo #7A5C22 sobre Marfil</span></td><td>5,7 : 1</td><td>Etiquetas y detalles sobre claro</td></tr>
+    <tr><td><span class="sample" style="background:#C9A66B;color:#0B1426">Medianoche sobre Oro</span></td><td>8,0 : 1</td><td>Texto dentro de botones</td></tr>
+  </table>
+</div></section>
+
+<section class="dark" style="border-top:1px solid #ffffff22"><div class="wrap">
+  <span class="lab">04 · Tipografía</span>
+  <h2>Serif para hablar, sans para trabajar</h2>
+  <p class="lead">Tres voces: Fraunces para titulares (elegancia y experiencia), Inter para el texto (claridad y tecnología) y JetBrains Mono solo para etiquetas técnicas.</p>
+  <div class="type">
+    <div class="tcard"><span class="lab">Titulares</span><div class="big" style="font-family:var(--serif);font-weight:600">Aa</div><b style="font-family:var(--serif);font-size:1.5rem;font-weight:600">Fraunces SemiBold</b><p>Títulos, cifras grandes y citas. Cursiva en oro para la palabra clave.</p></div>
+    <div class="tcard"><span class="lab">Texto</span><div class="big" style="font-family:var(--sans);font-weight:500">Aa</div><b style="font-size:1.5rem;font-weight:600">Inter Regular / SemiBold</b><p>Cuerpo, botones, interfaces y documentos.</p></div>
+    <div class="tcard"><span class="lab">Etiquetas</span><div class="big" style="font-family:var(--mono);font-weight:500;font-size:3.9rem">Aa</div><b style="font-family:var(--mono);font-weight:500;font-size:1.15rem;letter-spacing:.06em">JetBrains Mono Medium</b><p>MAYÚSCULAS espaciadas, números de cláusula, estados.</p></div>
+  </div>
+  <div class="spec">
+    <div><h4>Ejemplo · titular</h4><div class="h1">Su despacho atiende a las 23:47, <i>aunque esté durmiendo</i></div></div>
+    <div><h4>Ejemplo · texto</h4><p class="b">Web profesional y asistente con IA que responde, filtra la consulta y deja la cita en su agenda. Sin promesas vacías: datos concretos y un servicio que funciona desde el primer día.</p></div>
+  </div>
+  <p style="color:#9AA6BD;font-size:.86rem;margin-top:26px">Alternativas para Word y Office: Georgia (titulares) y Calibri (texto), que existen en cualquier equipo.</p>
+</div></section>
+
+<section><div class="wrap">
+  <span class="lab">05 · Componentes</span>
+  <h2>Detalles que construyen confianza</h2>
+  <p class="lead">Filete de oro bajo los títulos, tarjetas con borde superior dorado, un único botón principal por pantalla y el punto cian que indica actividad.</p>
+  <div class="comp">
+    <div class="panel">
+      <span class="lab">Botones y tarjeta</span>
+      <div style="margin-top:20px"><span class="btn p">Reservar consulta</span><span class="btn s2">Ver cómo funciona</span><span class="btn l">Hablar con una persona</span></div>
+      <div class="cardx"><h3>Asistente 24 horas</h3><p>Atiende, filtra con tus reglas y reserva en tu calendario, también de noche.</p></div>
+      <div class="cardx"><h3>Panel de contactos</h3><p>Estados, notas y exportación a CSV para que nada se pierda.</p></div>
+    </div>
+    <div class="panel d" style="padding:28px"><span class="lab" style="color:var(--oro)">Asistente</span>
+      <div class="chat" style="margin-top:16px"><div class="hd"><svg><use href="#s"/></svg><div>Asistente del despacho<small>● En línea</small></div></div>
+        <div class="m b">Hola, soy el asistente del despacho. Cuéntame brevemente tu caso y reservo tu primera consulta.</div>
+        <div class="m u">Me han despedido y me dan 3 días para firmar.</div>
+        <div class="m b">Lo marco como prioritario. Mañana a las 10:00 hay hueco con una abogada. ¿Te lo reservo?</div>
+        <div class="ok">✓ Cita creada · resumen enviado al despacho</div></div></div>
+  </div>
+</div></section>
+
+<section style="background:#EEEAE0"><div class="wrap">
+  <span class="lab">06 · Aplicaciones</span>
+  <h2>Del contrato a la tarjeta, la misma firma</h2>
+  <p class="lead">Documentos con membrete Medianoche y filete de oro; piezas para redes con fondo oscuro, titular en serif y una sola palabra en oro.</p>
+  <div class="apps">
+    <div class="card"><div class="lock"><svg style="width:34px;height:34px"><use href="#s"/></svg><span class="word" style="font-size:.7rem"><b>AI</b> Lead Machine</span></div><div><div class="t">Viviana Acero</div><div class="s" style="margin-top:6px">Atención, filtro y agenda con IA</div></div><div class="ct2">WhatsApp +34 672 953 197</div></div>
+    <div class="doc"><div class="top"><div class="lock" style="gap:12px"><svg><use href="#s"/></svg><span class="word"><b>AI</b> Lead Machine</span></div><span class="sub" style="color:#C9A66B">Contrato</span></div><div class="gold"></div>
+      <div class="bd"><span class="sub">Documento · modelo</span><h3>Contrato de prestación de servicios</h3><p>En <span class="ln"></span>, a <span class="ln" style="width:90px"></span> de <span class="ln" style="width:120px"></span> de <span class="ln" style="width:70px"></span>.</p><p><b>De una parte, la Prestadora:</b> Viviana Andrea Acero Pulido, con la marca AI Lead Machine…</p></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="lab">07 · Reglas</span>
+  <h2>Cómo cuidar la marca</h2>
+  <p class="lead" style="margin-bottom:28px">Pocas reglas, muy claras.</p>
+  <div class="rules">
+    <div class="yes"><h3>Sí</h3><ul><li>Fondo Medianoche o Marfil, con mucho aire alrededor.</li><li>Oro solo en un elemento clave por pieza.</li><li>Titular en Fraunces y una palabra en cursiva dorada.</li><li>Cifras y hechos concretos (horarios, plazos, pasos).</li><li>Un único botón principal por pantalla.</li></ul></div>
+    <div class="no"><h3>No</h3><ul><li>Oro como fondo grande ni como texto sobre marfil (usar Oro viejo).</li><li>Más de un acento (oro y cian a la vez en grande).</li><li>Degradados de colores, sombras fuertes o iconos infantiles.</li><li>Promesas de resultados que el producto no cumple hoy.</li><li>Deformar, girar o recolorear el símbolo.</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="lock"><svg style="width:30px;height:30px"><use href="#s"/></svg><span class="word" style="font-size:.7rem;color:#F7F4ED"><b>AI</b> Lead Machine</span></div><span>Hoja de marca v2 · Medianoche &amp; Oro · Viviana Acero · WhatsApp +34 672 953 197</span></div></footer>
+</body>
+</html>
