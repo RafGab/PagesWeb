@@ -1,3 +1,5 @@
+> **Descartada (09/10/2026):** a Viviana no le gustan los colores tan oscuros. **No usar en piezas nuevas sin preguntarle.** Se conserva solo como referencia. Para el contrato se usa un estilo claro (blanco con azul `#1D4E89`).
+
 # AI Lead Machine · marca v2 «Medianoche & Oro»
 
 Identidad sobria, tecnológica y premium: fondo profundo, oro champán para lo importante y un punto cian como señal de actividad.
