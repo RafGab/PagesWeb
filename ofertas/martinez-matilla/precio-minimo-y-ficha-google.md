@@ -2,6 +2,8 @@
 
 > Preparado el 07/10/2026. Precios en euros, **sin IVA** (21 % aparte). Las cifras de la competencia salen de blogs y páginas de proveedores españoles encontrados por búsqueda web; varias páginas estaban bloqueadas en mi entorno y no pude abrirlas, así que son **orientativas**. Contrástalas con 2 o 3 presupuestos reales de agencias de León antes del viernes.
 
+> **Actualización 09/10/2026 (dato de tu proyecto "Plan de acción"; confírmalo tú):** abre con alta de **1.250 €** y tu mínimo es **700 €** (precio fundador, con testimonio), más 149 €/mes, 12 meses. **Sustituye el suelo de 500 €** de las tablas siguientes. Primer año: 1.250 + 1.788 = **3.038 €**; con el mínimo, 700 + 1.788 = **2.488 €**. Como no puedes facturar hasta el 21/10, el cobro del alta llega después de esa fecha.
+
 > **Actualización 07/10/2026 (dato recibido de tu proyecto "Plan de acción"; confírmalo tú):** tu suelo para Martínez-Matilla es **500 € de alta + 149 €/mes + IVA, 12 meses**. Se te aconsejó abrir en 790 € y bajar a 500 € **solo** a cambio de caso de éxito con testimonio o de pago del alta al firmar. Esa decisión **prevalece sobre mi suelo de 790 €** en las tablas siguientes.
 > Con 500 € de alta y 25–35 horas de trabajo, el alta sola paga unos **14–20 €/hora**; el margen real viene de los 129 €/mes. Por eso la condición de 500 € debe ser siempre **testimonio o pago al firmar**, y el alcance debe quedar limitado (ver abajo).
 

@@ -33,13 +33,13 @@
 Su web en las dos versiones ("su estilo" y "mejorada") → abre el asistente → conversación completa con un caso de revolving → enseña la cita en el calendario, el correo y el panel.
 
 ## Oferta y cierre
-- **Abre:** alta **790 €** + **149 €/mes** + IVA, 12 meses (o 1.290 € si quieres más margen para ceder).
-- **Cede en este orden:** fraccionar el alta → caso de éxito con testimonio → **tu suelo: 500 € + 149 €/mes**, solo con testimonio o alta pagada al firmar.
+- **Abre:** alta **1.250 €** + **149 €/mes** + IVA, 12 meses (decisión de tu Plan de acción del 9/10; confírmala).
+- **Cede en este orden:** fraccionar el alta → caso de éxito con testimonio → **tu mínimo: alta 700 € + 149 €/mes** (precio fundador), solo con testimonio. Esto sustituye el suelo anterior de 500 €.
 - **Nunca:** bajar los 149 €/mes, alta 0 € con rediseño, ni prometer WhatsApp, recordatorios automáticos ni "ficha de Google" garantizada.
 - **Si dicen que no hay presupuesto:** solo el asistente, alta 290 € + 99 €/mes, mínimo 3 meses.
 - **Cierre:** "¿Empezamos el 21 de octubre? Necesito acceso a la web, un calendario compartido y el correo de avisos." Si dudan: "¿Qué necesitaría ver para decidir?" y fija el día.
 - **Cobro:** según tu Plan de acción (dato de otra sesión tuya; confírmalo), estás de baja médica hasta el 20/10 y no puedes trabajar ni facturar hasta el **21/10/2026**. Por eso **no propongas cobrar nada el día de la firma**: el contrato fija el inicio el 21/10 y el primer cobro llegará con la primera factura, después de esa fecha.
 
 ## Antes de salir
-- [ ] Fecha de inicio acordada · [ ] Quién te da el acceso a la web y al calendario · [ ] Testimonio/caso de éxito aceptado (si bajas a 500 €) · [ ] Aviso de privacidad y contrato de encargado de tratamiento pendientes de enviar.
+- [ ] Fecha de inicio acordada · [ ] Quién te da el acceso a la web y al calendario · [ ] Testimonio/caso de éxito aceptado (si bajas a 700 €) · [ ] Aviso de privacidad y contrato de encargado de tratamiento pendientes de enviar.
 - Preséntate como proveedora de tecnología, no como abogada.
