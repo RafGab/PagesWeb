@@ -35,7 +35,7 @@ botanix-ai/
 │   └── lib/
 │       ├── ai/             Capa de IA independiente del proveedor
 │       │   ├── types.ts        Contrato AiProvider
-│       │   ├── providers/      anthropic.ts · unconfigured.ts · fixture.ts (solo pruebas)
+│       │   ├── providers/      openai.ts · anthropic.ts · unconfigured.ts · fixture.ts (solo pruebas)
 │       │   ├── prompts/        Prompts versionados (la versión se guarda en cada análisis)
 │       │   ├── guardrails.ts   Controles deterministas de calidad y seguridad
 │       │   └── pricing.ts      Tarifas y cálculo de coste por operación
@@ -51,7 +51,7 @@ botanix-ai/
 └── tests/                  unit · integration (PostgreSQL real) · e2e (Playwright)
 ```
 
-**Tecnologías:** Next.js 15 (App Router) + React 19 + TypeScript estricto · Tailwind CSS 4 · PostgreSQL 16 + Prisma 6 · SDK oficial de Anthropic · zod · sharp · Vitest · Playwright.
+**Tecnologías:** Next.js 15 (App Router) + React 19 + TypeScript estricto · Tailwind CSS 4 · PostgreSQL 16 + Prisma 6 · SDK oficiales de OpenAI y Anthropic · zod · sharp · Vitest · Playwright.
 
 **Decisiones clave**
 
@@ -106,9 +106,11 @@ Producción: `npm run build && npm start`.
 |---|---|---|
 | `DATABASE_URL` | Sí | Cadena de conexión PostgreSQL |
 | `APP_URL` | Sí en producción | URL pública (comprobación de origen) |
-| `AI_PROVIDER` | No | `anthropic` (por defecto) |
-| `ANTHROPIC_API_KEY` | Para IA | Sin ella, identificación, diagnóstico, diseño y chat muestran instrucciones de configuración |
-| `ANTHROPIC_MODEL` | No | Por defecto `claude-opus-5-5` |
+| `AI_PROVIDER` | No | `openai` (por defecto) o `anthropic` |
+| `OPENAI_API_KEY` | Para IA con OpenAI | La misma clave del agente virtual (Render). Sin clave, identificación, diagnóstico, diseño y chat muestran instrucciones de configuración |
+| `OPENAI_MODEL` | No | Por defecto `gpt-4o-mini` (el del agente). Debe admitir imágenes y salidas estructuradas; `gpt-4o` identifica mejor |
+| `ANTHROPIC_API_KEY` | Si `AI_PROVIDER=anthropic` | Clave de Claude |
+| `ANTHROPIC_MODEL` | No | Por defecto `claude-opus-5-5` (solo con `AI_PROVIDER=anthropic`) |
 | `ANTHROPIC_EFFORT` | No | `low`/`medium`/`high`/`xhigh`/`max` (por defecto `medium`) |
 | `ANTHROPIC_SERVER_FALLBACK` | No | `1` (por defecto): si el modelo rechaza una petición por sus filtros, la API la reintenta en el modelo alternativo recomendado. Pon `0` para desactivarlo |
 | `AI_TIMEOUT_MS` | No | Tiempo máximo por llamada (120 000) |
@@ -123,7 +125,8 @@ Producción: `npm run build && npm start`.
 
 ### Cómo obtener las claves
 
-- **Anthropic (IA multimodal):** crea una cuenta en <https://platform.claude.com>, añade un método de pago, genera una clave en *API keys* y ponla en `ANTHROPIC_API_KEY`. Fija un límite de gasto mensual en la consola.
+- **OpenAI (IA multimodal, proveedor por defecto):** usa la misma clave que el agente virtual de AI Lead Machine: en Render → servicio del agente → *Environment* → copia el valor de `OPENAI_API_KEY` y pégalo en las variables de Botanix. Si prefieres separar consumos, crea otra clave en <https://platform.openai.com/api-keys> dentro del mismo proyecto. Revisa el saldo y el límite de gasto en *Billing*.
+- **Anthropic (alternativa):** crea una cuenta en <https://platform.claude.com>, añade un método de pago, genera una clave en *API keys* y ponla en `ANTHROPIC_API_KEY`. Fija un límite de gasto mensual en la consola.
 - **Open-Meteo (clima):** no requiere clave para uso **no comercial**. Para un uso comercial hay que contratar su plan de pago (<https://open-meteo.com/en/pricing>) y añadir la clave al adaptador (`lib/climate/open-meteo.ts`). Atribución obligatoria (CC BY 4.0), ya incluida en la interfaz.
 - **GBIF (taxonomía):** API pública sin clave (datos CC BY 4.0).
 
@@ -165,12 +168,24 @@ Para varias réplicas o plataformas *serverless*: sustituir el limitador en memo
 
 ## 6. Costes operativos estimados
 
-**Tarifas de la API de Anthropic** registradas en `lib/ai/pricing.ts` (tabla oficial de modelos vigente el 06/10/2026, USD por millón de tokens): Claude Opus 5.5 4 $ entrada / 20 $ salida; Claude Sonnet 5.5 2 $ / 10 $; Claude Haiku 5.5 0,10 $ / 0,50 $.
+Cada operación real guarda sus tokens y su coste en `AiUsage` (visible en el perfil), así que el coste se puede medir en cuanto haya clave. Las cifras siguientes son **estimaciones de tamaño, no mediciones**, calculadas con las tarifas registradas en `lib/ai/pricing.ts` (confírmalas en <https://openai.com/api/pricing>: no se pudieron comprobar en vivo desde el entorno).
 
-Coste por operación con Claude Opus 5.5 y esfuerzo `medium`. **Son estimaciones de tamaño (no mediciones):** no se ha podido llamar a la API desde el entorno de desarrollo. Cada operación real guarda sus tokens y su coste en `AiUsage`, visible en el perfil.
+**OpenAI (por defecto)** — gpt-4o-mini: 0,15 $ / 0,60 $ por millón de tokens (entrada / salida); gpt-4o: 2,50 $ / 10 $. En gpt-4o-mini cada foto en alta resolución consume muchos más tokens que en gpt-4o, por lo que la diferencia de coste real es menor de lo que sugieren las tarifas.
 
-| Operación | Entrada aprox. | Salida aprox. (incl. razonamiento) | Coste aprox. |
-|---|---|---|---|
+| Operación | gpt-4o-mini | gpt-4o |
+|---|---|---|
+| Identificación (3 fotos + ficha) | ~0,015 $ | ~0,05 $ |
+| Diagnóstico (2–3 fotos) | ~0,012 $ | ~0,04 $ |
+| Diseño de jardín | ~0,02 $ | ~0,10 $ |
+| Mensaje del asistente | <0,001 $ | ~0,01 $ |
+
+Ejemplo: 100 usuarios activos/mes con 8 análisis, 1 diseño y 20 mensajes ≈ **15 $/mes con gpt-4o-mini** o **≈ 70 $/mes con gpt-4o**. Recomendación: empezar con gpt-4o-mini (el mismo modelo del agente) y probar gpt-4o con fotos reales; para identificación de especies suele haber una diferencia de calidad apreciable.
+
+**Claude (alternativa)** — Claude Opus 5.5: 4 $ / 20 $ (tabla oficial del 06/10/2026): ~0,14–0,18 $ por identificación, ~0,28–0,44 $ por diseño.
+
+A esto se suman el alojamiento (servidor Node.js y PostgreSQL gestionado) y, para uso comercial, el plan de pago de Open-Meteo. El plan gratuito de la app limita a 10 análisis, 2 diseños y 40 mensajes al mes con un tope de 2 $ de IA por usuario (`lib/plans.ts`).
+
+---|---|---|---|
 | Identificación (3 fotos de 1568 px + ficha) | ~9 000 | ~5 000–7 000 | 0,14–0,18 $ |
 | Diagnóstico (2–3 fotos) | ~7 000–9 000 | ~4 000–6 000 | 0,11–0,16 $ |
 | Diseño de jardín (fotos + 1–3 propuestas) | ~10 000 | ~12 000–20 000 | 0,28–0,44 $ |
@@ -186,7 +201,8 @@ A esto se suman el alojamiento (servidor Node.js y PostgreSQL gestionado; depend
 
 | Integración | Estado |
 |---|---|
-| Anthropic (Claude, visión + salida estructurada + fallback de servidor) | **Implementada.** Tipos verificados contra el SDK oficial y esquemas convertidos con su helper en pruebas; **no ejecutada en vivo** (no había clave en el entorno). |
+| OpenAI (Responses API, visión + salida estructurada estricta) | **Implementada y proveedor por defecto.** Probada con respuestas HTTP simuladas (petición con imagen, esquema estricto, rechazos, clave inválida, saldo agotado); **no ejecutada en vivo** (la clave está en Render, no en este entorno). |
+| Anthropic (Claude, visión + salida estructurada + fallback de servidor) | **Implementada** (alternativa). Tipos verificados contra el SDK oficial y esquemas convertidos con su helper en pruebas; **no ejecutada en vivo** (no había clave en el entorno). |
 | Open-Meteo (geocodificación, histórico ERA5, previsión) | **Implementada** y probada con respuestas simuladas; **no ejecutada en vivo** (la red del entorno bloqueaba el dominio). |
 | GBIF (verificación de nombres y búsqueda) | **Implementada** y probada con respuestas simuladas; **no ejecutada en vivo** por el mismo motivo. |
 | Generación/edición de imágenes del jardín | **No implementada.** Se muestra el plano esquemático y la descripción; ninguna imagen decorativa se presenta como el jardín del usuario. |
@@ -208,7 +224,7 @@ A esto se suman el alojamiento (servidor Node.js y PostgreSQL gestionado; depend
 
 ## 9. Próximos pasos prioritarios
 
-1. Configurar `ANTHROPIC_API_KEY`, ejecutar un lote de fotos reales de referencia y medir calidad y coste (crear un conjunto de evaluación con identificaciones conocidas).
+1. Configurar `OPENAI_API_KEY` (la del agente), ejecutar un lote de fotos reales de referencia y comparar calidad y coste entre gpt-4o-mini y gpt-4o (crear un conjunto de evaluación con identificaciones conocidas).
 2. Verificar Open-Meteo y GBIF en vivo desde el servidor de despliegue; contratar el plan comercial de Open-Meteo si procede.
 3. Desplegar con PostgreSQL gestionado, volumen persistente y tarea diaria de limpieza.
 4. Revisión jurídica de la política de privacidad y condiciones.

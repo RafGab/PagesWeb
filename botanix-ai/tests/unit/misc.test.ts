@@ -12,6 +12,7 @@ import { DiagnosisSchema } from "@/lib/domain/diagnosis";
 import { GardenDesignSchema } from "@/lib/domain/garden-design";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { plantSheetMarkdown } from "@/lib/exports/plant-sheet";
+import { zodTextFormat } from "openai/helpers/zod";
 
 describe("exportaciones", () => {
   it("CSV: escapa separadores y neutraliza fórmulas", () => {
@@ -38,6 +39,8 @@ describe("costes", () => {
   it("calcula con la tarifa registrada y no inventa tarifas desconocidas", () => {
     expect(costUsd("claude-opus-5-5", 1_000_000, 100_000)).toBeCloseTo(6, 5);
     expect(costUsd("modelo-desconocido", 1000, 1000)).toBeNull();
+    expect(costUsd("gpt-4o-mini-2024-07-18", 1_000_000, 1_000_000)).toBeCloseTo(0.75, 5);
+    expect(costUsd("gpt-4o-2024-08-06", 1_000_000, 0)).toBeCloseTo(2.5, 5);
   });
 });
 
@@ -93,6 +96,34 @@ describe("esquemas de salida estructurada", () => {
     expect(() => IdentificationSchema.parse(FIXTURE_IDENTIFICATION)).not.toThrow();
     expect(() => DiagnosisSchema.parse(FIXTURE_DIAGNOSIS)).not.toThrow();
     expect(() => GardenDesignSchema.parse(FIXTURE_GARDEN)).not.toThrow();
+  });
+  it("los esquemas cumplen el modo estricto de salidas estructuradas de OpenAI", () => {
+    const stats = (node: unknown, depth = 0): { props: number; depth: number } => {
+      if (!node || typeof node !== "object") return { props: 0, depth };
+      const n = node as Record<string, unknown>;
+      let props = 0, max = depth;
+      if (n.type === "object" && n.properties) {
+        const keys = Object.keys(n.properties as object);
+        props += keys.length;
+        expect(n.additionalProperties).toBe(false);
+        expect([...(n.required as string[])].sort()).toEqual([...keys].sort());
+      }
+      for (const v of Object.values(n)) {
+        const s = stats(v, n.type === "object" ? depth + 1 : depth);
+        props += s.props;
+        max = Math.max(max, s.depth);
+      }
+      return { props, depth: max };
+    };
+    for (const [name, s] of [["identify", IdentificationSchema], ["diagnose", DiagnosisSchema], ["garden_design", GardenDesignSchema]] as const) {
+      const f = zodTextFormat(s, name) as unknown as { type: string; strict: boolean; schema: object };
+      expect(f.type).toBe("json_schema");
+      expect(f.strict).toBe(true);
+      const st = stats(f.schema);
+      // Límites documentados del modo estricto: 5000 propiedades y 10 niveles de anidamiento.
+      expect(st.props).toBeLessThan(5000);
+      expect(st.depth).toBeLessThanOrEqual(10);
+    }
   });
   it("los esquemas se pueden convertir al formato de salida estructurada de la API de Claude", () => {
     for (const s of [IdentificationSchema, DiagnosisSchema, GardenDesignSchema]) {

@@ -1,6 +1,7 @@
 import "server-only";
 import { env } from "@/lib/env";
 import { AnthropicProvider } from "./providers/anthropic";
+import { OpenAiProvider } from "./providers/openai";
 import { FixtureProvider } from "./providers/fixture";
 import { UnconfiguredProvider } from "./providers/unconfigured";
 import type { AiProvider } from "./types";
@@ -14,6 +15,8 @@ export function aiProvider(): AiProvider {
   if (cached) return cached;
   const e = env();
   if (e.AI_PROVIDER === "fixture") cached = new FixtureProvider();
+  else if (e.AI_PROVIDER === "openai" && e.OPENAI_API_KEY)
+    cached = new OpenAiProvider({ apiKey: e.OPENAI_API_KEY, model: e.OPENAI_MODEL, timeoutMs: e.AI_TIMEOUT_MS });
   else if (e.AI_PROVIDER === "anthropic" && e.ANTHROPIC_API_KEY)
     cached = new AnthropicProvider({
       apiKey: e.ANTHROPIC_API_KEY,

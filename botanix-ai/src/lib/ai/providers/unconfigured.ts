@@ -21,8 +21,8 @@ export function notConfigured() {
     "El análisis con IA no está configurado en este servidor.",
     {
       help: [
-        "1. Crea una clave en https://platform.claude.com (sección API keys).",
-        "2. Añádela al archivo .env del servidor: ANTHROPIC_API_KEY=\"…\" y AI_PROVIDER=\"anthropic\".",
+        "1. Copia la clave de OpenAI (la misma OPENAI_API_KEY del agente virtual en Render) o crea una en https://platform.openai.com/api-keys.",
+        "2. Añádela a las variables de entorno del servidor: OPENAI_API_KEY=\"…\" y AI_PROVIDER=\"openai\".",
         "3. Reinicia la aplicación.",
       ],
     },
