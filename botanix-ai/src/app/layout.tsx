@@ -45,7 +45,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 {user ? (
                   <>
                     <Link href="/profile" className="btn btn-ghost !px-3 !py-2 text-sm" aria-label={t.nav.profile}>
-                      <UserRound className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline">{user.name ?? t.nav.profile}</span>
+                      <UserRound className="h-4 w-4" aria-hidden /> <span className="hidden sm:inline xl:hidden 2xl:inline">{user.name ?? t.nav.profile}</span>
                     </Link>
                     <LogoutButton />
                   </>
@@ -58,8 +58,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </div>
             </div>
           </header>
-          <main id="main" className="mx-auto max-w-6xl px-4 pb-28 pt-6 lg:pb-16">{children}</main>
-          <footer className="mx-auto max-w-6xl px-4 pb-24 text-xs muted lg:pb-8 no-print">
+          <main id="main" className="mx-auto max-w-6xl px-4 pb-28 pt-6 xl:pb-16">{children}</main>
+          <footer className="mx-auto max-w-6xl px-4 pb-24 text-xs muted xl:pb-8 no-print">
             <p>
               Botanix AI · <Link href="/privacy" className="underline">{t.nav.privacy}</Link> · {locale === "es" ? "Los diagnósticos e identificaciones por imagen son orientativos." : "Image-based identifications and diagnoses are orientative."}
             </p>

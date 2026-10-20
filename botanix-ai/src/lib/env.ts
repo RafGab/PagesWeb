@@ -19,6 +19,7 @@ const EnvSchema = z.object({
   IMAGE_RETENTION_DAYS: z.coerce.number().int().positive().default(30),
   MAX_UPLOAD_MB: z.coerce.number().positive().max(25).default(12),
   SESSION_DAYS: z.coerce.number().int().positive().max(365).default(30),
+  RATE_LIMIT_REGISTER_PER_HOUR: z.coerce.number().int().positive().default(5),
   // Solo para pruebas automatizadas: habilita proveedores de datos de prueba.
   BOTANIX_ALLOW_FIXTURES: z.enum(["0", "1"]).default("0"),
 });

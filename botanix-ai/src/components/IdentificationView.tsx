@@ -89,7 +89,7 @@ export function IdentificationView({ data, verification, t, locale }: { data: Id
               <Field label={es ? "Crecimiento" : "Growth rate"} value={p.growth_rate} unknown={u} />
               <Field label={es ? "Origen" : "Origin"} value={p.native_origin} unknown={u} />
               <Field label={es ? "Floración" : "Flowering"} value={p.flowering_season} unknown={u} />
-              <Field label={es ? "Dificultad" : "Difficulty"} value={p.care.other.difficulty} unknown={u} />
+              <Field label={es ? "Dificultad" : "Difficulty"} value={(es ? { easy: "Fácil", moderate: "Media", hard: "Difícil", expert: "Experta" } : { easy: "Easy", moderate: "Moderate", hard: "Hard", expert: "Expert" })[p.care.other.difficulty]} unknown={u} />
             </dl>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="flex items-center gap-1 text-sm font-semibold"><Skull className="h-4 w-4" aria-hidden /> {es ? "Toxicidad" : "Toxicity"}:</span>

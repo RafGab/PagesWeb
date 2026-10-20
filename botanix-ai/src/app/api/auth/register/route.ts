@@ -5,6 +5,7 @@ import { hashPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
 import { clientIp, enforceRateLimit, route } from "@/lib/security/http";
 import { AppError } from "@/lib/errors";
+import { env } from "@/lib/env";
 
 const Body = z.object({
   email: z.string().trim().toLowerCase().email().max(200),
@@ -16,7 +17,7 @@ const Body = z.object({
 });
 
 export const POST = route(async (req) => {
-  enforceRateLimit(`register:${clientIp(req)}`, 5, 60 * 60_000);
+  enforceRateLimit(`register:${clientIp(req)}`, env().RATE_LIMIT_REGISTER_PER_HOUR, 60 * 60_000);
   const body = Body.parse(await req.json());
   const exists = await db.user.findUnique({ where: { email: body.email } });
   if (exists) throw new AppError("CONFLICT", "Ya existe una cuenta con ese correo.");

@@ -14,10 +14,10 @@ export function DesktopNav() {
     ["/plants", t.nav.plants], ["/calendar", t.nav.calendar], ["/explore", t.nav.explore], ["/assistant", t.nav.assistant],
   ] as const;
   return (
-    <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
+    <nav aria-label="Principal" className="hidden items-center gap-0.5 xl:flex">
       {items.map(([href, label]) => (
         <Link key={href} href={href} aria-current={path.startsWith(href) ? "page" : undefined}
-          className={clsx("rounded-full px-3 py-2 text-sm font-medium hover:bg-[var(--surface-2)]", path.startsWith(href) && "bg-[var(--color-sage-100)] text-[var(--color-forest-800)]")}>
+          className={clsx("whitespace-nowrap rounded-full px-2.5 py-2 text-sm font-medium hover:bg-[var(--surface-2)]", path.startsWith(href) && "bg-[var(--color-sage-100)] text-[var(--color-forest-800)]")}>
           {label}
         </Link>
       ))}
@@ -39,7 +39,7 @@ export function MobileNav() {
   return (
     <>
       {open && (
-        <div className="fixed inset-x-3 bottom-20 z-40 grid grid-cols-3 gap-2 rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-3 shadow-xl lg:hidden fade-in" role="menu">
+        <div className="fixed inset-x-3 bottom-20 z-40 mx-auto grid max-w-lg grid-cols-3 gap-2 rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-3 shadow-xl xl:hidden fade-in" role="menu">
           {more.map(([href, label, Icon]) => (
             <Link key={href} href={href} role="menuitem" onClick={() => setOpen(false)} className="flex flex-col items-center gap-1 rounded-2xl p-3 text-center text-xs font-medium hover:bg-[var(--surface-2)]">
               <Icon className="h-5 w-5" aria-hidden /> {label}
@@ -47,7 +47,7 @@ export function MobileNav() {
           ))}
         </div>
       )}
-      <nav aria-label="Navegación móvil" className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--line)] bg-[var(--surface)]/95 backdrop-blur lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+      <nav aria-label="Navegación móvil" className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--line)] bg-[var(--surface)]/95 backdrop-blur xl:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         <ul className="mx-auto grid max-w-lg grid-cols-5">
           {main.map(([href, label, Icon]) => {
             const active = href === "/" ? path === "/" : path.startsWith(href);

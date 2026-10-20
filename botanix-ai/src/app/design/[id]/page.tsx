@@ -30,6 +30,9 @@ export default async function DesignDetail({ params, searchParams }: { params: P
   const busy = latest && (latest.status === "PENDING" || latest.status === "PROCESSING");
   const inputs = design.inputs as { plotWidthM?: number | null; plotDepthM?: number | null; orientationOfMainArea?: string };
   const g = version ? (version.proposal as unknown as GardenDesign) : null;
+  const L = lang === "es"
+    ? { high: "alta", medium: "media", low: "baja", plants: "plantas", materials: "materiales", labor: "mano de obra", maintenance: "mantenimiento" }
+    : { high: "high", medium: "medium", low: "low", plants: "plants", materials: "materials", labor: "labour", maintenance: "maintenance" };
   const money = (n: number, cur: string) => new Intl.NumberFormat(locale, { style: "currency", currency: /^[A-Z]{3}$/.test(cur) ? cur : "EUR", maximumFractionDigits: 0 }).format(n);
 
   return (
@@ -59,7 +62,7 @@ export default async function DesignDetail({ params, searchParams }: { params: P
             <h2 className="section-title mb-2">{d.space}</h2>
             <p>{g.space_analysis.summary}</p>
             <div className="mt-3 grid gap-4 md:grid-cols-3 text-sm">
-              <div><p className="font-semibold">{lang === "es" ? "Dimensiones" : "Dimensions"}</p><p>{g.space_analysis.estimated_dimensions ?? "—"} <span className="chip ml-1">{g.space_analysis.dimensions_confidence}</span></p></div>
+              <div><p className="font-semibold">{lang === "es" ? "Dimensiones" : "Dimensions"}</p><p>{g.space_analysis.estimated_dimensions ?? "—"} <span className="chip ml-1">{lang === "es" ? "confianza" : "confidence"}: {L[g.space_analysis.dimensions_confidence]}</span></p></div>
               <div><p className="font-semibold">{lang === "es" ? "Sol y sombra" : "Sun & shade"}</p><p>{g.space_analysis.sun_shade_observations}</p></div>
               <div><p className="font-semibold">{lang === "es" ? "Pendiente y drenaje" : "Slope & drainage"}</p><p>{g.space_analysis.slope_drainage_observations}</p></div>
               <div><p className="font-semibold">{lang === "es" ? "Elementos existentes" : "Existing elements"}</p><List items={g.space_analysis.existing_elements.map((e) => `${e.keep ? "✓" : "✗"} ${e.element}${e.notes ? ` — ${e.notes}` : ""}`)} /></div>
@@ -123,7 +126,7 @@ export default async function DesignDetail({ params, searchParams }: { params: P
                           <td className="pr-3">{p.zones.find((z) => z.id === pl.zone_id)?.name ?? pl.zone_id}</td>
                           <td className="pr-3">{pl.spacing_m != null ? `${pl.spacing_m} m` : "—"}</td>
                           <td className="pr-3">{pl.adult_size}</td>
-                          <td className="pr-3">{pl.light} · {pl.water}</td>
+                          <td className="pr-3">{pl.light} · {lang === "es" ? "agua" : "water"} {L[pl.water]}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -139,7 +142,7 @@ export default async function DesignDetail({ params, searchParams }: { params: P
                     ))}
                   </div>
                   <table className="mt-3 w-full text-sm">
-                    <tbody>{p.cost_estimate.lines.map((l, k) => <tr key={k} className="border-t border-[var(--line)]"><td className="py-1.5 pr-2"><span className="chip mr-1">{l.category}</span>{l.item}</td><td className="text-right tabular-nums">{money(l.low, p.cost_estimate.currency)}–{money(l.high, p.cost_estimate.currency)}</td></tr>)}</tbody>
+                    <tbody>{p.cost_estimate.lines.map((l, k) => <tr key={k} className="border-t border-[var(--line)]"><td className="py-1.5 pr-2"><span className="chip mr-1">{L[l.category]}</span>{l.item}</td><td className="text-right tabular-nums">{money(l.low, p.cost_estimate.currency)}–{money(l.high, p.cost_estimate.currency)}</td></tr>)}</tbody>
                   </table>
                 </Collapsible>
                 <Collapsible title={d.shopping}>

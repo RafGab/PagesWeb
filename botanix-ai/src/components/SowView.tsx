@@ -26,6 +26,8 @@ export function SowView({ locations }: { locations: LocationOption[] }) {
   const [cal, setCal] = useState<FullCalendar | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const VISIBLE = 8;
   const name = (slug: string) => NAMES.get(slug)?.[lang] ?? slug;
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export function SowView({ locations }: { locations: LocationOption[] }) {
           <span className="label" id="month-label">{s.month}</span>
           <div className="flex max-w-full gap-1 overflow-x-auto pb-1" role="radiogroup" aria-labelledby="month-label">
             {t.common.months.map((m, i) => (
-              <button key={m} type="button" role="radio" aria-checked={month === i + 1} onClick={() => setMonth(i + 1)}
+              <button key={m} type="button" role="radio" aria-checked={month === i + 1} onClick={() => { setMonth(i + 1); setShowAll(false); }}
                 className={`min-h-11 min-w-11 rounded-xl px-2 text-sm font-semibold ${month === i + 1 ? "bg-[var(--accent)] text-[var(--accent-contrast)]" : "bg-[var(--surface-2)]"}`}>
                 {m}
               </button>
@@ -82,7 +84,7 @@ export function SowView({ locations }: { locations: LocationOption[] }) {
             <h2 className="section-title mb-3">{t.common.monthsLong[now.month - 1].replace(/^./, (c) => c.toUpperCase())} · {now.items.length}</h2>
             {now.items.length === 0 && <Notice>{s.noItems}</Notice>}
             <ul className="grid gap-3 md:grid-cols-2">
-              {now.items.map((it) => (
+              {(showAll ? now.items : now.items.slice(0, VISIBLE)).map((it) => (
                 <li key={it.slug + it.action} className="card p-4">
                   <div className="flex items-start justify-between gap-2">
                     <div>
@@ -106,6 +108,11 @@ export function SowView({ locations }: { locations: LocationOption[] }) {
                 </li>
               ))}
             </ul>
+            {now.items.length > VISIBLE && (
+              <button type="button" className="btn btn-ghost mt-3 w-full" aria-expanded={showAll} onClick={() => setShowAll((v) => !v)}>
+                {showAll ? (lang === "es" ? "Mostrar menos" : "Show less") : `${t.common.seeMore} (${now.items.length - VISIBLE})`}
+              </button>
+            )}
             {now.alternatives.length > 0 && (
               <div className="card mt-3 p-4"><p className="mb-1 font-semibold">{s.alternatives}</p><ul className="space-y-1 text-sm">{now.alternatives.map((a) => <li key={a}>• {a}</li>)}</ul></div>
             )}

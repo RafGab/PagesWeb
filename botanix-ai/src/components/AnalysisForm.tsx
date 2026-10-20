@@ -60,7 +60,7 @@ export function AnalysisForm({ kind, locations, plants, maxPhotos, hasConsent, a
             {(["outdoor", "indoor", "greenhouse"] as const).map((s, i) => (
               <label key={s} className="chip cursor-pointer has-[:checked]:bg-[var(--color-sage-100)] has-[:checked]:border-[var(--color-forest-600)] has-[:checked]:text-[var(--color-forest-800)] !py-2 !px-3 text-sm">
                 <input type="radio" name="setting" value={s} defaultChecked={i === 0} className="sr-only" />
-                {s === "indoor" ? t.identify.indoor : s === "outdoor" ? t.identify.outdoor : "Invernadero / Greenhouse"}
+                {s === "indoor" ? t.identify.indoor : s === "outdoor" ? t.identify.outdoor : t.identify.greenhouse}
               </label>
             ))}
           </div>
