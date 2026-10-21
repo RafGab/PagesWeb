@@ -154,15 +154,22 @@ Las pruebas usan proveedores de **DATOS DE PRUEBA** (IA y clima simulados) que l
 
 ## 5. Despliegue
 
-La app necesita un proceso Node.js persistente (por `after()` y el almacenamiento local) y PostgreSQL.
+### En Render (recomendado, archivo `render.yaml` incluido)
 
-1. Base de datos PostgreSQL gestionada (cualquier proveedor). Ejecuta `npx prisma migrate deploy` y `npm run db:seed`.
-2. Servidor Node.js (VPS, contenedor, Render, Railway, Fly.io…): `npm ci && npm run build && npm start`. Define las variables de entorno y monta un **volumen persistente** para `STORAGE_LOCAL_DIR`.
-3. HTTPS obligatorio (las cookies son `Secure` en producción). `APP_URL` debe ser la URL pública.
-4. Tarea diaria: `npm run cleanup:images` (fotos caducadas y sesiones expiradas).
-5. Comprobación de salud: `GET /api/health`.
+El Blueprint crea tres piezas en la región **Frankfurt** (UE, por el RGPD): el servidor web Node.js (plan *starter*, necesario para el disco), una base de datos **PostgreSQL** (`basic-256mb`, solo accesible desde Render) y un **disco persistente** de 5 GB para las fotos. Consulta los precios vigentes en <https://render.com/pricing>.
 
-Para varias réplicas o plataformas *serverless*: sustituir el limitador en memoria por Redis (misma interfaz en `lib/security/rate-limit.ts`), implementar un `StorageDriver` S3/R2 (`lib/storage/index.ts`) y mover el procesamiento de análisis a una cola.
+1. En Render: **New → Blueprint** y elige el repositorio **RafGab/botanix-ai**.
+2. Render pedirá `OPENAI_API_KEY`: pega la misma clave del agente virtual (servicio *ai-lead-machine-backend* → *Environment*) o una nueva del mismo proyecto de OpenAI.
+3. Pulsa **Apply**. En cada despliegue se ejecutan solas las migraciones de la base de datos y la carga de cultivos (`preDeployCommand`).
+4. Abre la URL `https://botanix-ai….onrender.com` y crea tu cuenta. Para un dominio propio: *Settings → Custom Domains* y añade también `APP_URL=https://tu-dominio` en *Environment*.
+
+La app usa la URL pública de Render automáticamente, borra cada 24 h las fotos de análisis caducadas y las sesiones expiradas, y expone `GET /api/health` para la comprobación de salud.
+
+### En otro proveedor
+
+Necesita un proceso Node.js persistente, PostgreSQL y un volumen para `STORAGE_LOCAL_DIR`: `npm ci && npx prisma generate && npm run build`, luego `npx prisma migrate deploy && npm run db:seed` y `npm start`. HTTPS obligatorio (cookies `Secure`).
+
+Para varias réplicas o plataformas *serverless*: sustituir el limitador en memoria por Redis (`lib/security/rate-limit.ts`), implementar un `StorageDriver` S3/R2 (`lib/storage/index.ts`) y mover el procesamiento de análisis a una cola.
 
 ---
 

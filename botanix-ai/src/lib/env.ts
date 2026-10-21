@@ -32,7 +32,8 @@ let cached: Env | null = null;
 
 export function env(): Env {
   if (cached) return cached;
-  const parsed = EnvSchema.safeParse(process.env);
+  // En Render, la URL pública llega en RENDER_EXTERNAL_URL si no se define APP_URL.
+  const parsed = EnvSchema.safeParse({ ...process.env, APP_URL: process.env.APP_URL || process.env.RENDER_EXTERNAL_URL || undefined });
   if (!parsed.success) {
     const fields = parsed.error.issues.map((i) => i.path.join(".")).join(", ");
     throw new Error(`Configuración inválida en variables de entorno: ${fields}`);
