@@ -89,6 +89,23 @@ footer{background:var(--tinta);color:#B9B0A4;padding:30px 0 90px;font-size:.84re
 footer b{color:#fff}
 .fab{position:fixed;right:16px;bottom:16px;z-index:40;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 26px -8px #0007;text-decoration:none}
 .fab svg{width:30px;height:30px;fill:#fff}
+.phase{position:fixed;left:14px;bottom:16px;z-index:45;background:var(--tinta);border-radius:99px;padding:4px;display:flex;gap:2px;box-shadow:0 10px 26px -8px #0007}
+.phase button{border:0;background:none;color:#fff;font:600 .78rem var(--sans);padding:10px 14px;border-radius:99px;cursor:pointer}.phase button[aria-pressed=true]{background:var(--terra)}
+.sim{background:#FFF4D6;color:#6B4E00;border-bottom:1px solid #E8D49A;text-align:center;font-size:.82rem;padding:8px 14px;display:none}.sim.on{display:block}
+.btn.buy{background:var(--pino);border-color:var(--pino);color:#fff}.btn.buy:hover{background:#244A40}
+.card .btn.s2{background:transparent;color:var(--mut);border-color:var(--line);margin-top:6px;font-weight:500}
+.ovl{position:fixed;inset:0;background:#2A262299;z-index:60;display:none;align-items:flex-end;justify-content:center;padding:0}
+.ovl.on{display:flex}
+.modal{background:#fff;width:100%;max-width:460px;border-radius:22px 22px 0 0;padding:24px 22px 26px;max-height:92vh;overflow:auto}
+@media(min-width:600px){.ovl{align-items:center;padding:20px}.modal{border-radius:22px}}
+.modal h3{font-size:1.35rem;margin-bottom:4px}.modal .sm{font-size:.82rem;color:var(--mut)}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:.95rem;gap:12px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:99px}.qty button{border:0;background:none;font:600 1.1rem var(--sans);width:36px;height:36px;cursor:pointer}.qty span{min-width:28px;text-align:center;font-weight:600}
+.ship label{display:flex;align-items:center;gap:10px;font-weight:500;margin:0;padding:10px 0;cursor:pointer}.ship input{width:auto}
+.tot{display:flex;justify-content:space-between;font:600 1.3rem var(--serif);padding:14px 0 6px}
+.pays{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}.pays span{font:600 .72rem var(--sans);border:1px solid var(--line);padding:5px 10px;border-radius:8px;color:var(--mut)}
+.okbox{text-align:center;padding:14px 0}.okbox .tick{width:64px;height:64px;border-radius:50%;background:#E3F3EA;color:#1F8A5B;display:grid;place-items:center;font-size:2rem;margin:0 auto 12px}
+.x{float:right;border:0;background:none;font-size:1.6rem;cursor:pointer;color:var(--mut);line-height:1}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media(max-width:860px){nav{display:none}.hg,.two,.loc,.steps,.band .wrap{grid-template-columns:1fr}.hero{padding:28px 0}section{padding:42px 0}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.cb{padding:12px 12px 14px}.cb h3{font-size:1rem}.price b{font-size:1.25rem}.badge{font-size:.6rem}}
@@ -97,6 +114,7 @@ footer b{color:#fff}
 </head>
 <body>
 <div class="demo">DEMO de propuesta · productos, precios e ilustraciones de ejemplo</div>
+<div class="sim" id="sim"><b>Fase 2 · con pago online (simulación).</b> No se cobra nada: así quedaría el botón de pago en la web del cliente.</div>
 <header><div class="wrap nav">
   <a class="brand" href="#"><b>Casa</b> Lino</a><!-- [CONFIRMAR] nombre real del negocio -->
   <nav><a href="#catalogo">Catálogo</a><a href="#mayor">Por mayor</a><a href="#mas">Más hogar</a><a href="#donde">Dónde estamos</a></nav>
@@ -160,6 +178,8 @@ footer b{color:#fff}
 
 <footer><div class="wrap"><b>Casa Lino</b> · demo de propuesta preparada por Viviana Acero · AI Lead Machine · WhatsApp +34 672 953 197. Productos, precios e ilustraciones de ejemplo; no es una tienda real.</div></footer>
 
+<div class="phase" role="group" aria-label="Fase de la demo"><button type="button" data-ph="1" aria-pressed="true">Fase 1 · WhatsApp</button><button type="button" data-ph="2" aria-pressed="false">Fase 2 · con pago</button></div>
+<div class="ovl" id="ovl" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" id="modal"></div></div>
 <a class="fab" data-wa="Hola, me gustaría información." href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.2A11 11 0 0 0 20.5 3.5zM12 20a9 9 0 0 1-4.6-1.3l-.3-.2-2.8.7.8-2.7-.2-.3A9 9 0 1 1 12 20zm5-6.7c-.3-.1-1.6-.8-1.9-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.7 3.1.6a2.6 2.6 0 0 0 1.7-1.200 2.100 2.100 0 0 0 .1-1.200c-.1-.1-.3-.2-.6-.3z"/></svg></a>
 
 <script>
@@ -198,18 +218,19 @@ footer b{color:#fff}
    {id:9,t:'cojin',cat:'mas',n:'Cojín decorativo 45×45',d:'Con relleno incluido.',menor:8.9,sizes:['Terracota','Mostaza','Verde'],c:['#C77B5B','#F4E6D6']},
    {id:10,t:'cortina',cat:'mas',n:'Cortinas térmicas opacas',d:'Para dormitorio y salón.',menor:21.9,sizes:['140×260','280×260'],c:['#5E7F73','#9DB7AD']}
   ];
-  var mode='menor',filt='todo';
+  var mode='menor',filt='todo',phase=1;
   var eur=function(n){return n.toFixed(2).replace('.',',')+' €'};
   function card(p,prov){
     var opts=p.sizes.map(function(s){return '<option>'+s+'</option>'}).join('');
     var pr=prov?'<div class="price"><b>'+eur(p.menor)+'</b><small>Envío desde proveedor</small></div>'
       :(mode==='mayor'?'<div class="price"><b>'+eur(p.mayor)+'</b><s>'+eur(p.menor)+'</s><small>desde '+p.min+' uds</small></div>':'<div class="price"><b>'+eur(p.menor)+'</b></div>');
-    return '<article class="card" data-id="'+p.id+'"><div class="art">'+art(p.t,p.c[0],p.c[1])+(prov?'<span class="badge prov">Vista previa · proveedor</span>':'<span class="badge">'+(mode==='mayor'?'Por mayor':'Disponible')+'</span>')+'</div><div class="cb"><h3>'+p.n+'</h3><p class="d">'+p.d+'</p>'+pr+'<div class="opt"><select aria-label="'+(prov?'Opción':'Medida')+'">'+opts+'</select></div><a class="btn wa" href="#" data-p="'+p.id+'">Pedir por WhatsApp</a></div></article>';
+    return '<article class="card" data-id="'+p.id+'"><div class="art">'+art(p.t,p.c[0],p.c[1])+(prov?'<span class="badge prov">Vista previa · proveedor</span>':'<span class="badge">'+(mode==='mayor'?'Por mayor':'Disponible')+'</span>')+'</div><div class="cb"><h3>'+p.n+'</h3><p class="d">'+p.d+'</p>'+pr+'<div class="opt"><select aria-label="'+(prov?'Opción':'Medida')+'">'+opts+'</select></div>'+(phase===2&&mode==='menor'?'<a class="btn buy" href="#" data-buy="'+p.id+'">Comprar · '+eur(p.menor)+'</a><a class="btn s2" href="#" data-p="'+p.id+'">Preguntar por WhatsApp</a>':'<a class="btn wa" href="#" data-p="'+p.id+'">'+(mode==='mayor'?'Pedir tarifa por WhatsApp':'Pedir por WhatsApp')+'</a>')+'</div></article>';
   }
   function render(){
     var list=P.filter(function(p){return filt==='todo'||p.cat===filt});
     $('#grid').innerHTML=list.map(function(p){return card(p,false)}).join('');
     $('#grid2').innerHTML=P2.map(function(p){return card(p,true)}).join('');
+    $$('.card [data-buy]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();openBuy(+b.getAttribute('data-buy'),b.closest('.card').querySelector('select').value)})});
     $$('.card .btn[data-p]').forEach(function(b){
       var id=+b.getAttribute('data-p'),p=P.concat(P2).filter(function(x){return x.id===id})[0],card=b.closest('.card'),sel=card.querySelector('select');
       function upd(){var prov=id>=7;var m='Hola, quiero pedir: '+p.n+' ('+sel.value+')'+(prov?'':(mode==='mayor'?'. Pedido al por MAYOR, ¿me confirmas precio y unidades mínimas?':'. Al por menor.'))+(prov?' (vi este producto en el catálogo ampliado).':'');b.href=wa(m);b.target='_blank';b.rel='noopener'}
@@ -220,6 +241,30 @@ footer b{color:#fff}
   $('#chips').innerHTML=cats.map(function(c,i){return '<button type="button" data-c="'+c[0]+'" aria-pressed="'+(i===0)+'">'+c[1]+'</button>'}).join('');
   $$('#chips button').forEach(function(b){b.addEventListener('click',function(){filt=b.dataset.c;$$('#chips button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
   $$('.mode button').forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.m;$$('.mode button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
+  // pago simulado (fase 2)
+  var all=function(id){return P.concat(P2).filter(function(x){return x.id===id})[0]};
+  function close(){$('#ovl').classList.remove('on');$('#ovl').setAttribute('aria-hidden','true')}
+  $('#ovl').addEventListener('click',function(e){if(e.target===$('#ovl'))close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  function openBuy(id,opt){
+    var p=all(id),prov=id>=7,q=1,ship=prov?'prov':'pick';
+    function draw(){
+      var sc=ship==='pick'?0:(ship==='dom'?4.9:5.9),sub=p.menor*q,tot=sub+sc;
+      $('#modal').innerHTML='<button class="x" aria-label="Cerrar" id="mx">×</button><h3>'+p.n+'</h3><div class="sm">'+opt+' · IVA incluido</div>'+
+       '<div class="mrow"><span>Cantidad</span><span class="qty"><button type="button" id="qm" aria-label="Menos">−</button><span>'+q+'</span><button type="button" id="qp" aria-label="Más">+</button></span></div>'+
+       '<div class="mrow"><span>Subtotal</span><b>'+eur(sub)+'</b></div>'+
+       '<div class="ship">'+(prov?'<label><input type="radio" name="sh" value="prov" checked> Envío desde proveedor · '+eur(5.9)+' · entrega en [CONFIRMAR] días</label>':'<label><input type="radio" name="sh" value="pick" '+(ship==='pick'?'checked':'')+'> Recoger en el mercadillo · gratis</label><label><input type="radio" name="sh" value="dom" '+(ship==='dom'?'checked':'')+'> Envío a domicilio · '+eur(4.9)+' [CONFIRMAR]</label>')+'</div>'+
+       '<div class="tot"><span>Total</span><span>'+eur(tot)+'</span></div>'+
+       '<div class="pays"><span>Tarjeta</span><span>Apple Pay / Google Pay</span><span>PayPal</span></div>'+
+       '<a class="btn buy" href="#" id="pay" style="width:100%;margin-top:10px">Pagar '+eur(tot)+'</a>'+
+       '<p class="sm" style="margin:12px 0 0">SIMULACIÓN: no se cobra nada. En la tienda real, aquí se abriría el pago seguro (por ejemplo Stripe o Redsys) y el cliente y el negocio recibirían el aviso del pedido.</p>';
+      $('#mx').onclick=close;$('#qm').onclick=function(){if(q>1){q--;draw()}};$('#qp').onclick=function(){q++;draw()};
+      $$('#modal input[name=sh]').forEach(function(r){r.onchange=function(){ship=r.value;draw()}});
+      $('#pay').onclick=function(e){e.preventDefault();$('#modal').innerHTML='<button class="x" aria-label="Cerrar" id="mx">×</button><div class="okbox"><div class="tick">✓</div><h3>Pedido recibido (simulado)</h3><p class="sm" style="margin:8px 0 16px">'+q+' × '+p.n+' · '+opt+'<br>Total '+eur(tot)+'</p><p class="sm">En la tienda real, el cliente recibiría la confirmación por correo y el negocio, el aviso del pedido'+(prov?', que además llegaría al proveedor para el envío':'')+'.</p><a class="btn p" href="#" id="ok" style="margin-top:14px">Volver a la tienda</a></div>';$('#mx').onclick=close;$('#ok').onclick=function(e2){e2.preventDefault();close()}};
+    }
+    draw();$('#ovl').classList.add('on');$('#ovl').setAttribute('aria-hidden','false');
+  }
+  $$('.phase button').forEach(function(b){b.addEventListener('click',function(){phase=+b.dataset.ph;$$('.phase button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});$('#sim').classList.toggle('on',phase===2);$$('.step').forEach(function(s,i){s.classList.toggle('now',i===phase-1)});render()})});
   render();
   // formulario por mayor
   function fgo(){var m='Hola, quiero la tarifa por mayor. Soy '+($('#f-n').value||'[nombre]')+' de '+($('#f-c').value||'[ciudad]')+'. Me interesa: '+$('#f-p').value+'. Unidades aproximadas: '+($('#f-u').value||'[por definir]')+'.';$('#f-go').href=wa(m);$('#f-go').target='_blank';$('#f-go').rel='noopener'}

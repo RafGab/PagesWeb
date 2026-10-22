@@ -1,0 +1,56 @@
+# Oferta ampliada · textil de hogar (pago online y proveedores)
+
+> Propuesta de precios mía, **para que decidas tú**. Importes sin IVA. Las cifras de plataformas y proveedores salen de reseñas y guías de terceros encontradas por búsqueda web (no pude abrir las páginas oficiales): **confírmalas** antes de prometerlas.
+> Supuesto de mi estimación: tu hora de trabajo a 30 €, y horas por tarea estimadas. Ajústalas a tu ritmo.
+
+## 1. Respuesta corta
+- **Sí se puede**: una tienda con carrito y pago, conectada a un proveedor de dropshipping, es técnicamente viable (hay conectores para WooCommerce y para Shopify).
+- **El botón de pago es adicional** y **los proveedores también**: no están en los 295 €. Son dos fases de pago aparte.
+- Hoy no tengo cuentas ni acceso a ningún proveedor, así que la integración real se prueba **con la cuenta del cliente**. Lo que ves en la demo es una simulación.
+
+## 2. Lo que sube el precio (propuesta)
+| Fase | Qué incluye | Pago único | Cuota mensual |
+|---|---|---|---|
+| **1 · Tu oferta** | Catálogo para móvil con pedido por WhatsApp, horario, cómo llegar, dominio y hosting, hasta 20 productos | **295 €** | **25 €** |
+| **+ Productos extra** | Cada pack de 20 productos más (con fotos y precios que entrega el cliente) | **+60 €** por pack | igual |
+| **2 · Botón de pago** | Pago con tarjeta y PayPal en los productos (enlaces de pago de Stripe o Redsys), recogida o envío, aviso del pedido por correo, textos legales básicos. Hasta 15 productos, sin carrito | **+150 €** | igual (25 €) |
+| **3 · Tienda online completa** | Carrito, pago, envíos, páginas legales, 30 productos propios (WooCommerce) | **790 €** *(sustituye a la fase 1)* | **40 €** |
+| **4 · Proveedor de dropshipping** | Conectar **1 proveedor**: importar hasta 100 productos, reglas de margen y precio, sincronización de stock, prueba de pedido | **+390 €** | **55 €** en total |
+
+**Resumen de paquetes (sin IVA):**
+- **A · Catálogo + WhatsApp:** 295 € + 25 €/mes.
+- **B · Catálogo + botón de pago:** 445 € + 25 €/mes.
+- **C · Tienda online propia:** 790 € + 40 €/mes.
+- **D · Tienda + proveedor:** 1.180 € + 55 €/mes.
+
+Para situarlo: según guías de 2026, una tienda online básica para pyme en España se mueve **entre 1.500 y 5.000 €**, y el mantenimiento web entre **50 y 150 €/mes**. Estos precios quedan por debajo a propósito, en línea con tu oferta de 295 €. Si prefieres subirlos, el punto más fácil es la tienda (C) y el proveedor (D).
+
+**Horas estimadas (para comprobar tu margen):** B ≈ 5 h, C ≈ 26 h, proveedor ≈ 13 h.
+
+## 3. Costes que paga el cliente a terceros (no son tuyos)
+| Concepto | Orientación | Dónde confirmarlo |
+|---|---|---|
+| Comisión de pago con tarjeta (Stripe, EEE) | ≈ **1,5 % + 0,25 €** por venta con tarjeta estándar | Stripe |
+| Proveedor de dropshipping (por ejemplo BigBuy) | Según reseñas, suscripción de **69 a 99 €/mes + 90 € de alta**; el conector de plataforma puede estar incluido en su plan para tienda propia o costar 129–149 € aparte | bigbuy.eu |
+| Shopify (si se usa en lugar de WooCommerce) | Plan Basic ≈ **36 USD/mes** según una fuente | shopify.com |
+| WooCommerce | Gratis como software; paga hosting, plugins y temas | |
+
+**Ojo:** esto puede sumar **100–190 €/mes** de costes del cliente. El dropshipping solo compensa si el margen por pedido lo paga:
+**margen = precio de venta − coste del proveedor − envío − comisión de pago − devoluciones.**
+En textil de hogar el margen suele ser corto; para lo que ya vende en el mercadillo, su stock propio suele salir mejor, y el proveedor para productos complementarios.
+
+## 4. Antes de decir sí
+- [ ] ¿Qué proveedor quiere? Pide **condiciones por escrito**: mínimos, plazos de entrega, devoluciones, y si tiene conector para su plataforma.
+- [ ] ¿Es autónomo o sociedad? Necesita **datos fiscales**, aviso legal, política de privacidad, cookies, condiciones de venta y devoluciones (14 días de desistimiento para consumidores). Que los revise un asesor.
+- [ ] ¿Quién atiende reclamaciones y devoluciones de los pedidos de proveedor? Lo gestiona el negocio, no tú.
+- [ ] Define **qué cubre tu soporte** y a qué precio los cambios fuera de la cuota (te recomiendo el mismo "un cambio al mes" de tu oferta).
+- [ ] Pago: **50 % al empezar y 50 % al publicar**. Recuerda tu fecha de inicio de trabajo si aplica.
+
+## 5. Cómo hacerle la oferta (guion corto)
+> "Para empezar le dejo la web con su catálogo y pedidos por WhatsApp, como ve en la demo, por 295 € y 25 al mes. Si más adelante quiere cobrar online, se le añade el botón de pago, y si quiere vender productos de proveedor, se conecta un proveedor. Cada paso se presupuesta aparte para que pague solo lo que usa."
+
+## 6. La demo
+La demo `demo-hogar-textil.html` tiene un selector abajo a la izquierda:
+- **Fase 1 · WhatsApp:** lo que cubre tu oferta de 295 €.
+- **Fase 2 · con pago:** muestra el **botón «Comprar»** y una ventana de pago **simulada** (cantidad, recogida o envío, total y «Pagar»). Los productos de proveedor muestran el envío desde proveedor. Hay un aviso amarillo de que no se cobra nada.
+- En **«Por mayor»** no hay pago online: se pide la tarifa por WhatsApp (así suele funcionar la venta al por mayor).

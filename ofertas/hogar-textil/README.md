@@ -34,9 +34,12 @@
 5. Días, horario y ubicación exacta del mercadillo, y su WhatsApp.
 6. ¿Ya tiene dominio y logo?
 
+## Oferta ampliada
+Ver `oferta-ampliada.md` (precios propuestos de botón de pago, tienda y proveedor).
+
 ## Archivos
 - `demo-hogar-textil.html`: la demo (un solo archivo, funciona sin internet; ábrela con Chrome o Edge, no con el editor de código).
-- `vista-movil.png` y `vista-escritorio.png`: capturas.
+- Capturas: `vista-movil-inicio.png`, `vista-movil-catalogo.png`, `vista-escritorio.png`, `vista-fase2-*.png`.
 - `demo.src.html`: fuente editable (las fuentes se incrustan al generar el archivo final).
 
 Los productos, precios e ilustraciones son de ejemplo. El botón de WhatsApp de la demo escribe a tu número (+34 672 953 197); sustitúyelo por el del cliente.
