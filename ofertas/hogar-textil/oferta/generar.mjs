@@ -36,11 +36,13 @@ const plazos=[
  {k:'D',t:'20 a 30 días hábiles**',a:0,b:6,c:'#C4479F'}];
 const tiers=[['Hasta 100 productos','+120 €','—'],['Hasta 300 productos','+250 €','—'],['Hasta 600 productos','+420 €','+15 €/mes'],['Hasta 1.200 productos','+700 €','+15 €/mes']];
 const grande=[
- {k:'A',n:'Catálogo + WhatsApp',u:'295 € + 700 € = 995 €',m:'40 €/mes',t:'12 a 18 días hábiles'},
- {k:'C',n:'Tienda online propia',u:'790 € + 700 € = 1.490 €',m:'55 €/mes',t:'25 a 35 días hábiles'},
- {k:'D',n:'Tienda + proveedor',u:'1.180 € + 700 € = 1.880 €',m:'70 €/mes',t:'30 a 40 días hábiles'}];
-const gInc=['Carga masiva desde tu hoja de cálculo (no se escribe producto a producto).','Buscador por nombre, color o referencia, y filtros por categoría.','«Mi pedido»: tus clientes añaden varios productos y te los mandan en un solo mensaje de WhatsApp, con el total estimado.','Precios por menor y por mayor, con las unidades mínimas de cada producto.','Fotos optimizadas para que la web cargue rápido en el móvil.','Salida por tandas: publicamos con tus 150 a 200 productos más vendidos y subimos el resto durante las dos semanas siguientes.'];
-const gHoja=['Una hoja de cálculo (Excel) con una fila por producto y estas columnas: referencia, nombre, categoría, medidas o variantes, colores, precio por menor, precio por mayor, unidades mínimas por mayor y nombre del archivo de la foto.','Una carpeta con las fotos, con el nombre de archivo de cada producto.','Si no tienes la hoja, la preparamos nosotros por 1,50 € por producto (1.200 productos: 1.800 €). Lo más rápido es que la mandes tú.'];
+ {k:'A',n:'Catálogo + WhatsApp con tus 230 piezas',u:'295 € + 250 € = 545 €',m:'25 €/mes',t:'7 a 10 días hábiles'},
+ {k:'C',n:'Tienda online con tus 230 piezas',u:'790 € + 250 € = 1.040 €',m:'40 €/mes',t:'15 a 25 días hábiles'},
+ {k:'D',n:'Tienda híbrida: tus 230 piezas + los modelos de 1 proveedor (hasta 1.200 en total)',u:'790 € + 700 € + 390 € = 1.880 €',m:'70 €/mes',t:'30 a 40 días hábiles***'}];
+const extraProv='Cada proveedor adicional: +250 € de alta y +10 €/mes, si entrega su catálogo en Excel, CSV o feed.';
+const gInc=['Tus 230 piezas aparecen como «En el puesto» (recogida hoy o envío en 24 a 48 h) y los modelos del proveedor como «Del proveedor» (lo envía él directamente a tu cliente).','Buscador por nombre, color o referencia, filtros por categoría y por origen.','«Mi pedido»: tus clientes añaden varios productos y te los mandan en un solo mensaje de WhatsApp.','Precios por menor y por mayor, con las unidades mínimas.','Aviso claro al cliente cuando su pedido llega en dos envíos.','Salida por tandas: publicamos con tus 230 piezas y los modelos más vendidos del proveedor, y subimos el resto en las semanas siguientes.'];
+const gHoja=['Tus 230 piezas en una hoja de cálculo (referencia, nombre, categoría, medidas, colores, precio por menor, precio por mayor, unidades mínimas y nombre de la foto) y sus fotos.','Quedamos de acuerdo en cómo actualizas el stock del puesto: así no vendes online lo que ya vendiste en el mercadillo.'];
+const gProv=['Confirmación por escrito de que envía directamente a tu cliente, en tu nombre y sin su factura dentro del paquete.','Su catálogo completo en Excel, CSV o feed: referencia, nombre, medidas, colores, precio de coste, stock y foto.','Plazos de entrega, coste de envío y política de devoluciones.','Cómo recibe los pedidos (correo, portal o conexión automática) y cada cuánto actualiza precios y stock.'];
 const info=[
  ['Para todos los paquetes',['Nombre del negocio y, si lo tienes, el logo y los colores.','Número de WhatsApp para recibir los pedidos.','Días, horario y ubicación de tu puesto o tienda.','Lista de productos: nombre, medidas, colores, precio por menor, precio por mayor y unidades mínimas por mayor.','Fotos de cada producto (cuanto mejor la luz, mejor se ve).','El dominio que quieres (por ejemplo, tunegocio.es) o el que ya tienes.']],
  ['Para pago online (B, C y D)',['Si eres autónomo o sociedad, con tus datos fiscales para las páginas legales.','Alta o verificación de tu cuenta de cobro (por ejemplo, Stripe, PayPal o la de tu banco).','Cómo quieres entregar: recogida y/o envío, con quién y a qué precio.']],
@@ -128,17 +130,14 @@ ${foot(1)}</section>
 <div class="two" style="margin-top:6mm"><div><h2 style="margin-top:0">Costes de terceros</h2><p class="note" style="font-size:8.6pt">Los paga el negocio directamente. Son orientativos y se confirman antes de empezar.</p><ul>${terceros.map(t=>`<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join('')}</ul></div>
 <div><h2 style="margin-top:0">Qué no incluye</h2><ul>${noincl.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
 ${foot(2)}</section>
-<section class="page">${head()}<span class="pill">Tu caso · unos 1.200 productos</span><h2 style="margin-top:10px">Un catálogo grande, cargado de una vez</h2>
-<p class="lead" style="font-size:9.6pt;margin-bottom:3mm">Con unos 1.200 productos no se carga producto a producto. Trabajamos desde tu hoja de cálculo y publicamos por tandas para que estés vendiendo cuanto antes.</p>
-<h2 style="margin-top:3mm;font-size:11.5pt">Carga del catálogo (se suma al paquete)</h2>
-<table><tr><th>Tamaño del catálogo</th><th>Pago único</th><th>Cuota mensual</th></tr>${tiers.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2]==='—'?'Sin cambio':r[2])}</td></tr>`).join('')}</table>
-<h2 style="margin-top:5mm;font-size:11.5pt">Tu caso con 1.200 productos</h2>
-<table><tr><th>Paquete</th><th>Pago único</th><th>Cuota</th><th>Plazo</th></tr>${grande.map(g=>`<tr><td>${g.k} · ${esc(g.n)}</td><td><b>${esc(g.u)}</b></td><td>${g.m}</td><td>${g.t}</td></tr>`).join('')}</table>
-<p class="note">Importes sin IVA. El paquete B (botón de pago en 15 productos) no encaja con 1.200: para cobrar online con todo el catálogo, elige la tienda (C o D).</p>
-<div class="two" style="margin-top:4mm"><div><h2 style="margin-top:0;font-size:11.5pt">Qué incluye</h2><ul>${gInc.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
-<div><h2 style="margin-top:0;font-size:11.5pt">Qué necesitamos de ti</h2><ul>${gHoja.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
-<div class="box" style="margin-top:5mm"><b>Salida por tandas:</b> con los 150 a 200 productos más vendidos y la hoja de cálculo del resto en nuestras manos, publicamos en <b>7 a 10 días hábiles</b> y vamos subiendo el resto en las dos semanas siguientes, sin costes extra.</div>
-<p class="note" style="margin-top:4px">${esc(notasG)}</p>
+<section class="page">${head()}<span class="pill">Tu caso · 230 piezas propias + modelos de tus proveedores</span><h2 style="margin-top:10px">Tu stock y el de tus proveedores, en una sola web</h2>
+<p class="lead" style="font-size:9.6pt;margin-bottom:3mm">Muestras todo lo que ofrecen tus proveedores y, cuando el modelo no lo tienes, lo envía el proveedor directamente a tu cliente. Cargamos todo desde hojas de cálculo, no producto a producto.</p>
+<table><tr><th>Opciones para tu caso</th><th>Pago único</th><th>Cuota</th><th>Plazo</th></tr>${grande.map(g=>`<tr><td style="text-align:left">${g.k} · ${esc(g.n)}</td><td><b>${esc(g.u)}</b></td><td>${g.m}</td><td>${g.t}</td></tr>`).join('')}</table>
+<p class="note">Importes sin IVA. ${esc(extraProv)} La carga de catálogo es +250 € hasta 300 productos y +700 € hasta 1.200 (en D la carga incluye tus 230 piezas y el catálogo del proveedor). Para vender los modelos del proveedor es necesaria la opción D.</p>
+<div class="two" style="margin-top:3mm"><div><h2 style="margin-top:0;font-size:11.5pt">Qué incluye</h2><ul>${gInc.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+<div><h2 style="margin-top:0;font-size:11.5pt">Qué necesitamos de ti</h2><ul>${gHoja.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h2 style="margin-top:3mm;font-size:11.5pt">Y de tus proveedores</h2><ul>${gProv.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+<div class="box" style="margin-top:3mm;font-size:8.8pt"><b>Antes de empezar:</b> confirmamos con tu proveedor que acepta enviar directamente. Si no acepta, la web puede mostrar sus modelos «bajo pedido» (tú compras y envías tú, con plazo mayor) o dejamos solo los modelos que sí envíen. El negocio sigue siendo el vendedor ante el cliente: las devoluciones y reclamaciones las gestionas tú.</div>
+<p class="note" style="margin-top:3px">*** Depende de que el proveedor confirme las condiciones y entregue su catálogo. Los plazos cuentan desde que recibimos las hojas de cálculo, las fotos y el primer pago.</p>
 ${foot(3)}</section>
 <section class="page">${head()}<h2 style="margin-top:0">Cuánto tardamos (catálogo de hasta 30 productos)</h2><p class="note" style="font-size:8.8pt;margin-bottom:2px">Contamos desde el día en que recibimos <b>toda la información</b> y el primer pago.</p>${tl}
 ${notas.map(n=>`<p class="note">${esc(n)}</p>`).join('')}
@@ -175,17 +174,15 @@ const kids=[
  H('Qué recomendamos'),
  P('Empieza por el paquete A. En una semana tendrás tu catálogo en el móvil y recibirás pedidos por WhatsApp. Cuando veas que compran, sumas el botón de pago (B) o pasas a tienda completa (C). El proveedor (D) conviene añadirlo cuando ya tengas ventas y hayas comprobado su margen.'),
  H('Qué incluye cada paquete'),tabla,
- H('Tu caso: un catálogo de unos 1.200 productos'),
- P('Con unos 1.200 productos no se carga producto a producto. Trabajamos desde tu hoja de cálculo y publicamos por tandas para que estés vendiendo cuanto antes.'),
- new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Carga del catálogo (se suma al paquete)',{bold:true,color:V})]}),
- new Table({width:{size:W,type:WidthType.DXA},columnWidths:[4000,2800,2838],rows:[new TableRow({tableHeader:true,children:[cell('Tamaño del catálogo',4000,{fill:LAV,b:true,c:V,al:AlignmentType.LEFT}),cell('Pago único',2800,{fill:LAV,b:true,c:V}),cell('Cuota mensual',2838,{fill:LAV,b:true,c:V})]}),...tiers.map(r=>new TableRow({cantSplit:true,children:[cell(r[0],4000,{al:AlignmentType.LEFT}),cell(r[1],2800),cell(r[2]==='—'?'Sin cambio':r[2],2838)]}))]}),
- new Paragraph({keepNext:true,spacing:{before:160,after:40},children:[t('Tu caso con 1.200 productos',{bold:true,color:V})]}),
- new Table({width:{size:W,type:WidthType.DXA},columnWidths:[2800,3100,1500,2238],rows:[new TableRow({tableHeader:true,children:[cell('Paquete',2800,{fill:LAV,b:true,c:V,al:AlignmentType.LEFT}),cell('Pago único',3100,{fill:LAV,b:true,c:V}),cell('Cuota',1500,{fill:LAV,b:true,c:V}),cell('Plazo',2238,{fill:LAV,b:true,c:V})]}),...grande.map(g=>new TableRow({cantSplit:true,children:[cell(`${g.k} · ${g.n}`,2800,{al:AlignmentType.LEFT,b:true}),cell(g.u,3100,{b:true}),cell(g.m,1500),cell(g.t,2238,{c:V,b:true})]}))]}),
- P('Importes sin IVA. El paquete B (botón de pago en 15 productos) no encaja con 1.200: para cobrar online con todo el catálogo, elige la tienda (C o D).',{spacing:{before:80,after:60}}),
+ H('Tu caso: 230 piezas propias + modelos de tus proveedores'),
+ P('Muestras todo lo que ofrecen tus proveedores y, cuando el modelo no lo tienes, lo envía el proveedor directamente a tu cliente. Cargamos todo desde hojas de cálculo, no producto a producto.'),
+ new Table({width:{size:W,type:WidthType.DXA},columnWidths:[3700,2600,1200,2138],rows:[new TableRow({tableHeader:true,children:[cell('Opciones para tu caso',3700,{fill:LAV,b:true,c:V,al:AlignmentType.LEFT}),cell('Pago único',2600,{fill:LAV,b:true,c:V}),cell('Cuota',1200,{fill:LAV,b:true,c:V}),cell('Plazo',2138,{fill:LAV,b:true,c:V})]}),...grande.map(g=>new TableRow({cantSplit:true,children:[cell(`${g.k} · ${g.n}`,3700,{al:AlignmentType.LEFT,b:true,sz:18}),cell(g.u,2600,{b:true,sz:18}),cell(g.m,1200),cell(g.t,2138,{c:V,b:true})]}))]}),
+ P('Importes sin IVA. '+extraProv+' La carga de catálogo es +250 € hasta 300 productos y +700 € hasta 1.200 (en D la carga incluye tus 230 piezas y el catálogo del proveedor). Para vender los modelos del proveedor es necesaria la opción D.',{spacing:{before:80,after:60}}),
  new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Qué incluye',{bold:true,color:V})]}),...gInc.map(B),
  new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Qué necesitamos de ti',{bold:true,color:V})]}),...gHoja.map(B),
- P([t('Salida por tandas: ',{bold:true}),t('con los 150 a 200 productos más vendidos y la hoja de cálculo del resto en nuestras manos, publicamos en 7 a 10 días hábiles y vamos subiendo el resto en las dos semanas siguientes, sin costes extra.')],{spacing:{before:100,after:60}}),
- P(notasG),
+ new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Y de tus proveedores',{bold:true,color:V})]}),...gProv.map(B),
+ P([t('Antes de empezar: ',{bold:true}),t('confirmamos con tu proveedor que acepta enviar directamente. Si no acepta, la web puede mostrar sus modelos «bajo pedido» (tú compras y envías tú, con plazo mayor) o dejamos solo los modelos que sí envíen. El negocio sigue siendo el vendedor ante el cliente: las devoluciones y reclamaciones las gestionas tú.')],{spacing:{before:100,after:60}}),
+ P('*** Depende de que el proveedor confirme las condiciones y entregue su catálogo. Los plazos cuentan desde que recibimos las hojas de cálculo, las fotos y el primer pago.'),
  H('Cuánto tardamos (catálogo de hasta 30 productos)'),P('Contamos desde el día en que recibimos toda la información y el primer pago.'),plazosT,
  ...notas.map(n=>P(n,{spacing:{after:40}})),
  H('Información que necesitamos de ti'),

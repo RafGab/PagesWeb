@@ -70,3 +70,13 @@ El cliente tiene unos 1.200 productos: no se cargan a mano. Propuesta:
 - **Camino crítico del plazo:** la hoja de cálculo y las fotos del cliente, no tu trabajo. Plazos: A 12–18 días hábiles, C 25–35, D 30–40; **salida por tandas** con los 150–200 más vendidos en 7–10 días.
 - **Alternativa gratuita para el cliente:** la app WhatsApp Business permite un catálogo de productos (el límite que recuerdo es de unos 500; compruébalo en Meta), pero no cubre 1.200 ni busca bien.
 - **Demo:** ya muestra 1.200 productos de ejemplo con buscador, filtros por categoría, «Ver más» y «Mi pedido» (varios productos en un solo WhatsApp).
+
+## 8. Caso real: 230 piezas propias + modelos de sus proveedores (22/10/2026)
+El cliente vende 230 piezas en el mercadillo y quiere mostrar **todos los modelos de sus proveedores**, que los envíen **directamente** a su cliente cuando él no los tiene.
+- **Es el paquete D (tienda híbrida):** 790 € (tienda) + 700 € (carga hasta 1.200) + 390 € (1 proveedor) = **1.880 € + 70 €/mes**. Cada proveedor extra: +250 € y +10 €/mes.
+- **Solo sus 230 piezas:** A = 545 € + 25 €/mes · C = 1.040 € + 40 €/mes.
+- **En la web** cada producto muestra «En el puesto» (recogida hoy o envío 24–48 h) o «Del proveedor» (lo envía el proveedor en [X] días). La demo ya lo hace (230 y 970).
+- **Lo que decide si se puede:** (1) que el proveedor **acepte enviar directo** al cliente final sin su factura en el paquete, (2) que tenga **catálogo digital** (Excel, CSV o feed) con precios, stock y fotos, (3) cómo recibe los pedidos y cada cuánto actualiza stock y precios. Un mayorista tradicional puede no tener nada de esto.
+- **Si el proveedor no envía directo:** mostrar sus modelos «bajo pedido» (compra el cliente, el negocio pide al proveedor y envía él, con plazo mayor) o dejar solo los que sí envíen.
+- **Riesgos:** el negocio es el vendedor ante el cliente (devoluciones, garantía y desistimiento los gestiona él); el stock del puesto se vende también en persona, así que puede vender online algo ya vendido; los precios del proveedor cambian y hay que actualizarlos (actualización mensual desde su Excel incluida; automática por feed, a presupuestar).
+- **Preguntas para el cliente:** ¿cuántos proveedores y cuáles?, ¿tienen catálogo en Excel o web de pedidos?, ¿ya enviaron alguna vez directo a un cliente tuyo?, ¿cómo llevas el stock del puesto?, ¿eres autónomo o sociedad?
