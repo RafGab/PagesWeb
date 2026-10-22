@@ -54,3 +54,19 @@ La demo `demo-hogar-textil.html` tiene un selector abajo a la izquierda:
 - **Fase 1 · WhatsApp:** lo que cubre tu oferta de 295 €.
 - **Fase 2 · con pago:** muestra el **botón «Comprar»** y una ventana de pago **simulada** (cantidad, recogida o envío, total y «Pagar»). Los productos de proveedor muestran el envío desde proveedor. Hay un aviso amarillo de que no se cobra nada.
 - En **«Por mayor»** no hay pago online: se pide la tarifa por WhatsApp (así suele funcionar la venta al por mayor).
+
+## 7. Catálogo grande (≈ 1.200 productos) · actualización 22/10/2026
+El cliente tiene unos 1.200 productos: no se cargan a mano. Propuesta:
+| Tamaño | Carga (pago único) | Cuota |
+|---|---|---|
+| Hasta 100 | +120 € | sin cambio |
+| Hasta 300 | +250 € | sin cambio |
+| Hasta 600 | +420 € | +15 €/mes |
+| Hasta 1.200 | +700 € | +15 €/mes |
+
+- **Ejemplos con 1.200:** A = 995 € + 40 €/mes · C = 1.490 € + 55 €/mes · D = 1.880 € + 70 €/mes. El paquete B no encaja (pago por producto solo en 15).
+- **Horas estimadas:** 20–26 h para 1.200 productos con hoja de cálculo y fotos listas (limpieza de datos, categorías y variantes, importación, optimizar fotos, pruebas). A 30 €/h son ≈ 700 €.
+- **Si no hay hoja de cálculo:** capturarla cuesta unos 1,50 € por producto (≈ 1.800 €). Lo más barato es que la prepare el cliente.
+- **Camino crítico del plazo:** la hoja de cálculo y las fotos del cliente, no tu trabajo. Plazos: A 12–18 días hábiles, C 25–35, D 30–40; **salida por tandas** con los 150–200 más vendidos en 7–10 días.
+- **Alternativa gratuita para el cliente:** la app WhatsApp Business permite un catálogo de productos (el límite que recuerdo es de unos 500; compruébalo en Meta), pero no cubre 1.200 ni busca bien.
+- **Demo:** ya muestra 1.200 productos de ejemplo con buscador, filtros por categoría, «Ver más» y «Mi pedido» (varios productos en un solo WhatsApp).

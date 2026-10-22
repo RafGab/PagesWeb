@@ -106,6 +106,17 @@ footer b{color:#fff}
 .pays{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}.pays span{font:600 .72rem var(--sans);border:1px solid var(--line);padding:5px 10px;border-radius:8px;color:var(--mut)}
 .okbox{text-align:center;padding:14px 0}.okbox .tick{width:64px;height:64px;border-radius:50%;background:#E3F3EA;color:#1F8A5B;display:grid;place-items:center;font-size:2rem;margin:0 auto 12px}
 .x{float:right;border:0;background:none;font-size:1.6rem;cursor:pointer;color:var(--mut);line-height:1}
+.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 16px}
+.search{flex:1;min-width:220px;position:relative}.search input{padding-left:42px;border-radius:99px;background:#fff}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--mut);fill:none;stroke-width:2}
+.count{font-size:.86rem;color:var(--mut);margin:0 0 14px}
+.more{display:block;margin:26px auto 0}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:40px 0}
+.btn.add{background:transparent;border:1.5px solid var(--pino);color:var(--pino);margin-top:6px;padding:10px 14px;font-size:.84rem}.btn.add:hover{background:var(--pino);color:#fff}
+.basket{position:fixed;right:16px;bottom:84px;z-index:44;background:var(--pino);color:#fff;border:0;border-radius:99px;padding:13px 18px;font:600 .9rem var(--sans);box-shadow:0 12px 28px -10px #0008;cursor:pointer;display:none}
+.basket.on{display:block}
+.line{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.line .nm{font-weight:600}.line .sz{color:var(--mut);font-size:.82rem}.line .qty{grid-row:1/3;grid-column:2;align-self:center}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 @media(max-width:860px){nav{display:none}.hg,.two,.loc,.steps,.band .wrap{grid-template-columns:1fr}.hero{padding:28px 0}section{padding:42px 0}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.cb{padding:12px 12px 14px}.cb h3{font-size:1rem}.price b{font-size:1.25rem}.badge{font-size:.6rem}}
@@ -134,11 +145,14 @@ footer b{color:#fff}
 </div></section>
 
 <section id="catalogo"><div class="wrap">
-  <div class="head rv"><div><h2>Catálogo</h2><p class="sub">Elige el producto, la medida y pídelo por WhatsApp. Sin registro, sin pagar en la web.</p></div>
+  <div class="head rv"><div><h2>Catálogo</h2><p class="sub">Más de 1.200 productos. Busca, elige medida y pide uno o varios por WhatsApp en un solo mensaje. Sin registro.</p></div>
     <div class="mode" role="group" aria-label="Tipo de compra"><button type="button" data-m="menor" aria-pressed="true">Por menor</button><button type="button" data-m="mayor" aria-pressed="false">Por mayor</button></div></div>
+  <div class="tools rv"><div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Busca por nombre, color o referencia (ej. 'sábanas beige')" aria-label="Buscar productos"></div></div>
   <div class="chips rv" id="chips"></div>
+  <p class="count" id="count"></p>
   <div class="grid" id="grid"></div>
-  <p class="note">Precios de ejemplo. El precio por mayor se aplica a partir de las unidades indicadas en cada producto.</p>
+  <button class="btn o more" id="more" type="button" style="display:none">Ver más productos</button>
+  <p class="note">Catálogo de 1.200 productos de EJEMPLO generados para la demo. Precios de ejemplo; el precio por mayor se aplica a partir de las unidades indicadas.</p>
 </div></section>
 
 <section class="band"><div class="wrap rv">
@@ -180,6 +194,7 @@ footer b{color:#fff}
 
 <div class="phase" role="group" aria-label="Fase de la demo"><button type="button" data-ph="1" aria-pressed="true">Fase 1 · WhatsApp</button><button type="button" data-ph="2" aria-pressed="false">Fase 2 · con pago</button></div>
 <div class="ovl" id="ovl" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" id="modal"></div></div>
+<button class="basket" id="basket" type="button">Mi pedido (0)</button>
 <a class="fab" data-wa="Hola, me gustaría información." href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.2 17.3L2 22l4.8-1.2A11 11 0 0 0 20.5 3.5zM12 20a9 9 0 0 1-4.6-1.3l-.3-.2-2.8.7.8-2.7-.2-.3A9 9 0 1 1 12 20zm5-6.7c-.3-.1-1.6-.8-1.9-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.4 7.4 0 0 1-3.7-3.2c-.3-.5.3-.5.8-1.5.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.7 3.1.6a2.6 2.6 0 0 0 1.7-1.200 2.100 2.100 0 0 0 .1-1.200c-.1-.1-.3-.2-.6-.3z"/></svg></a>
 
 <script>
@@ -189,8 +204,10 @@ footer b{color:#fff}
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
   function wa(msg){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg)}
   $$('[data-wa]').forEach(function(a){a.href=wa(a.getAttribute('data-wa'));a.target='_blank';a.rel='noopener'});
+  var eur=function(n){return n.toFixed(2).replace('.',',')+' €'};
+  var fold=function(t){return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')};
 
-  // Ilustraciones de ejemplo (SVG) por tipo de producto
+  // Ilustraciones de ejemplo (SVG)
   function art(type,c1,c2){
     var base='<svg viewBox="0 0 230 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="230" height="200" fill="'+c2+'"/>',s='';
     if(type==='sabana'){s='<rect x="30" y="38" width="170" height="124" rx="10" fill="'+c1+'"/><rect x="30" y="38" width="170" height="30" rx="10" fill="#ffffff55"/>'+[0,1,2,3,4,5,6].map(function(i){return '<rect x="'+(40+i*24)+'" y="76" width="8" height="78" fill="#ffffff33"/>'}).join('')+'<rect x="52" y="48" width="126" height="10" rx="5" fill="#ffffff66"/>'}
@@ -204,50 +221,95 @@ footer b{color:#fff}
   }
   $('#heroart').innerHTML=art('colcha','#B5573B','#EFE5D6');
 
+  // ---- Catálogo de EJEMPLO: 1.200 productos generados
+  var COL=[['beige','#CDB79E','#F3EADB'],['blanco roto','#D8D0C2','#F8F5EF'],['gris','#9AA0A6','#E9EBED'],['verde salvia','#8FB1A6','#E4EEEA'],['azul','#6C8FB3','#E6EDF5'],['terracota','#C77B5B','#F4E6D6'],['mostaza','#D9A441','#F8F0DD'],['rosa','#D9A0A6','#F7E6E8'],['burdeos','#8A3B4A','#EBD9DC'],['marrón','#A9927A','#F2EADD'],['verde bosque','#2F5D50','#E4EBE5'],['lila','#A79BC9','#EEEAF6'],['rojo','#B5473B','#F6E1DD'],['antracita','#4B4F57','#DFE1E4']];
+  var CAMA=['Cama 90','Cama 105','Cama 135','Cama 150','Cama 180'];
+  var CATS=[
+   {id:'sabanas',n:'Sábanas',t:'sabana',cnt:260,pr:[13,32],mn:10,sz:CAMA,b:['Sábanas algodón','Sábanas franela','Sábanas microfibra','Sábanas percal','Bajera ajustable','Sábanas térmicas'],d:['Suaves y fáciles de lavar.','Cálidas para el invierno.','Ligeras, no necesitan plancha.']},
+   {id:'colchas',n:'Colchas',t:'colcha',cnt:200,pr:[22,54],mn:6,sz:CAMA,b:['Colcha bouti','Colcha piqué','Colcha jacquard','Colcha reversible','Cubrecama verano','Colcha acolchada'],d:['Acolchada, para cubrir y decorar.','Ligera y fresca.','Doble cara.']},
+   {id:'mantas',n:'Mantas',t:'manta',cnt:220,pr:[8,32],mn:12,sz:['130×170','150×200','180×220'],b:['Manta coralina','Manta sherpa','Manta polar','Manta de sofá','Manta de punto','Manta con mangas'],d:['Muy suave, ideal para el sofá.','Doble cara, efecto borrego.','Cálida y ligera.']},
+   {id:'nordicas',n:'Fundas nórdicas',t:'nordica',cnt:160,pr:[16,40],mn:8,sz:CAMA,b:['Funda nórdica estampada','Funda nórdica lisa','Funda nórdica reversible','Funda nórdica algodón'],d:['Con 1 o 2 fundas de almohada.','Se lava en casa.']},
+   {id:'toallas',n:'Toallas',t:'toalla',cnt:130,pr:[7,28],mn:12,sz:['Juego 3 piezas','Juego 4 piezas','Toalla baño','Toalla de mano'],b:['Juego de toallas','Toalla algodón','Toalla rizo','Albornoz'],d:['Algodón de buen gramaje.','Absorbentes y suaves.']},
+   {id:'cojines',n:'Cojines',t:'cojin',cnt:120,pr:[4,16],mn:12,sz:['45×45','50×50','60×40'],b:['Cojín decorativo','Funda de cojín','Cojín de terciopelo','Cojín estampado'],d:['Con relleno incluido.','Para sofá y cama.']},
+   {id:'cortinas',n:'Cortinas',t:'cortina',cnt:110,pr:[10,38],mn:6,sz:['140×260','200×260','280×260'],b:['Cortinas térmicas opacas','Cortina visillo','Cortina con ollaos','Cortina de salón'],d:['Para dormitorio y salón.','Filtra la luz.']}
+  ];
+  var seed=7;function rnd(){seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296}
   var P=[
-   {id:1,t:'sabana',cat:'sabanas',n:'Juego de sábanas algodón',d:'3 piezas. Suave y fácil de lavar.',menor:24.9,mayor:17.5,min:10,sizes:['Cama 90','Cama 105','Cama 135','Cama 150','Cama 180'],c:['#8FB1A6','#EFE5D6']},
-   {id:2,t:'sabana',cat:'sabanas',n:'Sábanas franela invierno',d:'Cálidas y gorditas para el frío de León.',menor:29.9,mayor:21,min:10,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#C77B5B','#F4E6D6']},
-   {id:3,t:'colcha',cat:'colchas',n:'Colcha bouti jacquard',d:'Acolchada, para cubrir y decorar.',menor:39.9,mayor:28,min:6,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#B5573B','#EFE5D6']},
-   {id:4,t:'colcha',cat:'colchas',n:'Colcha piqué verano',d:'Ligera y fresca, fácil de planchar.',menor:34.9,mayor:24.5,min:6,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#2F5D50','#E4EBE5']},
-   {id:5,t:'manta',cat:'mantas',n:'Manta coralina',d:'Muy suave, ideal para el sofá.',menor:14.9,mayor:9.9,min:12,sizes:['130×170','150×200'],c:['#D9A441','#F8F0DD']},
-   {id:6,t:'manta',cat:'mantas',n:'Manta sherpa',d:'Doble cara, efecto borrego.',menor:22.9,mayor:15.9,min:12,sizes:['150×200','180×220'],c:['#A9927A','#F2EADD']}
-  ];
+   {id:1,t:'sabana',cat:'sabanas',n:'Juego de sábanas algodón',d:'3 piezas. Suave y fácil de lavar.',menor:24.9,mayor:17.5,min:10,sizes:CAMA,c:['#8FB1A6','#EFE5D6'],ref:'TX-0001'},
+   {id:2,t:'sabana',cat:'sabanas',n:'Sábanas franela invierno',d:'Cálidas y gorditas para el frío de León.',menor:29.9,mayor:21,min:10,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#C77B5B','#F4E6D6'],ref:'TX-0002'},
+   {id:3,t:'colcha',cat:'colchas',n:'Colcha bouti jacquard',d:'Acolchada, para cubrir y decorar.',menor:39.9,mayor:28,min:6,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#B5573B','#EFE5D6'],ref:'TX-0003'},
+   {id:4,t:'colcha',cat:'colchas',n:'Colcha piqué verano',d:'Ligera y fresca, fácil de planchar.',menor:34.9,mayor:24.5,min:6,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#2F5D50','#E4EBE5'],ref:'TX-0004'},
+   {id:5,t:'manta',cat:'mantas',n:'Manta coralina',d:'Muy suave, ideal para el sofá.',menor:14.9,mayor:9.9,min:12,sizes:['130×170','150×200'],c:['#D9A441','#F8F0DD'],ref:'TX-0005'},
+   {id:6,t:'manta',cat:'mantas',n:'Manta sherpa',d:'Doble cara, efecto borrego.',menor:22.9,mayor:15.9,min:12,sizes:['150×200','180×220'],c:['#A9927A','#F2EADD'],ref:'TX-0006'}];
+  var nid=7;
+  CATS.forEach(function(c){var made=P.filter(function(p){return p.cat===c.id}).length;
+    for(var i=0;i<c.cnt-made;i++){var col=COL[Math.floor(rnd()*COL.length)],b=c.b[Math.floor(rnd()*c.b.length)],pr=Math.round((c.pr[0]+rnd()*(c.pr[1]-c.pr[0])))-0.1;
+      var k=3+Math.floor(rnd()*(c.sz.length-2));
+      P.push({id:nid,t:c.t,cat:c.id,n:b+' '+col[0],d:c.d[Math.floor(rnd()*c.d.length)],menor:pr,mayor:Math.round(pr*0.7*10)/10,min:c.mn,sizes:c.sz.slice(0,Math.min(k,c.sz.length)),c:[col[1],col[2]],ref:'TX-'+('0000'+nid).slice(-4)});nid++}});
+  P.forEach(function(p){p.f=fold(p.n+' '+p.ref+' '+p.cat)});
   var P2=[
-   {id:7,t:'nordica',cat:'mas',n:'Funda nórdica estampada',d:'Con 1 o 2 fundas de almohada.',menor:27.9,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#6C8FB3','#E6EDF5']},
-   {id:8,t:'toalla',cat:'mas',n:'Juego de toallas 4 piezas',d:'Algodón 500 g, en varios colores.',menor:19.9,sizes:['Beige','Gris','Verde'],c:['#B7A58C','#8FB1A6']},
-   {id:9,t:'cojin',cat:'mas',n:'Cojín decorativo 45×45',d:'Con relleno incluido.',menor:8.9,sizes:['Terracota','Mostaza','Verde'],c:['#C77B5B','#F4E6D6']},
-   {id:10,t:'cortina',cat:'mas',n:'Cortinas térmicas opacas',d:'Para dormitorio y salón.',menor:21.9,sizes:['140×260','280×260'],c:['#5E7F73','#9DB7AD']}
-  ];
-  var mode='menor',filt='todo',phase=1;
-  var eur=function(n){return n.toFixed(2).replace('.',',')+' €'};
+   {id:9001,t:'nordica',n:'Funda nórdica estampada (proveedor)',d:'Con 1 o 2 fundas de almohada.',menor:27.9,sizes:['Cama 90','Cama 135','Cama 150','Cama 180'],c:['#6C8FB3','#E6EDF5']},
+   {id:9002,t:'toalla',n:'Juego de toallas 4 piezas (proveedor)',d:'Algodón 500 g, en varios colores.',menor:19.9,sizes:['Beige','Gris','Verde'],c:['#B7A58C','#8FB1A6']},
+   {id:9003,t:'cojin',n:'Cojín decorativo 45×45 (proveedor)',d:'Con relleno incluido.',menor:8.9,sizes:['Terracota','Mostaza','Verde'],c:['#C77B5B','#F4E6D6']},
+   {id:9004,t:'cortina',n:'Cortinas térmicas opacas (proveedor)',d:'Para dormitorio y salón.',menor:21.9,sizes:['140×260','280×260'],c:['#5E7F73','#9DB7AD']}];
+  var mode='menor',filt='todo',phase=1,term='',shown=24,STEP=24;
+  var all=function(id){return P.concat(P2).filter(function(x){return x.id===id})[0]};
   function card(p,prov){
     var opts=p.sizes.map(function(s){return '<option>'+s+'</option>'}).join('');
     var pr=prov?'<div class="price"><b>'+eur(p.menor)+'</b><small>Envío desde proveedor</small></div>'
       :(mode==='mayor'?'<div class="price"><b>'+eur(p.mayor)+'</b><s>'+eur(p.menor)+'</s><small>desde '+p.min+' uds</small></div>':'<div class="price"><b>'+eur(p.menor)+'</b></div>');
-    return '<article class="card" data-id="'+p.id+'"><div class="art">'+art(p.t,p.c[0],p.c[1])+(prov?'<span class="badge prov">Vista previa · proveedor</span>':'<span class="badge">'+(mode==='mayor'?'Por mayor':'Disponible')+'</span>')+'</div><div class="cb"><h3>'+p.n+'</h3><p class="d">'+p.d+'</p>'+pr+'<div class="opt"><select aria-label="'+(prov?'Opción':'Medida')+'">'+opts+'</select></div>'+(phase===2&&mode==='menor'?'<a class="btn buy" href="#" data-buy="'+p.id+'">Comprar · '+eur(p.menor)+'</a><a class="btn s2" href="#" data-p="'+p.id+'">Preguntar por WhatsApp</a>':'<a class="btn wa" href="#" data-p="'+p.id+'">'+(mode==='mayor'?'Pedir tarifa por WhatsApp':'Pedir por WhatsApp')+'</a>')+'</div></article>';
+    var btns=prov?(phase===2?'<a class="btn buy" href="#" data-buy="'+p.id+'">Comprar · '+eur(p.menor)+'</a><a class="btn s2" href="#" data-p="'+p.id+'">Preguntar por WhatsApp</a>':'<a class="btn wa" href="#" data-p="'+p.id+'">Pedir por WhatsApp</a>')
+      :(phase===2&&mode==='menor'?'<a class="btn buy" href="#" data-buy="'+p.id+'">Comprar · '+eur(p.menor)+'</a><a class="btn add" href="#" data-add="'+p.id+'">+ Añadir al pedido</a>':'<a class="btn wa" href="#" data-p="'+p.id+'">'+(mode==='mayor'?'Pedir tarifa por WhatsApp':'Pedir por WhatsApp')+'</a><a class="btn add" href="#" data-add="'+p.id+'">+ Añadir al pedido</a>');
+    return '<article class="card"><div class="art">'+art(p.t,p.c[0],p.c[1])+(prov?'<span class="badge prov">Vista previa · proveedor</span>':'<span class="badge">'+(mode==='mayor'?'Por mayor':p.ref)+'</span>')+'</div><div class="cb"><h3>'+p.n+'</h3><p class="d">'+p.d+'</p>'+pr+'<div class="opt"><select aria-label="'+(prov?'Opción':'Medida')+'">'+opts+'</select></div>'+btns+'</div></article>';
   }
-  function render(){
-    var list=P.filter(function(p){return filt==='todo'||p.cat===filt});
-    $('#grid').innerHTML=list.map(function(p){return card(p,false)}).join('');
+  function list(){var f=fold(term).split(/\s+/).filter(Boolean);return P.filter(function(p){return(filt==='todo'||p.cat===filt)&&f.every(function(w){return p.f.indexOf(w)>-1})})}
+  function bind(root){
+    $$('[data-buy]',root).forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();openBuy(+b.getAttribute('data-buy'),b.closest('.card').querySelector('select').value)})});
+    $$('[data-add]',root).forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();addItem(+b.getAttribute('data-add'),b.closest('.card').querySelector('select').value);b.textContent='✓ Añadido';setTimeout(function(){b.textContent='+ Añadir al pedido'},1200)})});
+    $$('[data-p]',root).forEach(function(b){var id=+b.getAttribute('data-p'),p=all(id),sel=b.closest('.card').querySelector('select');
+      function upd(){var prov=id>=9000;var m='Hola, quiero pedir: '+p.n+' ('+sel.value+')'+(prov?' (lo vi en el catálogo ampliado).':(mode==='mayor'?'. Pedido al por MAYOR, ¿me confirmas precio y unidades mínimas?':'. Al por menor.'));b.href=wa(m);b.target='_blank';b.rel='noopener'}
+      sel.addEventListener('change',upd);upd()});
+  }
+  function render(more){
+    var L=list();var vis=L.slice(0,shown);
+    $('#grid').innerHTML=vis.length?vis.map(function(p){return card(p,false)}).join(''):'<div class="empty">No encontramos productos con esa búsqueda. Prueba con otra palabra o pregúntanos por WhatsApp.</div>';
+    $('#count').textContent='Mostrando '+vis.length+' de '+L.length.toLocaleString('es-ES')+' productos'+(term?' para «'+term+'»':'');
+    $('#more').style.display=L.length>vis.length?'block':'none';
     $('#grid2').innerHTML=P2.map(function(p){return card(p,true)}).join('');
-    $$('.card [data-buy]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();openBuy(+b.getAttribute('data-buy'),b.closest('.card').querySelector('select').value)})});
-    $$('.card .btn[data-p]').forEach(function(b){
-      var id=+b.getAttribute('data-p'),p=P.concat(P2).filter(function(x){return x.id===id})[0],card=b.closest('.card'),sel=card.querySelector('select');
-      function upd(){var prov=id>=7;var m='Hola, quiero pedir: '+p.n+' ('+sel.value+')'+(prov?'':(mode==='mayor'?'. Pedido al por MAYOR, ¿me confirmas precio y unidades mínimas?':'. Al por menor.'))+(prov?' (vi este producto en el catálogo ampliado).':'');b.href=wa(m);b.target='_blank';b.rel='noopener'}
-      sel.addEventListener('change',upd);upd();
-    });
+    bind(document);
   }
-  var cats=[['todo','Todo'],['sabanas','Sábanas'],['colchas','Colchas'],['mantas','Mantas']];
+  var cats=[['todo','Todo']].concat(CATS.map(function(c){return [c.id,c.n]}));
   $('#chips').innerHTML=cats.map(function(c,i){return '<button type="button" data-c="'+c[0]+'" aria-pressed="'+(i===0)+'">'+c[1]+'</button>'}).join('');
-  $$('#chips button').forEach(function(b){b.addEventListener('click',function(){filt=b.dataset.c;$$('#chips button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
-  $$('.mode button').forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.m;$$('.mode button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
-  // pago simulado (fase 2)
-  var all=function(id){return P.concat(P2).filter(function(x){return x.id===id})[0]};
+  $$('#chips button').forEach(function(b){b.addEventListener('click',function(){filt=b.dataset.c;shown=STEP;$$('#chips button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render()})});
+  $$('.mode button').forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.m;$$('.mode button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render();paintBasket()})});
+  $('#q').addEventListener('input',function(){term=this.value.trim();shown=STEP;render()});
+  $('#more').addEventListener('click',function(){shown+=STEP;render()});
+
+  // ---- Mi pedido (varios productos en un solo WhatsApp)
+  var cart=[];
+  function addItem(id,size){var k=id+'|'+size,it=cart.filter(function(x){return x.k===k})[0];if(it)it.q++;else cart.push({k:k,id:id,size:size,q:1});paintBasket()}
+  function paintBasket(){var n=cart.reduce(function(a,b){return a+b.q},0);var b=$('#basket');b.textContent='Mi pedido ('+n+')';b.classList.toggle('on',n>0)}
+  function price(p){return mode==='mayor'?p.mayor:p.menor}
+  function openCart(){
+    function draw(){
+      var tot=0,lines=cart.map(function(it,i){var p=all(it.id),sub=price(p)*it.q;tot+=sub;return '<div class="line"><div class="nm">'+p.n+'</div><div class="qty"><button type="button" data-d="'+i+'" aria-label="Menos">−</button><span>'+it.q+'</span><button type="button" data-u="'+i+'" aria-label="Más">+</button></div><div class="sz">'+it.size+' · '+eur(price(p))+' c/u'+(mode==='mayor'?' (mín. '+p.min+' uds)':'')+'</div></div>'}).join('');
+      $('#modal').innerHTML='<button class="x" aria-label="Cerrar" id="mx">×</button><h3>Mi pedido</h3><div class="sm">'+(mode==='mayor'?'Precios por mayor':'Precios por menor')+' · IVA incluido · total estimado</div>'+(lines||'<p class="sm">Tu pedido está vacío.</p>')+'<div class="tot"><span>Total estimado</span><span>'+eur(tot)+'</span></div><a class="btn wa" href="#" id="sendwa" style="width:100%;margin-top:6px">Enviar pedido por WhatsApp</a><p class="sm" style="margin:12px 0 0">Te confirmamos disponibilidad, plazo y entrega por WhatsApp. No se cobra nada en la web.</p>';
+      $('#mx').onclick=close;
+      $$('#modal [data-d]').forEach(function(b){b.onclick=function(){var i=+b.dataset.d;cart[i].q--;if(cart[i].q<=0)cart.splice(i,1);paintBasket();draw()}});
+      $$('#modal [data-u]').forEach(function(b){b.onclick=function(){cart[+b.dataset.u].q++;paintBasket();draw()}});
+      var m='Hola, quiero hacer un pedido ('+(mode==='mayor'?'al por MAYOR':'al por menor')+'):\n'+cart.map(function(it){var p=all(it.id);return '- '+it.q+' × '+p.n+' ('+it.size+') · '+eur(price(p))}).join('\n')+'\nTotal estimado: '+eur(tot);
+      var a=$('#sendwa');a.href=wa(m);a.target='_blank';a.rel='noopener';
+    }
+    draw();$('#ovl').classList.add('on');$('#ovl').setAttribute('aria-hidden','false');
+  }
+  $('#basket').addEventListener('click',openCart);
+
+  // ---- Pago simulado (fase 2)
   function close(){$('#ovl').classList.remove('on');$('#ovl').setAttribute('aria-hidden','true')}
   $('#ovl').addEventListener('click',function(e){if(e.target===$('#ovl'))close()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   function openBuy(id,opt){
-    var p=all(id),prov=id>=7,q=1,ship=prov?'prov':'pick';
+    var p=all(id),prov=id>=9000,q=1,ship=prov?'prov':'pick';
     function draw(){
       var sc=ship==='pick'?0:(ship==='dom'?4.9:5.9),sub=p.menor*q,tot=sub+sc;
       $('#modal').innerHTML='<button class="x" aria-label="Cerrar" id="mx">×</button><h3>'+p.n+'</h3><div class="sm">'+opt+' · IVA incluido</div>'+

@@ -34,6 +34,13 @@ const plazos=[
  {k:'B',t:'8 a 12 días hábiles*',a:0,b:2.4,c:'#8B4FD9'},
  {k:'C',t:'15 a 20 días hábiles',a:0,b:4,c:'#A44CC4'},
  {k:'D',t:'20 a 30 días hábiles**',a:0,b:6,c:'#C4479F'}];
+const tiers=[['Hasta 100 productos','+120 €','—'],['Hasta 300 productos','+250 €','—'],['Hasta 600 productos','+420 €','+15 €/mes'],['Hasta 1.200 productos','+700 €','+15 €/mes']];
+const grande=[
+ {k:'A',n:'Catálogo + WhatsApp',u:'295 € + 700 € = 995 €',m:'40 €/mes',t:'12 a 18 días hábiles'},
+ {k:'C',n:'Tienda online propia',u:'790 € + 700 € = 1.490 €',m:'55 €/mes',t:'25 a 35 días hábiles'},
+ {k:'D',n:'Tienda + proveedor',u:'1.180 € + 700 € = 1.880 €',m:'70 €/mes',t:'30 a 40 días hábiles'}];
+const gInc=['Carga masiva desde tu hoja de cálculo (no se escribe producto a producto).','Buscador por nombre, color o referencia, y filtros por categoría.','«Mi pedido»: tus clientes añaden varios productos y te los mandan en un solo mensaje de WhatsApp, con el total estimado.','Precios por menor y por mayor, con las unidades mínimas de cada producto.','Fotos optimizadas para que la web cargue rápido en el móvil.','Salida por tandas: publicamos con tus 150 a 200 productos más vendidos y subimos el resto durante las dos semanas siguientes.'];
+const gHoja=['Una hoja de cálculo (Excel) con una fila por producto y estas columnas: referencia, nombre, categoría, medidas o variantes, colores, precio por menor, precio por mayor, unidades mínimas por mayor y nombre del archivo de la foto.','Una carpeta con las fotos, con el nombre de archivo de cada producto.','Si no tienes la hoja, la preparamos nosotros por 1,50 € por producto (1.200 productos: 1.800 €). Lo más rápido es que la mandes tú.'];
 const info=[
  ['Para todos los paquetes',['Nombre del negocio y, si lo tienes, el logo y los colores.','Número de WhatsApp para recibir los pedidos.','Días, horario y ubicación de tu puesto o tienda.','Lista de productos: nombre, medidas, colores, precio por menor, precio por mayor y unidades mínimas por mayor.','Fotos de cada producto (cuanto mejor la luz, mejor se ve).','El dominio que quieres (por ejemplo, tunegocio.es) o el que ya tienes.']],
  ['Para pago online (B, C y D)',['Si eres autónomo o sociedad, con tus datos fiscales para las páginas legales.','Alta o verificación de tu cuenta de cobro (por ejemplo, Stripe, PayPal o la de tu banco).','Cómo quieres entregar: recogida y/o envío, con quién y a qué precio.']],
@@ -43,6 +50,7 @@ const pasos=[
  ['Pago del 50 % y arranque','El plazo cuenta desde que tenemos toda la información y el primer pago.'],
  ['Te enseñamos el borrador','Lo ves en tu móvil y nos dices los cambios. Incluimos una ronda de ajustes.'],
  ['Publicamos','Con tu dominio, y te explicamos cómo pedir cambios cada mes. Pagas el otro 50 % al publicar y empieza la cuota mensual.']];
+const notasG='Estos plazos cuentan desde que recibimos la hoja de cálculo completa, las fotos y el primer pago. El camino crítico es tener lista esa información: si llega por tandas, el plazo se alarga.';
 const notas=[
  '* Con cobro por Stripe o PayPal. Si usas el TPV de tu banco (Redsys), el banco puede tardar de 1 a 3 semanas más en activarlo.',
  '** Depende de que el proveedor apruebe tu cuenta y de que tengamos sus condiciones. Cada proveedor se confirma antes de empezar.'];
@@ -101,7 +109,7 @@ ul{margin:0;padding-left:15px}li{margin:2.2px 0}
 `;
 const logoSvg='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7v5l-4 2v-7z"/></svg>';
 const head=(p)=>`<div class="brand"><div class="logo">${logoSvg}</div><div><b>AI Lead Machine</b><span>Webs para negocios</span></div></div>`;
-const foot=(n)=>`<div class="foot"><span>Propuesta de web para tu negocio · ${FECHA}</span><span>Página ${n} de 3</span></div>`;
+const foot=(n)=>`<div class="foot"><span>Propuesta de web para tu negocio · ${FECHA}</span><span>Página ${n} de 4</span></div>`;
 const cards=pk.map((p,i)=>`<div class="pc ${p.k==='A'?'rec':''}">${p.k==='A'?'<span class="reco">Para empezar</span>':'<span style="height:15px"></span>'}<div class="k">PAQUETE ${p.k}</div><h3>${esc(p.n)}</h3><div class="pr">${p.p}<small> + IVA</small></div><div class="mm">+ ${p.m} + IVA</div><div class="id">${esc(p.ideal)}</div><div class="tm">Listo en <b>${p.t}</b></div></div>`).join('');
 const tbl='<table><tr><th>Qué incluye</th>'+pk.map(p=>`<th>${p.k} · ${esc(p.n.split(' ')[0]==='Catálogo'?p.n.replace('Catálogo ','Catálogo '):p.n)}</th>`).join('')+'</tr>'+rows.map((r,i)=>`<tr class="${i>=12?'b':''}"><td>${esc(r[0])}</td>`+r.slice(1).map(c=>`<td class="${c==='—'?'n':(c.startsWith('✓')?'y':'')}">${esc(c)}</td>`).join('')+'</tr>').join('')+'</table>';
 const tl='<div class="tl">'+plazos.map(p=>`<div class="tr"><div class="kk">Paquete ${p.k}</div><div class="trk"><i style="left:${p.a/6*100}%;width:${(p.b-p.a)/6*100}%;background:${p.c}"></i></div><div class="tt">${p.t}</div></div>`).join('')+'<div class="scale"><div></div><div><span>Semana 0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div><div></div></div></div>';
@@ -120,12 +128,24 @@ ${foot(1)}</section>
 <div class="two" style="margin-top:6mm"><div><h2 style="margin-top:0">Costes de terceros</h2><p class="note" style="font-size:8.6pt">Los paga el negocio directamente. Son orientativos y se confirman antes de empezar.</p><ul>${terceros.map(t=>`<li><b>${esc(t[0])}:</b> ${esc(t[1])}</li>`).join('')}</ul></div>
 <div><h2 style="margin-top:0">Qué no incluye</h2><ul>${noincl.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div></div>
 ${foot(2)}</section>
-<section class="page">${head()}<h2 style="margin-top:0">Cuánto tardamos</h2><p class="note" style="font-size:8.8pt;margin-bottom:2px">Contamos desde el día en que recibimos <b>toda la información</b> y el primer pago.</p>${tl}
+<section class="page">${head()}<span class="pill">Tu caso · unos 1.200 productos</span><h2 style="margin-top:10px">Un catálogo grande, cargado de una vez</h2>
+<p class="lead" style="font-size:9.6pt;margin-bottom:3mm">Con unos 1.200 productos no se carga producto a producto. Trabajamos desde tu hoja de cálculo y publicamos por tandas para que estés vendiendo cuanto antes.</p>
+<h2 style="margin-top:3mm;font-size:11.5pt">Carga del catálogo (se suma al paquete)</h2>
+<table><tr><th>Tamaño del catálogo</th><th>Pago único</th><th>Cuota mensual</th></tr>${tiers.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2]==='—'?'Sin cambio':r[2])}</td></tr>`).join('')}</table>
+<h2 style="margin-top:5mm;font-size:11.5pt">Tu caso con 1.200 productos</h2>
+<table><tr><th>Paquete</th><th>Pago único</th><th>Cuota</th><th>Plazo</th></tr>${grande.map(g=>`<tr><td>${g.k} · ${esc(g.n)}</td><td><b>${esc(g.u)}</b></td><td>${g.m}</td><td>${g.t}</td></tr>`).join('')}</table>
+<p class="note">Importes sin IVA. El paquete B (botón de pago en 15 productos) no encaja con 1.200: para cobrar online con todo el catálogo, elige la tienda (C o D).</p>
+<div class="two" style="margin-top:4mm"><div><h2 style="margin-top:0;font-size:11.5pt">Qué incluye</h2><ul>${gInc.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+<div><h2 style="margin-top:0;font-size:11.5pt">Qué necesitamos de ti</h2><ul>${gHoja.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+<div class="box" style="margin-top:5mm"><b>Salida por tandas:</b> con los 150 a 200 productos más vendidos y la hoja de cálculo del resto en nuestras manos, publicamos en <b>7 a 10 días hábiles</b> y vamos subiendo el resto en las dos semanas siguientes, sin costes extra.</div>
+<p class="note" style="margin-top:4px">${esc(notasG)}</p>
+${foot(3)}</section>
+<section class="page">${head()}<h2 style="margin-top:0">Cuánto tardamos (catálogo de hasta 30 productos)</h2><p class="note" style="font-size:8.8pt;margin-bottom:2px">Contamos desde el día en que recibimos <b>toda la información</b> y el primer pago.</p>${tl}
 ${notas.map(n=>`<p class="note">${esc(n)}</p>`).join('')}
 <h2>Información que necesitamos de ti</h2><div class="info two"><div>${info.slice(0,1).map(i=>`<h3>${esc(i[0])}</h3><ul>${i[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`).join('')}</div><div>${info.slice(1).map(i=>`<h3>${esc(i[0])}</h3><ul>${i[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`).join('')}</div></div>
 <h2>Condiciones</h2><ul>${cond.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
 <div class="cta"><div class="who"><b>Viviana Acero</b><span>AI Lead Machine · Webs para negocios<br>Te la hago yo, sin que sepas nada de webs.</span></div><div class="wa">Escribe <b>WEB</b>WhatsApp +34 672 953 197</div></div>
-${foot(3)}</section></body></html>`;
+${foot(4)}</section></body></html>`;
 fs.writeFileSync('oferta.html',html);
 
 // ---------- WORD ----------
@@ -155,7 +175,18 @@ const kids=[
  H('Qué recomendamos'),
  P('Empieza por el paquete A. En una semana tendrás tu catálogo en el móvil y recibirás pedidos por WhatsApp. Cuando veas que compran, sumas el botón de pago (B) o pasas a tienda completa (C). El proveedor (D) conviene añadirlo cuando ya tengas ventas y hayas comprobado su margen.'),
  H('Qué incluye cada paquete'),tabla,
- H('Cuánto tardamos'),P('Contamos desde el día en que recibimos toda la información y el primer pago.'),plazosT,
+ H('Tu caso: un catálogo de unos 1.200 productos'),
+ P('Con unos 1.200 productos no se carga producto a producto. Trabajamos desde tu hoja de cálculo y publicamos por tandas para que estés vendiendo cuanto antes.'),
+ new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Carga del catálogo (se suma al paquete)',{bold:true,color:V})]}),
+ new Table({width:{size:W,type:WidthType.DXA},columnWidths:[4000,2800,2838],rows:[new TableRow({tableHeader:true,children:[cell('Tamaño del catálogo',4000,{fill:LAV,b:true,c:V,al:AlignmentType.LEFT}),cell('Pago único',2800,{fill:LAV,b:true,c:V}),cell('Cuota mensual',2838,{fill:LAV,b:true,c:V})]}),...tiers.map(r=>new TableRow({cantSplit:true,children:[cell(r[0],4000,{al:AlignmentType.LEFT}),cell(r[1],2800),cell(r[2]==='—'?'Sin cambio':r[2],2838)]}))]}),
+ new Paragraph({keepNext:true,spacing:{before:160,after:40},children:[t('Tu caso con 1.200 productos',{bold:true,color:V})]}),
+ new Table({width:{size:W,type:WidthType.DXA},columnWidths:[2800,3100,1500,2238],rows:[new TableRow({tableHeader:true,children:[cell('Paquete',2800,{fill:LAV,b:true,c:V,al:AlignmentType.LEFT}),cell('Pago único',3100,{fill:LAV,b:true,c:V}),cell('Cuota',1500,{fill:LAV,b:true,c:V}),cell('Plazo',2238,{fill:LAV,b:true,c:V})]}),...grande.map(g=>new TableRow({cantSplit:true,children:[cell(`${g.k} · ${g.n}`,2800,{al:AlignmentType.LEFT,b:true}),cell(g.u,3100,{b:true}),cell(g.m,1500),cell(g.t,2238,{c:V,b:true})]}))]}),
+ P('Importes sin IVA. El paquete B (botón de pago en 15 productos) no encaja con 1.200: para cobrar online con todo el catálogo, elige la tienda (C o D).',{spacing:{before:80,after:60}}),
+ new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Qué incluye',{bold:true,color:V})]}),...gInc.map(B),
+ new Paragraph({keepNext:true,spacing:{before:100,after:40},children:[t('Qué necesitamos de ti',{bold:true,color:V})]}),...gHoja.map(B),
+ P([t('Salida por tandas: ',{bold:true}),t('con los 150 a 200 productos más vendidos y la hoja de cálculo del resto en nuestras manos, publicamos en 7 a 10 días hábiles y vamos subiendo el resto en las dos semanas siguientes, sin costes extra.')],{spacing:{before:100,after:60}}),
+ P(notasG),
+ H('Cuánto tardamos (catálogo de hasta 30 productos)'),P('Contamos desde el día en que recibimos toda la información y el primer pago.'),plazosT,
  ...notas.map(n=>P(n,{spacing:{after:40}})),
  H('Información que necesitamos de ti'),
  ...info.flatMap(i=>[new Paragraph({keepNext:true,spacing:{before:120,after:40},children:[t(i[0],{bold:true,color:V})]}),...i[1].map(B)]),
