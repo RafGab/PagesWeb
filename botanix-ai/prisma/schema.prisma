@@ -1,0 +1,559 @@
+// Botanix AI — modelo de datos
+// Convenciones: ids cuid estables, borrado en cascada desde el usuario (RGPD),
+// todas las tablas privadas llevan userId e índice por userId.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────── Usuarios, sesiones y planes ─────────────────────────
+
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  PROFESSIONAL
+}
+
+enum UnitSystem {
+  METRIC
+  IMPERIAL
+}
+
+enum PlanId {
+  FREE
+  PERSONAL
+  GARDENER_PRO
+  MAINTENANCE_COMPANY
+  NURSERY
+  LANDSCAPER
+  SMALL_FARM
+}
+
+model User {
+  id              String          @id @default(cuid())
+  email           String          @unique
+  passwordHash    String
+  name            String?
+  locale          String          @default("es")
+  unitSystem      UnitSystem      @default(METRIC)
+  experience      ExperienceLevel @default(BEGINNER)
+  housingType     String? // piso con balcón, casa con jardín, finca, explotación…
+  budgetLevel     String? // bajo | medio | alto
+  maintenancePref String? // mínimo | moderado | alto
+  gardeningPrefs  String[] // estilos o intereses
+  hasChildren     Boolean?
+  hasPets         Boolean?
+  plan            PlanId          @default(FREE)
+  imageConsentAt  DateTime? // consentimiento explícito para procesar fotos con IA
+  termsAcceptedAt DateTime
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  sessions       Session[]
+  locations      Location[]
+  photos         Photo[]
+  analyses       Analysis[]
+  gardens        Garden[]
+  plants         UserPlant[]
+  reminders      Reminder[]
+  careEvents     CareEvent[]
+  journalEntries JournalEntry[]
+  conversations  Conversation[]
+  usage          AiUsage[]
+  designs        GardenDesign[]
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  userId     String
+  tokenHash  String   @unique // SHA-256 del token; el token en claro solo vive en la cookie
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+  lastSeenAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ───────────────────────── Ubicaciones y clima ─────────────────────────
+
+model Location {
+  id          String   @id @default(cuid())
+  userId      String
+  label       String // "Casa", "Huerto"…
+  country     String // ISO 3166-1 alfa-2
+  countryName String
+  region      String?
+  city        String?
+  postalCode  String?
+  // Coordenadas redondeadas a ~1 km (2 decimales): suficiente para clima, sin ubicación precisa.
+  latitude    Float
+  longitude   Float
+  elevationM  Float?
+  timezone    String?
+  isDefault   Boolean  @default(false)
+  notes       String? // microclima: patio interior, ladera norte, costa…
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gardens     Garden[]
+
+  @@index([userId])
+}
+
+// Caché compartida de normales climáticas calculadas (no es dato personal: clave por celda redondeada).
+model ClimateCache {
+  id        String   @id @default(cuid())
+  cellKey   String // "lat,lon" redondeado + tipo
+  kind      String // normals | forecast
+  provider  String
+  payload   Json
+  fetchedAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@unique([cellKey, kind, provider])
+}
+
+// ───────────────────────── Conocimiento botánico ─────────────────────────
+
+model Taxon {
+  id              String         @id @default(cuid())
+  scientificName  String // binomio sin autor
+  authorship      String?
+  rank            String // SPECIES, VARIETY, CULTIVAR, GENUS…
+  kingdom         String?
+  phylum          String?
+  className       String?
+  orderName       String?
+  family          String?
+  genus           String?
+  species         String?
+  infraspecific   String?
+  gbifKey         Int?           @unique
+  wfoId           String?        @unique
+  powoId          String?        @unique
+  taxonomicStatus String? // ACCEPTED, SYNONYM…
+  acceptedTaxonId String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  synonyms        TaxonSynonym[]
+  commonNames     CommonName[]
+  profiles        PlantProfile[]
+  userPlants      UserPlant[]
+
+  @@unique([scientificName, rank])
+  @@index([family])
+  @@index([genus])
+}
+
+model TaxonSynonym {
+  id      String @id @default(cuid())
+  taxonId String
+  name    String
+  source  String
+  taxon   Taxon  @relation(fields: [taxonId], references: [id], onDelete: Cascade)
+
+  @@unique([taxonId, name])
+  @@index([name])
+}
+
+model CommonName {
+  id       String  @id @default(cuid())
+  taxonId  String
+  name     String
+  language String // es, en…
+  country  String  @default("") // ISO, cuando el nombre es regional; "" si es general
+  source   String
+  taxon    Taxon   @relation(fields: [taxonId], references: [id], onDelete: Cascade)
+
+  @@unique([taxonId, name, language, country])
+  @@index([name])
+}
+
+// Ficha botánica y de cultivo. Cada ficha conserva su procedencia (IA o fuente verificada).
+model PlantProfile {
+  id            String      @id @default(cuid())
+  taxonId       String
+  locale        String      @default("es")
+  origin        String // ai_generated | curated | source_import
+  promptVersion String?
+  data          Json // ficha completa validada con zod (lib/domain/plant-profile.ts)
+  careGuide     Json?
+  sourceId      String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  taxon         Taxon       @relation(fields: [taxonId], references: [id], onDelete: Cascade)
+  source        DataSource? @relation(fields: [sourceId], references: [id])
+
+  @@unique([taxonId, locale, origin])
+}
+
+// Registro de procedencia de cualquier dato externo.
+model DataSource {
+  id           String         @id @default(cuid())
+  provider     String // gbif, open-meteo, curated-crops…
+  referenceUrl String?
+  retrievedAt  DateTime       @default(now())
+  updatedAt    DateTime?
+  region       String?
+  confidence   String? // alta | media | baja | orientativa
+  limitations  String?
+  license      String?
+  profiles     PlantProfile[]
+  crops        Crop[]
+}
+
+// Cultivos con parámetros agronómicos para el motor de siembra (datos curados).
+model Crop {
+  id             String      @id @default(cuid())
+  slug           String      @unique
+  category       String // vegetable | herb | flower | fruit_tree | shrub | lawn | green_manure
+  scientificName String
+  names          Json // { es: "...", en: "..." }
+  params         Json // CropParams (lib/sowing/types.ts)
+  sourceId       String?
+  source         DataSource? @relation(fields: [sourceId], references: [id])
+  updatedAt      DateTime    @updatedAt
+}
+
+// Fichas fitosanitarias de referencia (plagas/enfermedades) para enlazar diagnósticos.
+model PestDisease {
+  id             String      @id @default(cuid())
+  slug           String      @unique
+  kind           String // pest | fungal | bacterial | viral | abiotic | nutritional
+  scientificName String?
+  names          Json
+  eppoCode       String?
+  summary        Json
+  diagnoses      Diagnosis[]
+}
+
+// ───────────────────────── Fotos y análisis ─────────────────────────
+
+model Photo {
+  id          String              @id @default(cuid())
+  userId      String
+  storageKey  String              @unique // ruta en el almacenamiento privado
+  mimeType    String
+  width       Int
+  height      Int
+  bytes       Int
+  sha256      String // del archivo procesado (para caché de análisis)
+  // Las fotos de análisis sin guardar se purgan tras IMAGE_RETENTION_DAYS.
+  retainUntil DateTime?
+  createdAt   DateTime            @default(now())
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analyses    AnalysisPhoto[]
+  journal     JournalEntryPhoto[]
+  plantsCover UserPlant[]         @relation("PlantCover")
+
+  @@index([userId])
+  @@index([retainUntil])
+  @@index([userId, sha256])
+}
+
+enum AnalysisKind {
+  IDENTIFY
+  DIAGNOSE
+  GARDEN_SPACE
+}
+
+enum AnalysisStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  NOT_CONFIGURED
+}
+
+model Analysis {
+  id            String          @id @default(cuid())
+  userId        String
+  kind          AnalysisKind
+  status        AnalysisStatus  @default(PENDING)
+  provider      String?
+  model         String?
+  promptVersion String
+  inputHash     String // hash de fotos + contexto + versión del prompt
+  context       Json? // respuestas a preguntas, entorno, ubicación…
+  result        Json? // salida validada
+  warnings      String[]
+  isTestFixture Boolean         @default(false)
+  errorCode     String?
+  errorMessage  String?
+  taxonId       String?
+  createdAt     DateTime        @default(now())
+  completedAt   DateTime?
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  photos        AnalysisPhoto[]
+  diagnosis     Diagnosis?
+  usage         AiUsage[]
+
+  @@index([userId, createdAt])
+  @@index([userId, inputHash])
+}
+
+model AnalysisPhoto {
+  analysisId String
+  photoId    String
+  position   Int
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  photo      Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+
+  @@id([analysisId, photoId])
+}
+
+enum Severity {
+  MILD
+  MODERATE
+  SEVERE
+  URGENT
+}
+
+model Diagnosis {
+  id             String       @id @default(cuid())
+  analysisId     String       @unique
+  userPlantId    String?
+  primaryProblem String
+  severity       Severity
+  confirmation   String // visual_orientative | confirmed_by_user | lab_confirmed
+  pestDiseaseId  String?
+  createdAt      DateTime     @default(now())
+  analysis       Analysis     @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  userPlant      UserPlant?   @relation(fields: [userPlantId], references: [id], onDelete: SetNull)
+  pestDisease    PestDisease? @relation(fields: [pestDiseaseId], references: [id])
+  treatments     Treatment[]
+}
+
+model Treatment {
+  id          String    @id @default(cuid())
+  diagnosisId String
+  description String
+  kind        String // cultural | physical | biological | chemical
+  appliedAt   DateTime?
+  outcome     String?
+  diagnosis   Diagnosis @relation(fields: [diagnosisId], references: [id], onDelete: Cascade)
+}
+
+// ───────────────────────── Jardines y diseños ─────────────────────────
+
+model Garden {
+  id          String         @id @default(cuid())
+  userId      String
+  locationId  String?
+  name        String
+  kind        String // jardín, huerto, terraza, balcón, interior, parcela
+  areaM2      Float?
+  orientation String? // N, NE, E… (indicada por el usuario)
+  soilType    String?
+  notes       String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  location    Location?      @relation(fields: [locationId], references: [id], onDelete: SetNull)
+  zones       GardenZone[]
+  plants      UserPlant[]
+  designs     GardenDesign[]
+
+  @@index([userId])
+}
+
+model GardenZone {
+  id          String  @id @default(cuid())
+  gardenId    String
+  name        String
+  sunExposure String? // full_sun | part_shade | shade
+  areaM2      Float?
+  notes       String?
+  garden      Garden  @relation(fields: [gardenId], references: [id], onDelete: Cascade)
+
+  @@index([gardenId])
+}
+
+model GardenDesign {
+  id        String          @id @default(cuid())
+  userId    String
+  gardenId  String?
+  title     String
+  style     String
+  inputs    Json // medidas, preferencias, presupuesto, análisis del espacio
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  garden    Garden?         @relation(fields: [gardenId], references: [id], onDelete: SetNull)
+  versions  DesignVersion[]
+
+  @@index([userId])
+}
+
+model DesignVersion {
+  id            String       @id @default(cuid())
+  designId      String
+  version       Int
+  promptVersion String
+  proposal      Json // propuesta validada (lib/domain/garden-design.ts)
+  changeRequest String? // petición de modificación que originó la versión
+  isTestFixture Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  design        GardenDesign @relation(fields: [designId], references: [id], onDelete: Cascade)
+
+  @@unique([designId, version])
+}
+
+// ───────────────────────── Mis plantas, diario y recordatorios ─────────────────────────
+
+model UserPlant {
+  id               String         @id @default(cuid())
+  userId           String
+  gardenId         String?
+  taxonId          String?
+  nickname         String
+  scientificName   String?
+  commonName       String?
+  sourceAnalysisId String?
+  coverPhotoId     String?
+  locationNote     String? // interior junto a ventana sur, maceta 30 cm…
+  potted           Boolean        @default(true)
+  acquiredAt       DateTime?
+  sownAt           DateTime?
+  germinatedAt     DateTime?
+  status           String         @default("healthy") // healthy | watch | sick | recovering | dormant | dead | harvested
+  notes            String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  garden           Garden?        @relation(fields: [gardenId], references: [id], onDelete: SetNull)
+  taxon            Taxon?         @relation(fields: [taxonId], references: [id], onDelete: SetNull)
+  coverPhoto       Photo?         @relation("PlantCover", fields: [coverPhotoId], references: [id], onDelete: SetNull)
+  careEvents       CareEvent[]
+  reminders        Reminder[]
+  journal          JournalEntry[]
+  diagnoses        Diagnosis[]
+
+  @@index([userId])
+}
+
+enum CareType {
+  WATERING
+  FERTILIZING
+  PRUNING
+  TRANSPLANT
+  SOWING
+  GERMINATION
+  HARVEST
+  TREATMENT
+  PEST_PREVENTION
+  OTHER
+}
+
+model CareEvent {
+  id          String    @id @default(cuid())
+  userId      String
+  userPlantId String
+  type        CareType
+  date        DateTime
+  quantity    String? // "2 L", "300 g de tomates"…
+  notes       String?
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userPlant   UserPlant @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+  @@index([userPlantId, date])
+}
+
+model Reminder {
+  id             String     @id @default(cuid())
+  userId         String
+  userPlantId    String?
+  type           CareType
+  title          String
+  intervalDays   Int
+  seasonAdaptive Boolean    @default(true) // ajusta el intervalo según la temperatura del mes
+  enabled        Boolean    @default(true)
+  nextDueAt      DateTime
+  lastDoneAt     DateTime?
+  createdAt      DateTime   @default(now())
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userPlant      UserPlant? @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
+
+  @@index([userId, nextDueAt])
+}
+
+model JournalEntry {
+  id          String              @id @default(cuid())
+  userId      String
+  userPlantId String
+  date        DateTime            @default(now())
+  title       String?
+  notes       String?
+  heightCm    Float?
+  healthScore Int? // 1–5 valoración del usuario
+  createdAt   DateTime            @default(now())
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userPlant   UserPlant           @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
+  photos      JournalEntryPhoto[]
+
+  @@index([userPlantId, date])
+}
+
+model JournalEntryPhoto {
+  entryId String
+  photoId String
+  entry   JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  photo   Photo        @relation(fields: [photoId], references: [id], onDelete: Cascade)
+
+  @@id([entryId, photoId])
+}
+
+// ───────────────────────── Asistente conversacional ─────────────────────────
+
+model Conversation {
+  id        String        @id @default(cuid())
+  userId    String
+  title     String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  ChatMessage[]
+
+  @@index([userId, updatedAt])
+}
+
+model ChatMessage {
+  id             String       @id @default(cuid())
+  conversationId String
+  role           String // user | assistant
+  content        String
+  createdAt      DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+}
+
+// ───────────────────────── Uso y costes de IA ─────────────────────────
+
+model AiUsage {
+  id              String    @id @default(cuid())
+  userId          String
+  analysisId      String?
+  operation       String // identify | diagnose | garden_design | chat
+  provider        String
+  model           String
+  inputTokens     Int
+  outputTokens    Int
+  cacheReadTokens Int       @default(0)
+  costUsd         Decimal   @db.Decimal(10, 6)
+  createdAt       DateTime  @default(now())
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysis        Analysis? @relation(fields: [analysisId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+}

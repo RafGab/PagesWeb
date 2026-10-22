@@ -1,0 +1,50 @@
+# Despliegue de Botanix AI en Render (Blueprint): servidor web + PostgreSQL + disco para fotos.
+# En Render: New → Blueprint → elegir este repositorio → rellenar OPENAI_API_KEY.
+# Región Frankfurt (UE) para que los datos personales se queden en la Unión Europea (RGPD).
+services:
+  - type: web
+    name: botanix-ai
+    runtime: node
+    region: frankfurt
+    plan: starter # el disco persistente requiere un plan de pago
+    buildCommand: npm ci && npx prisma generate && npm run build
+    preDeployCommand: npx prisma migrate deploy && npm run db:seed
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: botanix-db
+          property: connectionString
+      - key: AI_PROVIDER
+        value: openai
+      - key: OPENAI_API_KEY
+        sync: false # se pide al crear el Blueprint (la misma clave del agente virtual)
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: CLIMATE_PROVIDER
+        value: open-meteo
+      - key: TAXONOMY_PROVIDER
+        value: gbif
+      - key: STORAGE_DRIVER
+        value: local
+      - key: STORAGE_LOCAL_DIR
+        value: /data/storage
+      - key: IMAGE_RETENTION_DAYS
+        value: "30"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+    disk:
+      name: botanix-photos
+      mountPath: /data
+      sizeGB: 5
+
+databases:
+  - name: botanix-db
+    databaseName: botanix
+    user: botanix
+    region: frankfurt
+    plan: basic-256mb
+    ipAllowList: [] # solo accesible desde los servicios de Render

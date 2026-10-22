@@ -18,6 +18,7 @@ Análisis del modelo de Oier Triana (@oiertriana) y réplica lista para usar.
 | [`demos/`](demos/) | Demos publicables con marca ficticia (Bodega Nova): agente virtual de WhatsApp con IA y página de captación de revendedores |
 | [`plantilla-cliente/`](plantilla-cliente/index.html) | Web de ejemplo para negocio local (clínica dental ficticia) |
 | [`landing-agencia/`](landing-agencia/index.html) | Landing de tu propia agencia para captar clientes |
+| [`botanix-ai/`](botanix-ai/README.md) | **Botanix AI**: app (Next.js + PostgreSQL + IA) para identificar plantas, diagnosticar, saber qué sembrar según el clima y diseñar jardines |
 
 Los kits comparten motor y estilos en `plantillas/comun/`.
 
